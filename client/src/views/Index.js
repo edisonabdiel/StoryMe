@@ -26,7 +26,7 @@ import FileUploader from "./index-sections/FileUploader.js";
 import Carousel from "./index-sections/Carousel.js";
 import NucleoIcons from "./index-sections/NucleoIcons.js";
 
-const Index = () => {
+const App = () => {
   React.useEffect(() => {
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
@@ -68,4 +68,4 @@ const Index = () => {
   );
 }
 
-export default Index;
+export default App;

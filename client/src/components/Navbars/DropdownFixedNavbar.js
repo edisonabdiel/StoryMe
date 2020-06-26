@@ -67,10 +67,10 @@ function DropdownFixedNavbar() {
           </UncontrolledDropdown>
           <div className="navbar-translate">
             <NavbarBrand to="/" tag={Link} id="navbar-brand">
-              Now Ui Kit PRO React
+              StoryMe
             </NavbarBrand>
             <UncontrolledTooltip target="navbar-brand">
-              Designed by Invision. Coded by Creative Tim
+              Go Home
             </UncontrolledTooltip>
             <button
               onClick={() => {

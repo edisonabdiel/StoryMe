@@ -31,7 +31,7 @@ import ScrollTransparentNavbar from "components/Navbars/ScrollTransparentNavbar.
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import FooterDefault from "components/Footers/FooterDefault.js";
 
-function ProfilePage() {
+const ProfilePage = () => {
   const [pills, setPills] = React.useState("1");
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [emailFocus, setEmailFocus] = React.useState(false);

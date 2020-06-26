@@ -6,7 +6,7 @@ import { Container } from "reactstrap";
 
 // core components
 
-function Footer() {
+const Footer = () => {
   return (
     <>
       <footer className="footer">
@@ -18,7 +18,7 @@ function Footer() {
                   href="https://www.creative-tim.com?ref=nuk-pro-react-footer"
                   target="_blank"
                 >
-                  Creative Tim
+                  StoryMe
                 </a>
               </li>
               <li>
@@ -40,19 +40,13 @@ function Footer() {
             </ul>
           </nav>
           <div className="copyright" id="copyright">
-            © {new Date().getFullYear()}, Designed by{" "}
-            <a
-              href="https://www.invisionapp.com?ref=creativetim"
-              target="_blank"
-            >
-              Invision
-            </a>
+            © {new Date().getFullYear()}
             . Coded by{" "}
             <a
-              href="https://www.creative-tim.com?ref=nuk-pro-react-footer"
+              href="http://www.github.com/edisonabdiel"
               target="_blank"
             >
-              Creative Tim
+              Edison Abdiel
             </a>
             .
           </div>

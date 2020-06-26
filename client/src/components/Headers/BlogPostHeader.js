@@ -5,7 +5,7 @@ import { Row, Col } from "reactstrap";
 
 // core components
 
-function BlogPostHeader() {
+const BlogPostHeader = () => {
   let pageHeader = React.createRef();
   React.useEffect(() => {
     if (window.innerWidth > 991) {

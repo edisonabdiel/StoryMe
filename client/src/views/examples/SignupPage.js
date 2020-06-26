@@ -45,7 +45,7 @@ function SignupPage() {
         <div
           className="page-header-image"
           style={{
-            backgroundImage: "url(" + require("assets/img/bg18.jpg") + ")",
+            backgroundImage: "url(" + require("assets/img/universe-bg.png") + ")",
           }}
         ></div>
         <div className="content">
@@ -57,10 +57,9 @@ function SignupPage() {
                     <i className="now-ui-icons media-2_sound-wave"></i>
                   </div>
                   <div className="description">
-                    <h5 className="info-title">Marketing</h5>
+                    <h5 className="info-title">StoryMe</h5>
                     <p className="description">
-                      We've created the marketing campaign of the website. It
-                      was a very interesting collaboration.
+                      Here is where your stories become alive
                     </p>
                   </div>
                 </div>
@@ -69,10 +68,10 @@ function SignupPage() {
                     <i className="now-ui-icons media-1_button-pause"></i>
                   </div>
                   <div className="description">
-                    <h5 className="info-title">Fully Coded in React 16</h5>
+                    <h5 className="info-title">Easy and Fast</h5>
                     <p className="description">
-                      We've developed the website with React 16 and CSS3. The
-                      client has access to the code using GitHub.
+                      It only takes a 2 clicks and a few seconds to share 
+                       your creations with the rest of the world
                     </p>
                   </div>
                 </div>
@@ -83,14 +82,14 @@ function SignupPage() {
                   <div className="description">
                     <h5 className="info-title">Built Audience</h5>
                     <p className="description">
-                      There is also a Fully Customizable CMS Admin Dashboard for
-                      this product.
+                    Reach thousands of readers around the world by simply
+                        publishing your beloved writings
                     </p>
                   </div>
                 </div>
               </Col>
               <Col className="mr-auto" md="6" lg="4">
-                <Card className="card-signup">
+                <Card className="card-signup" >
                   <CardBody>
                     <CardTitle className="text-center" tag="h4">
                       Register
@@ -104,14 +103,15 @@ function SignupPage() {
                       </Button>
                       <Button
                         className="btn-icon btn-round mr-2"
-                        color="dribbble"
+                        color="instagram"
                       >
-                        <i className="fab fa-dribbble"></i>
+                        <i className="fab fa-instagram"></i>
                       </Button>
-                      <Button className="btn-icon btn-round" color="facebook">
+                      <Button className="btn-icon btn-round"
+                        color="facebook">
                         <i className="fab fa-facebook"></i>
                       </Button>
-                      <h5 className="card-description">or be classical</h5>
+                      <h5 className="card-description">or go old school</h5>
                     </div>
                     <Form action="" className="form" method="">
                       <InputGroup

@@ -16,7 +16,7 @@ import Pricing from "./sections-sections/Pricing.js";
 import Testimonials from "./sections-sections/Testimonials.js";
 import ContactUs from "./sections-sections/ContactUs.js";
 
-function Sections() {
+const Sections = () => {
   React.useEffect(() => {
     document.body.classList.add("sections-page");
     document.body.classList.add("sidebar-collapse");

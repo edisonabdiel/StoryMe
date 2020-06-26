@@ -5,7 +5,7 @@ import { Button, Row, Col } from "reactstrap";
 
 // core components
 
-function BlogPostsHeader() {
+const BlogPostsHeader = () => {
   let pageHeader = React.createRef();
   React.useEffect(() => {
     if (window.innerWidth > 991) {
@@ -34,14 +34,8 @@ function BlogPostsHeader() {
           <Row>
             <Col className="ml-auto mr-auto text-center" md="8">
               <h2 className="title">
-                A Place for Entrepreneurs to Share and Discover New Stories
+                Give life to your stories
               </h2>
-              <Button className="btn-round btn-icon mr-1" color="info">
-                <i className="fab fa-twitter"></i>
-              </Button>
-              <Button className="btn-round btn-icon" color="info">
-                <i className="fab fa-instagram"></i>
-              </Button>
             </Col>
           </Row>
         </div>

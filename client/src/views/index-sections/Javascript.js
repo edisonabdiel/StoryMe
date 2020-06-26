@@ -29,7 +29,17 @@ import {
 
 // core components
 
-function Javascript() {
+const Javascript = () => {
+
+  // state = {
+  //   nameFocus: false
+  // }
+
+  // setNameFocus = (bool) => {
+  //   this.setState({
+  //     nameFocus: bool
+  //   })
+  // }
   // focus states and functions for login modal
   const [nameFocus, setNameFocus] = React.useState(false);
   const [passwordFocus, setPasswordFocus] = React.useState(false);
@@ -38,6 +48,7 @@ function Javascript() {
   const [modalMini, setModalMini] = React.useState(false);
   const [modalNotice, setModalNotice] = React.useState(false);
   const [modalLogin, setModalLogin] = React.useState(false);
+  // const [logedIn, setLogedIn] = React.useState(false);
   // collapse states and functions
   const [collapses, setCollapses] = React.useState([1]);
   const changeCollapse = (collapse) => {
@@ -47,6 +58,12 @@ function Javascript() {
       setCollapses([...collapses, collapse]);
     }
   };
+
+  const loginHandler = (e) => {
+    e.preventDefault();
+    console.log("Im a modal, and i work")
+  }
+
   return (
     <>
       <div className="section section-javascript" id="javascriptComponents">
@@ -107,8 +124,8 @@ function Javascript() {
                   </p>
                 </div>
                 <ModalFooter>
-                  <Button color="default" type="button">
-                    Nice Button
+                  <Button color="success" type="button">
+                    <i className="now-ui-icons ui-2_favourite-28 "></i>
                   </Button>
                   <Button color="danger" onClick={() => setModalClassic(false)}>
                     Close
@@ -303,7 +320,7 @@ function Javascript() {
                       className="btn-neutral btn-round"
                       color="info"
                       href="#pablo"
-                      onClick={(e) => e.preventDefault()}
+                      onClick={loginHandler}
                       size="lg"
                     >
                       Get Started
