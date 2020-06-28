@@ -27,9 +27,16 @@ const transporter = nodemailer.createTransport({
 //POST /api/singup
 authRoutes.post('/signup', (req, res, next) => {
   const email = req.body.email;
+  console.log("outPut: email", email)
   const password = req.body.password;
+  console.log("outPut: password", password)
 
   User.findOne({ email }, (err, foundUser) => {
+
+    if (err) {
+      res.status(500).json({ message: "Username check went bad." });
+      return;
+    }
 
     if (foundUser) {
       res.status(400).json({ message: 'Email taken. Choose another one.' });
@@ -70,6 +77,8 @@ authRoutes.post('/signup', (req, res, next) => {
       return token.save()
     }).then((token) => {
       //Send email verification
+      console.log("email", email);
+      console.log(process.env.EMAIL_HOST);
       const mailOptions = {
         from: "storymewebapp@gmail.com",
         to: email,
@@ -83,12 +92,13 @@ authRoutes.post('/signup', (req, res, next) => {
       // render the res after signup
       transporter.sendMail(mailOptions, (err) => {
         if (err) {
-          res.status(500).json({ message: 'Email could not be sent' })
+          console.log("erro", err);
+          // res.status(500).json({ message: 'Email could not be sent' })
         };
-        console.log('EMAIL',email);
-        console.log('USER OBJECT',aNewUser);
-        res.status(200).json(email, aNewUser)
-        
+        // console.log('EMAIL', email);
+        // console.log('USER OBJECT', aNewUser);
+        // res.status(200).json(email, aNewUser)
+
       });
     });
   });
