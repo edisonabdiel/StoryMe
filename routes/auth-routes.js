@@ -85,7 +85,7 @@ authRoutes.post('/signup', (req, res, next) => {
         subject: "Account Verification Token",
         html: `<p>Hi there,<br></br>
           To verify your email, simply click below.</p><br>
-          <a href= "${process.env.EMAIL_HOST}confirmations/${token.token}">verify your email</a><br>
+          <a href= "${process.env.EMAIL_HOST}confirmation/${token.token}">verify your email</a><br>
           <h4>Enjoy<br>
           The StoryMe Team</h4>`
       };
@@ -102,6 +102,34 @@ authRoutes.post('/signup', (req, res, next) => {
       });
     });
   });
+});
+
+authRoutes.get("/confirmation/:token", (req, res) => {
+  console.log(req.params);
+  Token.findOne({
+    token: req.params.token,
+  })
+    .then((token) => {
+      return User.findOne({
+        _id: token._userId
+      })
+    }).then((user) => {
+      console.log("outPut: user backend", user)
+      user.isVerified = true;
+      return user.save();
+    })
+    .then((user) => {
+      req.login(user, (err) => {
+
+        if (err) {
+          res.status(500).json({ message: 'Login after signup went bad.' });
+          return;
+        }
+        // Send the user's information to the frontend
+        // We can use also: res.status(200).json(req.user);
+        res.status(200).json(user);
+      });
+    });
 });
 
 //POST /api/login
