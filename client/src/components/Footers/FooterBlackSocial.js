@@ -19,7 +19,7 @@ function FooterBlackSocial() {
                   <li>
                     <a
                       className="text-muted"
-                      href="#pablo"
+                      href=""
                       onClick={(e) => e.preventDefault()}
                     >
                       Blog
@@ -28,7 +28,7 @@ function FooterBlackSocial() {
                   <li>
                     <a
                       className="text-muted"
-                      href="#pablo"
+                      href=""
                       onClick={(e) => e.preventDefault()}
                     >
                       About Us
@@ -37,7 +37,7 @@ function FooterBlackSocial() {
                   <li>
                     <a
                       className="text-muted"
-                      href="#pablo"
+                      href=""
                       onClick={(e) => e.preventDefault()}
                     >
                       Presentation

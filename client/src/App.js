@@ -14,7 +14,6 @@ import Index from "views/Index.js";
 import LandingPage from "views/examples/LandingPage.js";
 import LoginPage from "views/examples/LoginPage.js";
 import NucleoIcons from "views/NucleoIcons.js";
-import Presentation from "views/Presentation.js";
 import ProfilePage from "views/examples/ProfilePage.js";
 import Sections from "views/Sections.js";
 import SignupPage from "views/examples/SignupPage.js";
@@ -38,7 +37,7 @@ class App extends React.Component {
 
     return (
       <div>
-      {this.state.loggedInUser ? <h1>Hi {this.state.loggedInUser.email}</h1>:'Logged out'}
+      {/* {this.state.loggedInUser ? <h1>Hi {this.state.loggedInUser.email}</h1>:'Logged out'} */}
       <Switch>
         
         <Route exact path="/" render={(props) => <Discovery {...props} />} />
@@ -49,9 +48,7 @@ class App extends React.Component {
         <Route path="/index" render={(props) => <Index {...props} />} />
         <Route path="/landing-page" render={(props) => <LandingPage {...props} />} />
         <Route path="/nucleo-icons" render={(props) => <NucleoIcons {...props} />} />
-        <Route path="/presentation" render={(props) => <Presentation {...props} />} />
-        <Route path="/profile-page" render={(props) => <ProfilePage {...props} />}
-        />
+        <Route path="/profile-page" render={(props) => <ProfilePage {...props} />} />
         <Route path="/sections" render={(props) => <Sections {...props} />} />
       </Switch>
       </div>

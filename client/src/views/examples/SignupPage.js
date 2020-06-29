@@ -21,7 +21,7 @@ import {
 
 // core components
 import FixedTransparentNavbar from "components/Navbars/FixedTransparentNavbar.js";
-import Footer from "components/Footers/Footer.js";
+import FooterBlack from "components/Footers/FooterBlack";
 
 function SignupPage() {
   const [firstFocus, setFirstFocus] = React.useState(false);
@@ -191,7 +191,7 @@ function SignupPage() {
             </Row>
           </Container>
         </div>
-        <Footer />
+        <FooterBlack />
       </div>
     </>
   );

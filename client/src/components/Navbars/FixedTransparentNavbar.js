@@ -59,7 +59,7 @@ function FixedTransparentNavbar() {
                 <Button
                   className="nav-link btn-success"
                   color="success"
-                  href="https://www.creative-tim.com/product/now-ui-kit-pro-react?ref=nuk-pro-react-fixed-transparent-navbar"
+                  href=""
                   target="_blank"
                 >
                   <p>PUBLISH</p>
