@@ -42,7 +42,7 @@ class App extends React.Component {
       <Switch>
         
         <Route exact path="/" render={(props) => <Discovery {...props} />} />
-        <Route exact path="/login-button" render={() => <LoginButton updateUser={this.updateUser} />} />
+        <Route exact path="/login-button" render={(props) => <LoginButton updateUser={this.updateUser} currentUser={this.state.loggedInUser} {...props}  />} />
         <Route exact path="/login-page" render={(props) => <LoginPage {...props} />} />
         <Route path="/sign-up" render={(props) => <SignupPage {...props} />} />
         <Route path="/contact-us" render={(props) => <ContactUs {...props} />} />

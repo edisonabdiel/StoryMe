@@ -3,6 +3,7 @@ import React from "react";
 // react plugin used to create datetimepicker
 import ReactDatetime from "react-datetime";
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 // reactstrap components
 import {
@@ -69,7 +70,8 @@ class LoginButton extends React.Component {
     axios.post("/api/login", { email, password })
       .then((resp) => {
         // this.props.getData();
-        console.log(resp.data);
+
+        console.log('User Data', resp.data);
         this.props.updateUser(resp.data)
         this.setState({ email: "", password: "" });
       }).catch((error) => {
@@ -78,6 +80,10 @@ class LoginButton extends React.Component {
         this.setState({
           errorMessage: error.response.data.message
         })
+      }).then(() => {
+        if (this.props.currentUser) {
+          this.props.history.push('/profile-page')
+        }
       })
   }
 
@@ -119,6 +125,7 @@ class LoginButton extends React.Component {
                     </div>
                   </div>
                   <div className="modal-body">
+                    {this.state.errorMessage ? <p style={{textAlign:'center'}}>{this.state.errorMessage}</p> : null}
                     <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
                       <CardBody>
                         <InputGroup
@@ -165,9 +172,9 @@ class LoginButton extends React.Component {
                             onChange={this.handleChange}
                           ></Input>
                         </InputGroup>
-                      </CardBody>
+                      </CardBody>  
                       <ModalFooter className="text-center">
-                        <Button
+                      <Button
                           block
                           className="btn-neutral btn-round"
                           color="info"
@@ -176,12 +183,17 @@ class LoginButton extends React.Component {
                           size="lg"
                         >
                           Get Started
-                    </Button>
+                        </Button>
                       </ModalFooter>
                     </Form>
+                    <p>Do not have Account?
+                         <Link to={"/sign-up"} style={{fontWeight:'bold'}}> Sign up</Link>
+                    </p>
+                    
                   </div>
-
+                  
                 </Card>
+                
               </Modal>
             </Col>
           </Row>
