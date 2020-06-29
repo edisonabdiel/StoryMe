@@ -36,7 +36,7 @@ authRoutes.post('/signup', signUpValidation, (req, res, next) => {
   const errors = validationResult(req);
   console.log("outPut: errors", errors.array())
   if (!errors.isEmpty()) {
-    return res.status(500).json({
+    return res.status(400).json({
       errors: errors.array()
     });
   }
@@ -44,6 +44,8 @@ authRoutes.post('/signup', signUpValidation, (req, res, next) => {
   console.log("outPut: email", email)
   const password = req.body.password;
   console.log("outPut: password", password)
+  const checked = req.body.checked;
+  console.log("outPut: checked", checked)
 
   User.findOne({ email }, (err, foundUser) => {
 

@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 export class ConfirmationPage extends Component {
     state = {
         loading: true,
-
     }
 
     componentDidMount() {

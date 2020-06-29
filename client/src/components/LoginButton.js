@@ -125,7 +125,7 @@ class LoginButton extends React.Component {
                     </div>
                   </div>
                   <div className="modal-body">
-                    {this.state.errorMessage ? <p style={{textAlign:'center'}}>{this.state.errorMessage}</p> : null}
+                    {this.state.errorMessage ? <p style={{ textAlign: 'center' }}>{this.state.errorMessage}</p> : null}
                     <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
                       <CardBody>
                         <InputGroup
@@ -172,10 +172,9 @@ class LoginButton extends React.Component {
                             onChange={this.handleChange}
                           ></Input>
                         </InputGroup>
-                      </CardBody>  
+                      </CardBody>
                       <ModalFooter className="text-center">
-                      <Button
-´
+                        <Button
                           block
                           className="btn-neutral btn-round"
                           color="info"
@@ -188,13 +187,13 @@ class LoginButton extends React.Component {
                       </ModalFooter>
                     </Form>
                     <p>Do not have Account?
-                         <Link to={"/sign-up"} style={{fontWeight:'bold'}}> Sign up</Link>
+                         <Link to={"/sign-up"} style={{ fontWeight: 'bold' }}> Sign up</Link>
                     </p>
-                    
+
                   </div>
-                  
+
                 </Card>
-                
+
               </Modal>
             </Col>
           </Row>

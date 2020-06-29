@@ -3,6 +3,7 @@ const {
 } = require("express-validator");
 const User = require("../models/user-model");
 
+
 let signUpValidation = [
     check("email")
         .isEmail().withMessage("Email is not valid")
@@ -20,6 +21,7 @@ let signUpValidation = [
             min: 5,
         })
         .withMessage("Password must be at least 5 chars long"),
+    check("checked").equals("true").withMessage("must agree to terms and conditions")
 ];
 
 

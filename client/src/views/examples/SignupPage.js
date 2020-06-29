@@ -30,7 +30,6 @@ import FooterBlack from "components/Footers/FooterBlack";
 
 
 function SignupPage(props) {
-  const [errMessage, setErrMessage] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [checked, setChecked] = React.useState(false);
   const [errorMessages, setErrorMessages] = React.useState([]);
@@ -51,6 +50,7 @@ function SignupPage(props) {
   }, []);
 
   const handleFormSubmit = (event) => {
+    console.log(checked);
     event.preventDefault()
     axios.post("/api/signup", { email, password, checked })
       .then((resp) => {
@@ -58,7 +58,6 @@ function SignupPage(props) {
         console.log("resp data", resp.data)
         if (!resp.data.errors)
           props.updateUser(resp.data)
-        setErrMessage('')
         setEmail("")
         setPassword("")
         setErrorMessages([])
@@ -66,6 +65,10 @@ function SignupPage(props) {
         console.log("ERROR !!")
         console.log('error', error.response.data.errors)
         setErrorMessages(error.response.data.errors)
+      }).then(() => {
+        if (props.currentUser) {
+          props.history.push('/landing-page')
+        }
       })
   }
   return (
@@ -145,11 +148,9 @@ function SignupPage(props) {
 
                     </div>
                     <Form className="form" onSubmit={handleFormSubmit}>
-                      <h5 style={{ color: "black" }}>{errMessage}</h5>
-                      <h5 style={{ color: "black" }}>
-                        {errorMessages.map((m) =>
-                          m.msg
-                        )}</h5>
+                      {errorMessages.map((m) =>
+                        <h6 key={m.param} style={{ color: "black", margin: '0px' }}>{m.msg}</h6>
+                      )}
                       <InputGroup
                         className={emailFocus ? "input-group-focus" : ""}
                       >
