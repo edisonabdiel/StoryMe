@@ -175,7 +175,6 @@ class LoginButton extends React.Component {
                       </CardBody>  
                       <ModalFooter className="text-center">
                       <Button
-´
                           block
                           className="btn-neutral btn-round"
                           color="info"
