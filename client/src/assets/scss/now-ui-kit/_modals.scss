@@ -39,31 +39,36 @@
         padding-left: 24px;
         line-height: 1.9;
     }
+  }
+  // Modal body
+  // Where all modal content resides (sibling of .modal-header and .modal-footer)
+  .modal-body {
+    padding-top:    24px;
+    padding-right:  24px;
+    padding-bottom: 16px;
+    padding-left:   24px;
+    line-height: 1.9;
+  }
+  // Footer (for actions)
+  .modal-footer {
+    border-top: none;
+    padding-right: 24px;
+    padding-bottom: 16px;
+    padding-left: 24px;
+    -webkit-justify-content: space-between; /* Safari 6.1+ */
+    justify-content: center;
 
-    // Footer (for actions)
-    .modal-footer {
-        border-top: none;
-        padding-right: 24px;
-        padding-bottom: 16px;
-        padding-left: 24px;
-        -webkit-justify-content: center;
-        /* Safari 6.1+ */
-        justify-content: center;
-
-        button {
-            margin: 0;
-            padding-left: 16px;
-            padding-right: 16px;
-            width: auto;
-
-            &.pull-left {
-                padding-left: 5px;
-                padding-right: 5px;
-                position: relative;
-                left: -5px;
-            }
-        }
-
+    button {
+      margin: 0;
+      padding-left: 16px;
+      padding-right: 16px;
+      width: auto;
+      &.pull-left {
+        padding-left: 5px;
+        padding-right: 5px;
+        position: relative;
+        left: -5px;
+      }
     }
 
     .modal-body+.modal-footer {
