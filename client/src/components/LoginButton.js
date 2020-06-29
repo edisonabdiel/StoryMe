@@ -165,8 +165,10 @@ class LoginButton extends React.Component {
                             onChange={this.handleChange}
                           ></Input>
                         </InputGroup>
+
                       </CardBody>
-                      <ModalFooter className="text-center">
+
+                      <ModalFooter className="text-center" >
                         <Button
                           block
                           className="btn-neutral btn-round"

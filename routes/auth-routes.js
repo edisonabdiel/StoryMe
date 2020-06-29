@@ -14,6 +14,12 @@ const User = require('../models/user-model');
 const Token = require("../models/token-model");
 const randomToken = require("random-token");
 const nodemailer = require("nodemailer");
+// add express-validation
+const {
+  validationResult
+} = require("express-validator");
+const signUpValidation = require("../helpers/middlewares").signUpValidation;
+
 
 // email authorization
 const transporter = nodemailer.createTransport({
@@ -25,11 +31,26 @@ const transporter = nodemailer.createTransport({
 });
 
 //POST /api/singup
-authRoutes.post('/signup', (req, res, next) => {
+authRoutes.post('/signup', signUpValidation, (req, res, next) => {
+  // get the validation errors 
+  const errors = validationResult(req);
+  console.log("outPut: errors", errors.array())
+  if (!errors.isEmpty()) {
+    return res.status(500).json({
+      errors: errors.array()
+    });
+  }
   const email = req.body.email;
+  console.log("outPut: email", email)
   const password = req.body.password;
+  console.log("outPut: password", password)
 
   User.findOne({ email }, (err, foundUser) => {
+
+    if (err) {
+      res.status(500).json({ message: "Username check went bad." });
+      return;
+    }
 
     if (foundUser) {
       res.status(400).json({ message: 'Email taken. Choose another one.' });
@@ -70,28 +91,59 @@ authRoutes.post('/signup', (req, res, next) => {
       return token.save()
     }).then((token) => {
       //Send email verification
+      console.log("email", email);
+      console.log(process.env.EMAIL_HOST);
       const mailOptions = {
         from: "storymewebapp@gmail.com",
         to: email,
         subject: "Account Verification Token",
         html: `<p>Hi there,<br></br>
           To verify your email, simply click below.</p><br>
-          <a href= "${process.env.EMAIL_HOST}confirmations/${token.token}">verify your email</a><br>
+          <a href= "${process.env.EMAIL_HOST}confirmation/${token.token}">verify your email</a><br>
           <h4>Enjoy<br>
           The StoryMe Team</h4>`
       };
       // render the res after signup
       transporter.sendMail(mailOptions, (err) => {
         if (err) {
-          res.status(500).json({ message: 'Email could not be sent' })
+          console.log("erro", err);
+          // res.status(500).json({ message: 'Email could not be sent' })
         };
-        console.log('EMAIL',email);
-        console.log('USER OBJECT',aNewUser);
-        res.status(200).json(email, aNewUser)
-        
+        // console.log('EMAIL', email);
+        // console.log('USER OBJECT', aNewUser);
+        // res.status(200).json(email, aNewUser)
+
       });
     });
   });
+});
+
+authRoutes.get("/confirmation/:token", (req, res) => {
+  console.log(req.params);
+  Token.findOne({
+    token: req.params.token,
+  })
+    .then((token) => {
+      return User.findOne({
+        _id: token._userId
+      })
+    }).then((user) => {
+      console.log("outPut: user backend", user)
+      user.isVerified = true;
+      return user.save();
+    })
+    .then((user) => {
+      req.login(user, (err) => {
+
+        if (err) {
+          res.status(500).json({ message: 'Login after signup went bad.' });
+          return;
+        }
+        // Send the user's information to the frontend
+        // We can use also: res.status(200).json(req.user);
+        res.status(200).json(user);
+      });
+    });
 });
 
 //POST /api/login
