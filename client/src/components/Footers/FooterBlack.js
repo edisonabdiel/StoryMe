@@ -15,15 +15,15 @@ function FooterBlack() {
             <ul>
               <li>
                 <a
-                  href="https://www.creative-tim.com?ref=nuk-pro-react-footer-black"
+                  // href=""
                   target="_blank"
                 >
-                  Creative Tim
+                  StoryMe
                 </a>
               </li>
               <li>
                 <a
-                  href="http://presentation.creative-tim.com?ref=nuk-pro-react-footer-black"
+                  // href=""
                   target="_blank"
                 >
                   About Us
@@ -31,7 +31,7 @@ function FooterBlack() {
               </li>
               <li>
                 <a
-                  href="http://blog.creative-tim.com?ref=nuk-pro-react-footer-black"
+                  // href=""
                   target="_blank"
                 >
                   Blog
@@ -40,19 +40,13 @@ function FooterBlack() {
             </ul>
           </nav>
           <div className="copyright" id="copyright">
-            © {new Date().getFullYear()}, Designed by{" "}
-            <a
-              href="https://www.invisionapp.com?ref=creativetim"
-              target="_blank"
-            >
-              Invision
-            </a>
+            © {new Date().getFullYear()}
             . Coded by{" "}
             <a
-              href="https://www.creative-tim.com?ref=nuk-pro-react-footer-black"
+              // href=""
               target="_blank"
             >
-              Creative Tim
+              Dima, Edison & Noubar
             </a>
             .
           </div>

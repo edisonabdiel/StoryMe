@@ -1,4 +1,8 @@
-import React from "react";
+import React from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+
+
 
 // reactstrap components
 import {
@@ -21,11 +25,18 @@ import {
 
 // core components
 import FixedTransparentNavbar from "components/Navbars/FixedTransparentNavbar.js";
-import Footer from "components/Footers/Footer.js";
+import FooterBlack from "components/Footers/FooterBlack";
 
-function SignupPage() {
-  const [firstFocus, setFirstFocus] = React.useState(false);
-  const [lastFocus, setLastFocus] = React.useState(false);
+
+
+function SignupPage(props) {
+  const [errMessage, setErrMessage] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [checked, setChecked] = React.useState(false);
+  const [errorMessages, setErrorMessages] = React.useState([]);
+  const [password, setPassword] = React.useState('');
+  // const [firstFocus, setFirstFocus] = React.useState(false);
+  const [passwordFocus, setPasswordFocus] = React.useState(false);
   const [emailFocus, setEmailFocus] = React.useState(false);
   React.useEffect(() => {
     document.body.classList.add("signup-page");
@@ -38,6 +49,25 @@ function SignupPage() {
       document.body.classList.remove("sidebar-collapse");
     };
   }, []);
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault()
+    axios.post("/api/signup", { email, password, checked })
+      .then((resp) => {
+        console.log("outPut: handleFormSubmit -> resp", resp)
+        console.log("resp data", resp.data)
+        if (!resp.data.errors)
+          props.updateUser(resp.data)
+        setErrMessage('')
+        setEmail("")
+        setPassword("")
+        setErrorMessages([])
+      }).catch((error) => {
+        console.log("ERROR !!")
+        console.log('error', error.response.data.errors)
+        setErrorMessages(error.response.data.errors)
+      })
+  }
   return (
     <>
       <FixedTransparentNavbar />
@@ -70,8 +100,8 @@ function SignupPage() {
                   <div className="description">
                     <h5 className="info-title">Easy and Fast</h5>
                     <p className="description">
-                      It only takes a 2 clicks and a few seconds to share 
-                       your creations with the rest of the world
+                      It only takes a 2 clicks and a few seconds to share
+                      your creations with the rest of the world
                     </p>
                   </div>
                 </div>
@@ -82,8 +112,8 @@ function SignupPage() {
                   <div className="description">
                     <h5 className="info-title">Built Audience</h5>
                     <p className="description">
-                    Reach thousands of readers around the world by simply
-                        publishing your beloved writings
+                      Reach thousands of readers around the world by simply
+                      publishing your beloved writings
                     </p>
                   </div>
                 </div>
@@ -112,40 +142,14 @@ function SignupPage() {
                         <i className="fab fa-facebook"></i>
                       </Button>
                       <h5 className="card-description">or go old school</h5>
+
                     </div>
-                    <Form action="" className="form" method="">
-                      <InputGroup
-                        className={firstFocus ? "input-group-focus" : ""}
-                      >
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                            <i className="now-ui-icons users_circle-08"></i>
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input
-                          autoComplete="fullname"
-                          placeholder="First Name..."
-                          type="text"
-                          onFocus={() => setFirstFocus(true)}
-                          onBlur={() => setFirstFocus(false)}
-                        ></Input>
-                      </InputGroup>
-                      <InputGroup
-                        className={lastFocus ? "input-group-focus" : ""}
-                      >
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                            <i className="now-ui-icons text_caps-small"></i>
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input
-                          autoComplete="name"
-                          placeholder="Last Name..."
-                          type="text"
-                          onFocus={() => setLastFocus(true)}
-                          onBlur={() => setLastFocus(false)}
-                        ></Input>
-                      </InputGroup>
+                    <Form className="form" onSubmit={handleFormSubmit}>
+                      <h5 style={{ color: "black" }}>{errMessage}</h5>
+                      <h5 style={{ color: "black" }}>
+                        {errorMessages.map((m) =>
+                          m.msg
+                        )}</h5>
                       <InputGroup
                         className={emailFocus ? "input-group-focus" : ""}
                       >
@@ -160,16 +164,38 @@ function SignupPage() {
                           type="text"
                           onFocus={() => setEmailFocus(true)}
                           onBlur={() => setEmailFocus(false)}
+                          name="email"
+                          value={email}
+                          onChange={e => setEmail(e.target.value)}
+                        ></Input>
+                      </InputGroup>
+                      <InputGroup
+                        className={passwordFocus ? "input-group-focus" : ""}
+                      >
+                        <InputGroupAddon addonType="prepend">
+                          <InputGroupText>
+                            <i className="now-ui-icons ui-1_lock-circle-open"></i>
+                          </InputGroupText>
+                        </InputGroupAddon>
+                        <Input
+                          autoComplete="password"
+                          placeholder="Password..."
+                          type="text"
+                          onFocus={() => setPasswordFocus(true)}
+                          onBlur={() => setPasswordFocus(false)}
+                          name="password"
+                          value={password}
+                          onChange={e => setPassword(e.target.value)}
                         ></Input>
                       </InputGroup>
                       <FormGroup check>
                         <Label check>
-                          <Input type="checkbox"></Input>
+                          <Input type="checkbox" onChange={(e) => setChecked(e.target.checked)}></Input>
                           <span className="form-check-sign"></span>I agree to
                           the terms and{" "}
-                          <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                          <Link to='/'>
                             conditions
-                          </a>
+                          </Link>
                           .
                         </Label>
                       </FormGroup>
@@ -177,8 +203,7 @@ function SignupPage() {
                         <Button
                           className="btn-round"
                           color="info"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
+                          type="submit"
                           size="lg"
                         >
                           Get Started
@@ -191,7 +216,7 @@ function SignupPage() {
             </Row>
           </Container>
         </div>
-        <Footer />
+        <FooterBlack />
       </div>
     </>
   );

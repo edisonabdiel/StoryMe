@@ -27,9 +27,9 @@ import {
 } from "reactstrap";
 
 // core components
-import ScrollTransparentNavbar from "components/Navbars/ScrollTransparentNavbar.js";
+import FixedTransparentNavbar from "components/Navbars/FixedTransparentNavbar.js";
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
-import FooterDefault from "components/Footers/FooterDefault.js";
+import FooterBlack from "components/Footers/FooterBlack.js";
 
 const ProfilePage = () => {
   const [pills, setPills] = React.useState("1");
@@ -48,11 +48,11 @@ const ProfilePage = () => {
   }, []);
   return (
     <>
-      <ScrollTransparentNavbar />
-      <div className="wrapper">
+      <FixedTransparentNavbar />
+      <div className="wrapper" >
         <ProfilePageHeader />
         <div className="section">
-          <Container>
+          <Container >
             <div className="button-container">
               <Button
                 className="btn-round mr-1"
@@ -61,7 +61,7 @@ const ProfilePage = () => {
                 onClick={(e) => e.preventDefault()}
                 size="lg"
               >
-                Follow
+                ReadMe
               </Button>
               <Button
                 className="btn-round btn-icon mr-1"
@@ -311,111 +311,7 @@ const ProfilePage = () => {
             </Row>
           </Container>
         </div>
-        <div className="contactus-2">
-          <div className="map" id="contactUsMap"></div>
-          <Col lg="6" md="10">
-            <Card className="card-contact card-raised">
-              <Form id="contact-form" method="post" role="form">
-                <CardHeader className="text-center">
-                  <CardTitle tag="h4">Contact Us</CardTitle>
-                </CardHeader>
-                <CardBody>
-                  <Row>
-                    <Col md="6">
-                      <div className="info info-horizontal">
-                        <div className="icon icon-info">
-                          <i className="now-ui-icons tech_mobile"></i>
-                        </div>
-                        <div className="description">
-                          <h5 className="info-title">Give us a ring</h5>
-                          <p>
-                            Michael Jordan <br></br>
-                            +40 762 321 762 <br></br>
-                            Mon - Fri, 8:00-22:00
-                          </p>
-                        </div>
-                      </div>
-                    </Col>
-                    <Col md="6">
-                      <div className="info info-horizontal">
-                        <div className="icon icon-info">
-                          <i className="now-ui-icons location_pin"></i>
-                        </div>
-                        <div className="description">
-                          <h5 className="info-title">Find us at the office</h5>
-                          <p>
-                            Bld Mihail Kogalniceanu, nr. 8, <br></br>
-                            7652 Bucharest, <br></br>
-                            Romania
-                          </p>
-                        </div>
-                      </div>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className="pr-2" md="6">
-                      <label>Full name</label>
-                      <InputGroup
-                        className={firstFocus ? "input-group-focus" : ""}
-                      >
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                            <i className="now-ui-icons users_circle-08"></i>
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input
-                          placeholder="First Name..."
-                          type="text"
-                          onFocus={() => setFirstFocus(true)}
-                          onBlur={() => setFirstFocus(false)}
-                        ></Input>
-                      </InputGroup>
-                    </Col>
-                    <Col className="pl-2" md="6">
-                      <label>Email address</label>
-                      <InputGroup
-                        className={emailFocus ? "input-group-focus" : ""}
-                      >
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                            <i className="now-ui-icons ui-1_email-85"></i>
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input
-                          placeholder="Email Here..."
-                          type="text"
-                          onFocus={() => setEmailFocus(true)}
-                          onBlur={() => setEmailFocus(false)}
-                        ></Input>
-                      </InputGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md="6">
-                      <FormGroup check>
-                        <Label check>
-                          <Input type="checkbox"></Input>
-                          <span className="form-check-sign"></span>
-                          I'm not a robot
-                        </Label>
-                      </FormGroup>
-                    </Col>
-                    <Col md="6">
-                      <Button
-                        className="btn-round pull-right"
-                        color="info"
-                        type="submit"
-                      >
-                        Send Message
-                      </Button>
-                    </Col>
-                  </Row>
-                </CardBody>
-              </Form>
-            </Card>
-          </Col>
-        </div>
-        <FooterDefault />
+        <FooterBlack />
       </div>
     </>
   );
