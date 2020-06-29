@@ -14,6 +14,12 @@ const User = require('../models/user-model');
 const Token = require("../models/token-model");
 const randomToken = require("random-token");
 const nodemailer = require("nodemailer");
+// add express-validation
+const {
+  validationResult
+} = require("express-validator");
+const signUpValidation = require("../helpers/middlewares").signUpValidation;
+
 
 // email authorization
 const transporter = nodemailer.createTransport({
@@ -25,7 +31,15 @@ const transporter = nodemailer.createTransport({
 });
 
 //POST /api/singup
-authRoutes.post('/signup', (req, res, next) => {
+authRoutes.post('/signup', signUpValidation, (req, res, next) => {
+  // get the validation errors 
+  const errors = validationResult(req);
+  console.log("outPut: errors", errors.array())
+  if (!errors.isEmpty()) {
+    return res.status(500).json({
+      errors: errors.array()
+    });
+  }
   const email = req.body.email;
   console.log("outPut: email", email)
   const password = req.body.password;

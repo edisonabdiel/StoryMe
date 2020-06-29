@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 
@@ -29,7 +30,10 @@ import Footer from "components/Footers/Footer.js";
 
 
 function SignupPage(props) {
+  const [errMessage, setErrMessage] = React.useState('');
   const [email, setEmail] = React.useState('');
+  const [checked, setChecked] = React.useState(false);
+  const [errorMessages, setErrorMessages] = React.useState([]);
   const [password, setPassword] = React.useState('');
   // const [firstFocus, setFirstFocus] = React.useState(false);
   const [passwordFocus, setPasswordFocus] = React.useState(false);
@@ -47,16 +51,21 @@ function SignupPage(props) {
   }, []);
 
   const handleFormSubmit = (event) => {
-    event.preventDefault();
-    // setUser({ email, password })
-    // console.log("outPut: handleFormSubmit -> setUser", setUser)
-
-    axios.post("/api/signup", { email, password })
+    event.preventDefault()
+    axios.post("/api/signup", { email, password, checked })
       .then((resp) => {
         console.log("outPut: handleFormSubmit -> resp", resp)
-        props.updateUser(resp.data)
+        console.log("resp data", resp.data)
+        if (!resp.data.errors)
+          props.updateUser(resp.data)
+        setErrMessage('')
         setEmail("")
         setPassword("")
+        setErrorMessages([])
+      }).catch((error) => {
+        console.log("ERROR !!")
+        console.log('error', error.response.data.errors)
+        setErrorMessages(error.response.data.errors)
       })
   }
   return (
@@ -133,25 +142,14 @@ function SignupPage(props) {
                         <i className="fab fa-facebook"></i>
                       </Button>
                       <h5 className="card-description">or go old school</h5>
+
                     </div>
                     <Form className="form" onSubmit={handleFormSubmit}>
-                      {/* <InputGroup
-                        className={firstFocus ? "input-group-focus" : ""}
-                      >
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                            <i className="now-ui-icons users_circle-08"></i>
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input
-                          autoComplete="fullname"
-                          placeholder="First Name..."
-                          type="text"
-                          onFocus={() => setFirstFocus(true)}
-                          onBlur={() => setFirstFocus(false)}
-
-                        ></Input>
-                      </InputGroup> */}
+                      <h5 style={{ color: "black" }}>{errMessage}</h5>
+                      <h5 style={{ color: "black" }}>
+                        {errorMessages.map((m) =>
+                          m.msg
+                        )}</h5>
                       <InputGroup
                         className={emailFocus ? "input-group-focus" : ""}
                       >
@@ -192,12 +190,12 @@ function SignupPage(props) {
                       </InputGroup>
                       <FormGroup check>
                         <Label check>
-                          <Input type="checkbox"></Input>
+                          <Input type="checkbox" onChange={(e) => setChecked(e.target.checked)}></Input>
                           <span className="form-check-sign"></span>I agree to
                           the terms and{" "}
-                          {/* <a onClick={(e) => e.preventDefault()}>
+                          <Link to='/'>
                             conditions
-                          </a> */}
+                          </Link>
                           .
                         </Label>
                       </FormGroup>

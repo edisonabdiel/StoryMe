@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 
 export class ConfirmationPage extends Component {
     state = {
-        loading: true
-        // success: false
+        loading: true,
+
     }
 
     componentDidMount() {
@@ -18,13 +18,10 @@ export class ConfirmationPage extends Component {
             this.props.updateUser(resp.data)
             this.setState({
                 loading: false
-                // success: true
             })
         })
     }
     render() {
-        console.log('loading', this.state.loading);
-        console.log(this.props.match.params.token);
         return (
             <div>
                 <h1>confirmation page</h1>
