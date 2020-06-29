@@ -25,7 +25,7 @@ import {
 
 // core components
 import FixedTransparentNavbar from "components/Navbars/FixedTransparentNavbar.js";
-import Footer from "components/Footers/Footer.js";
+import FooterBlack from "components/Footers/FooterBlack";
 
 
 
@@ -216,7 +216,7 @@ function SignupPage(props) {
             </Row>
           </Container>
         </div>
-        <Footer />
+        <FooterBlack />
       </div>
     </>
   );

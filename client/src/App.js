@@ -16,7 +16,6 @@ import Index from "views/Index.js";
 import LandingPage from "views/examples/LandingPage.js";
 import LoginPage from "views/examples/LoginPage.js";
 import NucleoIcons from "views/NucleoIcons.js";
-import Presentation from "views/Presentation.js";
 import ProfilePage from "views/examples/ProfilePage.js";
 import Sections from "views/Sections.js";
 import SignupPage from "views/examples/SignupPage.js";
@@ -41,24 +40,22 @@ class App extends React.Component {
   render() {
 
     return (
-      <div className='App'>
-        {this.state.loggedInUser ? <h1>Hi {this.state.loggedInUser.email}</h1> : 'Logged out'}
-
-
+      <div>
+      {/* {this.state.loggedInUser ? <h1>Hi {this.state.loggedInUser.email}</h1>:'Logged out'} */}
+      <Switch>
+        
         <Route exact path="/" render={(props) => <Discovery {...props} />} />
         <Route exact path="/login-button" render={() => <LoginButton updateUser={this.updateUser} />} />
         <Route exact path="/login-page" render={(props) => <LoginPage {...props} />} />
         <Route exact path="/sign-up" render={() => <SignupPage updateUser={this.updateUser} />} />
-        <Route exact path="/contact-us" render={(props) => <ContactUs {...props} />} />
-        <Route exact path="/index" render={(props) => <Index {...props} />} />
-        <Route exact path="/landing-page" render={(props) => <LandingPage {...props} />} />
-        <Route exact path="/nucleo-icons" render={(props) => <NucleoIcons {...props} />} />
-        <Route exact path="/presentation" render={(props) => <Presentation {...props} />} />
-        <Route exact path="/profile-page" render={(props) => <ProfilePage {...props} />}
-        />
-        <Route exact path="/sections" render={(props) => <Sections {...props} />} />
+        <Route path="/contact-us" render={(props) => <ContactUs {...props} />} />
+        <Route path="/index" render={(props) => <Index {...props} />} />
+        <Route path="/landing-page" render={(props) => <LandingPage {...props} />} />
+        <Route path="/nucleo-icons" render={(props) => <NucleoIcons {...props} />} />
+        <Route path="/profile-page" render={(props) => <ProfilePage {...props} />} />
+        <Route path="/sections" render={(props) => <Sections {...props} />} />
         <Route exact path="/confirmation/:token" render={(props) => <ConfirmationPage {...props} updateUser={this.updateUser} />} />
-
+      </Switch>
       </div>
     )
   }
