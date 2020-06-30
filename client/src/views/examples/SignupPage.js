@@ -52,28 +52,26 @@ function SignupPage(props) {
   const handleFormSubmit = (event) => {
     console.log(checked);
     event.preventDefault()
-    axios.post("/api/signup", { email, password, checked })
-      .then((res) => {
-        console.log("outPut: handleFormSubmit -> resp", res)
-        console.log("resp data", res.data)
-        props.updateUser(res.data)
-        console.log("outPut: handleFormSubmit -> props.currentUser", props.currentUser)
-        setChecked(false)
-        setEmail("")
-        setPassword("")
-        setErrorMessages([])
-        // props.history.push('/landing-page')
-      }).catch((error) => {
-        console.log("ERROR !!")
-        console.log('error', error.response.data.errors)
-        setErrorMessages(error.response.data.errors)
-      }).then(() => {
-        console.log("outPut: handleFormSubmit -> props.currentUser", props.currentUser)
-        if (props.currentUser) {
+    if (!props.currentUser) {
+      axios.post("/api/signup", { email, password, checked })
+        .then((res) => {
+          console.log("outPut: handleFormSubmit -> resp", res)
+          console.log("resp data", res.data)
+          props.updateUser(res.data)
           console.log("outPut: handleFormSubmit -> props.currentUser", props.currentUser)
+          setChecked(false)
+          setEmail("")
+          setPassword("")
+          setErrorMessages([])
           props.history.push('/landing-page')
-        }
-      })
+        }).catch((error) => {
+          console.log("ERROR !!")
+          console.log('error', error.response.data.errors)
+          setErrorMessages(error.response.data.errors)
+        })
+    } else {
+      setErrorMessages([{ param: 'login', msg: "It seems that you are already logged in" }])
+    }
   }
   return (
     <>
