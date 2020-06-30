@@ -24,7 +24,7 @@ import {
 } from "reactstrap";
 
 // core components
-import FixedTransparentNavbar from "components/Navbars/FixedTransparentNavbar.js";
+import ScrollTransparentNavbar from "components/Navbars/ScrollTransparentNavbar.js";
 import FooterBlack from "components/Footers/FooterBlack";
 import LoginButton from 'components/LoginButton';
 
@@ -96,7 +96,7 @@ class SignupPage extends React.Component {
   render(){
     return(
       <>
-      <FixedTransparentNavbar />
+        <ScrollTransparentNavbar updateUser={this.props.updateUser}/>
       <div className="page-header header-filter" filter-color="black">
         <div
           className="page-header-image"
@@ -215,10 +215,10 @@ class SignupPage extends React.Component {
                       <FormGroup check>
                         <Label check>
                           <Input type="checkbox" onChange={this.handleChange}></Input>
-                          <span className="form-check-sign"></span>I agree to
-                          the terms and{" "}
-                          <Link to='/'>
-                            conditions
+                          <span className="form-check-sign"></span>
+                          <Link to='/terms-and-conditions'>
+                          I agree to
+                          the terms and conditions
                           </Link>
                           .
                         </Label>
@@ -248,5 +248,3 @@ class SignupPage extends React.Component {
 }
 
 export default SignupPage;
-
-

@@ -14,6 +14,7 @@ import {
   Nav,
   Container,
 } from "reactstrap";
+
 import Logout from "views/examples/Logout";
 
 
@@ -94,7 +95,8 @@ const ScrollTransparentNavbar = (props) => {
               <Logout updateUser={props.updateUser} />
               <NavItem>
                 <Button
-                  className="nav-link btn-default"
+                  className="nav-link btn-round"
+                  size="sm"
                   color={buyButtonColor}
                   href="https://www.creative-tim.com/product/now-ui-kit-pro-react?ref=nuk-pro-react-scroll-transparent-navbar"
                   target="_blank"
