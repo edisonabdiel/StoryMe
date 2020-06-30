@@ -48,7 +48,6 @@ function SignupPage(props) {
       document.body.classList.remove("sidebar-collapse");
     };
   }, []);
-
   const handleFormSubmit = (event) => {
     console.log(checked);
     event.preventDefault()
