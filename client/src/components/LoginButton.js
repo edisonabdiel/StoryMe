@@ -57,7 +57,7 @@ class LoginButton extends React.Component {
     e.preventDefault();
     console.log("Im a modal, and i work")
   }
-  handleChange = () => {
+  handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   }
