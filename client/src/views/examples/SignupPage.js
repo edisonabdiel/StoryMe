@@ -30,7 +30,6 @@ import FooterBlack from "components/Footers/FooterBlack";
 
 
 function SignupPage(props) {
-  const [errMessage, setErrMessage] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [checked, setChecked] = React.useState(false);
   const [errorMessages, setErrorMessages] = React.useState([]);
@@ -49,11 +48,33 @@ function SignupPage(props) {
       document.body.classList.remove("sidebar-collapse");
     };
   }, []);
-
-  
+  const handleFormSubmit = (event) => {
+    console.log(checked);
+    event.preventDefault()
+    if (!props.currentUser) {
+      axios.post("/api/signup", { email, password, checked })
+        .then((res) => {
+          console.log("outPut: handleFormSubmit -> resp", res)
+          console.log("resp data", res.data)
+          props.updateUser(res.data)
+          console.log("outPut: handleFormSubmit -> props.currentUser", props.currentUser)
+          setChecked(false)
+          setEmail("")
+          setPassword("")
+          setErrorMessages([])
+          props.history.push('/landing-page')
+        }).catch((error) => {
+          console.log("ERROR !!")
+          console.log('error', error.response.data.errors)
+          setErrorMessages(error.response.data.errors)
+        })
+    } else {
+      setErrorMessages([{ param: 'login', msg: "It seems that you are already logged in" }])
+    }
+  }
   return (
     <>
-      <FixedTransparentNavbar />
+      <FixedTransparentNavbar updateUser={props.updateUser} />
       <div className="page-header header-filter" filter-color="black">
         <div
           className="page-header-image"
@@ -128,11 +149,9 @@ function SignupPage(props) {
 
                     </div>
                     <Form className="form" onSubmit={handleFormSubmit}>
-                      <h5 style={{ color: "black" }}>{errMessage}</h5>
-                      <h5 style={{ color: "black" }}>
-                        {errorMessages.map((m) =>
-                          m.msg
-                        )}</h5>
+                      {errorMessages.map((m) =>
+                        <h6 key={m.param} style={{ color: "black", margin: '0px' }}>{m.msg}</h6>
+                      )}
                       <InputGroup
                         className={emailFocus ? "input-group-focus" : ""}
                       >

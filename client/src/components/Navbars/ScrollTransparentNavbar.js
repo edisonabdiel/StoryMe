@@ -4,18 +4,20 @@ import { Link } from "react-router-dom";
 import {
   Button,
   Collapse,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
+  // DropdownToggle,
+  // DropdownMenu,
+  // DropdownItem,
+  // UncontrolledDropdown,
   NavbarBrand,
   Navbar,
   NavItem,
   Nav,
   Container,
 } from "reactstrap";
+import Logout from "views/examples/Logout";
 
-const ScrollTransparentNavbar = () => {
+
+const ScrollTransparentNavbar = (props) => {
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   const [navbarColor, setNavbarColor] = React.useState(
     (document.documentElement.scrollTop > 499 || document.body.scrollTop) > 499
@@ -80,15 +82,16 @@ const ScrollTransparentNavbar = () => {
           </div>
           <Collapse isOpen={collapseOpen} navbar>
             <Nav className="ml-auto" id="ceva" navbar>
-                  <Link to="/" nav><i className="now-ui-icons objects_globe p-md-3"></i></Link>
-                  <Link to="/profile-page" nav><i
-                    aria-hidden={true}
-                    className="now-ui-icons users_single-02 p-md-3"
-                  ></i></Link>
+              <Link to="/" ><i className="now-ui-icons objects_globe p-md-3"></i></Link>
+              <Link to="/profile-page" ><i
+                aria-hidden={true}
+                className="now-ui-icons users_single-02 p-md-3"
+              ></i></Link>
               <Link to="/contact-us"><i
-                    aria-hidden={true}
-                    className="now-ui-icons ui-1_email-85 p-md-3"
-                  ></i></Link>
+                aria-hidden={true}
+                className="now-ui-icons ui-1_email-85 p-md-3"
+              ></i></Link>
+              <Logout updateUser={props.updateUser} />
               <NavItem>
                 <Button
                   className="nav-link btn-default"

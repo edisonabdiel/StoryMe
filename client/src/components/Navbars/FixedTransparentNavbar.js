@@ -11,8 +11,10 @@ import {
   Nav,
   Container
 } from "reactstrap";
+import Logout from "views/examples/Logout";
 
-function FixedTransparentNavbar() {
+
+function FixedTransparentNavbar(props) {
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   return (
     <>
@@ -46,15 +48,17 @@ function FixedTransparentNavbar() {
           </div>
           <Collapse isOpen={collapseOpen} navbar>
             <Nav className="ml-auto" id="ceva" navbar>
-                  <Link to="/" nav><i className="now-ui-icons objects_globe p-md-3"></i></Link>
-                  <Link to="/profile-page" nav><i
-                    aria-hidden={true}
-                    className="now-ui-icons users_single-02 p-md-3"
-                  ></i></Link>
+              <Link to="/" ><i className="now-ui-icons objects_globe p-md-3"></i></Link>
+              <Link to="/profile-page" ><i
+                aria-hidden={true}
+                className="now-ui-icons users_single-02 p-md-3"
+              ></i></Link>
               <Link to="/contact-us"><i
-                    aria-hidden={true}
-                    className="now-ui-icons ui-1_email-85 p-md-3"
-                  ></i></Link>
+                aria-hidden={true}
+                className="now-ui-icons ui-1_email-85 p-md-3"
+              ></i></Link>
+              <Logout updateUser={props.updateUser} />
+
               <NavItem>
                 <Button
                   className="nav-link btn-success"
