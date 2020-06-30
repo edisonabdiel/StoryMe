@@ -52,34 +52,28 @@ function SignupPage(props) {
   const handleFormSubmit = (event) => {
     console.log(checked);
     event.preventDefault()
-    if (!props.currentUser) {
-      axios.post("/api/signup", { email, password, checked })
-        .then((resp) => {
-          console.log("outPut: handleFormSubmit -> resp", resp)
-          console.log("resp data", resp.data)
-          setChecked(false)
-          console.log(checked);
-          setEmail("")
-          setPassword("")
-          setErrorMessages([])
-          return props.updateUser(resp.data)
-        }).then(() => {
-          console.log('before redirect');
-          console.log(props.currentUser);
-          console.log(checked);
-          if (props.currentUser) {
-            console.log('after redirect');
-            props.history.push('/landing-page')
-
-          }
-        }).catch((error) => {
-          console.log("ERROR !!")
-          console.log('error', error.response.data.errors)
-          setErrorMessages(error.response.data.errors)
-        })
-    } else {
-      setErrorMessages([{ param: 'login', msg: 'You are already logged in' }])
-    }
+    axios.post("/api/signup", { email, password, checked })
+      .then((res) => {
+        console.log("outPut: handleFormSubmit -> resp", res)
+        console.log("resp data", res.data)
+        props.updateUser(res.data)
+        console.log("outPut: handleFormSubmit -> props.currentUser", props.currentUser)
+        setChecked(false)
+        setEmail("")
+        setPassword("")
+        setErrorMessages([])
+        // props.history.push('/landing-page')
+      }).catch((error) => {
+        console.log("ERROR !!")
+        console.log('error', error.response.data.errors)
+        setErrorMessages(error.response.data.errors)
+      }).then(() => {
+        console.log("outPut: handleFormSubmit -> props.currentUser", props.currentUser)
+        if (props.currentUser) {
+          console.log("outPut: handleFormSubmit -> props.currentUser", props.currentUser)
+          props.history.push('/landing-page')
+        }
+      })
   }
   return (
     <>
