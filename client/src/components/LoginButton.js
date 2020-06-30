@@ -92,7 +92,7 @@ class LoginButton extends React.Component {
         <Container>
           <Row id="modals">
             <Col md="6">
-              <Button color="info" onClick={() => this.setModalLogin(true)}>
+              <Button color="info" className="nav-link btn-success" onClick={() => this.setModalLogin(true)}>
                 <i className="now-ui-icons users_single-02"></i> Login Modal
               </Button>
               <Modal

@@ -24,57 +24,79 @@ import {
 } from "reactstrap";
 
 // core components
-import FixedTransparentNavbar from "components/Navbars/FixedTransparentNavbar.js";
+import ScrollTransparentNavbar from "components/Navbars/ScrollTransparentNavbar.js";
 import FooterBlack from "components/Footers/FooterBlack";
+import LoginButton from 'components/LoginButton';
 
-
-
-function SignupPage(props) {
-  const [email, setEmail] = React.useState('');
-  const [checked, setChecked] = React.useState(false);
-  const [errorMessages, setErrorMessages] = React.useState([]);
-  const [password, setPassword] = React.useState('');
-  // const [firstFocus, setFirstFocus] = React.useState(false);
-  const [passwordFocus, setPasswordFocus] = React.useState(false);
-  const [emailFocus, setEmailFocus] = React.useState(false);
-  React.useEffect(() => {
-    document.body.classList.add("signup-page");
-    document.body.classList.add("sidebar-collapse");
-    document.documentElement.classList.remove("nav-open");
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-    return function cleanup() {
-      document.body.classList.remove("signup-page");
-      document.body.classList.remove("sidebar-collapse");
-    };
-  }, []);
-  const handleFormSubmit = (event) => {
-    console.log(checked);
-    event.preventDefault()
-    if (!props.currentUser) {
-      axios.post("/api/signup", { email, password, checked })
-        .then((res) => {
-          console.log("outPut: handleFormSubmit -> resp", res)
-          console.log("resp data", res.data)
-          props.updateUser(res.data)
-          console.log("outPut: handleFormSubmit -> props.currentUser", props.currentUser)
-          setChecked(false)
-          setEmail("")
-          setPassword("")
-          setErrorMessages([])
-          props.history.push('/landing-page')
-        }).catch((error) => {
-          console.log("ERROR !!")
-          console.log('error', error.response.data.errors)
-          setErrorMessages(error.response.data.errors)
-        })
-    } else {
-      setErrorMessages([{ param: 'login', msg: "It seems that you are already logged in" }])
-    }
+class SignupPage extends React.Component {
+  state = {
+    email: '',
+    checked: false,
+    errorMessages: [],
+    password: '',
+    passwordFocus: false,
+    emailFocus: false
   }
-  return (
-    <>
-      <FixedTransparentNavbar updateUser={props.updateUser} />
+  setChecked = (bool) => {
+    this.setState({
+      checked: bool
+    })
+  }
+  setPasswordFocus = (bool) => {
+    this.setState({
+      passwordFocus: bool
+    })
+  }
+  setEmailFocus = (bool) => {
+    this.setState({
+      emailFocus: bool
+    })
+  }
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    const checked=event.target.checked
+    this.setState({ 
+      [name]: value,
+      checked:checked 
+    });
+  }
+  
+  handleFormSubmit = (event) => {
+    event.preventDefault()
+    const email = this.state.email
+    const password = this.state.password
+    const checked = this.state.checked
+    if(!this.props.currentUser){
+    axios.post("/api/signup", { email, password, checked })
+      .then((res) => {
+        this.props.updateUser(res.data)
+        this.setState({
+          checked:false,
+          email:"",
+          password:"",
+          errorMessages:[]
+        })
+        //props.history.push('/landing-page')  
+      }).catch((error) => {
+        this.setState({
+          errorMessages:error.response.data.errors
+        })
+      }).then(() => {
+        if (this.props.currentUser) {
+          this.props.history.push('/landing-page')
+        }
+      })
+    }else{
+      this.setState({
+        errorMessages:[{param:'login', msg:'It seems that you are already logged in'}]
+      })
+    }
+
+  }
+  render(){
+    return(
+      <>
+        <ScrollTransparentNavbar updateUser={this.props.updateUser}/>
       <div className="page-header header-filter" filter-color="black">
         <div
           className="page-header-image"
@@ -148,12 +170,12 @@ function SignupPage(props) {
                       <h5 className="card-description">or go old school</h5>
 
                     </div>
-                    <Form className="form" onSubmit={handleFormSubmit}>
-                      {errorMessages.map((m) =>
+                    <Form className="form" onSubmit={this.handleFormSubmit}>
+                      {this.state.errorMessages.map((m) =>
                         <h6 key={m.param} style={{ color: "black", margin: '0px' }}>{m.msg}</h6>
                       )}
                       <InputGroup
-                        className={emailFocus ? "input-group-focus" : ""}
+                        className={this.emailFocus ? "input-group-focus" : ""}
                       >
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
@@ -164,15 +186,15 @@ function SignupPage(props) {
                           autoComplete="email"
                           placeholder="Your Email..."
                           type="text"
-                          onFocus={() => setEmailFocus(true)}
-                          onBlur={() => setEmailFocus(false)}
+                          onFocus={() => this.setEmailFocus(true)}
+                          onBlur={() => this.setEmailFocus(false)}
                           name="email"
-                          value={email}
-                          onChange={e => setEmail(e.target.value)}
+                          value={this.state.email}
+                          onChange={this.handleChange}
                         ></Input>
                       </InputGroup>
                       <InputGroup
-                        className={passwordFocus ? "input-group-focus" : ""}
+                        className={this.passwordFocus ? "input-group-focus" : ""}
                       >
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
@@ -183,20 +205,20 @@ function SignupPage(props) {
                           autoComplete="password"
                           placeholder="Password..."
                           type="text"
-                          onFocus={() => setPasswordFocus(true)}
-                          onBlur={() => setPasswordFocus(false)}
+                          onFocus={() => this.setPasswordFocus(true)}
+                          onBlur={() => this.setPasswordFocus(false)}
                           name="password"
-                          value={password}
-                          onChange={e => setPassword(e.target.value)}
+                          value={this.state.password}
+                          onChange={this.handleChange}
                         ></Input>
                       </InputGroup>
                       <FormGroup check>
                         <Label check>
-                          <Input type="checkbox" onChange={(e) => setChecked(e.target.checked)}></Input>
-                          <span className="form-check-sign"></span>I agree to
-                          the terms and{" "}
-                          <Link to='/'>
-                            conditions
+                          <Input type="checkbox" onChange={this.handleChange}></Input>
+                          <span className="form-check-sign"></span>
+                          <Link to='/terms-and-conditions'>
+                          I agree to
+                          the terms and conditions
                           </Link>
                           .
                         </Label>
@@ -221,7 +243,8 @@ function SignupPage(props) {
         <FooterBlack />
       </div>
     </>
-  );
+    )
+  }
 }
 
 export default SignupPage;
