@@ -38,9 +38,10 @@ class App extends React.Component {
   }
 
   render() {
-
+    
     return (
       <div>
+
         {this.state.loggedInUser ? <h1>Hi {this.state.loggedInUser.email}</h1> : 'Logged out'}
         <Switch>
 
