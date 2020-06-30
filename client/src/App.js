@@ -41,10 +41,11 @@ class App extends React.Component {
 
     return (
       <div>
-        {/* {this.state.loggedInUser ? <h1>Hi {this.state.loggedInUser.email}</h1>:'Logged out'} */}
+        {this.state.loggedInUser ? <h1>Hi {this.state.loggedInUser.email}</h1> : 'Logged out'}
         <Switch>
 
-          <Route exact path="/" render={(props) => <Discovery {...props} />} />
+
+          <Route exact path="/" render={(props) => <Discovery {...props} updateUser={this.updateUser} />} />
           <Route exact path="/login-button" render={(props) => <LoginButton updateUser={this.updateUser} currentUser={this.state.loggedInUser} {...props} />} />
           <Route exact path="/login-page" render={(props) => <LoginPage {...props} />} />
           <Route exact path="/sign-up" render={(props) => <SignupPage updateUser={this.updateUser} currentUser={this.state.loggedInUser} {...props} />} />

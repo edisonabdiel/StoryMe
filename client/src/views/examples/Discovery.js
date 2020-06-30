@@ -22,7 +22,7 @@ import ScrollTransparentNavbar from "components/Navbars/ScrollTransparentNavbar.
 import BlogPostsHeader from "components/Headers/BlogPostsHeader.js";
 import FooterBlackSocial from "components/Footers/FooterBlackSocial.js";
 
-function BlogPosts() {
+function BlogPosts(props) {
   const [emailFocus, setEmailFocus] = React.useState(false);
   React.useEffect(() => {
     document.body.classList.add("blog-posts");
@@ -37,7 +37,7 @@ function BlogPosts() {
   }, []);
   return (
     <>
-      <ScrollTransparentNavbar />
+      <ScrollTransparentNavbar updateUser={props.updateUser} />
       <div className="wrapper">
         <BlogPostsHeader />
         <div className="projects-4">

@@ -52,28 +52,38 @@ function SignupPage(props) {
   const handleFormSubmit = (event) => {
     console.log(checked);
     event.preventDefault()
-    axios.post("/api/signup", { email, password, checked })
-      .then((resp) => {
-        console.log("outPut: handleFormSubmit -> resp", resp)
-        console.log("resp data", resp.data)
-        if (!resp.data.errors)
-          props.updateUser(resp.data)
-        setEmail("")
-        setPassword("")
-        setErrorMessages([])
-      }).catch((error) => {
-        console.log("ERROR !!")
-        console.log('error', error.response.data.errors)
-        setErrorMessages(error.response.data.errors)
-      }).then(() => {
-        if (props.currentUser) {
-          props.history.push('/landing-page')
-        }
-      })
+    if (!props.currentUser) {
+      axios.post("/api/signup", { email, password, checked })
+        .then((resp) => {
+          console.log("outPut: handleFormSubmit -> resp", resp)
+          console.log("resp data", resp.data)
+          setChecked(false)
+          console.log(checked);
+          setEmail("")
+          setPassword("")
+          setErrorMessages([])
+          return props.updateUser(resp.data)
+        }).then(() => {
+          console.log('before redirect');
+          console.log(props.currentUser);
+          console.log(checked);
+          if (props.currentUser) {
+            console.log('after redirect');
+            props.history.push('/landing-page')
+
+          }
+        }).catch((error) => {
+          console.log("ERROR !!")
+          console.log('error', error.response.data.errors)
+          setErrorMessages(error.response.data.errors)
+        })
+    } else {
+      setErrorMessages([{ param: 'login', msg: 'You are already logged in' }])
+    }
   }
   return (
     <>
-      <FixedTransparentNavbar />
+      <FixedTransparentNavbar updateUser={props.updateUser} />
       <div className="page-header header-filter" filter-color="black">
         <div
           className="page-header-image"
