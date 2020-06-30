@@ -50,24 +50,7 @@ function SignupPage(props) {
     };
   }, []);
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault()
-    axios.post("/api/signup", { email, password, checked })
-      .then((resp) => {
-        console.log("outPut: handleFormSubmit -> resp", resp)
-        console.log("resp data", resp.data)
-        if (!resp.data.errors)
-          props.updateUser(resp.data)
-        setErrMessage('')
-        setEmail("")
-        setPassword("")
-        setErrorMessages([])
-      }).catch((error) => {
-        console.log("ERROR !!")
-        console.log('error', error.response.data.errors)
-        setErrorMessages(error.response.data.errors)
-      })
-  }
+  
   return (
     <>
       <FixedTransparentNavbar />

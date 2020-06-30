@@ -69,10 +69,9 @@ class LoginButton extends React.Component {
 
     axios.post("/api/login", { email, password })
       .then((resp) => {
-        // this.props.getData();
-
-        console.log('User Data', resp.data);
+        
         this.props.updateUser(resp.data)
+        console.log('USER DATA UPDATED',this.props.currentUser);
         this.setState({ email: "", password: "" });
       }).catch((error) => {
         console.log("Error!!");
