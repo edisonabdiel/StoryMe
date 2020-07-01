@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 
 
@@ -41,21 +41,22 @@ class App extends React.Component {
 
     return (
       <div>
-      {/* {this.state.loggedInUser ? <h1>Hi {this.state.loggedInUser.email}</h1>:'Logged out'} */}
-      <Switch>
-        
-        <Route exact path="/" render={(props) => <Discovery {...props} />} />
-        <Route exact path="/login-button" render={(props) => <LoginButton updateUser={this.updateUser} currentUser={this.state.loggedInUser} {...props}  />} />
-        <Route exact path="/login-page" render={(props) => <LoginPage {...props} />} />
-        <Route exact path="/sign-up" render={() => <SignupPage updateUser={this.updateUser} />} />
-        <Route path="/contact-us" render={(props) => <ContactUs {...props} />} />
-        <Route path="/index" render={(props) => <Index {...props} />} />
-        <Route path="/landing-page" render={(props) => <LandingPage {...props} />} />
-        <Route path="/nucleo-icons" render={(props) => <NucleoIcons {...props} />} />
-        <Route path="/profile-page" render={(props) => <ProfilePage {...props} />} />
-        <Route path="/sections" render={(props) => <Sections {...props} />} />
-        <Route exact path="/confirmation/:token" render={(props) => <ConfirmationPage {...props} updateUser={this.updateUser} />} />
-      </Switch>
+        {this.state.loggedInUser ? <h1>Hi {this.state.loggedInUser.email}</h1> : 'Logged out'}
+        <Switch>
+
+
+          <Route exact path="/" render={(props) => <Discovery {...props} updateUser={this.updateUser} />} />
+          <Route exact path="/login-button" render={(props) => <LoginButton updateUser={this.updateUser} currentUser={this.state.loggedInUser} {...props} />} />
+          <Route exact path="/login-page" render={(props) => <LoginPage {...props} />} />
+          <Route exact path="/sign-up" render={(props) => <SignupPage updateUser={this.updateUser} currentUser={this.state.loggedInUser} {...props} />} />
+          <Route path="/contact-us" render={(props) => <ContactUs {...props} />} />
+          <Route path="/index" render={(props) => <Index {...props} />} />
+          <Route path="/landing-page" render={(props) => <LandingPage {...props} />} />
+          <Route path="/nucleo-icons" render={(props) => <NucleoIcons {...props} />} />
+          <Route path="/profile-page" render={(props) => { if (this.state.loggedInUser) { return <ProfilePage updateUser={this.updateUser} {...props} /> } else { return <Redirect to="/login-page" /> } }} />
+          <Route path="/sections" render={(props) => <Sections {...props} />} />
+          <Route exact path="/confirmation/:token" render={(props) => <ConfirmationPage {...props} updateUser={this.updateUser} />} />
+        </Switch>
       </div>
     )
   }

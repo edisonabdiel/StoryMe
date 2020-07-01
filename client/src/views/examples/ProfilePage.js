@@ -31,7 +31,7 @@ import FixedTransparentNavbar from "components/Navbars/FixedTransparentNavbar.js
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import FooterBlack from "components/Footers/FooterBlack.js";
 
-const ProfilePage = () => {
+const ProfilePage = (props) => {
   const [pills, setPills] = React.useState("1");
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [emailFocus, setEmailFocus] = React.useState(false);
@@ -48,7 +48,7 @@ const ProfilePage = () => {
   }, []);
   return (
     <>
-      <FixedTransparentNavbar />
+      <FixedTransparentNavbar updateUser={props.updateUser} />
       <div className="wrapper" >
         <ProfilePageHeader />
         <div className="section">
