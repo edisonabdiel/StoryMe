@@ -83,7 +83,7 @@ class SignupPage extends React.Component {
         })
       }).then(() => {
         if (this.props.currentUser) {
-          this.props.history.push('/landing-page')
+          this.props.history.push('/profile-page')
         }
       })
     }else{
