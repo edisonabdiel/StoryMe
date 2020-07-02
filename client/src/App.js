@@ -48,8 +48,10 @@ class App extends React.Component {
           <Route exact path="/login-button" render={(props) => <LoginButton updateUser={this.updateUser} currentUser={this.state.loggedInUser} {...props} />} />
           <Route exact path="/login-page" render={(props) => <LoginPage {...props} />} />
           <Route exact path="/sign-up" render={(props) => <SignupPage updateUser={this.updateUser} currentUser={this.state.loggedInUser} {...props} />} />
+
           <Route path="/index" render={(props) => <Index {...props} />} />
           <Route path="/terms-and-conditions" render={(props) => <TermsAndConditions {...props} />} />
+
           <Route path="/nucleo-icons" render={(props) => <NucleoIcons {...props} />} />
           <Route path="/profile-page" render={(props) => { if (this.state.loggedInUser) { return <ProfilePage updateUser={this.updateUser} {...props} /> } else { return <Redirect to="/login-page" /> } }} />
           <Route path="/sections" render={(props) => <Sections {...props} />} />

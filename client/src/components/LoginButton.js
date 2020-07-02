@@ -69,9 +69,11 @@ class LoginButton extends React.Component {
 
     axios.post("/api/login", { email, password })
       .then((resp) => {
+
         
         this.props.updateUser(resp.data)
         console.log('USER DATA UPDATED',this.props.currentUser);
+
         this.setState({ email: "", password: "" });
       }).catch((error) => {
         console.log("Error!!");
@@ -173,7 +175,9 @@ class LoginButton extends React.Component {
                         </InputGroup>
                       </CardBody>
                       <ModalFooter className="text-center">
-                      <Button
+
+                        <Button
+
                           block
                           className="btn-neutral btn-round"
                           color="info"

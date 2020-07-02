@@ -14,8 +14,10 @@ import {
   Nav,
   Container,
 } from "reactstrap";
-
 import Logout from "views/examples/Logout";
+
+
+
 
 
 const ScrollTransparentNavbar = (props) => {
