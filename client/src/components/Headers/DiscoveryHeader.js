@@ -26,7 +26,7 @@ const BlogPostsHeader = () => {
         <div
           className="page-header-image"
           style={{
-            backgroundImage: "url(" + require("assets/img/bg44.jpg") + ")",
+            backgroundImage: "url(" + require("assets/img/universe-bg.png") + ")",
           }}
           ref={pageHeader}
         ></div>
@@ -34,7 +34,7 @@ const BlogPostsHeader = () => {
           <Row>
             <Col className="ml-auto mr-auto text-center" md="8">
               <h2 className="title">
-                Give life to your stories
+                Discover the Universe of your Stories
               </h2>
             </Col>
           </Row>

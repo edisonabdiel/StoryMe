@@ -62,12 +62,12 @@ class SignupPage extends React.Component {
       checked: checked
     });
   }
-
   handleFormSubmit = (event) => {
     event.preventDefault()
     const email = this.state.email
     const password = this.state.password
     const checked = this.state.checked
+    
     if (!this.props.currentUser) {
       axios.post("/api/signup", { email, password, checked })
         .then((res) => {
@@ -95,9 +95,6 @@ class SignupPage extends React.Component {
     }
 
   }
-
-
-
   render() {
     return (
       <BodyClassName className="signup-page sidebar-collapse">
@@ -122,7 +119,7 @@ class SignupPage extends React.Component {
                         <h5 className="info-title">StoryMe</h5>
                         <p className="description">
                           Here is where your stories become alive
-                    </p>
+                         </p>
                       </div>
                     </div>
                     <div className="info info-horizontal">
@@ -175,58 +172,58 @@ class SignupPage extends React.Component {
                           </Button>
                           <h5 className="card-description">or go old school</h5>
 
-                        </div>
-                        <Form className="form" onSubmit={this.handleFormSubmit}>
-                          {this.state.errorMessages.map((m) =>
-                            <h6 key={m.param} style={{ color: "black", margin: '0px' }}>{m.msg}</h6>
-                          )}
-                          <InputGroup
-                            className={this.emailFocus ? "input-group-focus" : ""}
-                          >
-                            <InputGroupAddon addonType="prepend">
-                              <InputGroupText>
-                                <i className="now-ui-icons ui-1_email-85"></i>
-                              </InputGroupText>
-                            </InputGroupAddon>
-                            <Input
-                              autoComplete="email"
-                              placeholder="Your Email..."
-                              type="text"
-                              onFocus={() => this.setEmailFocus(true)}
-                              onBlur={() => this.setEmailFocus(false)}
-                              name="email"
-                              value={this.state.email}
-                              onChange={this.handleChange}
-                            ></Input>
-                          </InputGroup>
-                          <InputGroup
-                            className={this.passwordFocus ? "input-group-focus" : ""}
-                          >
-                            <InputGroupAddon addonType="prepend">
-                              <InputGroupText>
-                                <i className="now-ui-icons ui-1_lock-circle-open"></i>
-                              </InputGroupText>
-                            </InputGroupAddon>
-                            <Input
-                              autoComplete="password"
-                              placeholder="Password..."
-                              type="text"
-                              onFocus={() => this.setPasswordFocus(true)}
-                              onBlur={() => this.setPasswordFocus(false)}
-                              name="password"
-                              value={this.state.password}
-                              onChange={this.handleChange}
-                            ></Input>
-                          </InputGroup>
-                          <FormGroup check>
-                            <Label check>
-                              <Input type="checkbox" onChange={this.handleChange}></Input>
-                              <span className="form-check-sign"></span>
-                              <Link to='/terms-and-conditions'>
-                                I agree to
-                                the terms and conditions
+
+                    </div>
+                    <Form className="form" onSubmit={this.handleFormSubmit}>
+                      {this.state.errorMessages.map((m) =>
+                        <h6 key={m.param} style={{ color: "black", margin: '0px' }}>{m.msg}</h6>
+                      )}
+                      <InputGroup
+                        className={this.emailFocus ? "input-group-focus" : ""}
+                      >
+                        <InputGroupAddon addonType="prepend">
+                          <InputGroupText>
+                            <i className="now-ui-icons ui-1_email-85"></i>
+                          </InputGroupText>
+                        </InputGroupAddon>
+                        <Input
+                          autoComplete="email"
+                          placeholder="Your Email..."
+                          type="text"
+                          onFocus={() => this.setEmailFocus(true)}
+                          onBlur={() => this.setEmailFocus(false)}
+                          name="email"
+                          value={this.state.email}
+                          onChange={this.handleChange}
+                        ></Input>
+                      </InputGroup>
+                      <InputGroup
+                        className={this.passwordFocus ? "input-group-focus" : ""}
+                      >
+                        <InputGroupAddon addonType="prepend">
+                          <InputGroupText>
+                            <i className="now-ui-icons ui-1_lock-circle-open"></i>
+                          </InputGroupText>
+                        </InputGroupAddon>
+                        <Input
+                          autoComplete="password"
+                          placeholder="Password..."
+                          type="text"
+                          onFocus={() => this.setPasswordFocus(true)}
+                          onBlur={() => this.setPasswordFocus(false)}
+                          name="password"
+                          value={this.state.password}
+                          onChange={this.handleChange}
+                        ></Input>
+                      </InputGroup>
+                      <FormGroup check>
+                        <Label check>
+                          <Input type="checkbox" onChange={this.handleChange}></Input>
+                          <span className="form-check-sign"></span>
+                          <Link to='/terms-and-conditions'>
+                          I agree to
+                          the terms and conditions.
                           </Link>
-                          .
                         </Label>
                           </FormGroup>
                           <CardFooter className="text-center">
