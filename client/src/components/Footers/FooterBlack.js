@@ -9,7 +9,7 @@ import { Container } from "reactstrap";
 function FooterBlack() {
   return (
     <>
-      <footer className="footer" data-background-color="black">
+      <footer className="footer fixed-bottom" data-background-color="black">
         <Container>
           <nav>
             <ul>
@@ -43,7 +43,7 @@ function FooterBlack() {
             © {new Date().getFullYear()}
             . Coded by{" "}
             <a
-              // href=""
+              href=""
               target="_blank"
             >
               Dima, Edison & Noubar

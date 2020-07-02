@@ -18,6 +18,9 @@ import {
 import Logout from "views/examples/Logout";
 
 
+
+
+
 const ScrollTransparentNavbar = (props) => {
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   const [navbarColor, setNavbarColor] = React.useState(
@@ -98,7 +101,7 @@ const ScrollTransparentNavbar = (props) => {
                   className="nav-link btn-round"
                   size="sm"
                   color={buyButtonColor}
-                  href="https://www.creative-tim.com/product/now-ui-kit-pro-react?ref=nuk-pro-react-scroll-transparent-navbar"
+                  href=""
                   target="_blank"
                 >
                   <p>PUBLISH</p>
