@@ -18,6 +18,9 @@ import {
 import Logout from "views/examples/Logout";
 
 
+
+
+
 const ScrollTransparentNavbar = (props) => {
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   const [navbarColor, setNavbarColor] = React.useState(
