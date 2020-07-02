@@ -57,7 +57,7 @@ class LoginButton extends React.Component {
     e.preventDefault();
     console.log("Im a modal, and i work")
   }
-  handleChange = () => {
+  handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   }
@@ -70,8 +70,10 @@ class LoginButton extends React.Component {
     axios.post("/api/login", { email, password })
       .then((resp) => {
 
+        
         this.props.updateUser(resp.data)
-        console.log('USER DATA UPDATED', this.props.currentUser);
+        console.log('USER DATA UPDATED',this.props.currentUser);
+
         this.setState({ email: "", password: "" });
       }).catch((error) => {
         console.log("Error!!");
@@ -92,7 +94,7 @@ class LoginButton extends React.Component {
         <Container>
           <Row id="modals">
             <Col md="6">
-              <Button color="info" onClick={() => this.setModalLogin(true)}>
+              <Button color="info" className="nav-link btn-success" onClick={() => this.setModalLogin(true)}>
                 <i className="now-ui-icons users_single-02"></i> Login Modal
               </Button>
               <Modal
@@ -173,7 +175,9 @@ class LoginButton extends React.Component {
                         </InputGroup>
                       </CardBody>
                       <ModalFooter className="text-center">
+
                         <Button
+
                           block
                           className="btn-neutral btn-round"
                           color="info"

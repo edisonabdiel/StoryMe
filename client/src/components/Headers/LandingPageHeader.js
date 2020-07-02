@@ -5,7 +5,7 @@ import { Button, Container } from "reactstrap";
 
 // core components
 
-function LandingPageHeader() {
+const LandingPageHeader = () => {
   let pageHeader = React.createRef();
   React.useEffect(() => {
     if (window.innerWidth > 991) {
@@ -26,39 +26,13 @@ function LandingPageHeader() {
         <div
           className="page-header-image"
           style={{
-            backgroundImage: "url(" + require("assets/img/bg26.jpg") + ")",
+            backgroundImage: "url(" + require("assets/img/green-universe.jpg") + ")",
           }}
           ref={pageHeader}
         ></div>
         <div className="content-center">
           <Container>
-            <h1 className="title">This is our great company.</h1>
-            <div className="text-center">
-              <Button
-                className="btn-icon btn-round mr-1"
-                color="info"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="fab fa-facebook-square"></i>
-              </Button>
-              <Button
-                className="btn-icon btn-round mr-1"
-                color="info"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="fab fa-twitter"></i>
-              </Button>
-              <Button
-                className="btn-icon btn-round"
-                color="info"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="fab fa-google-plus"></i>
-              </Button>
-            </div>
+            <h1 className="title">StoryMe Terms & Conditions</h1>
           </Container>
         </div>
       </div>

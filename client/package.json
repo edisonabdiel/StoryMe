@@ -54,5 +54,5 @@
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8"
   },
-  "proxy": "http://127.0.0.1:5555"
+  "proxy": "http://127.0.0.1:5555/"
 }
