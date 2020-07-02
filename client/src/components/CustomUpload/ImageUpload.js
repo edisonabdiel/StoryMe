@@ -7,7 +7,7 @@ import { Button } from "reactstrap";
 import defaultImage from "assets/img/image_placeholder.jpg";
 import defaultAvatar from "assets/img/placeholder.jpg";
 
-function ImageUpload(props) {
+const ImageUpload = (props) => {
   const [file, setFile] = React.useState(null);
   const [imagePreviewUrl, setImagePreviewUrl] = React.useState(
     props.avatar ? defaultAvatar : defaultImage
