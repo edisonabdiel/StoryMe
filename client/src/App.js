@@ -13,6 +13,8 @@ import "assets/demo/nucleo-icons-page-styles.css?v=1.4.0";
 import Discovery from "views/examples/Discovery.js";
 import Index from "views/Index.js";
 import TermsAndConditions from "views/examples/TermsAndConditions.js";
+import EmailSent from 'views/examples/EmailSent.js'
+import EmailConfirmed from 'views/examples/EmailConfirmed.js'
 import LoginPage from "views/examples/LoginPage.js";
 import NucleoIcons from "views/NucleoIcons.js";
 import ProfilePage from "views/examples/ProfilePage.js";
@@ -44,7 +46,7 @@ class App extends React.Component {
     
     return (
       <div>
-        {this.state.loggedInUser ? <h1>Hi {this.state.loggedInUser.email}</h1> : 'Logged out'}
+        {/* {this.state.loggedInUser ? <h1>Hi {this.state.loggedInUser.email}</h1> : 'Logged out'} */}
         <Switch>
           <Route exact path="/" render={(props) => <Discovery {...props} updateUser={this.updateUser} />} />
           <Route exact path="/login-button" render={(props) => <LoginButton updateUser={this.updateUser} currentUser={this.state.loggedInUser} {...props} />} />
@@ -52,6 +54,8 @@ class App extends React.Component {
           <Route exact path="/sign-up" render={(props) => <SignupPage updateUser={this.updateUser} currentUser={this.state.loggedInUser} {...props} />} />
           <Route path="/index" render={(props) => <Index {...props} />} />
           <Route path="/terms-and-conditions" render={(props) => <TermsAndConditions {...props} />} />
+          <Route path="/email-sent" render={(props) => <EmailSent {...props} />} />
+          <Route path="/email-confirmed" render={(props) => <EmailConfirmed {...props} />} />
           <Route path="/nucleo-icons" render={(props) => <NucleoIcons {...props} />} />
           <Route path="/profile-page" render={(props) => { if (this.state.loggedInUser) { return <ProfilePage updateUser={this.updateUser} {...props} /> } else { return <Redirect to="/login-page" /> } }} />
           <Route path="/sections" render={(props) => <Sections {...props} />} />
