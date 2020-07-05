@@ -7,6 +7,7 @@ import { Button } from "reactstrap";
 import defaultAvatar from "assets/img/placeholder.jpg";
 import axios from 'axios'
 
+<<<<<<< HEAD
 
 
 
@@ -38,6 +39,34 @@ export class ImageUpload extends Component {
       imageUrl: defaultAvatar
     })
     this.fileInput.current.value = null
+=======
+const ImageUpload = (props) => {
+  const [file, setFile] = React.useState(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = React.useState(
+    props.avatar ? defaultAvatar : defaultImage
+  );
+  const fileInput = React.createRef();
+  const handleImageChange = (e) => {
+    e.preventDefault();
+    let reader = new FileReader();
+    let file = e.target.files[0];
+    reader.onloadend = () => {
+      setFile(file);
+      setImagePreviewUrl(reader.result);
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+  // const handleSubmit = e => {
+  // e.preventDefault();
+  // this.state.file is the file/image uploaded
+  // in this function you can save the image (this.state.file) on form submit
+  // you have to call it yourself
+  // };
+  const handleClick = () => {
+    fileInput.current.click();
+>>>>>>> 8685826c4f1baf8da89e3ed2c473a0dfa91fdcec
   };
   handleClick = () => {
     this.fileInput.current.click();

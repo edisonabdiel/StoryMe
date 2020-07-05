@@ -19,8 +19,8 @@ import {
 
 // core components
 import ScrollTransparentNavbar from "components/Navbars/ScrollTransparentNavbar.js";
-import BlogPostsHeader from "components/Headers/BlogPostsHeader.js";
-import FooterBlackSocial from "components/Footers/FooterBlackSocial.js";
+import DiscoveryHeader from "components/Headers/DiscoveryHeader.js";
+import FooterBlack from "components/Footers/FooterBlack.js";
 
 
 function BlogPosts(props) {
@@ -40,7 +40,7 @@ function BlogPosts(props) {
     <>
       <ScrollTransparentNavbar updateUser={props.updateUser} />
       <div className="wrapper">
-        <BlogPostsHeader />
+        <DiscoveryHeader />
         <div className="projects-4">
           <Container fluid>
             <Row>
@@ -49,7 +49,7 @@ function BlogPosts(props) {
                   className="card-fashion card-background"
                   style={{
                     backgroundImage:
-                      "url(" + require("assets/img/project10.jpg") + ")",
+                      "url(" + require("assets/img/green-universe.jpg") + ")",
                   }}
                 >
                   <CardBody>
@@ -219,7 +219,7 @@ function BlogPosts(props) {
           <Container>
             <div className="section">
               <h3 className="title text-center">
-                You may also be interested in
+                Readers also read
               </h3>
               <br></br>
               <Row>
@@ -341,145 +341,9 @@ function BlogPosts(props) {
               </Row>
             </div>
           </Container>
-          <div className="section pt-0 pb-0">
-            <div
-              className="team-3 section-image"
-              data-parallax={true}
-              style={{
-                backgroundImage: "url(" + require("assets/img/bg26.jpg") + ")",
-              }}
-            >
-              <Container>
-                <Row>
-                  <Col className="ml-auto mr-auto text-center" md="8">
-                    <h2 className="title">Our little team.</h2>
-                    <h4 className="description">
-                      This is the paragraph where you can write more details
-                      about your product. Keep you user engaged by providing
-                      meaningful information.
-                    </h4>
-                  </Col>
-                  <Col className="ml-auto mr-auto" lg="7" xl="6">
-                    <Card className="card-profile">
-                      <Row>
-                        <Col md="5">
-                          <div className="card-image">
-                            <a
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              <img
-                                alt="..."
-                                className="img"
-                                src={require("assets/img/olivia.jpg")}
-                              ></img>
-                            </a>
-                          </div>
-                        </Col>
-                        <Col md="7">
-                          <CardBody>
-                            <CardTitle tag="h3">Ariana Hazel</CardTitle>
-                            <h6 className="category text-info">
-                              Fashion Designer
-                            </h6>
-                            <p className="card-description">
-                              Happiness resides not in possessions, and not in
-                              gold, happiness dwells in the soul...
-                            </p>
-                          </CardBody>
-                        </Col>
-                      </Row>
-                    </Card>
-                  </Col>
-                  <Col className="ml-auto mr-auto" lg="7" xl="6">
-                    <Card className="card-profile">
-                      <Row>
-                        <Col md="5">
-                          <div className="card-image">
-                            <a
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              <img
-                                alt="..."
-                                className="img"
-                                src={require("assets/img/james.jpg")}
-                              ></img>
-                            </a>
-                          </div>
-                        </Col>
-                        <Col md="7">
-                          <CardBody>
-                            <CardTitle tag="h3">Ryan Samuel</CardTitle>
-                            <h6 className="category text-info">
-                              Financial Examiner
-                            </h6>
-                            <p className="card-description">
-                              Today you are you! That is truer than true! There
-                              is no one alive who is you-er than you!..
-                            </p>
-                          </CardBody>
-                        </Col>
-                      </Row>
-                    </Card>
-                  </Col>
-                </Row>
-              </Container>
-            </div>
-          </div>
-          <div className="subscribe-line subscribe-line-white">
-            <Container>
-              <Row>
-                <Col md="6">
-                  <h4 className="title">Get Tips &amp; Tricks every Week!</h4>
-                  <p className="description">
-                    Join our newsletter and get news in your inbox every week!
-                    We hate spam too, so no worries about this.
-                  </p>
-                </Col>
-                <Col md="6">
-                  <Card className="card-plain card-form-horizontal">
-                    <div className="card-content">
-                      <Form action="" method="">
-                        <Row>
-                          <Col sm="8">
-                            <InputGroup
-                              className={emailFocus ? "input-group-focus" : ""}
-                            >
-                              <InputGroupAddon addonType="prepend">
-                                <InputGroupText>
-                                  <i className="now-ui-icons ui-1_email-85"></i>
-                                </InputGroupText>
-                              </InputGroupAddon>
-                              <Input
-                                placeholder="Email Name..."
-                                type="text"
-                                onFocus={() => setEmailFocus(true)}
-                                onBlur={() => setEmailFocus(false)}
-                              ></Input>
-                            </InputGroup>
-                          </Col>
-                          <Col sm="4">
-                            <Button
-                              block
-                              className="btn-round"
-                              color="info"
-                              type="button"
-                            >
-                              Subscribe
-                            </Button>
-                          </Col>
-                        </Row>
-                      </Form>
-                    </div>
-                  </Card>
-                </Col>
-              </Row>
-            </Container>
           </div>
         </div>
-        <FooterBlackSocial />
-      </div>
+        <FooterBlack />
     </>
   );
 }

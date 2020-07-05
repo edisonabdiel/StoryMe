@@ -205,19 +205,13 @@ function FooterBlackSocial() {
           </div>
           <hr></hr>
           <div className="copyright" id="copyright">
-            © {new Date().getFullYear()}, Designed by{" "}
-            <a
-              href="https://www.invisionapp.com?ref=creativetim"
-              target="_blank"
-            >
-              Invision
-            </a>
+            © {new Date().getFullYear()}
             . Coded by{" "}
             <a
-              href="https://www.creative-tim.com?ref=nuk-pro-react-footer-black-social"
+              href="https://github.com/edisonabdiel/StoryMe"
               target="_blank"
             >
-              Creative Tim
+              Noubar, Edison & Dima
             </a>
             .
           </div>

@@ -63,12 +63,12 @@ class SignupPage extends React.Component {
       checked: checked
     });
   }
-
   handleFormSubmit = (event) => {
     event.preventDefault()
     const email = this.state.email
     const password = this.state.password
     const checked = this.state.checked
+
     if (!this.props.currentUser) {
       axios.post("/api/signup", { email, password, checked })
         .then((res) => {
@@ -80,14 +80,14 @@ class SignupPage extends React.Component {
             errorMessages: []
           })
           //props.history.push('/landing-page')  
-        }).catch((error) => {
-          this.setState({
-            errorMessages: error.response.data.errors
-          })
         }).then(() => {
           if (this.props.currentUser) {
             this.props.history.push('/profile-page')
           }
+        }).catch((error) => {
+          this.setState({
+            errorMessages: error.response.data.errors
+          })
         })
     } else {
       this.setState({
@@ -96,7 +96,6 @@ class SignupPage extends React.Component {
     }
 
   }
-
 
 
   render() {
@@ -123,7 +122,7 @@ class SignupPage extends React.Component {
                         <h5 className="info-title">StoryMe</h5>
                         <p className="description">
                           Here is where your stories become alive
-                    </p>
+                         </p>
                       </div>
                     </div>
                     <div className="info info-horizontal">
@@ -175,7 +174,6 @@ class SignupPage extends React.Component {
                             <i className="fab fa-facebook"></i>
                           </Button>
                           <h5 className="card-description">or go old school</h5>
-
                         </div>
                         <Form className="form" onSubmit={this.handleFormSubmit}>
                           {this.state.errorMessages.map((m) =>
@@ -225,10 +223,9 @@ class SignupPage extends React.Component {
                               <span className="form-check-sign"></span>
                               <Link to='/terms-and-conditions'>
                                 I agree to
-                                the terms and conditions
+                                the terms and conditions.
                           </Link>
-                          .
-                        </Label>
+                            </Label>
                           </FormGroup>
                           <CardFooter className="text-center">
                             <Button
