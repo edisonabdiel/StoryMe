@@ -22,14 +22,11 @@ import Sections from "views/Sections.js";
 import SignupPage from "views/examples/SignupPage.js";
 import LoginButton from "components/LoginButton";
 import ConfirmationPage from "components/ConfirmationPage";
-<<<<<<< HEAD
 import ImageUpload from "components/CustomUpload/ImageUpload";
 import testForm from "views/examples/testForm";
-=======
 import ListStories from "components/ListStories";
 import StoryDetails from "components/StoryDetails";
 import EditStory from "components/EditStory";
->>>>>>> 8685826c4f1baf8da89e3ed2c473a0dfa91fdcec
 
 
 // others
@@ -65,15 +62,12 @@ class App extends React.Component {
           <Route path="/profile-page" render={(props) => { if (this.state.loggedInUser) { return <ProfilePage updateUser={this.updateUser} {...props} /> } else { return <Redirect to="/login-page" /> } }} />
           <Route path="/sections" render={(props) => <Sections {...props} />} />
           <Route exact path="/confirmation/:token" render={(props) => <ConfirmationPage {...props} updateUser={this.updateUser} />} />
-<<<<<<< HEAD
           <Route exact path='/img-upload' component={ImageUpload} />
           <Route exact path='/editor' component={testForm} />
 
-=======
-          <Route exact path="/list-stories" render={(props)=> <ListStories updateUser={this.updateUser} currentUser={this.state.loggedInUser} {...props}/>}/>
+          <Route exact path="/list-stories" render={(props) => <ListStories updateUser={this.updateUser} currentUser={this.state.loggedInUser} {...props} />} />
           <Route exact path="/stories/:id" component={StoryDetails} />
-          <Route exact path="/story-edit/:id" component={EditStory}/>
->>>>>>> 8685826c4f1baf8da89e3ed2c473a0dfa91fdcec
+          <Route exact path="/story-edit/:id" component={EditStory} />
         </Switch>
       </div>
     )
