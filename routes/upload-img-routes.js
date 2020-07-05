@@ -2,11 +2,16 @@
 const express = require("express");
 const router = express.Router();
 // Require user model
-const User = require("../models/user-model");
-const cloudinary = require("cloudinary");
-const cloudinaryStorage = require("multer-storage-cloudinary");
+const Story = require("../models/story-model");
 // package to allow <input type="file"> in forms
-const multer = require("multer");
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const multer = require('multer');
+
+
+
+
+
 
 // upload profile picture route
 cloudinary.config({
@@ -15,37 +20,53 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_SECRET,
 });
 
-const storage = cloudinaryStorage({
+const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
-    folder: "images", // The name of the folder in cloudinary
-    allowedFormats: ["jpg", "png"],
-    filename: function (req, file, cb) {
-        cb(null, file.originalname); // The file on cloudinary would have the same name as the original file name
+    params: {
+        folder: 'images',
+        format: async (req, file) => "png", // supports promises as well
+        public_id: (req, file) => 'computed-filename-using-request'
     },
+
+    // params: { resource_type: 'raw' }, => this is in case you want to upload other type of files, not just images
+
 });
 
 const uploadCloud = multer({
-    storage: storage,
+    storage: storage
 });
 
 router.post(
     "/upload-img",
-    uploadCloud.single("user-img"),
+    uploadCloud.single("imageUrl"),
     (req, res) => {
-        if (!req.file) {
-            // res.redirect("personalAccount")
-        } else {
-            console.log("req.file", req.file);
-            const imageURL = req.file.url;
-            User.findById(req.user._id).then((user) => {
-                user.image = imageURL;
-                return user.save()
-            }).then(() => {
-                // res.redirect("personalAccount");
-                res.status(200).json(user);
-            })
-        }
-    });
+        // if (!req.file) {
+        //     // res.redirect("personalAccount")
+        // } else {
+        console.log("req.file", req.file);
+        // const imageURL = req.file.url;
+        // User.findById(req.user._id).then((user) => {
+        //     user.image = imageURL;
+        //     return user.save()
+        // .then((res) => {
+        // res.redirect("personalAccount");
+        res.json({ secure_url: req.file.path });
+        // });
+    })
+// }
+router.post("/story", (req, res) => {
+    Story.create({
+        title: req.body.title,
+        description: req.body.description,
+        content: req.body.content
+    })
+        .then(newStory => {
+            res.json(newStory);
+        })
+})
+
+
+
 
 // router.post("/delete-profile-img", uploadCloud.single("user-img"), (req, res) => {
 //     User.findByIdAndUpdate({

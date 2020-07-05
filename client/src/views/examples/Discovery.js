@@ -22,6 +22,7 @@ import ScrollTransparentNavbar from "components/Navbars/ScrollTransparentNavbar.
 import BlogPostsHeader from "components/Headers/BlogPostsHeader.js";
 import FooterBlackSocial from "components/Footers/FooterBlackSocial.js";
 
+
 function BlogPosts(props) {
   const [emailFocus, setEmailFocus] = React.useState(false);
   React.useEffect(() => {

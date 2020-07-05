@@ -2,3 +2,7 @@
 .modal-content {
     justify-content: center !important;
 }
+
+.jodit-ui-group {
+    background-color: lightgray !important;
+}
