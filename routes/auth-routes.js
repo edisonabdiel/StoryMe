@@ -48,27 +48,27 @@ authRoutes.post('/signup', signUpValidation, (req, res, next) => {
   console.log("outPut: checked", checked)
 
   User.findOne({ email }, (err, foundUser) => {
+    // because of signUpValidation middleware
+    // if (err) {
+    //   res.status(500).json({ message: "Username check went bad." });
+    //   return;
+    // }
 
-    if (err) {
-      res.status(500).json({ message: "Username check went bad." });
-      return;
-    }
-
-    if (foundUser) {
-      res.status(400).json({ message: 'Email taken. Choose another one.' });
-      return;
-    }
+    // if (foundUser) {
+    //   res.status(400).json({ message: 'Email taken. Choose another one.' });
+    //   return;
+    // }
 
     //Save new user
     const salt = bcrypt.genSaltSync(10);
     const hashPass = bcrypt.hashSync(password, salt);
 
-    const aNewUser = new User({
+    const newUser = new User({
       email: email,
       password: hashPass
     });
 
-    return aNewUser.save().then((user) => {
+    return newUser.save().then((user) => {
 
       // create new token for the user to verify its email 
       const token = new Token({
@@ -76,20 +76,6 @@ authRoutes.post('/signup', signUpValidation, (req, res, next) => {
         token: randomToken(16)
       });
 
-      // Automatically log in user after sign up
-      // .login() here is actually a predefined passport method
-      req.login(aNewUser, (err) => {
-
-        if (err) {
-          res.status(500).json({ message: 'Login after signup went bad.' });
-          return;
-        }
-
-        // Send the user's information to the frontend
-        // We can use also: res.status(200).json(req.user);
-        res.status(200).json(aNewUser);
-
-      });
       return token.save()
     }).then((token) => {
       //Send email verification
@@ -109,12 +95,19 @@ authRoutes.post('/signup', signUpValidation, (req, res, next) => {
       transporter.sendMail(mailOptions, (err) => {
         if (err) {
           console.log("erro", err);
-          // res.status(500).json({ message: 'Email could not be sent' })
+          res.status(500).json({ message: 'Email could not be sent' })
         };
-        // console.log('EMAIL', email);
-        // console.log('USER OBJECT', aNewUser);
-        // res.status(200).json(email, aNewUser)
-
+        // Automatically log in user after sign up
+        // .login() here is actually a predefined passport method
+        req.login(newUser, (err) => {
+          if (err) {
+            res.status(500).json({ message: 'Login after signup went bad.' });
+            return;
+          }
+          // Send the user's information to the frontend
+          // We can use also: res.status(200).json(req.user);
+          res.status(200).json(newUser);
+        });
       });
     });
   });
@@ -136,7 +129,6 @@ authRoutes.get("/confirmation/:token", (req, res) => {
     })
     .then((user) => {
       req.login(user, (err) => {
-
         if (err) {
           res.status(500).json({ message: 'Login after signup went bad.' });
           return;

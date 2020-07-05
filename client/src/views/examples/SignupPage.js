@@ -6,6 +6,7 @@ import BodyClassName from 'react-body-classname';
 
 
 
+
 // reactstrap components
 import {
   Button,
@@ -245,6 +246,7 @@ class SignupPage extends React.Component {
             </div>
             <FooterBlack />
           </div>
+
         </div>
       </BodyClassName>
     )
