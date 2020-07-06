@@ -12,7 +12,7 @@ const storySchema = new Schema({
     // required: true
   },
   category: String,
-  text: String,
+  content: String,
   likes: Number,
   duration: String,
   owner: { type: Schema.Types.ObjectId, ref: 'User' }

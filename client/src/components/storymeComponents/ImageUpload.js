@@ -13,7 +13,7 @@ import axios from 'axios'
 export class ImageUpload extends Component {
   state = {
     file: null,
-    imageUrl: this.props.imageUrl
+    imageUrl: defaultAvatar
   }
   fileInput = React.createRef();
 
@@ -21,9 +21,7 @@ export class ImageUpload extends Component {
     let formData = new FormData()
     formData.append("imageUrl", e.target.files[0])
     axios.post("/api/upload-img", formData).then((res) => {
-      console.log("outPut: ImageUpload -> handleImageChange -> res", res.data.secure_url)
       this.setState({ imageUrl: res.data.secure_url })
-
 
     }).catch((error) => {
       console.log("Error!!");

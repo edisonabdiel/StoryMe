@@ -45,11 +45,11 @@ class ListStories extends Component {
       listOfStories: this.state.listOfStories.filter(p => p._id === storyID)
     })
   }
-  // newStoryHandler = (story) => {
-  //   this.setState({
-  //     listOfStories: this.state.listOfStories.concat(story)
-  //   })
-  // }
+  newStoryHandler = (story) => {
+    this.setState({
+      listOfStories: this.state.listOfStories.concat(story)
+    })
+  }
   render() {
     console.log('CURRENT USER Name:', this.props.currentUser.email);
 
@@ -135,6 +135,8 @@ class ListStories extends Component {
             </Container>
           </div>
         </div>
+        <AddStory addNewStory={this.newStoryHandler} />
+
       </div>
 
     )
