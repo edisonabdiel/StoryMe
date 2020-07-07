@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
-import AddStory from './AddStory';
+import AddStoryForm from '../views/examples/AddStoryForm';
 import EditStory from './EditStory';
 
 
@@ -127,7 +127,6 @@ class ListStories extends Component {
                           </CardBody>
                         </Card>
                       </Col>
-
                     )
                   })
                 }

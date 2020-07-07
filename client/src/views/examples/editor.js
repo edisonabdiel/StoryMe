@@ -19,7 +19,7 @@ const Editor = (props) => {
         buttons: "|,bold,strikethrough,underline,italic,eraser,|,superscript,subscript,|,ul,ol,|,outdent,indent,|,font,fontsize,brush,paragraph,|,image,table,link,|,align,undo,redo,|,selectall,cut,copy,paste,copyformat,|,symbol,fullsize,print",
 
         removeButtons: ['hr', 'source', 'image', 'video', 'about', 'file'],
-        toolbarAdaptive: false,
+        toolbarAdaptive: true,
 
 
         // uploader: {

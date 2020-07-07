@@ -37,7 +37,7 @@ import {
 const DOMPurify = createDOMPurify(window);
 
 
-class TestForm extends React.Component {
+class AddStoryForm extends React.Component {
     state = {
         nameFocus: false,
         headlineFocus: false,
@@ -99,7 +99,7 @@ class TestForm extends React.Component {
 
         axios.post("/api/stories", { title, headline, content, image, duration, category })
             .then((resp) => {
-                this.setState({ title: "", headline: "", content: '',image: defaultAvatar, duration: "", category:""  });
+                this.setState({ title: "", headline: "", content: '', image: defaultAvatar, duration: "", category: "" });
                 this.setState({ uploadedContent: resp.data.content })
             }).catch((error) => {
                 console.log("Error!!");
@@ -123,8 +123,6 @@ class TestForm extends React.Component {
             icon: value
         })
     }
-
-
 
     render() {
         return (
@@ -164,32 +162,32 @@ class TestForm extends React.Component {
                                     </InputGroup>
                                     {/* category */}
                                     <Container>
-                                    <Row>
-                                    <Col xs="3">
-                                    < DropdownIconsCategory iconValue={this.iconSelected} icon={this.state.icon} />
-                                    </Col>
-                                    <Col xs="9">
-                                    <InputGroup
-                                        className={
-                                            this.state.categoryFocus
-                                                ? "no-border input-lg input-group-focus"
-                                                : "no-border input-lg"
-                                        }
-                                    >
-                                        <Input
-                                            placeholder="Category"
-                                            name="category"
-                                            value={this.state.category}
-                                            type="text"
-                                            onFocus={() => this.setCategoryFocus(true)}
-                                            onBlur={() => this.setCategoryFocus(false)}
-                                            onChange={this.handleChange}
-                                        ></Input>
+                                        <Row>
+                                            <Col xs="3">
+                                                < DropdownIconsCategory iconValue={this.iconSelected} icon={this.state.icon} />
+                                            </Col>
+                                            <Col xs="9">
+                                                <InputGroup
+                                                    className={
+                                                        this.state.categoryFocus
+                                                            ? "no-border input-lg input-group-focus"
+                                                            : "no-border input-lg"
+                                                    }
+                                                >
+                                                    <Input
+                                                        placeholder="Category"
+                                                        name="category"
+                                                        value={this.state.category}
+                                                        type="text"
+                                                        onFocus={() => this.setCategoryFocus(true)}
+                                                        onBlur={() => this.setCategoryFocus(false)}
+                                                        onChange={this.handleChange}
+                                                    ></Input>
 
-                                    </InputGroup>
-                                    </Col >
-                                    </Row> 
-                                     </Container>
+                                                </InputGroup>
+                                            </Col >
+                                        </Row>
+                                    </Container>
                                     {/* Duration */}
                                     <InputGroup
                                         className={
@@ -238,7 +236,7 @@ class TestForm extends React.Component {
                                     </InputGroup>
                                     {/* editor */}
 
-                                        <Editor updateContent={this.updateContent} content={this.state.content} />
+                                    <Editor updateContent={this.updateContent} content={this.state.content} />
                                 </CardBody>
                                 <ModalFooter className="text-center">
                                     <Button
@@ -262,7 +260,7 @@ class TestForm extends React.Component {
 
 }
 
-export default TestForm
+export default AddStoryForm
 
 
 
