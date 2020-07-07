@@ -18,13 +18,13 @@ router.get('/stories', (req, res, next) => {
 // POST route => to create a new project
 router.post('/stories', (req, res, next) => {
   console.log(req.body);
-  console.log('USER',req.user);
+  console.log('USER', req.user);
   Story.create({
     title: req.body.title,
     image: req.body.image,
-    category:req.body.category,
+    category: req.body.category,
     headline: req.body.headline,
-    text: req.body.text,
+    content: req.body.content,
     likes: req.body.likes,
     duration: req.body.duration,
     owner: req.user._id
@@ -51,7 +51,7 @@ router.put('/stories/:id', (req, res, next) => {
     {
       title: req.body.title,
       image: req.body.image,
-      category:req.body.category,
+      category: req.body.category,
       headline: req.body.headline,
       text: req.body.text,
       duration: req.body.duration,

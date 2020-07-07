@@ -28,7 +28,7 @@ import {
 } from "reactstrap";
 
 // core components
-import FixedTransparentNavbar from "components/Navbars/FixedTransparentNavbar.js";
+import ScrollTransparentNavbar from "components/Navbars/ScrollTransparentNavbar.js";
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import FooterBlack from "components/Footers/FooterBlack.js";
 import BodyClassName from "react-body-classname"
@@ -45,9 +45,9 @@ const ProfilePage = (props) => {
   }
   return (
     <BodyClassName className="profile-page sidebar-collapse">
-     
+
       <div>
-        <FixedTransparentNavbar updateUser={props.updateUser} />
+        <ScrollTransparentNavbar updateUser={props.updateUser} />
         <div className="wrapper" >
           <ProfilePageHeader />
           <div className="section">

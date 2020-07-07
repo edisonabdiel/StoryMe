@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
-import AddStory from './AddStory';
+import AddStoryForm from '../views/examples/AddStoryForm';
 import EditStory from './EditStory';
 
 
@@ -22,7 +22,7 @@ class ListStories extends Component {
 
   state = {
     listOfStories: [],
-    storiesInARow:0
+    storiesInARow: 0
   }
 
   componentDidMount() {
@@ -45,11 +45,11 @@ class ListStories extends Component {
       listOfStories: this.state.listOfStories.filter(p => p._id === storyID)
     })
   }
-  newStoryHandler = (story) => {
-    this.setState({
-      listOfStories: this.state.listOfStories.concat(story)
-    })
-  }
+  // newStoryHandler = (story) => {
+  //   this.setState({
+  //     listOfStories: this.state.listOfStories.concat(story)
+  //   })
+  // }
   render() {
     console.log('CURRENT USER Name:', this.props.currentUser.email);
 
@@ -66,10 +66,10 @@ class ListStories extends Component {
                 <h3 className="title">User Cards</h3>
               </div>
               <Row  >
-              {this.state.listOfStories.length === 0
-                ? <h1>LOADING...</h1>
-                : this.state.listOfStories.map(p => {
-                  return (
+                {this.state.listOfStories.length === 0
+                  ? <h1>LOADING...</h1>
+                  : this.state.listOfStories.map(p => {
+                    return (
                       <Col lg="4" md="6" key={p._id}>
                         <Card className="card-blog">
                           <div className="card-image">
@@ -115,7 +115,7 @@ class ListStories extends Component {
                                   <div>
                                     {/* <EditStory theStory={this.state} getTheStory={this.componentDidMount} {...this.props}/> */}
                                     <button>
-                                    <Link to={"/story-edit/" + p._id} onClick={() => this.editHandler(p._id)}>Edit</Link>
+                                      <Link to={"/story-edit/" + p._id} onClick={() => this.editHandler(p._id)}>Edit</Link>
                                     </button>
                                   </div>
                                   : "hello"}
@@ -127,16 +127,13 @@ class ListStories extends Component {
                           </CardBody>
                         </Card>
                       </Col>
-                    
-                  )
-                })
-              }
+                    )
+                  })
+                }
               </Row>
             </Container>
           </div>
         </div>
-        <AddStory addNewStory={this.newStoryHandler} />
-
       </div>
 
     )

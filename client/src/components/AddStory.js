@@ -9,7 +9,7 @@ class AddStory extends Component {
         title: '',
         image: '',
         headline: '',
-        category:'',
+        category: '',
         text: '',
         // likes: '',
         duration: ''
@@ -27,23 +27,23 @@ class AddStory extends Component {
         const title = this.state.title;
         const image = this.state.image;
         const headline = this.state.headline;
-        const category=this.state.category;
+        const category = this.state.category;
         const text = this.state.text;
         // const likes = this.state.likes;
         const duration = this.state.duration;
-        
-        axios.post("/api/stories", { title, image, headline,category, text,  duration})
+
+        axios.post("/api/stories", { title, image, headline, category, text, duration })
             .then((resp) => {
                 // this.props.getData();
-                console.log('Add Strory response: ',resp);
+                console.log('Add Strory response: ', resp);
                 this.props.addNewStory(resp.data)
                 this.setState({
-                    title: "", 
+                    title: "",
                     image: "",
                     headline: "",
-                    category:"",
+                    category: "",
                     text: "",
-                    // likes: "",
+                    likes: "",
                     duration: ""
                 });
             })
@@ -60,7 +60,7 @@ class AddStory extends Component {
                     <label>Headline:</label>
                     <input type="text" name="headline" value={this.state.headline} onChange={this.handleChange} />
                     <label>Text:</label>
-                    <textarea name="text" value={this.state.text} onChange={this.handleChange}/>
+                    <textarea name="text" value={this.state.text} onChange={this.handleChange} />
 
                     <button type="submit" value="Submit" > Submit</button>
                 </form>
