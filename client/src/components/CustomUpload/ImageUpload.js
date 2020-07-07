@@ -33,6 +33,7 @@ export class ImageUpload extends Component {
   }
 
   handleRemove = () => {
+    axios.delete('/api/')
     this.setState({
       file: null,
       imageUrl: defaultAvatar
@@ -42,6 +43,16 @@ export class ImageUpload extends Component {
   handleClick = () => {
     this.fileInput.current.click();
   };
+
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.imageUrl !== prevProps.imageUrl) {
+      this.setState({
+        imageUrl: this.props.imageUrl
+      })
+    }
+  }
+
   render() {
     return (
       <div className="fileinput text-center">

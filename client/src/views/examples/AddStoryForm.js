@@ -95,8 +95,9 @@ class AddStoryForm extends React.Component {
         axios.post("/api/stories", { title, headline, content, image, duration, category })
             .then((resp) => {
                 console.log("outPut: AddStoryForm -> handleFormSubmit -> resp", resp.data.image)
-                this.setState({ title: "", headline: "", content: '', image: defaultAvatar, duration: "", category: "" });
+                this.setState({ title: "", headline: "", content: '', imageUrl: defaultAvatar, duration: "", category: "" });
                 this.setState({ uploadedContent: resp.data.content })
+                // this.props.history.push("/profile-page")
             }).catch((error) => {
                 console.log("Error!!");
                 console.log(error.response);
