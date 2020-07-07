@@ -41,7 +41,7 @@ router.post(
     uploadCloud.single("imageUrl"),
     (req, res) => {
         // if (!req.file) {
-        //     // res.redirect("personalAccount")
+        // res.redirect("personalAccount")
         // } else {
         console.log("req.file", req.file);
         // const imageURL = req.file.url;

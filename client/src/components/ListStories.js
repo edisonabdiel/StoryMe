@@ -55,83 +55,86 @@ class ListStories extends Component {
 
     return (
       <div>
-        <div
-          className="section section-cards"
-          data-background-color="gray"
-          id="cards"
-        >
-          <div className="cards">
-            <Container>
-              <div className="title">
-                <h3 className="title">Your Story</h3>
-              </div>
-              <Row  >
-                {this.state.listOfStories.length === 0
-                  ? <h1>LOADING...</h1>
-                  : this.state.listOfStories.map(p => {
-                    return (
-                      <Col lg="4" md="6" key={p._id}>
-                        <Card className="card-blog">
-                          <div className="card-image">
-                            <img
-                              alt="..."
-                              className="img rounded"
-                              src={require("assets/img/project13.jpg")}
-                            ></img>
-                          </div>
-                          <CardBody>
-                            <h6 className="category text-warning">
-                              <i className="now-ui-icons business_bulb-63"></i> Focus
+        <div>
+          <div
+            className="section section-cards"
+            data-background-color="gray"
+            id="cards"
+          >
+            <div className="cards">
+              <Container>
+                <div className="title">
+                  <h3 className="title">Your Story</h3>
+                </div>
+                <Row  >
+                  {this.state.listOfStories.length === 0
+                    ? <h1>LOADING...</h1>
+                    : this.state.listOfStories.map(p => {
+                      return (
+                        <Col lg="4" md="6" key={p._id}>
+                          <Card className="card-blog" onClick={(e) => console.log("working")} style={{ cursor: 'pointer' }}>
+                            <div className="card-image">
+                              <img
+                                alt="..."
+                                className="img rounded"
+                                src={require("assets/img/project13.jpg")}
+                              ></img>
+                            </div>
+                            <CardBody>
+                              <h6 className="category text-warning">
+                                <i className="now-ui-icons business_bulb-63"></i> Focus
                               </h6>
-                            <CardTitle tag="h5">
-                              {/* <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                              <CardTitle tag="h5">
+                                {/* <a href="#pablo" onClick={(e) => e.preventDefault()}>
                                   Stay Focused: Train Your Brain
                                 </a> */}
-                              <Link to={`/stories/${p._id}`} key={p._id}>
-                                <strong>{p.title}</strong>
-                              </Link>
-                            </CardTitle>
-                            <p className="card-description">
-                              {p.headline}
-                            </p>
-                            <CardFooter>
-                              <div className="stats stats-right">
-                                <i className="now-ui-icons ui-2_favourite-28"></i>
+                                <Link to={`/stories/${p._id}`} key={p._id}>
+                                  <strong>{p.title}</strong>
+                                </Link>
+                              </CardTitle>
+                              <p className="card-description">
+                                {p.headline}
+                              </p>
+
+                              <CardFooter>
+                                <div className="stats stats-right">
+                                  <i className="now-ui-icons ui-2_favourite-28"></i>
                                     342 ·{" "}
-                                <i className="now-ui-icons tech_watch-time"></i>
+                                  <i className="now-ui-icons tech_watch-time"></i>
                                   5 min
                                 </div>
-                              <div className="author">
-                                <img
-                                  alt="..."
-                                  className="avatar img-raised"
-                                  src={require("assets/img/james.jpg")}
-                                ></img>
-                                <span>{this.props.currentUser.email}</span>
-                              </div>
-                              <hr />
-                              <div>
-                                {p.owner === this.props.currentUser._id ?
-                                  <div>
-                                    {/* <EditStory theStory={this.state} getTheStory={this.componentDidMount} {...this.props}/> */}
-                                    <button>
-                                      <Link to={"/story-edit/" + p._id} onClick={() => this.editHandler(p._id)}>Edit</Link>
-                                    </button>
-                                  </div>
-                                  : "hello"}
+                                <div className="author">
+                                  <img
+                                    alt="..."
+                                    className="avatar img-raised"
+                                    src={require("assets/img/james.jpg")}
+                                  ></img>
+                                  <span>{this.props.currentUser.email}</span>
+                                </div>
+                                <hr />
+                                <div>
+                                  {p.owner === this.props.currentUser._id ?
+                                    <div>
+                                      {/* <EditStory theStory={this.state} getTheStory={this.componentDidMount} {...this.props}/> */}
+                                      <button>
+                                        <Link to={"/story-edit/" + p._id} onClick={() => this.editHandler(p._id)}>Edit</Link>
+                                      </button>
+                                    </div>
+                                    : "hello"}
 
-                                {p.owner === this.props.currentUser._id ? <button onClick={() => this.deleteHandler(p._id)}>Delete</button> : "hello"}
-                              </div>
+                                  {p.owner === this.props.currentUser._id ? <button onClick={() => this.deleteHandler(p._id)}>Delete</button> : "hello"}
+                                </div>
 
-                            </CardFooter>
-                          </CardBody>
-                        </Card>
-                      </Col>
-                    )
-                  })
-                }
-              </Row>
-            </Container>
+                              </CardFooter>
+                            </CardBody>
+                          </Card>
+                        </Col>
+                      )
+                    })
+                  }
+                </Row>
+              </Container>
+            </div>
           </div>
         </div>
       </div>

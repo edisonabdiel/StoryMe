@@ -33,7 +33,6 @@ export class ImageUpload extends Component {
   }
 
   handleRemove = () => {
-    axios.delete('/api/')
     this.setState({
       file: null,
       imageUrl: defaultAvatar
