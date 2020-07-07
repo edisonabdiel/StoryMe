@@ -9,7 +9,7 @@ import { Container } from "reactstrap";
 const Footer = () => {
   return (
     <>
-      <footer className="footer">
+      <footer className="footer fixed-bottom" data-background-color="black">
         <Container>
           <nav>
             <ul>
