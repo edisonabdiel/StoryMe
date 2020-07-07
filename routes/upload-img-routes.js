@@ -25,7 +25,7 @@ const storage = new CloudinaryStorage({
     params: {
         folder: 'images',
         format: async (req, file) => "png", // supports promises as well
-        public_id: (req, file) => 'computed-filename-using-request'
+        public_id: (req, file) => (file.originalname)
     },
 
     // params: { resource_type: 'raw' }, => this is in case you want to upload other type of files, not just images
