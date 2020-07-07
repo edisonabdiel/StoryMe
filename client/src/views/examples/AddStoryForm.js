@@ -42,7 +42,6 @@ class AddStoryForm extends React.Component {
         nameFocus: false,
         headlineFocus: false,
         categoryFocus: false,
-        modalLogin: false,
         title: '',
         headline: '',
         errorMessage: '',
@@ -73,14 +72,10 @@ class AddStoryForm extends React.Component {
             passwordFocus: bool
         })
     }
-    setModalLogin = (bool) => {
+    setImageHandel = (value) => {
         this.setState({
-            modalLogin: bool
+            imageUrl: value
         })
-    }
-    loginHandler = (e) => {
-        e.preventDefault();
-        console.log("Im a modal, and i work")
     }
     handleChange = (event) => {
         const { name, value } = event.target;
@@ -99,6 +94,7 @@ class AddStoryForm extends React.Component {
 
         axios.post("/api/stories", { title, headline, content, image, duration, category })
             .then((resp) => {
+                console.log("outPut: AddStoryForm -> handleFormSubmit -> resp", resp.data.image)
                 this.setState({ title: "", headline: "", content: '', image: defaultAvatar, duration: "", category: "" });
                 this.setState({ uploadedContent: resp.data.content })
             }).catch((error) => {
@@ -117,7 +113,6 @@ class AddStoryForm extends React.Component {
     }
 
     // category icons 
-
     iconSelected = (value) => {
         this.setState({
             icon: value
@@ -130,7 +125,7 @@ class AddStoryForm extends React.Component {
                 <Container>
                     <Row>
                         <Col md="6">
-                            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.state.uploadedContent) }} />
+                            {/* <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.state.uploadedContent) }} /> */}
                             <h2>CREATE NEW STORY</h2>
                             <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
                                 <CardBody>
@@ -158,7 +153,7 @@ class AddStoryForm extends React.Component {
                                     </InputGroup>
                                     {/* image */}
                                     <InputGroup >
-                                        <ImageUpload imageUrl={this.state.imageUrl} />
+                                        <ImageUpload imageUrl={this.state.imageUrl} setImageHandel={this.setImageHandel} />
                                     </InputGroup>
                                     {/* category */}
                                     <Container>

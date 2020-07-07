@@ -54,16 +54,6 @@ router.post(
         // });
     })
 // }
-router.post("/story", (req, res) => {
-    Story.create({
-        title: req.body.title,
-        description: req.body.description,
-        content: req.body.content
-    })
-        .then(newStory => {
-            res.json(newStory);
-        })
-})
 
 
 

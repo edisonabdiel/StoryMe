@@ -63,7 +63,7 @@ class ListStories extends Component {
           <div className="cards">
             <Container>
               <div className="title">
-                <h3 className="title">User Cards</h3>
+                <h3 className="title">Your Story</h3>
               </div>
               <Row  >
                 {this.state.listOfStories.length === 0
