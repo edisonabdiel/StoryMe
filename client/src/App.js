@@ -22,6 +22,13 @@ import Sections from "views/Sections.js";
 import SignupPage from "views/examples/SignupPage.js";
 import LoginButton from "components/LoginButton";
 import ConfirmationPage from "components/ConfirmationPage";
+import ImageUpload from "components/CustomUpload/ImageUpload";
+import ListStories from "components/ListStories";
+import StoryDetails from "components/StoryDetails";
+import EditStory from "components/EditStory";
+import AddStoryForm from 'views/examples/AddStoryForm';
+
+
 
 // others
 
@@ -44,8 +51,6 @@ class App extends React.Component {
       <div>
         {/* {this.state.loggedInUser ? <h1>Hi {this.state.loggedInUser.email}</h1> : 'Logged out'} */}
         <Switch>
-
-
           <Route exact path="/" render={(props) => <Discovery {...props} updateUser={this.updateUser} />} />
           <Route exact path="/login-button" render={(props) => <LoginButton updateUser={this.updateUser} currentUser={this.state.loggedInUser} {...props} />} />
           <Route exact path="/login-page" render={(props) => <LoginPage {...props} />} />
@@ -58,6 +63,11 @@ class App extends React.Component {
           <Route path="/profile-page" render={(props) => { if (this.state.loggedInUser) { return <ProfilePage updateUser={this.updateUser} {...props} /> } else { return <Redirect to="/login-page" /> } }} />
           <Route path="/sections" render={(props) => <Sections {...props} />} />
           <Route exact path="/confirmation/:token" render={(props) => <ConfirmationPage {...props} updateUser={this.updateUser} />} />
+          <Route exact path='/img-upload' component={ImageUpload} />
+          <Route exact path='/publish' component={AddStoryForm} />
+          <Route exact path="/list-stories" render={(props) => <ListStories currentUser={this.state.loggedInUser} {...props} />} />
+          <Route exact path="/stories/:id" component={StoryDetails} />
+          <Route exact path="/story-edit/:id" render={(props) => <EditStory currentUser={this.state.loggedInUser} {...props} />} />
         </Switch>
       </div>
     )
