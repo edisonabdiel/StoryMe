@@ -12,17 +12,16 @@ import axios from 'axios'
 
 export class ImageUpload extends Component {
   state = {
-    file: null,
-    imageUrl: this.props.imageUrl
+    file: null
   }
   fileInput = React.createRef();
+
 
   handleImageChange = (e) => {
     let formData = new FormData()
     formData.append("imageUrl", e.target.files[0])
     axios.post("/api/upload-img", formData).then((res) => {
       this.props.setImageHandel(res.data.secure_url)
-      this.setState({ imageUrl: res.data.secure_url })
     }).catch((error) => {
       console.log("Error!!");
       console.log(error.response);
@@ -35,10 +34,13 @@ export class ImageUpload extends Component {
   handleRemove = () => {
     this.setState({
       file: null,
-      imageUrl: defaultAvatar
     })
+    this.props.setImageHandel(defaultAvatar)
     this.fileInput.current.value = null
   };
+
+
+
   handleClick = () => {
     this.fileInput.current.click();
   };
@@ -62,10 +64,10 @@ export class ImageUpload extends Component {
             (this.props.avatar ? " img-circle" : "")
           }
         >
-          <img src={this.state.imageUrl} alt="..." />
+          <img src={this.props.imageUrl} alt="..." />
         </div>
         <div>
-          {this.state.imageUrl === defaultAvatar ? (
+          {this.props.imageUrl === defaultAvatar ? (
             <Button className="btn-round" color="default" onClick={this.handleClick}>
               {this.props.avatar ? "Add Photo" : "Select image"}
             </Button>

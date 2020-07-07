@@ -65,9 +65,9 @@ class App extends React.Component {
           <Route exact path="/confirmation/:token" render={(props) => <ConfirmationPage {...props} updateUser={this.updateUser} />} />
           <Route exact path='/img-upload' component={ImageUpload} />
           <Route exact path='/publish' component={AddStoryForm} />
-          <Route exact path="/list-stories" render={(props) => <ListStories updateUser={this.updateUser} currentUser={this.state.loggedInUser} {...props} />} />
+          <Route exact path="/list-stories" render={(props) => <ListStories currentUser={this.state.loggedInUser} {...props} />} />
           <Route exact path="/stories/:id" component={StoryDetails} />
-          <Route exact path="/story-edit/:id" component={EditStory} />
+          <Route exact path="/story-edit/:id" render={(props) => <EditStory currentUser={this.state.loggedInUser} {...props} />} />
         </Switch>
       </div>
     )
