@@ -53,7 +53,7 @@ router.put('/stories/:id', (req, res, next) => {
       image: req.body.image,
       category: req.body.category,
       headline: req.body.headline,
-      text: req.body.text,
+      content: req.body.content,
       duration: req.body.duration,
     })
     .then(() => {

@@ -17,14 +17,22 @@ export class ImageUpload extends Component {
   }
   fileInput = React.createRef();
 
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.imageUrl !== prevProps.imageUrl) {
+      this.setState({
+        imageUrl: this.props.imageUrl
+      })
+    }
+  }
+
   handleImageChange = (e) => {
     let formData = new FormData()
     formData.append("imageUrl", e.target.files[0])
     axios.post("/api/upload-img", formData).then((res) => {
       console.log("outPut: ImageUpload -> handleImageChange -> res", res.data.secure_url)
       this.setState({ imageUrl: res.data.secure_url })
-
-
+      this.props.setImageHandel(res.data.secure_url)
     }).catch((error) => {
       console.log("Error!!");
       console.log(error.response);
