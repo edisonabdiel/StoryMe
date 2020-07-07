@@ -71,6 +71,8 @@ class ListStories extends Component {
                   : this.state.listOfStories.map(p => {
                     return (
                       <Col lg="4" md="6" key={p._id}>
+                      {console.log('Current user:',this.props.currentUser)}
+                      {console.log('Owner:', p.owner)}
                         <Card className="card-blog">
                           <div className="card-image">
                             <img
