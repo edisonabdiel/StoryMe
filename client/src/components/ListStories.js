@@ -139,7 +139,6 @@ class ListStories extends Component {
         </div>
       </div>
 
-
     )
   }
 }

@@ -1,18 +1,12 @@
 import React, { Component } from 'react'
-// used for making the prop types of this component
-import PropTypes from "prop-types";
-
 import { Button } from "reactstrap";
-
 import defaultAvatar from "assets/img/placeholder.jpg";
 import axios from 'axios'
 
 
-
-
 export class ImageUpload extends Component {
   state = {
-    file: null
+    imageName: ""
   }
   fileInput = React.createRef();
 
@@ -21,20 +15,32 @@ export class ImageUpload extends Component {
     let formData = new FormData()
     formData.append("imageUrl", e.target.files[0])
     axios.post("/api/upload-img", formData).then((res) => {
+      console.log(res.data)
       this.props.setImageHandel(res.data.secure_url)
+      console.log(res.data.imageName)
+      this.setState({
+        imageName: res.data.imageName
+      })
     }).catch((error) => {
       console.log("Error!!");
       console.log(error.response);
-      // this.setState({
-      //     errorMessage: error.response.data.message
-      // })
     })
   }
 
   handleRemove = () => {
-    this.setState({
-      file: null,
+    // this.setState({
+    //   file: null,
+    // })
+    const name = (this.state.imageName)
+    // .split(".")
+    console.log("outPut: ImageUpload -> handleRemove -> name", name)
+    axios.post(`/api/delete-upload-img/${name}`).then((res) => {
+      console.log(res)
+    }).catch((error) => {
+      console.log("Error!!");
+      console.log(error.response);
     })
+    console.log(this.props.imageUrl)
     this.props.setImageHandel(defaultAvatar)
     this.fileInput.current.value = null
   };
@@ -46,7 +52,7 @@ export class ImageUpload extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    // Typical usage (don't forget to compare props):
+    //  to compare props
     if (this.props.imageUrl !== prevProps.imageUrl) {
       this.setState({
         imageUrl: this.props.imageUrl
@@ -64,7 +70,7 @@ export class ImageUpload extends Component {
             (this.props.avatar ? " img-circle" : "")
           }
         >
-          <img src={this.props.imageUrl} alt="..." />
+          <img src={this.props.imageUrl} alt="image" />
         </div>
         <div>
           {this.props.imageUrl === defaultAvatar ? (

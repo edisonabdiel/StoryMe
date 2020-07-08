@@ -24,7 +24,7 @@ const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
         folder: 'images',
-        format: async (req, file) => "png", // supports promises as well
+        // format: async (req, file) => "png", // supports promises as well
         public_id: (req, file) => file.originalname
     },
 
@@ -50,7 +50,7 @@ router.post(
         //     return user.save()
         // .then((res) => {
         // res.redirect("personalAccount");
-        res.json({ secure_url: req.file.path });
+        res.json({ secure_url: req.file.path, imageName: req.file.originalname });
         // });
     })
 // }
@@ -67,5 +67,13 @@ router.post(
 //         res.redirect("personalAccount");
 //     });
 // });
+
+router.post("/delete-upload-img/:name", (req, res) => {
+    console.log(req.params.name)
+    cloudinary.uploader.destroy(`images/${req.params.name}`, (err, result) => { console.log(result); console.log(err) })
+    res.json({ message: "done" });
+
+})
+
 
 module.exports = router;
