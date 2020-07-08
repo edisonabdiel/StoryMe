@@ -33,7 +33,8 @@ class AddStoryForm extends React.Component {
         title: '',
         headline: '',
         content: '',
-        imageUrl: defaultAvatar,
+        storyImageUrl: defaultAvatar,
+        storyImageName: '',
         category: "",
         duration: "",
         icon: null,
@@ -85,18 +86,54 @@ class AddStoryForm extends React.Component {
         })
     }
 
+    // upload-delete images handlers 
+
+    handleImageChange = (e) => {
+        let formData = new FormData()
+        formData.append("storyImageUrl", e.target.files[0])
+        console.log(e.target.files[0])
+        axios.post("/api/upload-img", formData).then((res) => {
+            console.log(res.data)
+            this.setState({
+                storyImageUrl: res.data.secure_url,
+                storyImageName: res.data.imageName
+            })
+        }).catch((error) => {
+            console.log("Error!!");
+            console.log(error.response);
+        })
+    }
+
+    handleImageRemove = () => {
+        const name = (this.state.storyImageName)
+        console.log("outPut: ImageUpload -> handleRemove -> name", name)
+        axios.post(`/api/delete-upload-img/${name}`).then((res) => {
+            console.log(res)
+            this.setState({
+                storyImageUrl: defaultAvatar,
+                storyImageName: ''
+            })
+        }).catch((error) => {
+            console.log("Error!!");
+            console.log(error.response);
+        })
+    };
+
+
+    // submit add story form handler
     handleFormSubmit = (event) => {
         event.preventDefault()
         const title = this.state.title
         const headline = this.state.headline
         const content = this.state.content
-        const image = this.state.imageUrl
+        const image = this.state.storyImageUrl
+        const imageName = this.state.storyImageName
         const duration = this.state.duration
         const category = this.state.category
-        axios.post("/api/stories", { title, headline, content, image, duration, category })
+        axios.post("/api/stories", { title, headline, content, image, imageName, duration, category })
             .then((resp) => {
                 console.log("outPut: AddStoryForm -> handleFormSubmit -> resp", resp.data.image)
-                this.setState({ title: "", headline: "", content: '', imageUrl: defaultAvatar, duration: "", category: "" });
+                this.setState({ title: "", headline: "", content: '', storyImageUrl: defaultAvatar, storyImageName: '', duration: "", category: "" });
                 this.setState({ uploadedContent: resp.data.content })
             }).catch((error) => {
                 console.log("Error!!");
@@ -141,7 +178,7 @@ class AddStoryForm extends React.Component {
                                     </InputGroup>
                                     {/* image */}
                                     <InputGroup >
-                                        <ImageUpload imageUrl={this.state.imageUrl} setImageHandel={this.setImageHandel} />
+                                        <ImageUpload storyImageUrl={this.state.storyImageUrl} setImageHandel={this.setImageHandel} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
                                     </InputGroup>
                                     {/* category */}
                                     <Container>

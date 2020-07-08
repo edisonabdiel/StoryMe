@@ -38,35 +38,11 @@ const uploadCloud = multer({
 
 router.post(
     "/upload-img",
-    uploadCloud.single("imageUrl"),
+    uploadCloud.single("storyImageUrl"),
     (req, res) => {
-        // if (!req.file) {
-        // res.redirect("personalAccount")
-        // } else {
         console.log("req.file", req.file);
-        // const imageURL = req.file.url;
-        // User.findById(req.user._id).then((user) => {
-        //     user.image = imageURL;
-        //     return user.save()
-        // .then((res) => {
-        // res.redirect("personalAccount");
         res.json({ secure_url: req.file.path, imageName: req.file.originalname });
-        // });
     })
-// }
-
-
-
-
-// router.post("/delete-profile-img", uploadCloud.single("user-img"), (req, res) => {
-//     User.findByIdAndUpdate({
-//         _id: req.user._id
-//     }, {
-//         image: `https://api.adorable.io/avatars/59/${req.user.email}`
-//     }).then(() => {
-//         res.redirect("personalAccount");
-//     });
-// });
 
 router.post("/delete-upload-img/:name", (req, res) => {
     console.log(req.params.name)
