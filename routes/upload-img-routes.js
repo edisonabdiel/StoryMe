@@ -37,7 +37,7 @@ router.post(
 router.post("/delete-upload-img/:name", (req, res) => {
     console.log(req.params.name)
     cloudinary.uploader.destroy(`images/${req.params.name}`, (err, result) => { console.log(result); console.log(err) })
-    res.json({ message: "done" });
+    res.json({ message: "deleted" });
 
 })
 

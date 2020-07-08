@@ -109,7 +109,7 @@ class EditStory extends Component {
             console.log(error.response);
         })
     };
-
+    // update state of story elements 
     handleChange = (event) => {
         const { name, value } = event.target;
         this.setState({ [name]: value })
@@ -142,7 +142,6 @@ class EditStory extends Component {
 
         axios.put(`/api/stories/${this.props.match.params.id}`, { title, headline, content, image, imageName, duration, category })
             .then((resp) => {
-
                 this.setState({
                     title: this.state.title,
                     headline: this.state.headline,

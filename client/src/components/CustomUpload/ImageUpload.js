@@ -20,10 +20,9 @@ export class ImageUpload extends Component {
     this.fileInput.current.click();
   };
 
-  handelRemove = (event) => {
-    event.preventDefault();
+  handelRemove = () => {
     this.setState({ modalOpen: false });
-    this.props.handleImageRemove
+    this.props.handleImageRemove()
 
   }
 
@@ -46,7 +45,7 @@ export class ImageUpload extends Component {
             </Button>
           ) : (
               <span>
-                <Button className="btn-round" color="default" onClick={this.handleClick}>
+                <Button className="btn-round" color="default" onClick={() => { this.handleClick(); this.props.handleImageRemove() }}>
                   Change
             </Button>
                 {this.props.avatar ? <br /> : null}
@@ -66,18 +65,18 @@ export class ImageUpload extends Component {
               </div>
             </div>
             <div className="modal-body">
-              <p>Delete the image</p>
+              <p>Are you sure you want to delete the image?</p>
             </div>
             <ModalFooter>
-              <Button className="btn-neutral" color="link" onClick={() => this.handelRemove}>
-                YES
+              <Button className="btn-neutral" color="link" onClick={this.handelRemove}>
+                Delete
                 </Button>
               <Button
                 className="btn-link"
                 color="neutral"
                 onClick={() => this.setState({ modalOpen: false })}
               >
-                CLOSE
+                Cancel
                 </Button>
             </ModalFooter>
           </Modal>

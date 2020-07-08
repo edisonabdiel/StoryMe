@@ -1,8 +1,6 @@
 import React from "react";
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import Editor from "views/examples/editor";
-import createDOMPurify from "dompurify";
 import defaultAvatar from "assets/img/placeholder.jpg";
 import ImageUpload from "components/CustomUpload/ImageUpload.js";
 import DropdownIconsCategory from "views/examples/DropdownIconsCategory"
@@ -86,9 +84,7 @@ class AddStoryForm extends React.Component {
     handleImageChange = (e) => {
         let formData = new FormData()
         formData.append("storyImageUrl", e.target.files[0])
-        console.log(e.target.files[0])
         axios.post("/api/upload-img", formData).then((res) => {
-            console.log(res.data)
             this.setState({
                 storyImageUrl: res.data.secure_url,
                 storyImageName: res.data.imageName
@@ -100,9 +96,8 @@ class AddStoryForm extends React.Component {
     }
 
     handleImageRemove = () => {
-        const name = (this.state.storyImageName)
-        console.log("outPut: ImageUpload -> handleRemove -> name", name)
-        axios.post(`/api/delete-upload-img/${name}`).then((res) => {
+        const imageName = (this.state.storyImageName)
+        axios.post(`/api/delete-upload-img/${imageName}`).then((res) => {
             console.log(res)
             this.setState({
                 storyImageUrl: defaultAvatar,
