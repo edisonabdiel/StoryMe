@@ -3,13 +3,29 @@ import { Button } from "reactstrap";
 import defaultAvatar from "assets/img/placeholder.jpg";
 
 
+import {
+  Modal,
+  ModalFooter,
+} from "reactstrap";
+
+
 export class ImageUpload extends Component {
+  state = {
+    modalOpen: false
+  }
 
   fileInput = React.createRef();
 
   handleClick = () => {
     this.fileInput.current.click();
   };
+
+  handelRemove = (event) => {
+    event.preventDefault();
+    this.setState({ modalOpen: false });
+    this.props.handleImageRemove
+
+  }
 
   render() {
     return (
@@ -34,11 +50,37 @@ export class ImageUpload extends Component {
                   Change
             </Button>
                 {this.props.avatar ? <br /> : null}
-                <Button color="danger" className="btn-round" onClick={this.props.handleImageRemove}>
+                <Button color="danger" className="btn-round" onClick={() => this.setState({ modalOpen: true })}>
                   <i className="fa fa-times" /> Remove
             </Button>
               </span>
             )}
+          <Modal
+            modalClassName="modal-mini modal-info"
+            isOpen={this.state.modalOpen}
+            toggle={() => this.setState({ modalOpen: false })}
+          >
+            <div className="modal-header justify-content-center">
+              <div className="modal-profile">
+                <i className="now-ui-icons users_circle-08"></i>
+              </div>
+            </div>
+            <div className="modal-body">
+              <p>Delete the image</p>
+            </div>
+            <ModalFooter>
+              <Button className="btn-neutral" color="link" onClick={() => this.handelRemove}>
+                YES
+                </Button>
+              <Button
+                className="btn-link"
+                color="neutral"
+                onClick={() => this.setState({ modalOpen: false })}
+              >
+                CLOSE
+                </Button>
+            </ModalFooter>
+          </Modal>
         </div>
       </div>
     );
