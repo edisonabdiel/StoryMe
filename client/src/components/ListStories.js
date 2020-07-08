@@ -71,8 +71,8 @@ class ListStories extends Component {
                   : this.state.listOfStories.map(p => {
                     return (
                       <Col lg="4" md="6" key={p._id}>
-                      {console.log('Current user:',this.props.currentUser)}
-                      {console.log('Owner:', p.owner)}
+                        {console.log('Current user:', this.props.currentUser)}
+                        {console.log('Owner:', p.owner)}
                         <Card className="card-blog">
                           <div className="card-image">
                             <img
@@ -96,6 +96,7 @@ class ListStories extends Component {
                             <p className="card-description">
                               {p.headline}
                             </p>
+
                             <CardFooter>
                               <div className="stats stats-right">
                                 <i className="now-ui-icons ui-2_favourite-28"></i>

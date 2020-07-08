@@ -1,40 +1,25 @@
 import React from "react";
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import Editor from "views/examples/editor";
-import createDOMPurify from "dompurify";
 import defaultAvatar from "assets/img/placeholder.jpg";
 import ImageUpload from "components/CustomUpload/ImageUpload.js";
 import DropdownIconsCategory from "views/examples/DropdownIconsCategory"
-
-
-
-
 // reactstrap components
 import {
     Button,
-    Card,
-    CardHeader,
     CardBody,
-    Collapse,
-    FormGroup,
     Container,
     Row,
     Col,
-    UncontrolledTooltip,
-    PopoverBody,
-    PopoverHeader,
-    UncontrolledPopover,
     Form,
     Input,
     InputGroupAddon,
     InputGroupText,
     InputGroup,
-    Modal,
     ModalFooter,
 } from "reactstrap";
 
-const DOMPurify = createDOMPurify(window);
+
 
 
 class AddStoryForm extends React.Component {
@@ -42,15 +27,16 @@ class AddStoryForm extends React.Component {
         nameFocus: false,
         headlineFocus: false,
         categoryFocus: false,
+        durationFocus: false,
         title: '',
         headline: '',
-        errorMessage: '',
         content: '',
-        uploadedContent: '',
-        imageUrl: defaultAvatar,
+        storyImageUrl: defaultAvatar,
+        storyImageName: '',
         category: "",
         duration: "",
-        icon: null
+        icon: null,
+        errorMessage: ''
     }
     setNameFocus = (bool) => {
         this.setState({
@@ -64,48 +50,21 @@ class AddStoryForm extends React.Component {
     }
     setDurationFocus = (bool) => {
         this.setState({
-            categoryFocus: bool
+            durationFocus: bool
         })
     }
     setHeadlineFocus = (bool) => {
         this.setState({
-            passwordFocus: bool
-        })
-    }
-    setImageHandel = (value) => {
-        this.setState({
-            imageUrl: value
+            headlineFocus: bool
         })
     }
 
+    // change the state of story elements 
     handleChange = (event) => {
         const { name, value } = event.target;
         this.setState({ [name]: value });
     }
-    handleFormSubmit = (event) => {
-        event.preventDefault()
 
-        const title = this.state.title
-        const headline = this.state.headline
-        const content = this.state.content
-        const image = this.state.imageUrl
-        const duration = this.state.duration
-        const category = this.state.category
-
-
-        axios.post("/api/stories", { title, headline, content, image, duration, category })
-            .then((resp) => {
-                this.setState({ title: "", headline: "", content: '', image: defaultAvatar, duration: "", category: "" });
-                this.setState({ uploadedContent: resp.data.content })
-                
-            }).catch((error) => {
-                console.log("Error!!");
-                console.log(error.response);
-                this.setState({
-                    errorMessage: error.response.data.message
-                })
-            })
-    }
     // data coming from the editor
     updateContent = (newContent) => {
         this.setState({
@@ -114,11 +73,65 @@ class AddStoryForm extends React.Component {
     }
 
     // category icons 
-
     iconSelected = (value) => {
         this.setState({
             icon: value
         })
+    }
+
+    // upload-delete images handlers 
+
+    handleImageChange = (e) => {
+        let formData = new FormData()
+        formData.append("storyImageUrl", e.target.files[0])
+        axios.post("/api/upload-img", formData).then((res) => {
+            this.setState({
+                storyImageUrl: res.data.secure_url,
+                storyImageName: res.data.imageName
+            })
+        }).catch((error) => {
+            console.log("Error!!");
+            console.log(error.response);
+        })
+    }
+
+    handleImageRemove = () => {
+        const imageName = (this.state.storyImageName)
+        axios.post(`/api/delete-upload-img/${imageName}`).then((res) => {
+            console.log(res)
+            this.setState({
+                storyImageUrl: defaultAvatar,
+                storyImageName: ''
+            })
+        }).catch((error) => {
+            console.log("Error!!");
+            console.log(error.response);
+        })
+    };
+
+
+    // submit add story form handler
+    handleFormSubmit = (event) => {
+        event.preventDefault()
+        const title = this.state.title
+        const headline = this.state.headline
+        const content = this.state.content
+        const image = this.state.storyImageUrl
+        const imageName = this.state.storyImageName
+        const duration = this.state.duration
+        const category = this.state.category
+        axios.post("/api/stories", { title, headline, content, image, imageName, duration, category })
+            .then((resp) => {
+                console.log("outPut: AddStoryForm -> handleFormSubmit -> resp", resp.data.image)
+                this.setState({ title: "", headline: "", content: '', storyImageUrl: defaultAvatar, storyImageName: '', duration: "", category: "" });
+                this.setState({ uploadedContent: resp.data.content })
+            }).catch((error) => {
+                console.log("Error!!");
+                console.log(error.response);
+                this.setState({
+                    errorMessage: error.response.data.message
+                })
+            })
     }
 
     render() {
@@ -127,7 +140,6 @@ class AddStoryForm extends React.Component {
                 <Container>
                     <Row>
                         <Col md="6">
-                            {/* <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.state.uploadedContent) }} /> */}
                             <h2>CREATE NEW STORY</h2>
                             <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
                                 <CardBody>
@@ -138,6 +150,7 @@ class AddStoryForm extends React.Component {
                                                 : "no-border input-lg"
                                         }
                                     >
+                                        {/* title */}
                                         <InputGroupAddon addonType="prepend">
                                             <InputGroupText>
                                                 <i className="now-ui-icons users_circle-08"></i>
@@ -155,15 +168,17 @@ class AddStoryForm extends React.Component {
                                     </InputGroup>
                                     {/* image */}
                                     <InputGroup >
-                                        <ImageUpload imageUrl={this.state.imageUrl} setImageHandel={this.setImageHandel} /> 
+                                        <ImageUpload storyImageUrl={this.state.storyImageUrl} setImageHandel={this.setImageHandel} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
                                     </InputGroup>
                                     {/* category */}
                                     <Container>
                                         <Row>
+                                            {/* category icons dropdown list */}
                                             <Col xs="3">
                                                 < DropdownIconsCategory iconValue={this.iconSelected} icon={this.state.icon} />
                                             </Col>
                                             <Col xs="9">
+                                                {/* category name input */}
                                                 <InputGroup
                                                     className={
                                                         this.state.categoryFocus
@@ -232,7 +247,6 @@ class AddStoryForm extends React.Component {
                                         ></Input>
                                     </InputGroup>
                                     {/* editor */}
-
                                     <Editor updateContent={this.updateContent} content={this.state.content} />
                                 </CardBody>
                                 <ModalFooter className="text-center">
@@ -240,12 +254,11 @@ class AddStoryForm extends React.Component {
                                         block
                                         className="btn-neutral btn-round"
                                         color="info"
-                                        // href=""
                                         type="submit"
                                         size="lg"
                                     >
                                         PUBLISH
-                          </Button>
+                                   </Button>
                                 </ModalFooter>
                             </Form>
                         </Col>
