@@ -60,11 +60,6 @@ class AddStoryForm extends React.Component {
             headlineFocus: bool
         })
     }
-    setImageHandel = (value) => {
-        this.setState({
-            imageUrl: value
-        })
-    }
 
     // change the state of story elements 
     handleChange = (event) => {

@@ -28,7 +28,6 @@ class EditStory extends Component {
         title: '',
         headline: '',
         content: '',
-        // uploadedContent: '',
         storyImageUrl: defaultAvatar,
         storyImageName: '',
         category: "",
@@ -37,7 +36,9 @@ class EditStory extends Component {
         icon: null,
         nameFocus: false,
         headlineFocus: false,
-        categoryFocus: false
+        categoryFocus: false,
+        durationFocus: false
+
     }
 
     componentDidMount() {
@@ -67,21 +68,17 @@ class EditStory extends Component {
     }
     setDurationFocus = (bool) => {
         this.setState({
-            categoryFocus: bool
+            durationFocus: bool
         })
     }
     setHeadlineFocus = (bool) => {
         this.setState({
-            passwordFocus: bool
-        })
-    }
-    setImageHandel = (value) => {
-        this.setState({
-            imageUrl: value
+            headlineFocus: bool
         })
     }
 
-    // upload-delete images handlers 
+
+    // upload-delete image handlers 
 
     handleImageChange = (e) => {
         let formData = new FormData()
@@ -113,10 +110,26 @@ class EditStory extends Component {
         })
     };
 
+    handleChange = (event) => {
+        const { name, value } = event.target;
+        this.setState({ [name]: value })
+    }
 
+    // data coming from the editor
+    updateContent = (newContent) => {
+        this.setState({
+            content: newContent
+        })
+    }
+
+    // category icons 
+    iconSelected = (value) => {
+        this.setState({
+            icon: value
+        })
+    }
 
     handleFormSubmit = (event) => {
-
         const title = this.state.title;
         const headline = this.state.headline;
         const content = this.state.content;
@@ -151,24 +164,6 @@ class EditStory extends Component {
             })
     }
 
-    handleChange = (event) => {
-        const { name, value } = event.target;
-        this.setState({ [name]: value })
-    }
-
-    // data coming from the editor
-    updateContent = (newContent) => {
-        this.setState({
-            content: newContent
-        })
-    }
-
-    // category icons 
-    iconSelected = (value) => {
-        this.setState({
-            icon: value
-        })
-    }
 
     render() {
         return (
