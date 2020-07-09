@@ -17,13 +17,13 @@ export default function DropdownIconsCategory(props) {
                         className="react-select react-select-info mt-2"
                         onChange={(value) => props.iconValue(value)}
                         classNamePrefix="react-select"
-                        placeholder="&#128161;"
+                        placeholder="&#x27a2;"
                         value={props.icon}
                         name=""
                         options={[
                             {
                                 value: "",
-                                label: <i className="now-ui-icons business_bulb-63"></i>,
+                                label: "Icon",
                                 isDisabled: true,
                             },
                             { value: "2", label: <i className="now-ui-icons users_single-02"></i> },

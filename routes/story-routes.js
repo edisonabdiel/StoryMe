@@ -17,11 +17,12 @@ router.get('/stories', (req, res, next) => {
 
 // POST route => to create a new project
 router.post('/stories', (req, res, next) => {
-  console.log(req.body);
+  console.log('POST',req.body);
   console.log('USER', req.user);
   Story.create({
     title: req.body.title,
     image: req.body.image,
+    icon: req.body.icon,
     category: req.body.category,
     headline: req.body.headline,
     content: req.body.content,
@@ -30,6 +31,7 @@ router.post('/stories', (req, res, next) => {
     owner: req.user._id
   })
     .then(newProject => {
+    
       res.json(newProject);
     })
 
@@ -51,6 +53,7 @@ router.put('/stories/:id', (req, res, next) => {
     {
       title: req.body.title,
       image: req.body.image,
+      icon: req.body.icon,
       category: req.body.category,
       headline: req.body.headline,
       content: req.body.content,

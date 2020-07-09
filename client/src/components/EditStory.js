@@ -4,6 +4,8 @@ import defaultAvatar from "assets/img/placeholder.jpg";
 import Editor from "views/examples/editor";
 import DOMPurify from "dompurify";
 import ImageUpload from "components/CustomUpload/ImageUpload.js";
+import Select from "react-select";
+
 import DropdownIconsCategory from "views/examples/DropdownIconsCategory"
 
 // reactstrap components
@@ -23,6 +25,7 @@ import {
 
 
 
+
 class EditStory extends Component {
     state = {
         title: '',
@@ -32,8 +35,8 @@ class EditStory extends Component {
         imageUrl: defaultAvatar,
         category: "",
         duration: "",
-        errorMessage: '',
-        icon: null,
+        errorMessage: "",
+        icon: "",
         nameFocus: false,
         headlineFocus: false,
         categoryFocus: false
@@ -48,7 +51,8 @@ class EditStory extends Component {
                 content: resp.data.content,
                 imageUrl: resp.data.image,
                 category: resp.data.category,
-                duration: resp.data.duration
+                duration: resp.data.duration,
+                icon: resp.data.icon
             })
         })
     }
@@ -87,10 +91,11 @@ class EditStory extends Component {
         const image = this.state.imageUrl;
         const duration = this.state.duration;
         const category = this.state.category;
+        const icon = this.state.icon;
 
         event.preventDefault();
 
-        axios.put(`/api/stories/${this.props.match.params.id}`, { title, headline, content, image, duration, category })
+        axios.put(`/api/stories/${this.props.match.params.id}`, { title, headline, content, image, duration, category, icon })
             .then((resp) => {
 
                 this.setState({
@@ -99,9 +104,10 @@ class EditStory extends Component {
                     content: this.state.content,
                     image: this.state.imageUrl,
                     duration: this.state.duration,
-                    category: this.state.category
+                    category: this.state.category,
+                    icon: this.state.icon
                 })
-                if(this.props.currentUser){
+                if (this.props.currentUser) {
                     this.props.history.push('/list-stories')
                 }
             })
@@ -115,7 +121,7 @@ class EditStory extends Component {
 
     handleChange = (event) => {
         const { name, value } = event.target;
-        this.setState({[name]:value })
+        this.setState({ [name]: value })
     }
 
     // data coming from the editor
@@ -128,7 +134,7 @@ class EditStory extends Component {
     // category icons 
     iconSelected = (value) => {
         this.setState({
-            icon: value
+            icon: value.label.props.className
         })
     }
 
@@ -172,7 +178,7 @@ class EditStory extends Component {
                                     <Container>
                                         <Row>
                                             <Col xs="3">
-                                                < DropdownIconsCategory iconValue={this.iconSelected} icon={this.state.icon} />
+                                                <DropdownIconsCategory iconValue={this.iconSelected} icon={this.state.icon} />
                                             </Col>
                                             <Col xs="9">
                                                 <InputGroup
@@ -193,7 +199,7 @@ class EditStory extends Component {
                                                     ></Input>
 
                                                 </InputGroup>
-                                            </Col >
+                                            </Col>
                                         </Row>
                                     </Container>
                                     {/* Duration */}

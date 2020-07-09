@@ -15,14 +15,19 @@ import {
   Container,
   Row,
   Col,
+  Modal,
+  ModalFooter,
 } from "reactstrap";
+import { clearConfig } from 'dompurify';
 
 
 class ListStories extends Component {
 
   state = {
     listOfStories: [],
-    storiesInARow: 0
+    storiesInARow: 0,
+    modalClassic: false,
+    // icon: this.props.icon
   }
 
   componentDidMount() {
@@ -45,6 +50,11 @@ class ListStories extends Component {
       listOfStories: this.state.listOfStories.filter(p => p._id === storyID)
     })
   }
+  setModalClassic = (bool) => {
+    this.setState({
+      modalClassic: bool
+    })
+  }
   // newStoryHandler = (story) => {
   //   this.setState({
   //     listOfStories: this.state.listOfStories.concat(story)
@@ -55,6 +65,7 @@ class ListStories extends Component {
 
     return (
       <div>
+        {/* {console.log('ICON',this.state.icon)} */}
         <div
           className="section section-cards"
           data-background-color="gray"
@@ -70,39 +81,43 @@ class ListStories extends Component {
                   ? <h1>LOADING...</h1>
                   : this.state.listOfStories.map(p => {
                     return (
-                      <Col lg="4" md="6" key={p._id}>
-                      {console.log('Current user:',this.props.currentUser)}
-                      {console.log('Owner:', p.owner)}
-                        <Card className="card-blog">
-                          <div className="card-image">
+                      <Col lg="4" md="6" key={p._id} >
+                        {console.log('Maped List:', p)}
+                        {console.log('Icon', p.icon)}
+                        <Card className="card-blog" >
+                          <div className="card-image" onClick={() => this.setModalClassic(true)} style={{ cursor: 'pointer' }}>
+                            {/* <Link to={`/stories/${p._id}`} key={p._id}> */}
                             <img
                               alt="..."
                               className="img rounded"
-                              src={require("assets/img/project13.jpg")}
+                              src={p.image}
                             ></img>
+                            {/* </Link> */}
                           </div>
+
+
                           <CardBody>
+                            {/* <Link to={`/stories/${p._id}`} key={p._id}> */}
                             <h6 className="category text-warning">
-                              <i className="now-ui-icons business_bulb-63"></i> Focus
-                              </h6>
-                            <CardTitle tag="h5">
-                              {/* <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                                  Stay Focused: Train Your Brain
-                                </a> */}
-                              <Link to={`/stories/${p._id}`} key={p._id}>
+                              <i className={`${p.icon}`}></i> {p.category}
+                            </h6>
+                            
+                            <CardTitle tag="h5" onClick={() => this.setModalClassic(true)} style={{ cursor: 'pointer' }}>
+                              {/* <Link to={`/stories/${p._id}`} key={p._id}> */}
                                 <strong>{p.title}</strong>
-                              </Link>
+                              {/* </Link> */}
                             </CardTitle>
-                            <p className="card-description">
+                            <p className="card-description" onClick={() => this.setModalClassic(true)} style={{ cursor: 'pointer' }}>
                               {p.headline}
                             </p>
-                            <CardFooter>
-                              <div className="stats stats-right">
+                            {/* </Link> */}
+                            <CardFooter >
+                              <div className="stats stats-right" onClick={() => this.setModalClassic(true)} style={{ cursor: 'pointer' }}>
                                 <i className="now-ui-icons ui-2_favourite-28"></i>
                                     342 ·{" "}
                                 <i className="now-ui-icons tech_watch-time"></i>
-                                  5 min
-                                </div>
+                                {p.duration}
+                              </div>
                               <div className="author">
                                 <img
                                   alt="..."
@@ -115,20 +130,43 @@ class ListStories extends Component {
                               <div>
                                 {p.owner === this.props.currentUser._id ?
                                   <div>
-                                    {/* <EditStory theStory={this.state} getTheStory={this.componentDidMount} {...this.props}/> */}
-                                    <button>
-                                      <Link to={"/story-edit/" + p._id} onClick={() => this.editHandler(p._id)}>Edit</Link>
-                                    </button>
+                                    <button onClick={() => this.editHandler(p._id)}> <Link to={`/story-edit/${p._id}`}> Edit </Link></button>
                                   </div>
                                   : "hello"}
-
-                                {p.owner === this.props.currentUser._id ? <button onClick={() => this.deleteHandler(p._id)}>Delete</button> : "hello"}
+                                {p.owner === this.props.currentUser._id ? <button onClick={() => this.deleteHandler(p._id)}> Delete </button> : "hello"}
                               </div>
-
                             </CardFooter>
                           </CardBody>
                         </Card>
-                      </Col>
+                        <Modal
+                        isOpen={this.state.modalClassic}
+                        toggle={() => this.setModalClassic(false)}
+                      >
+                        <div className="modal-header justify-content-center">
+                          <button
+                            aria-hidden={true}
+                            className="close"
+                            onClick={() => this.setModalClassic(false)}
+                            type="button"
+                          >
+                            <i className="now-ui-icons ui-1_simple-remove"></i>
+                          </button>
+                          <h4 className="title title-up">{p.title}</h4>
+                        </div>
+                        <div className="modal-body">
+                          <h5 style={{ textDecoration: 'underline' }}>{p.headline}</h5>
+                          <p>{p.content}</p>
+                        </div>
+                        <ModalFooter>
+                          <Button color="success" type="button">
+                            <i className="now-ui-icons ui-2_favourite-28 "></i>
+                          </Button>
+                          <Button color="danger" onClick={() => this.setModalClassic(false)}>
+                            Close
+                              </Button>
+                        </ModalFooter>
+                      </Modal>
+                      </Col>  
                     )
                   })
                 }
@@ -137,12 +175,38 @@ class ListStories extends Component {
           </div>
         </div>
       </div>
-
     )
   }
 }
 
-
-
-
 export default ListStories;
+
+// onClick={() => this.setModalClassic(true)} style={{ cursor: 'pointer' }}
+{/* <Modal
+                            isOpen={this.state.modalClassic}
+                            toggle={() => this.setModalClassic(false)}
+                          >
+                            <div className="modal-header justify-content-center">
+                              <button
+                                aria-hidden={true}
+                                className="close"
+                                onClick={() => this.setModalClassic(false)}
+                                type="button"
+                              >
+                                <i className="now-ui-icons ui-1_simple-remove"></i>
+                              </button>
+                              <h4 className="title title-up">{p.title}</h4>
+                            </div>
+                            <div className="modal-body">
+                              <h5 style={{ textDecoration: 'underline' }}>{p.headline}</h5>
+                              <p>{p.content}</p>
+                            </div>
+                            <ModalFooter>
+                              <Button color="success" type="button">
+                                <i className="now-ui-icons ui-2_favourite-28 "></i>
+                              </Button>
+                              <Button color="danger" onClick={() => this.setModalClassic(false)}>
+                                Close
+                              </Button>
+                            </ModalFooter>
+                          </Modal> */}

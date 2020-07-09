@@ -5,6 +5,8 @@ import Editor from "views/examples/editor";
 import createDOMPurify from "dompurify";
 import defaultAvatar from "assets/img/placeholder.jpg";
 import ImageUpload from "components/CustomUpload/ImageUpload.js";
+import Select from "react-select";
+
 import DropdownIconsCategory from "views/examples/DropdownIconsCategory"
 
 
@@ -50,7 +52,7 @@ class AddStoryForm extends React.Component {
         imageUrl: defaultAvatar,
         category: "",
         duration: "",
-        icon: null
+        icon: ''
     }
     setNameFocus = (bool) => {
         this.setState({
@@ -91,13 +93,14 @@ class AddStoryForm extends React.Component {
         const image = this.state.imageUrl
         const duration = this.state.duration
         const category = this.state.category
+        const icon = this.state.icon
 
 
-        axios.post("/api/stories", { title, headline, content, image, duration, category })
+        axios.post("/api/stories", { title, headline, content, image, duration, category, icon})
             .then((resp) => {
-                this.setState({ title: "", headline: "", content: '', image: defaultAvatar, duration: "", category: "" });
+                this.setState({ title: "", headline: "", content: '', image: defaultAvatar, duration: "", category: "", icon:""});
                 this.setState({ uploadedContent: resp.data.content })
-                
+
             }).catch((error) => {
                 console.log("Error!!");
                 console.log(error.response);
@@ -114,10 +117,9 @@ class AddStoryForm extends React.Component {
     }
 
     // category icons 
-
     iconSelected = (value) => {
         this.setState({
-            icon: value
+            icon: value.label.props.className
         })
     }
 
@@ -155,13 +157,51 @@ class AddStoryForm extends React.Component {
                                     </InputGroup>
                                     {/* image */}
                                     <InputGroup >
-                                        <ImageUpload imageUrl={this.state.imageUrl} setImageHandel={this.setImageHandel} /> 
+                                        <ImageUpload imageUrl={this.state.imageUrl} setImageHandel={this.setImageHandel} />
                                     </InputGroup>
                                     {/* category */}
                                     <Container>
                                         <Row>
                                             <Col xs="3">
-                                                < DropdownIconsCategory iconValue={this.iconSelected} icon={this.state.icon} />
+                                                <DropdownIconsCategory iconValue={this.iconSelected} icon={this.state.icon} />
+                                                {/* <Row >
+                                                    <Col style={{ paddingLeft: 0, paddingRight: 0 }} >
+
+                                                        <Select
+                                                            className="react-select react-select-info mt-2"
+                                                            onChange={this.iconSelected}
+                                                            classNamePrefix="react-select"
+                                                            placeholder="&#x27a2;"
+                                                            value={this.state.icon}
+                                                            name="icon"
+                                                            options={[
+                                                                {
+                                                                    value: "",
+                                                                    label: "Icon",
+                                                                    isDisabled: true,
+                                                                },
+                                                                { value: "2", label: <i className="now-ui-icons users_single-02"></i> },
+                                                                { value: "3", label: <i className="now-ui-icons ui-1_zoom-bold"></i> },
+                                                                { value: "4", label: <i className="now-ui-icons ui-2_favourite-28"></i> },
+                                                                { value: "5", label: <i className="now-ui-icons tech_controller-modern"></i> },
+                                                                { value: "6", label: <i className="now-ui-icons transportation_air-baloon"></i> },
+                                                                { value: "7", label: <i className="now-ui-icons sport_user-run"></i> },
+                                                                { value: "8", label: <i className="now-ui-icons education_glasses"></i> },
+                                                                { value: "9", label: <i className="now-ui-icons objects_planet"></i> },
+                                                                { value: "10", label: <i className="now-ui-icons objects_diamond"></i> },
+                                                                { value: "11", label: <i className="now-ui-icons objects_spaceship"></i> },
+                                                                { value: "12", label: <i className="now-ui-icons media-2_sound-wave"></i> },
+                                                                { value: "13", label: <i className="now-ui-icons files_paper"></i> },
+                                                                { value: "14", label: <i className="now-ui-icons files_single-copy-04"></i> },
+                                                                { value: "15", label: <i className="now-ui-icons emoticons_satisfied"></i> },
+                                                                { value: "15", label: <i className="now-ui-icons design_app"></i> },
+                                                                { value: "16", label: <i className="now-ui-icons design_palette"></i> },
+                                                                { value: "17", label: <i className="now-ui-icons business_money-coins"></i> },
+                                                                { value: "18", label: <i className="now-ui-icons business_bulb-63"></i> },
+                                                            ]}
+                                                        ></Select>
+                                                    </Col>
+                                                </Row> */}
                                             </Col>
                                             <Col xs="9">
                                                 <InputGroup
@@ -182,7 +222,7 @@ class AddStoryForm extends React.Component {
                                                     ></Input>
 
                                                 </InputGroup>
-                                            </Col >
+                                            </Col>
                                         </Row>
                                     </Container>
                                     {/* Duration */}
