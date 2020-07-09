@@ -10,7 +10,7 @@ import {
 
 // core components
 import ScrollTransparentNavbar from 'components/Navbars/ScrollTransparentNavbar.js'
-import FooterBlack from "components/Footers/FooterBlack";
+import Footer from "components/Footers/Footer";
 
 const EmailSent = () => {
   const [pills, setPills] = React.useState("1");
@@ -37,15 +37,23 @@ const EmailSent = () => {
               <Col className="ml-auto mr-auto text-center" md="8">
                 <h1 className="title">Hey! Check your email!</h1>
                 <h5 className="description" style={{color: 'black'}}>
-                  Hey check you e
                 </h5>
+                <div >
+                  <h3 >Didn't get an email?</h3>
+                  <ul className="text-left">
+                    <li>The email is in your spam folder. (Sometimes things get lost in there.)</li>
+                    <li>The email address you entered had a mistake or typo. (Happens to the best of us.)</li>
+                    <li>You accidentally gave us another email address. (Usually a work or personal one instead of the one you meant.)</li>
+                    <li>We can’t deliver the email to this address. (Usually because of corporate firewalls or filtering.)</li>
+                  </ul>
+                </div>
               </Col>
             </Row>
             <div className="separator separator-info"></div>
           </Container>
         </div>
         </div>
-        <FooterBlack />
+        <Footer />
     </>
   );
 }

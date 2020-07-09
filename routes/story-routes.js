@@ -23,6 +23,7 @@ router.post('/stories', (req, res, next) => {
     title: req.body.title,
     image: req.body.image,
     icon: req.body.icon,
+    imageName: req.body.imageName,
     category: req.body.category,
     headline: req.body.headline,
     content: req.body.content,
@@ -48,16 +49,18 @@ router.get('/stories/:id', (req, res, next) => {
 
 // PUT route => to update a specific project
 router.put('/stories/:id', (req, res, next) => {
-
+  console.log(req.body)
   Story.findByIdAndUpdate(req.params.id,
     {
       title: req.body.title,
       image: req.body.image,
       icon: req.body.icon,
+      imageName: req.body.imageName,
       category: req.body.category,
       headline: req.body.headline,
       content: req.body.content,
       duration: req.body.duration,
+
     })
     .then(() => {
       res.json({ message: `Story with ${req.params.id} is updated successfully.` });

@@ -8,6 +8,7 @@ const storySchema = new Schema({
     // required: true
   },
   image: String,
+  imageName: String,
   headline: {
     type: String,
     // required: true

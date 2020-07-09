@@ -10,7 +10,7 @@ import {
 
 // core components
 import ScrollTransparentNavbar from 'components/Navbars/ScrollTransparentNavbar.js'
-import FooterBlack from "components/Footers/FooterBlack";
+import Footer from "components/Footers/Footer";
 
 const LandingPage = () => {
   const [pills, setPills] = React.useState("1");
@@ -48,7 +48,7 @@ const LandingPage = () => {
              <b>Keep discovering</b></Link></Button>
           </Container>
         </div>
-        <FooterBlack />
+        <Footer />
       </div>
     </>
   );

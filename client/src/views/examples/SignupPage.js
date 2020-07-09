@@ -29,7 +29,7 @@ import {
 // core components
 import ScrollTransparentNavbar from "components/Navbars/ScrollTransparentNavbar.js";
 import FooterBlack from "components/Footers/FooterBlack";
-import LoginButton from 'components/LoginButton';
+// import LoginButton from 'components/LoginButton';
 
 class SignupPage extends React.Component {
   state = {

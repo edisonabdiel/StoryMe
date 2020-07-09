@@ -31,15 +31,17 @@ class EditStory extends Component {
         title: '',
         headline: '',
         content: '',
-        // uploadedContent: '',
-        imageUrl: defaultAvatar,
+        storyImageUrl: defaultAvatar,
+        storyImageName: '',
         category: "",
         duration: "",
         errorMessage: "",
         icon: "",
         nameFocus: false,
         headlineFocus: false,
-        categoryFocus: false
+        categoryFocus: false,
+        durationFocus: false
+
     }
 
     componentDidMount() {
@@ -49,7 +51,8 @@ class EditStory extends Component {
                 title: resp.data.title,
                 headline: resp.data.headline,
                 content: resp.data.content,
-                imageUrl: resp.data.image,
+                storyImageUrl: resp.data.image,
+                storyImageName: resp.data.imageName,
                 category: resp.data.category,
                 duration: resp.data.duration,
                 icon: resp.data.icon
@@ -69,56 +72,48 @@ class EditStory extends Component {
     }
     setDurationFocus = (bool) => {
         this.setState({
-            categoryFocus: bool
+            durationFocus: bool
         })
     }
     setHeadlineFocus = (bool) => {
         this.setState({
-            passwordFocus: bool
-        })
-    }
-    setImageHandel = (value) => {
-        this.setState({
-            imageUrl: value
+            headlineFocus: bool
         })
     }
 
-    handleFormSubmit = (event) => {
 
-        const title = this.state.title;
-        const headline = this.state.headline;
-        const content = this.state.content;
-        const image = this.state.imageUrl;
-        const duration = this.state.duration;
-        const category = this.state.category;
-        const icon = this.state.icon;
+    // upload-delete image handlers 
 
-        event.preventDefault();
-
-        axios.put(`/api/stories/${this.props.match.params.id}`, { title, headline, content, image, duration, category, icon })
-            .then((resp) => {
-
-                this.setState({
-                    title: this.state.title,
-                    headline: this.state.headline,
-                    content: this.state.content,
-                    image: this.state.imageUrl,
-                    duration: this.state.duration,
-                    category: this.state.category,
-                    icon: this.state.icon
-                })
-                if (this.props.currentUser) {
-                    this.props.history.push('/list-stories')
-                }
+    handleImageChange = (e) => {
+        let formData = new FormData()
+        formData.append("storyImageUrl", e.target.files[0])
+        axios.post("/api/upload-img", formData).then((res) => {
+            console.log(res.data)
+            this.setState({
+                storyImageUrl: res.data.secure_url,
+                storyImageName: res.data.imageName
             })
-            .catch(error => {
-                console.log("Error!", error.response);
-                this.setState({
-                    errorMessage: error.response.data.message
-                })
-            })
+        }).catch((error) => {
+            console.log("Error!!");
+            console.log(error.response);
+        })
     }
 
+    handleImageRemove = () => {
+        const name = (this.state.storyImageName)
+        console.log("outPut: ImageUpload -> handleRemove -> name", name)
+        axios.post(`/api/delete-upload-img/${name}`).then((res) => {
+            console.log(res)
+            this.setState({
+                storyImageUrl: defaultAvatar,
+                storyImageName: ''
+            })
+        }).catch((error) => {
+            console.log("Error!!");
+            console.log(error.response);
+        })
+    };
+    // update state of story elements 
     handleChange = (event) => {
         const { name, value } = event.target;
         this.setState({ [name]: value })
@@ -138,6 +133,43 @@ class EditStory extends Component {
         })
     }
 
+    handleFormSubmit = (event) => {
+        const title = this.state.title;
+        const headline = this.state.headline;
+        const content = this.state.content;
+        const image = this.state.storyImageUrl
+        const imageName = this.state.storyImageName
+        const duration = this.state.duration;
+        const category = this.state.category;
+        const icon = this.state.icon;
+
+        event.preventDefault();
+
+        axios.put(`/api/stories/${this.props.match.params.id}`, { title, headline, content, image, imageName, duration, category,icon })
+            .then((resp) => {
+                this.setState({
+                    title: this.state.title,
+                    headline: this.state.headline,
+                    content: this.state.content,
+                    image: this.state.storyImageUrl,
+                    imageName: this.state.storyImageName,
+                    duration: this.state.duration,
+                    category: this.state.category,
+                    icon: this.state.icon
+                })
+                if (this.props.currentUser) {
+                    this.props.history.push('/list-stories')
+                }
+            })
+            .catch(error => {
+                console.log("Error!", error.response);
+                this.setState({
+                    errorMessage: error.response.data.message
+                })
+            })
+    }
+
+
     render() {
         return (
             <div>
@@ -145,7 +177,7 @@ class EditStory extends Component {
                     <Row>
                         <Col md="6">
                             <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.state.uploadedContent) }} />
-                            <h2>CREATE NEW STORY</h2>
+                            <h2>Edit your story</h2>
                             <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
                                 <CardBody>
                                     <InputGroup
@@ -172,7 +204,7 @@ class EditStory extends Component {
                                     </InputGroup>
                                     {/* image */}
                                     <InputGroup >
-                                        <ImageUpload imageUrl={this.state.imageUrl} setImageHandel={this.setImageHandel} />
+                                        <ImageUpload storyImageUrl={this.state.storyImageUrl} setImageHandel={this.setImageHandel} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
                                     </InputGroup>
                                     {/* category */}
                                     <Container>
