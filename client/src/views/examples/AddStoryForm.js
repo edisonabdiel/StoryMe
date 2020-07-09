@@ -3,6 +3,8 @@ import axios from 'axios'
 import Editor from "views/examples/editor";
 import defaultAvatar from "assets/img/placeholder.jpg";
 import ImageUpload from "components/CustomUpload/ImageUpload.js";
+import Select from "react-select";
+
 import DropdownIconsCategory from "views/examples/DropdownIconsCategory"
 // reactstrap components
 import {
@@ -35,7 +37,7 @@ class AddStoryForm extends React.Component {
         storyImageName: '',
         category: "",
         duration: "",
-        icon: null,
+        icon: '',
         errorMessage: ''
     }
     setNameFocus = (bool) => {
@@ -75,7 +77,7 @@ class AddStoryForm extends React.Component {
     // category icons 
     iconSelected = (value) => {
         this.setState({
-            icon: value
+            icon: value.label.props.className
         })
     }
 
@@ -120,11 +122,13 @@ class AddStoryForm extends React.Component {
         const imageName = this.state.storyImageName
         const duration = this.state.duration
         const category = this.state.category
-        axios.post("/api/stories", { title, headline, content, image, imageName, duration, category })
+        const icon = this.state.icon
+
+
+        axios.post("/api/stories", { title, headline, content, image, imageName, duration, category,icon })
             .then((resp) => {
                 console.log("outPut: AddStoryForm -> handleFormSubmit -> resp", resp.data.image)
-                this.setState({ title: "", headline: "", content: '', storyImageUrl: defaultAvatar, storyImageName: '', duration: "", category: "" });
-                this.setState({ uploadedContent: resp.data.content })
+                this.setState({ title: "", headline: "", content: '', storyImageUrl: defaultAvatar, storyImageName: '', duration: "", category: "",icon:"" });
             }).catch((error) => {
                 console.log("Error!!");
                 console.log(error.response);
@@ -175,7 +179,7 @@ class AddStoryForm extends React.Component {
                                         <Row>
                                             {/* category icons dropdown list */}
                                             <Col xs="3">
-                                                < DropdownIconsCategory iconValue={this.iconSelected} icon={this.state.icon} />
+                                                <DropdownIconsCategory iconValue={this.iconSelected} icon={this.state.icon} />
                                             </Col>
                                             <Col xs="9">
                                                 {/* category name input */}
@@ -197,7 +201,7 @@ class AddStoryForm extends React.Component {
                                                     ></Input>
 
                                                 </InputGroup>
-                                            </Col >
+                                            </Col>
                                         </Row>
                                     </Container>
                                     {/* Duration */}
