@@ -28,6 +28,7 @@ router.post('/stories', (req, res, next) => {
     content: req.body.content,
     likes: req.body.likes,
     duration: req.body.duration,
+    icon: req.body.icon,
     owner: req.user._id
   })
     .then(newProject => {
@@ -57,6 +58,7 @@ router.put('/stories/:id', (req, res, next) => {
       headline: req.body.headline,
       content: req.body.content,
       duration: req.body.duration,
+      icon: req.body.icon
 
     })
     .then(() => {

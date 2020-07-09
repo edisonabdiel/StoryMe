@@ -74,8 +74,11 @@ class AddStoryForm extends React.Component {
 
     // category icons 
     iconSelected = (value) => {
+        console.log("outPut: AddStoryForm -> iconSelected -> value", value)
+        console.log("outPut: AddStoryForm -> iconSelected -> value", value.label.props.className)
+        const iconValue = value.label.props.className
         this.setState({
-            icon: value
+            icon: iconValue
         })
     }
 
@@ -120,10 +123,11 @@ class AddStoryForm extends React.Component {
         const imageName = this.state.storyImageName
         const duration = this.state.duration
         const category = this.state.category
-        axios.post("/api/stories", { title, headline, content, image, imageName, duration, category })
+        const icon = this.state.icon
+        axios.post("/api/stories", { title, headline, content, image, imageName, duration, category, icon })
             .then((resp) => {
                 console.log("outPut: AddStoryForm -> handleFormSubmit -> resp", resp.data.image)
-                this.setState({ title: "", headline: "", content: '', storyImageUrl: defaultAvatar, storyImageName: '', duration: "", category: "" });
+                this.setState({ title: "", headline: "", content: '', storyImageUrl: defaultAvatar, storyImageName: '', duration: "", category: "", icon: null });
                 this.setState({ uploadedContent: resp.data.content })
             }).catch((error) => {
                 console.log("Error!!");

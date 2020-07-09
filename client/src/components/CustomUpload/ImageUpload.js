@@ -17,13 +17,13 @@ export class ImageUpload extends Component {
   fileInput = React.createRef();
 
   handleClick = () => {
+    console.log(this.fileInput.current)
     this.fileInput.current.click();
   };
 
   handelRemove = () => {
     this.setState({ modalOpen: false });
     this.props.handleImageRemove()
-
   }
 
   render() {
@@ -45,7 +45,8 @@ export class ImageUpload extends Component {
             </Button>
           ) : (
               <span>
-                <Button className="btn-round" color="default" onClick={() => { this.handleClick(); this.props.handleImageRemove() }}>
+                <Button className="btn-round" color="default" onClick={() => { this.handleClick() }}>
+                  {/* this.props.handleImageRemove() */}
                   Change
             </Button>
                 {this.props.avatar ? <br /> : null}

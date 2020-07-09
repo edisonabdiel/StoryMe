@@ -83,8 +83,8 @@ class ListStories extends Component {
                           </div>
                           <CardBody>
                             <h6 className="category text-warning">
-                              <i className="now-ui-icons business_bulb-63"></i> Focus
-                              </h6>
+                              <i className={p.icon}></i> {p.category}
+                            </h6>
                             <CardTitle tag="h5">
                               {/* <a href="#pablo" onClick={(e) => e.preventDefault()}>
                                   Stay Focused: Train Your Brain
