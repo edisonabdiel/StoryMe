@@ -17,7 +17,7 @@ router.get('/stories', (req, res, next) => {
 
 // POST route => to create a new project
 router.post('/stories', (req, res, next) => {
-  console.log('POST',req.body);
+  console.log('POST', req.body);
   console.log('USER', req.user);
   Story.create({
     title: req.body.title,
@@ -33,7 +33,7 @@ router.post('/stories', (req, res, next) => {
     owner: req.user._id
   })
     .then(newProject => {
-    
+
       res.json(newProject);
     })
 

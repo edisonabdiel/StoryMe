@@ -132,7 +132,7 @@ export class ProfilePage extends Component {
 
 
                 <ProfilePagePortfolio handelIsClicked={this.handelIsClicked} handelToClose={this.handelToClose} />
-                {this.state.isClicked ? <ListStories currentUser={this.props.updateUser} /> : ""}
+                {this.state.isClicked ? <ListStories currentUser={this.props.currentUser} /> : ""}
 
 
               </Container>

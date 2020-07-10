@@ -130,9 +130,9 @@ class ProfileEdit extends Component {
             })
             .catch(error => {
                 console.log("Error!", error.response);
-                this.setState({
-                    errorMessage: error.response.data.message
-                })
+                // this.setState({
+                //     errorMessage: error.response.data.message
+                // })
             })
     }
 
