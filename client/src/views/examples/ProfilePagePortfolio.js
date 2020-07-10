@@ -62,12 +62,9 @@ export class ProfilePagePortfolio extends Component {
                                                 duration: 1500,
                                                 delay: 100,
                                                 smooth: true,
-                                                // containerId: 'ContainerElementID',
-                                                // offset: 50, // Scrolls to element + 50 pixels down the page
                                             })
                                         }}
                                         className={this.state.pills === "1" ? "active" : ""}
-                                    // role="tablist"
 
                                     >
                                         <i className="now-ui-icons design_image"></i>
@@ -76,23 +73,14 @@ export class ProfilePagePortfolio extends Component {
                                 </NavItem>
                                 <NavItem>
                                     <NavLink
-                                        onSelect={() => scroller.scrollTo('myScrollToElement', {
-                                            duration: 1500,
-                                            delay: 100,
-                                            smooth: true,
-                                            // containerId: 'ContainerElementID',
-                                            // offset: 50, // Scrolls to element + 50 pixels down the page
-                                        })}
                                         onClick={(e) => {
                                             e.preventDefault();
+                                            this.props.handelToClose(false)
                                             this.setState({
                                                 pills: '2'
                                             })
                                         }}
                                         className={this.state.pills === "2" ? "active" : ""}
-                                        // role="tablist"
-                                        href="#go-here"
-
                                     >
                                         <i className="now-ui-icons location_world"></i>
                                     </NavLink>
@@ -101,13 +89,12 @@ export class ProfilePagePortfolio extends Component {
                                     <NavLink
                                         onClick={(e) => {
                                             e.preventDefault();
+                                            this.props.handelToClose(false)
                                             this.setState({
                                                 pills: '3'
                                             })
                                         }}
                                         className={this.state.pills === "3" ? "active" : ""}
-                                    // role="tablist"
-                                    // href="#pablo"
                                     >
                                         <i className="now-ui-icons design-2_ruler-pencil"></i>
                                     </NavLink>
@@ -118,9 +105,8 @@ export class ProfilePagePortfolio extends Component {
                     </Col>
                 </Row>
                 <Element name="myScrollToElement">
-                    nothing here, just try the
-                    scroll
-            </Element>
+
+                </Element>
             </div>
         )
     }

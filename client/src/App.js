@@ -27,6 +27,7 @@ import ListStories from "components/ListStories";
 import StoryDetails from "components/StoryDetails";
 import EditStory from "components/EditStory";
 import AddStoryForm from 'views/examples/AddStoryForm';
+import ProfileEdit from 'views/examples/ProfileEdit'
 
 
 
@@ -60,7 +61,7 @@ class App extends React.Component {
           <Route path="/email-sent" render={(props) => <EmailSent {...props} />} />
           <Route path="/email-confirmed" render={(props) => <EmailConfirmed {...props} />} />
           <Route path="/nucleo-icons" render={(props) => <NucleoIcons {...props} />} />
-          <Route path="/profile-page" render={(props) => { if (this.state.loggedInUser) { return <ProfilePage updateUser={this.updateUser} {...props} /> } else { return <Redirect to="/login-page" /> } }} />
+          <Route path="/profile-page" render={(props) => { if (this.state.loggedInUser) { return <ProfilePage currentUser={this.state.loggedInUser} updateUser={this.updateUser} {...props} /> } else { return <Redirect to="/login-page" /> } }} />
           <Route path="/sections" render={(props) => <Sections {...props} />} />
           <Route exact path="/confirmation/:token" render={(props) => <ConfirmationPage {...props} updateUser={this.updateUser} />} />
           <Route exact path='/img-upload' component={ImageUpload} />
@@ -68,6 +69,8 @@ class App extends React.Component {
           <Route exact path="/list-stories" render={(props) => <ListStories currentUser={this.state.loggedInUser} {...props} />} />
           <Route exact path="/stories/:id" component={StoryDetails} />
           <Route exact path="/story-edit/:id" render={(props) => <EditStory currentUser={this.state.loggedInUser} {...props} />} />
+          <Route exact path="/profile-edit" render={(props) => <ProfileEdit currentUser={this.state.loggedInUser} {...props} />} />
+
         </Switch>
       </div>
     )

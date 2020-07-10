@@ -37,6 +37,8 @@ import FooterBlack from "components/Footers/FooterBlack.js";
 import BodyClassName from "react-body-classname";
 import ListStories from "components/ListStories"
 import ProfilePagePortfolio from './ProfilePagePortfolio';
+import ProfileSetting from './ProfileEdit';
+
 
 export class ProfilePage extends Component {
   // const[pills, setPills] = React.useState("1");
@@ -53,14 +55,19 @@ export class ProfilePage extends Component {
     })
   }
 
+  handelToClose = (bool) => {
+    this.setState({
+      isClicked: bool
+    })
+  }
+
   render() {
     return (
       <BodyClassName className="profile-page sidebar-collapse">
-
         <div>
           <ScrollTransparentNavbar updateUser={this.props.updateUser} />
           <div className="wrapper" >
-            <ProfilePageHeader />
+            <ProfilePageHeader currentUser={this.props.currentUser} />
             <div className="section">
               <Container >
                 <div className="button-container">
@@ -100,15 +107,31 @@ export class ProfilePage extends Component {
                     Follow me on Instagram
                 </UncontrolledTooltip>
                 </div>
-                <div> <h3 className="title">About me</h3>
+                {/* <div> <h3 className="title">About me</h3>
                   {/* <h5 className="description text-center">
                     An artist of considerable range, Ryan — the name taken by
                     Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs
                     and records all of his own music, giving it a warm, intimate feel
                     with a solid groove structure. An artist of considerable range.
-                  </h5> */}
-                  <ProfilePagePortfolio handelIsClicked={this.handelIsClicked} />
+                  </h5> 
+                </div> */}
+                <div className="content">
+                  <div className="social-description">
+                    <h2>26</h2>
+                    <p>Comments</p>
+                  </div>
+                  <div className="social-description">
+                    <h2>26</h2>
+                    <p>Comments</p>
+                  </div>
+                  <div className="social-description">
+                    <h2>48</h2>
+                    <p>Bookmarks</p>
+                  </div>
                 </div>
+
+
+                <ProfilePagePortfolio handelIsClicked={this.handelIsClicked} handelToClose={this.handelToClose} />
                 {this.state.isClicked ? <ListStories currentUser={this.props.updateUser} /> : ""}
 
 

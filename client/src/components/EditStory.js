@@ -31,7 +31,7 @@ class EditStory extends Component {
         title: '',
         headline: '',
         content: '',
-        storyImageUrl: defaultAvatar,
+        imageUrl: defaultAvatar,
         storyImageName: '',
         category: "",
         duration: "",
@@ -51,7 +51,7 @@ class EditStory extends Component {
                 title: resp.data.title,
                 headline: resp.data.headline,
                 content: resp.data.content,
-                storyImageUrl: resp.data.image,
+                imageUrl: resp.data.image,
                 storyImageName: resp.data.imageName,
                 category: resp.data.category,
                 duration: resp.data.duration,
@@ -86,11 +86,11 @@ class EditStory extends Component {
 
     handleImageChange = (e) => {
         let formData = new FormData()
-        formData.append("storyImageUrl", e.target.files[0])
+        formData.append("imageUrl", e.target.files[0])
         axios.post("/api/upload-img", formData).then((res) => {
             console.log(res.data)
             this.setState({
-                storyImageUrl: res.data.secure_url,
+                imageUrl: res.data.secure_url,
                 storyImageName: res.data.imageName
             })
         }).catch((error) => {
@@ -105,7 +105,7 @@ class EditStory extends Component {
         axios.post(`/api/delete-upload-img/${name}`).then((res) => {
             console.log(res)
             this.setState({
-                storyImageUrl: defaultAvatar,
+                imageUrl: defaultAvatar,
                 storyImageName: ''
             })
         }).catch((error) => {
@@ -137,7 +137,7 @@ class EditStory extends Component {
         const title = this.state.title;
         const headline = this.state.headline;
         const content = this.state.content;
-        const image = this.state.storyImageUrl
+        const image = this.state.imageUrl
         const imageName = this.state.storyImageName
         const duration = this.state.duration;
         const category = this.state.category;
@@ -145,13 +145,13 @@ class EditStory extends Component {
 
         event.preventDefault();
 
-        axios.put(`/api/stories/${this.props.match.params.id}`, { title, headline, content, image, imageName, duration, category,icon })
+        axios.put(`/api/stories/${this.props.match.params.id}`, { title, headline, content, image, imageName, duration, category, icon })
             .then((resp) => {
                 this.setState({
                     title: this.state.title,
                     headline: this.state.headline,
                     content: this.state.content,
-                    image: this.state.storyImageUrl,
+                    image: this.state.imageUrl,
                     imageName: this.state.storyImageName,
                     duration: this.state.duration,
                     category: this.state.category,
@@ -204,7 +204,7 @@ class EditStory extends Component {
                                     </InputGroup>
                                     {/* image */}
                                     <InputGroup >
-                                        <ImageUpload storyImageUrl={this.state.storyImageUrl} setImageHandel={this.setImageHandel} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
+                                        <ImageUpload imageUrl={this.state.imageUrl} setImageHandel={this.setImageHandel} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
                                     </InputGroup>
                                     {/* category */}
                                     <Container>

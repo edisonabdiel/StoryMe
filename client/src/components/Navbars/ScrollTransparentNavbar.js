@@ -17,10 +17,6 @@ import {
 
 import Logout from "views/examples/Logout";
 
-
-
-
-
 const ScrollTransparentNavbar = (props) => {
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   const [navbarColor, setNavbarColor] = React.useState(
@@ -96,6 +92,7 @@ const ScrollTransparentNavbar = (props) => {
                 className="now-ui-icons ui-1_email-85 p-md-3"
               ></i></Link>
               <Logout updateUser={props.updateUser} />
+              <Link to='/profile-edit'>Edit your profile</Link>
               <NavItem>
                 <Button
                   className="nav-link btn-round"

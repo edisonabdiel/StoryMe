@@ -12,7 +12,7 @@ import {
 export class ImageUpload extends Component {
   state = {
     modalOpen: false,
-    image: this.props.storyImageUrl
+    image: this.props.imageUrl
   }
 
   fileInput = React.createRef();
@@ -25,6 +25,8 @@ export class ImageUpload extends Component {
   handelRemove = () => {
     this.setState({ modalOpen: false });
     this.props.handleImageRemove()
+    this.fileInput.current.value = null;
+
   }
 
   render() {
@@ -37,10 +39,10 @@ export class ImageUpload extends Component {
             (this.props.avatar ? " img-circle" : "")
           }
         >
-          <img src={this.props.storyImageUrl} alt="image" />
+          <img src={this.props.imageUrl} alt="image" />
         </div>
         <div>
-          {this.props.storyImageUrl === defaultAvatar ? (
+          {this.props.imageUrl === defaultAvatar ? (
             <Button className="btn-round" color="default" onClick={this.handleClick}>
               {this.props.avatar ? "Add Photo" : "Select image"}
             </Button>

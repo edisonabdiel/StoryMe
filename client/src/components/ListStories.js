@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
-import AddStoryForm from '../views/examples/AddStoryForm';
 import EditStory from './EditStory';
-import Scroll from 'react-scroll'
 
 
 
@@ -22,7 +20,6 @@ import {
   ModalFooter,
 } from "reactstrap";
 
-var Element = Scroll.Element;
 
 class ListStories extends Component {
 
@@ -78,7 +75,7 @@ class ListStories extends Component {
 
             <Container>
               <div className="title">
-                <h3 className="title">User Cards</h3>
+                <h3 className="title"></h3>
               </div>
               <Row  >
                 {this.state.listOfStories.length === 0
@@ -139,14 +136,13 @@ class ListStories extends Component {
                             </CardFooter>
                           </CardBody>
                         </Card>
-
-
                       </Col>
                     )
                   })
                 }
               </Row>
             </Container>
+
 
             <Modal
               isOpen={this.state.modalClassic}

@@ -2,7 +2,6 @@
 import React, { useState, useRef } from 'react';
 import JoditEditor from "jodit-react";
 import '../../assets/css/App.css';
-import axios from 'axios'
 
 
 
@@ -11,6 +10,7 @@ const Editor = (props) => {
     const editor = useRef(null)
     const [content, setContent] = useState("")
     console.log("outPut: Editor -> content", content)
+
     const config = {
         readonly: false, // all options from https://xdsoft.net/jodit/doc/
         askBeforePasteFromWord: false,
@@ -22,6 +22,17 @@ const Editor = (props) => {
         askBeforePasteHTML: false
     }
 
+    const config2 = {
+        readonly: false,
+        askBeforePasteFromWord: false,
+        buttons: "|,bold,strikethrough,underline,italic,|,|,ul,ol,|,,fontsize,brush,,|,\n,cut,copy,paste,|",
+        removeButtons: ['hr', 'source', 'image', 'video', 'about', 'file', "copyformat", 'table', 'link'],
+        toolbarAdaptive: false,
+        askBeforePasteHTML: false
+    }
+
+
+
 
 
     return (
@@ -29,7 +40,7 @@ const Editor = (props) => {
         <JoditEditor
             ref={editor}
             value={props.content}
-            config={config}
+            config={props.profile ? config2 : config}
             tabIndex={1} // tabIndex of textarea
             onBlur={newContent => [props.updateContent(newContent), setContent(newContent)]} // preferred to use only this option to update the content for performance reasons
             onChange={newContent => { }}
