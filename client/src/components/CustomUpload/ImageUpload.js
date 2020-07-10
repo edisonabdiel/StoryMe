@@ -11,7 +11,8 @@ import {
 
 export class ImageUpload extends Component {
   state = {
-    modalOpen: false
+    modalOpen: false,
+    image: this.props.storyImageUrl
   }
 
   fileInput = React.createRef();
@@ -29,7 +30,7 @@ export class ImageUpload extends Component {
   render() {
     return (
       <div className="fileinput text-center">
-        <input type="file" name="imageUrl" onChange={(e) => this.props.handleImageChange(e)} ref={this.fileInput} />
+        <input type="file" name="stroyImageUrl" onChange={(e) => this.props.handleImageChange(e)} ref={this.fileInput} />
         <div
           className={
             "fileinput-new thumbnail img-raised" +
@@ -46,7 +47,7 @@ export class ImageUpload extends Component {
           ) : (
               <span>
                 <Button className="btn-round" color="default" onClick={() => { this.handleClick() }}>
-                  {/* this.props.handleImageRemove() */}
+
                   Change
             </Button>
                 {this.props.avatar ? <br /> : null}

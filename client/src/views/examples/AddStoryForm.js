@@ -131,6 +131,7 @@ class AddStoryForm extends React.Component {
             .then((resp) => {
                 console.log("outPut: AddStoryForm -> handleFormSubmit -> resp", resp.data.image)
                 this.setState({ title: "", headline: "", content: '', storyImageUrl: defaultAvatar, storyImageName: '', duration: "", category: "", icon: "" });
+                this.props.history.push('/profile-page')
             }).catch((error) => {
                 console.log("Error!!");
                 console.log(error.response);
@@ -174,14 +175,14 @@ class AddStoryForm extends React.Component {
                                     </InputGroup>
                                     {/* image */}
                                     <InputGroup >
-                                        <ImageUpload storyImageUrl={this.state.storyImageUrl} setImageHandel={this.setImageHandel} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
+                                        <ImageUpload storyImageUrl={this.state.storyImageUrl} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
                                     </InputGroup>
                                     {/* category */}
                                     <Container>
                                         <Row>
                                             {/* category icons dropdown list */}
                                             <Col xs="3">
-                                                <DropdownIconsCategory iconValue={this.iconSelected} icon={this.state.icon} />
+                                                <DropdownIconsCategory iconValue={this.iconSelected} />
                                             </Col>
                                             <Col xs="9">
                                                 {/* category name input */}
