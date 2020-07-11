@@ -12,9 +12,11 @@ import {
   Container,
   UncontrolledDropdown,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  DropdownToggle
 } from "reactstrap";
 import Logout from "views/examples/Logout";
+import Login from 'views/examples/Login';
 
 
 function FixedTransparentNavbar(props) {
@@ -67,7 +69,27 @@ function FixedTransparentNavbar(props) {
                   <Logout updateUser={props.updateUser} />
                   </DropdownItem>
                 </DropdownMenu>
-
+                <UncontrolledDropdown className="button-dropdown p-md-2" >
+            <DropdownToggle
+              caret
+              tag="a"
+              data-toggle="dropdown"
+              id="navbarDropdown"
+                  onClick={(e) => e.preventDefault()}
+            >
+              <span className="button-bar"></span>
+              <span className="button-bar"></span>
+              <span className="button-bar"></span>
+            </DropdownToggle>
+            <DropdownMenu aria-labelledby="navbarDropdown" data-background-color="black">
+              <DropdownItem onClick={(e) => e.preventDefault()}>
+              <Logout size="sm" updateUser={props.updateUser} />
+              </DropdownItem>
+              <DropdownItem onClick={(e) => e.preventDefault()}>
+              <Link to="/login-page" style={{textDecoration: 'none'}}><Login /></Link>
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
               </UncontrolledDropdown>
               {/* <NavItem>
                 <Button

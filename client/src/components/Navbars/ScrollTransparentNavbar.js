@@ -118,7 +118,7 @@ const ScrollTransparentNavbar = (props) => {
                 <Button
                   className="nav-link btn-round"
                   size="sm"
-                  color='success'
+                  color={buyButtonColor}
                 >
                   <Link to="/publish">
                     <p>PUBLISH</p></Link>

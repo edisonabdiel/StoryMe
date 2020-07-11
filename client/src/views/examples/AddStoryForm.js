@@ -1,6 +1,5 @@
 import React from "react";
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import Editor from "views/examples/editor";
 import createDOMPurify from "dompurify";
 import defaultAvatar from "assets/img/placeholder.jpg";
@@ -12,24 +11,15 @@ import FooterBlack from "components/Footers/FooterBlack.js";
 // reactstrap components
 import {
     Button,
-    //Card,
-    // CardHeader,
     CardBody,
-    //Collapse,
-    //FormGroup,
     Container,
     Row,
     Col,
-    //UncontrolledTooltip,
-    //PopoverBody,
-    //PopoverHeader,
-    //UncontrolledPopover,
     Form,
     Input,
     InputGroupAddon,
     InputGroupText,
     InputGroup,
-    //Modal,
     ModalFooter,
 } from "reactstrap";
 
@@ -125,13 +115,13 @@ class AddStoryForm extends React.Component {
         return (
             <div data-background-color="black">
                 <FixedTransparentNavbar />
-                <div style={{ height: '65px' }}></div> {/* offsets height of navbar */}
+                <div style={{ height: '70px' }}></div> {/* offsets height of navbar */}
                 <div className="text-center">
                     <Container fluid>
                         <Row>
                             <Col></Col>
                             <Col className="px-0 my-auto" md="6">
-                                {/* <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.state.uploadedContent) }} /> */}
+                                <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.state.uploadedContent) }} />
                                 <h2><b>NEW STORY</b></h2>
                                 <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
                                     <CardBody>
@@ -158,14 +148,12 @@ class AddStoryForm extends React.Component {
                                             ></Input>
                                         </InputGroup>
                                         {/* image */}
-                                        <InputGroup >
                                             <ImageUpload imageUrl={this.state.imageUrl} setImageHandel={this.setImageHandel} />
-                                        </InputGroup>
                                         {/* category */}
                                         <Container>
                                             <Row>
                                                 <Col xs="3">
-                                                    < DropdownIconsCategory iconValue={this.iconSelected} icon={this.state.icon} />
+                                                    <DropdownIconsCategory iconValue={this.iconSelected} icon={this.state.icon} />
                                                 </Col>
                                                 <Col xs="9">
                                                     <InputGroup
@@ -222,11 +210,11 @@ class AddStoryForm extends React.Component {
                                         >
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
-                                                    <i className="now-ui-icons ui-1_lock-circle-open"></i>
+                                                    <i className="now-ui-icons files_paper"></i>
                                                 </InputGroupText>
                                             </InputGroupAddon>
                                             <Input
-                                                placeholder="Headline"
+                                                placeholder="Summary"
                                                 name="headline"
                                                 value={this.state.headline}
                                                 type="text"
@@ -236,7 +224,6 @@ class AddStoryForm extends React.Component {
                                             ></Input>
                                         </InputGroup>
                                         {/* editor */}
-
                                         <Editor updateContent={this.updateContent} content={this.state.content} />
                                     </CardBody>
                                     <ModalFooter className="text-center">
@@ -245,7 +232,7 @@ class AddStoryForm extends React.Component {
                                             className="nav-link btn-round"
                                             color="success"
                                             type="submit"
-                                            size="lg"
+                                            size="md"
                                         >
                                             PUBLISH
                           </Button>

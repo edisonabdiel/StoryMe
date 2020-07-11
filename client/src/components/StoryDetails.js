@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link, Redirect } from 'react-router-dom';
-import DOMPurify from "dompurify";
 
 
 class StoryDetails extends Component{
@@ -30,7 +28,7 @@ class StoryDetails extends Component{
             <h2>title:</h2>
             <h3>{this.state.story.title}</h3>
             <h2>Image</h2>
-            <img src={this.state.story.image} alt="image"/>
+            <img src={this.state.story.image} alt="story ilustration"/>
             <h2>Icon:</h2>
             <i className={this.state.story.icon}></i>
             <h2>Category:</h2>

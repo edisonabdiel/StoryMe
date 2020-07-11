@@ -171,9 +171,7 @@ class EditStory extends Component {
                                         ></Input>
                                     </InputGroup>
                                     {/* image */}
-                                    <InputGroup >
                                         <ImageUpload imageUrl={this.state.imageUrl} setImageHandel={this.setImageHandel} />
-                                    </InputGroup>
                                     {/* category */}
                                     <Container>
                                         <Row>
@@ -197,9 +195,8 @@ class EditStory extends Component {
                                                         onBlur={() => this.setCategoryFocus(false)}
                                                         onChange={this.handleChange}
                                                     ></Input>
-
                                                 </InputGroup>
-                                            </Col >
+                                            </Col>
                                         </Row>
                                     </Container>
                                     {/* Duration */}
@@ -235,11 +232,11 @@ class EditStory extends Component {
                                     >
                                         <InputGroupAddon addonType="prepend">
                                             <InputGroupText>
-                                                <i className="now-ui-icons ui-1_lock-circle-open"></i>
+                                                <i className="now-ui-icons files_paper"></i>
                                             </InputGroupText>
                                         </InputGroupAddon>
                                         <Input
-                                            placeholder="Headline"
+                                            placeholder="Summary"
                                             name="headline"
                                             value={this.state.headline}
                                             type="text"

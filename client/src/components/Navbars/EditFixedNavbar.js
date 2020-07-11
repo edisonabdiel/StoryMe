@@ -33,7 +33,7 @@ const EditFixedNavbar = (props) => {
           }}
         />
       ) : null}
-      <Navbar className="fixed-top" color="transparent" expand="lg">
+      <Navbar className="navbar-absolute" color="transparent" expand="lg">
         <Container>
           <div className="navbar-translate">
             <NavbarBrand to="/" tag={Link} id="navbar-brand">

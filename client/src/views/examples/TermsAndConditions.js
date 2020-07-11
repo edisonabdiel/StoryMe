@@ -25,7 +25,8 @@ const TermsAndConditions = () => {
                 <h2 className="title" >Welcome to StoryMe!</h2>
                 <h5 className="description" style={{color: 'black'}}>
                 
-<span>These terms and conditions outline the rules and regulations for the use of StoryMe's Website, located at www.storyme.com.</span>
+                  <span>These terms and conditions outline the rules and regulations for the use of StoryMe's Website, located at www.storyme.com.</span>
+                  
 
 By accessing this website we assume you accept these terms and conditions. Do not continue to use StoryMe if you do not agree to take all of the terms and conditions stated on this page. Our Terms and Conditions were created with the help of the Terms And Conditions Generator and the Free Terms & Conditions Generator.
 

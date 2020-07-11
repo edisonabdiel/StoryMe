@@ -2,7 +2,6 @@ import React from "react";
 
 // reactstrap components
 import {
-  Button,
   Card,
   CardBody,
   CardFooter,
@@ -18,7 +17,7 @@ import DiscoveryHeader from "components/Headers/DiscoveryHeader.js";
 import FooterBlack from "components/Footers/FooterBlack.js";
 
 function BlogPosts(props) {
-  const [emailFocus, setEmailFocus] = React.useState(false);
+  // const [emailFocus, setEmailFocus] = React.useState(false);
   return (
     <>
       <ScrollTransparentNavbar updateUser={props.updateUser} />
@@ -38,7 +37,7 @@ function BlogPosts(props) {
                   <CardBody>
                     <CardTitle className="text-left" tag="div">
                       <h2>
-                        <a onClick={(e) => e.preventDefault()}>
+                        <a href="/" onClick={(e) => e.preventDefault()}>
                           The world's biggest yacht sets sail. It has lasers.
                         </a>
                       </h2>
