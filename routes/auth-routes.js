@@ -65,7 +65,9 @@ authRoutes.post('/signup', signUpValidation, (req, res, next) => {
 
     const newUser = new User({
       email: email,
-      password: hashPass
+      password: hashPass,
+      userName: '',
+      about: ''
     });
 
     return newUser.save().then((user) => {
@@ -98,14 +100,12 @@ authRoutes.post('/signup', signUpValidation, (req, res, next) => {
           res.status(500).json({ message: 'Email could not be sent' })
         };
         // Automatically log in user after sign up
-        // .login() here is actually a predefined passport method
         req.login(newUser, (err) => {
           if (err) {
             res.status(500).json({ message: 'Login after signup went bad.' });
             return;
           }
           // Send the user's information to the frontend
-          // We can use also: res.status(200).json(req.user);
           res.status(200).json(newUser);
         });
       });
@@ -198,13 +198,15 @@ authRoutes.put("/user/:id", (req, res, next) => {
 authRoutes.put("/password/:id", (req, res, next) => {
   console.log("Params", req.params.id);
   console.log("req.body", req.body);
+  console.log("outPut: req.user.password", req.user.password)
+
   const salt = bcrypt.genSaltSync(10);
   const hashPass = bcrypt.hashSync(req.body.newPassword, salt)
   User.findOne({ _id: req.params.id }).then((user) => {
+    console.log("outPut: user.password", user.password)
 
-    if (!bcrypt.compareSync(req.user.password, user.password)) {
-      // res.status(500).json({ message: 'Incorrect password.' })
-      next(null, false, { message: 'Incorrect password.' })
+    if (!bcrypt.compareSync(req.body.oldPassword, user.password)) {
+      res.status(500).json({ message: 'Incorrect password.' })
       return;
     } else {
       console.log("user", user.password);
@@ -213,10 +215,11 @@ authRoutes.put("/password/:id", (req, res, next) => {
     return user.save().then((user) => {
 
       res.status(200).json(user);
-    }).catch((err) => {
-      res.status(500).json({ err: err })
     })
+  }).catch((err) => {
+    res.status(500).json({ err: err })
   })
+
 })
 
 

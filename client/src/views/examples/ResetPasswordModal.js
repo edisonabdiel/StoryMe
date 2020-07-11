@@ -51,29 +51,21 @@ class PasswordReset extends React.Component {
         const { name, value } = event.target;
         this.setState({ [name]: value });
     }
-    handleFormSubmit = (event) => {
+
+    handlePasswordFormSubmit = (event) => {
         event.preventDefault()
 
-        const oldPassword = this.state.email
-        const newPassword = this.state.password
+        const oldPassword = this.state.oldPassword
+        const newPassword = this.state.newPassword
 
         axios.put(`/api/password/${this.props.currentUser._id}`, { oldPassword, newPassword })
             .then((resp) => {
-                console.log(resp);
-                //     this.props.updateUser(resp.data)
-                //     console.log('USER DATA UPDATED', this.props.currentUser);
-
-                //     this.setState({ email: "", password: "" });
-                // }).catch((error) => {
-                //     console.log("Error!!");
-                //     console.log(error.response);
-                //     this.setState({
-                //         errorMessage: error.response.data.message
-                //     })
-                // }).then(() => {
-                //     if (this.props.currentUser) {
-                //         this.props.history.push('/profile-page')
-                //     }
+                // this.setModalLogin(false)
+                console.log(resp.data);
+                // this.props.updateUser(resp.data)
+                this.setState({ newPassword: "", oldPassword: "" });
+            }).catch((err) => {
+                console.log('error', err);
             })
     }
 
@@ -83,8 +75,8 @@ class PasswordReset extends React.Component {
                 <Container>
                     <Row id="modals">
                         <Col md="6">
-                            <h3 color="info" className="nav-link " onClick={() => this.setModalLogin(true)}>
-                                <i className="now-ui-icons ui-1_lock-circle-open"></i> Rest Password </h3>
+                            <h6 color="info" onClick={() => this.setModalLogin(true)} style={{ cursor: "pointer" }}>
+                                <i className="now-ui-icons ui-1_lock-circle-open"></i> Rest Password </h6>
                             <Modal
                                 className="modal-login"
                                 modalClassName="modal-info"
@@ -115,11 +107,11 @@ class PasswordReset extends React.Component {
                                     </div>
                                     <div className="modal-body">
                                         {this.state.errorMessage ? <p style={{ textAlign: 'center' }}>{this.state.errorMessage}</p> : null}
-                                        <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
+                                        <Form action="" className="form" method="" onSubmit={this.handlePasswordFormSubmit}>
                                             <CardBody>
                                                 <InputGroup
                                                     className={
-                                                        this.state.nameFocus
+                                                        this.state.oldPasswordFocus
                                                             ? "no-border input-lg input-group-focus"
                                                             : "no-border input-lg"
                                                     }
@@ -141,7 +133,7 @@ class PasswordReset extends React.Component {
                                                 </InputGroup>
                                                 <InputGroup
                                                     className={
-                                                        this.state.passwordFocus
+                                                        this.state.newPasswordFocus
                                                             ? "no-border input-lg input-group-focus"
                                                             : "no-border input-lg"
                                                     }
@@ -153,7 +145,7 @@ class PasswordReset extends React.Component {
                                                     </InputGroupAddon>
                                                     <Input
                                                         placeholder="New Password"
-                                                        name="NewPassword"
+                                                        name="newPassword"
                                                         value={this.state.newPassword}
                                                         type="password"
                                                         onFocus={() => this.setNewPasswordFocus(true)}
@@ -163,9 +155,7 @@ class PasswordReset extends React.Component {
                                                 </InputGroup>
                                             </CardBody>
                                             <ModalFooter className="text-center">
-
                                                 <Button
-
                                                     block
                                                     className="btn-neutral btn-round"
                                                     color="info"
@@ -174,7 +164,7 @@ class PasswordReset extends React.Component {
                                                     size="lg"
                                                 >
                                                     submit
-                        </Button>
+                                                </Button>
                                             </ModalFooter>
                                         </Form>
                                     </div>
