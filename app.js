@@ -59,10 +59,13 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 // ADD SESSION SETTINGS HERE:
 const MongoStore = require('connect-mongo')(session);
 app.use(session({
-  secret: "doesn't matter in our case", // but it's required
+  secret: "abc", // but it's required
   resave: false,
   saveUninitialized: false, // don't create cookie for non-logged-in user
   // MongoStore makes sure the user stays logged in also when the server restarts
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000,
+  },
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 

@@ -178,7 +178,6 @@ authRoutes.put("/user/:id", (req, res, next) => {
   console.log(req.params.id);
   console.log(req.body);
 
-
   User.findByIdAndUpdate(req.params.id,
     {
       email: req.body.email,
@@ -186,25 +185,42 @@ authRoutes.put("/user/:id", (req, res, next) => {
       imageName: req.body.imageName,
       userName: req.body.userName,
       about: req.body.about,
-    }).then((user) => {
-      console.log("outPut: user", user)
+    }, {
+    new: true
+  }).then((user) => {
+    console.log("outPut: user", user)
+    res.status(200).json(user);
+  }).catch((err) => {
+    res.status(500).json({ err: err })
+  })
+})
+
+authRoutes.put("/password/:id", (req, res, next) => {
+  console.log("Params", req.params.id);
+  console.log("req.body", req.body);
+  const salt = bcrypt.genSaltSync(10);
+  const hashPass = bcrypt.hashSync(req.body.newPassword, salt)
+  User.findOne({ _id: req.params.id }).then((user) => {
+
+    if (!bcrypt.compareSync(req.user.password, user.password)) {
+      // res.status(500).json({ message: 'Incorrect password.' })
+      next(null, false, { message: 'Incorrect password.' })
+      return;
+    } else {
+      console.log("user", user.password);
+      user.password = hashPass
+    }
+    return user.save().then((user) => {
+
       res.status(200).json(user);
     }).catch((err) => {
       res.status(500).json({ err: err })
     })
+  })
 })
+
 
 
 module.exports = authRoutes;
 
 
-// passport.authenticate('local', (err, theUser, failureDetails) => {
-
-//   if (!theUser) {
-//     // "failureDetails" contains the error messages
-//     // from our logic in "LocalStrategy" { message: '...' }.
-//     console.log(failureDetails);
-//     console.log("something");
-//     res.status(401).json(failureDetails);
-//     return;
-//   }  })(req, res, next);

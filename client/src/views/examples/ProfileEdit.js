@@ -3,9 +3,7 @@ import axios from 'axios';
 import defaultAvatar from "assets/img/placeholder.jpg";
 import Editor from "views/examples/editor";
 import ImageUpload from "components/CustomUpload/ImageUpload.js";
-import Select from "react-select";
 
-import DropdownIconsCategory from "views/examples/DropdownIconsCategory"
 
 // reactstrap components
 import {
@@ -21,6 +19,7 @@ import {
     InputGroup,
     ModalFooter,
 } from "reactstrap";
+import PasswordReset from './ResetPasswordModal';
 
 
 
@@ -30,7 +29,6 @@ class ProfileEdit extends Component {
         email: this.props.currentUser.email,
         password: "",
         newPassword: '',
-        // userImage: this.props.currentUser.image,
         imageUrl: this.props.currentUser.image,
         uploadedImageName: '',
         about: this.props.currentUser.about,
@@ -97,11 +95,12 @@ class ProfileEdit extends Component {
     // data coming from the editor
     updateContent = (newContent) => {
         this.setState({
-            content: newContent
+            about: newContent
         })
     }
 
     handleFormSubmit = (event) => {
+        event.preventDefault();
         const email = this.state.email;
         const password = this.state.password;
         const about = this.state.about;
@@ -109,12 +108,10 @@ class ProfileEdit extends Component {
         const imageName = this.state.uploadedImageName
         const userName = this.state.userName;
         const newPassword = this.state.newPassword
-
-
-        event.preventDefault();
-
         axios.put(`/api/user/${this.props.currentUser._id}`, { email, password, about, imageUrl, imageName, userName, newPassword })
             .then((resp) => {
+                this.props.updateUser(resp.data)
+                console.log("outPut: handleFormSubmit -> resp", resp.data)
                 this.setState({
                     email: "",
                     password: "",
@@ -124,15 +121,12 @@ class ProfileEdit extends Component {
                     newPassword: '',
                     userName: ""
                 })
-                // if (this.props.currentUser) {
-                //     this.props.history.push('/list-stories')
-                // }
+            }).then(() => {
+                this.props.history.push('/profile-page')
             })
             .catch(error => {
-                console.log("Error!", error.response);
-                // this.setState({
-                //     errorMessage: error.response.data.message
-                // })
+                console.log("Error!", error);
+
             })
     }
 
@@ -143,7 +137,6 @@ class ProfileEdit extends Component {
                 <Container>
                     <Row>
                         <Col md="6">
-                            {/* <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.state.uploadedContent) }} /> */}
                             <h2>Edit your account</h2>
                             <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
                                 <CardBody>
@@ -230,14 +223,14 @@ class ProfileEdit extends Component {
                                     </InputGroup>
                                     {/* about */}
 
-                                    <Editor updateContent={this.updateContent} content={this.state.content} profile />
+                                    <Editor updateContent={this.updateContent} content={this.state.about} profile />
+                                    <PasswordReset currentUser={this.props.currentUser} />
                                 </CardBody>
                                 <ModalFooter className="text-center">
                                     <Button
                                         block
                                         className="btn-neutral btn-round"
                                         color="info"
-                                        // href=""
                                         type="submit"
                                         size="lg"
                                     >

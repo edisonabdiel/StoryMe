@@ -69,7 +69,7 @@ class App extends React.Component {
           <Route exact path="/list-stories" render={(props) => <ListStories currentUser={this.state.loggedInUser} {...props} />} />
           <Route exact path="/stories/:id" component={StoryDetails} />
           <Route exact path="/story-edit/:id" render={(props) => <EditStory currentUser={this.state.loggedInUser} {...props} />} />
-          <Route exact path="/profile-edit" render={(props) => <ProfileEdit currentUser={this.state.loggedInUser} {...props} />} />
+          <Route exact path="/profile-edit" render={(props) => <ProfileEdit currentUser={this.state.loggedInUser} updateUser={this.updateUser} {...props} />} />
 
         </Switch>
       </div>

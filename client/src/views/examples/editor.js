@@ -10,7 +10,7 @@ const Editor = (props) => {
     const editor = useRef(null)
     const [content, setContent] = useState("")
     console.log("outPut: Editor -> content", content)
-
+    // config for the add story page
     const config = {
         readonly: false, // all options from https://xdsoft.net/jodit/doc/
         askBeforePasteFromWord: false,
@@ -21,7 +21,7 @@ const Editor = (props) => {
         // defaultActionOnPaste: "insert_as_text",
         askBeforePasteHTML: false
     }
-
+    // config for edit profile page
     const config2 = {
         readonly: false,
         askBeforePasteFromWord: false,

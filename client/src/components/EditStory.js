@@ -158,7 +158,7 @@ class EditStory extends Component {
                     icon: this.state.icon
                 })
                 if (this.props.currentUser) {
-                    this.props.history.push('/list-stories')
+                    this.props.history.push('/profile-page')
                 }
             })
             .catch(error => {

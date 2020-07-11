@@ -6,7 +6,7 @@ const router = express.Router();
 const Story = require('../models/story-model');
 // const Task = require('../models/task-model'); // <== !!!
 
-// GET route => to get all the stories
+// GET route => to get all the stories for discovery page
 router.get('/stories', (req, res, next) => {
   console.log(req.user);
   Story.find()
@@ -14,6 +14,21 @@ router.get('/stories', (req, res, next) => {
       res.json(allTheStories);
     })
 });
+
+// GET route => to get all the stories for profile page
+router.get('/profileStories', (req, res, next) => {
+  let newList = []
+  Story.find().then(allTheStories => {
+    console.log("outPut: allTheStories", allTheStories)
+    allTheStories.forEach((e) => {
+      if (req.user.id.localeCompare(e.owner) === 0) {
+        newList.push(e)
+      }
+    })
+    res.json(newList);
+  });
+
+})
 
 // POST route => to create a new project
 router.post('/stories', (req, res, next) => {
@@ -29,12 +44,14 @@ router.post('/stories', (req, res, next) => {
     content: req.body.content,
     likes: req.body.likes,
     duration: req.body.duration,
-    icon: req.body.icon,
     owner: req.user._id
   })
     .then(newProject => {
 
       res.json(newProject);
+    }).catch((err) => {
+      console.log("outPut: err", err)
+      res.send(500).json(err)
     })
 
 });
@@ -61,9 +78,7 @@ router.put('/stories/:id', (req, res, next) => {
       headline: req.body.headline,
       content: req.body.content,
       duration: req.body.duration,
-      icon: req.body.icon
-
-    })
+    }, { new: true })
     .then(() => {
       res.json({ message: `Story with ${req.params.id} is updated successfully.` });
     })

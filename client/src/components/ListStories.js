@@ -29,14 +29,22 @@ class ListStories extends Component {
     modalClassic: false,
     // icon: this.props.icon
   }
-
   componentDidMount() {
-    axios.get('/api/stories').then((resp) => {
-      this.setState({
-        listOfStories: resp.data
-      })
-    })
+    {
+      this.props.profile
+        ? axios.get('/api/profileStories').then((resp) => {
+          this.setState({
+            listOfStories: resp.data
+          })
+        })
+        : axios.get('/api/stories').then((resp) => {
+          this.setState({
+            listOfStories: resp.data
+          })
+        })
+    }
   }
+
   deleteHandler = (storyID) => {
     axios.delete('/api/stories/' + storyID).then(() => {
       this.setState({

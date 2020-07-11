@@ -11,8 +11,8 @@ import {
 
 export class ImageUpload extends Component {
   state = {
-    modalOpen: false,
-    image: this.props.imageUrl
+    modalOpen: false
+
   }
 
   fileInput = React.createRef();
