@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
-<<<<<<< HEAD
 import EditStory from './EditStory';
-=======
 // import AddStoryForm from '../views/examples/AddStoryForm';
 // import EditStory from './EditStory';
->>>>>>> fd73b37d6fdddcc087abc9960123f6db7c1461e0
 
 
 
@@ -119,7 +116,7 @@ class ListStories extends Component {
                               {/* </Link> */}
                             </CardTitle>
                             <p className="card-description">
-                              <strong>{p.headline}</strong> 
+                              <strong>{p.headline}</strong>
                             </p>
                             {/* </Link> */}
                             <CardFooter >
@@ -142,13 +139,13 @@ class ListStories extends Component {
                                 {p.owner === this.props.currentUser._id ?
                                   <div>
                                     {/* <EditStory theStory={this.state} getTheStory={this.componentDidMount} {...this.props}/> */}
-                                    <button className="nav-link btn-info btn-round pull-left ml-lg-5" style={{ color: 'white', textDecoration: 'none'}}>
+                                    <button className="nav-link btn-info btn-round pull-left ml-lg-5" style={{ color: 'white', textDecoration: 'none' }}>
                                       <Link className="text-decoration-none" to={"/story-edit/" + p._id} onClick={() => this.editHandler(p._id)}><b>Edit</b></Link>
                                     </button>
                                   </div>
                                   : "hello"}
 
-                                {p.owner === this.props.currentUser._id ? <button className="nav-link btn-round btn-danger pull-right mr-5" 
+                                {p.owner === this.props.currentUser._id ? <button className="nav-link btn-round btn-danger pull-right mr-5"
                                   onClick={() => this.deleteHandler(p._id)}><b>Delete</b></button> : "hello"}
                               </div>
                             </CardFooter>

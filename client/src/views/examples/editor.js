@@ -2,10 +2,6 @@
 import React, { useState, useRef } from 'react';
 import JoditEditor from "jodit-react";
 import '../../assets/css/App.css';
-<<<<<<< HEAD
-
-=======
->>>>>>> fd73b37d6fdddcc087abc9960123f6db7c1461e0
 
 
 const Editor = (props) => {
