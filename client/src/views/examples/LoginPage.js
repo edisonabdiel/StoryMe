@@ -18,8 +18,8 @@ import {
 } from "reactstrap";
 
 // core components
-import DropdownScrollNavbar from "components/Navbars/DropdownScrollNavbar.js";
 import Footer from "components/Footers/Footer.js";
+import ScrollTransparentNavbar from "components/Navbars/ScrollTransparentNavbar";
 
 const LoginPage = () => {
   const [firstFocus, setFirstFocus] = React.useState(false);
@@ -37,12 +37,12 @@ const LoginPage = () => {
   }, []);
   return (
     <>
-      <DropdownScrollNavbar />
+      <ScrollTransparentNavbar />
       <div className="page-header header-filter" filter-color="blue">
         <div
           className="page-header-image"
           style={{
-            backgroundImage: "url(" + require("assets/img/login.jpg") + ")",
+            backgroundImage: "url(" + require("assets/img/green-universe.jpg") + ")",
           }}
         ></div>
         <div className="content">
