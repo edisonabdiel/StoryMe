@@ -19,7 +19,6 @@ import {
     InputGroup,
     ModalFooter,
 } from "reactstrap";
-import PasswordReset from './ResetPasswordModal';
 
 
 
@@ -27,16 +26,18 @@ import PasswordReset from './ResetPasswordModal';
 class ProfileEdit extends Component {
     state = {
         email: this.props.currentUser.email,
-        password: "",
-        newPassword: '',
         imageUrl: this.props.currentUser.image,
         uploadedImageName: '',
         about: this.props.currentUser.about,
         userName: this.props.currentUser.userName,
         errorMessage: "",
         nameFocus: false,
-        passwordFocus: false,
         userNameFocus: false,
+        oldPasswordFocus: false,
+        newPasswordFocus: false,
+        modalLogin: false,
+        oldPassword: '',
+        newPassword: ''
     }
 
     setNameFocus = (bool) => {
@@ -44,14 +45,20 @@ class ProfileEdit extends Component {
             nameFocus: bool
         })
     }
-    setPasswordFocus = (bool) => {
-        this.setState({
-            categoryFocus: bool
-        })
-    }
+
     setUserNameFocus = (bool) => {
         this.setState({
             durationFocus: bool
+        })
+    }
+    setOldPasswordFocus = (bool) => {
+        this.setState({
+            nameFocus: bool
+        })
+    }
+    setNewPasswordFocus = (bool) => {
+        this.setState({
+            passwordFocus: bool
         })
     }
 
@@ -97,6 +104,23 @@ class ProfileEdit extends Component {
         this.setState({
             about: newContent
         })
+    }
+
+    handlePasswordFormSubmit = (event) => {
+        event.preventDefault()
+
+        const oldPassword = this.state.oldPassword
+        const newPassword = this.state.newPassword
+
+        axios.put(`/api/password/${this.props.currentUser._id}`, { oldPassword, newPassword })
+            .then((resp) => {
+                // this.setModalLogin(false)
+                console.log(resp.data);
+                // this.props.updateUser(resp.data)
+                this.setState({ newPassword: "", oldPassword: "" });
+            }).catch((err) => {
+                console.log('error', err);
+            })
     }
 
     handleFormSubmit = (event) => {
@@ -203,28 +227,28 @@ class ProfileEdit extends Component {
                                                 <i className="now-ui-icons ui-1_lock-circle-open"></i>                                            </InputGroupText>
                                         </InputGroupAddon>
                                         <Input
-                                            placeholder="old password"
-                                            name="password"
-                                            value={this.state.password}
-                                            type="text"
-                                            onFocus={() => this.setPasswordFocus(true)}
-                                            onBlur={() => this.setPasswordFocus(false)}
+                                            placeholder="Old Password"
+                                            name="oldPassword"
+                                            value={this.state.oldPassword}
+                                            type="password"
+                                            onFocus={() => this.setOldPasswordFocus(true)}
+                                            onBlur={() => this.setOldPasswordFocus(false)}
                                             onChange={this.handleChange}
                                         ></Input>
                                         <Input
-                                            placeholder="new password"
+                                            placeholder="New Password"
                                             name="newPassword"
                                             value={this.state.newPassword}
-                                            type="text"
-                                            onFocus={() => this.setPasswordFocus(true)}
-                                            onBlur={() => this.setPasswordFocus(false)}
+                                            type="password"
+                                            onFocus={() => this.setNewPasswordFocus(true)}
+                                            onBlur={() => this.setNewPasswordFocus(false)}
                                             onChange={this.handleChange}
                                         ></Input>
+                                        <Button onClick={this.handlePasswordFormSubmit}>  Reset</Button>
                                     </InputGroup>
                                     {/* about */}
 
                                     <Editor updateContent={this.updateContent} content={this.state.about} profile />
-                                    <PasswordReset currentUser={this.props.currentUser} />
                                 </CardBody>
                                 <ModalFooter className="text-center">
                                     <Button
