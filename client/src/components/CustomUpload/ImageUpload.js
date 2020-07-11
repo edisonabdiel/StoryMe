@@ -1,88 +1,85 @@
 import React, { Component } from 'react'
-// used for making the prop types of this component
-import PropTypes from "prop-types";
-
 import { Button } from "reactstrap";
-
 import defaultAvatar from "assets/img/placeholder.jpg";
-import axios from 'axios'
 
 
+import {
+  Modal,
+  ModalFooter,
+} from "reactstrap";
 
 
 export class ImageUpload extends Component {
   state = {
-    file: null
+    modalOpen: false
   }
+
   fileInput = React.createRef();
-
-
-  handleImageChange = (e) => {
-    let formData = new FormData()
-    formData.append("imageUrl", e.target.files[0])
-    axios.post("/api/upload-img", formData).then((res) => {
-      this.props.setImageHandel(res.data.secure_url)
-    }).catch((error) => {
-      console.log("Error!!");
-      console.log(error.response);
-      // this.setState({
-      //     errorMessage: error.response.data.message
-      // })
-    })
-  }
-
-  handleRemove = () => {
-    this.setState({
-      file: null,
-    })
-    this.props.setImageHandel(defaultAvatar)
-    this.fileInput.current.value = null
-  };
-
-
 
   handleClick = () => {
     this.fileInput.current.click();
   };
 
-  componentDidUpdate(prevProps) {
-    // Typical usage (don't forget to compare props):
-    if (this.props.imageUrl !== prevProps.imageUrl) {
-      this.setState({
-        imageUrl: this.props.imageUrl
-      })
-    }
-  }
+  handelRemove = () => {
+    this.setState({ modalOpen: false });
+    this.props.handleImageRemove()
 
+  }
 
   render() {
     return (
       <div className="fileinput text-center">
-        <input type="file" name="imageUrl" onChange={this.handleImageChange} ref={this.fileInput} />
+        <input type="file" name="imageUrl" onChange={(e) => this.props.handleImageChange(e)} ref={this.fileInput} />
         <div
           className={
             "fileinput-new thumbnail img-raised" +
             (this.props.avatar ? " img-circle" : "")
           }
         >
-          <img src={this.props.imageUrl} alt="..." />
+          <img src={this.props.storyImageUrl} alt="image" />
         </div>
         <div>
-          {this.props.imageUrl === defaultAvatar ? (
+          {this.props.storyImageUrl === defaultAvatar ? (
             <Button className="btn-round" color="default" onClick={this.handleClick}>
               {this.props.avatar ? "Add Photo" : "Select image"}
             </Button>
           ) : (
               <span>
-                <Button className="btn-round" color="default" onClick={this.handleClick}>
+                <Button className="btn-round" color="default" onClick={() => { this.handleClick(); this.props.handleImageRemove() }}>
                   Change
             </Button>
                 {this.props.avatar ? <br /> : null}
-                <Button color="danger" className="btn-round" onClick={this.handleRemove}>
+                <Button color="danger" className="btn-round" onClick={() => this.setState({ modalOpen: true })}>
                   <i className="fa fa-times" /> Remove
             </Button>
               </span>
             )}
+          <Modal
+            modalClassName="modal-mini modal-info"
+            isOpen={this.state.modalOpen}
+            toggle={() => this.setState({ modalOpen: false })}
+          >
+            <div className="modal-header justify-content-center">
+              <div className="modal-profile">
+                <i className="now-ui-icons users_circle-08"></i>
+              </div>
+            </div>
+            <div className="modal-body">
+              <p>Are you sure you want to delete the image?</p>
+            </div>
+            <ModalFooter>
+              <Button className="btn-neutral" color="link" onClick={this.handelRemove}>
+                Delete
+                </Button>
+              <Button
+                className="btn-link"
+                color="neutral"
+                onClick={() => this.setState({ modalOpen: false })}
+              >
+                Cancel
+                </Button>
+            </ModalFooter>
+          </Modal>
         </div>
       </div>
     );

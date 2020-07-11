@@ -1,7 +1,6 @@
 import React from "react";
 import axios from 'axios'
 import Editor from "views/examples/editor";
-import createDOMPurify from "dompurify";
 import defaultAvatar from "assets/img/placeholder.jpg";
 import ImageUpload from "components/CustomUpload/ImageUpload.js";
 import DropdownIconsCategory from "views/examples/DropdownIconsCategory"
@@ -24,23 +23,21 @@ import {
 } from "reactstrap";
 
 
-const DOMPurify = createDOMPurify(window);
-
-
 class AddStoryForm extends React.Component {
     state = {
         nameFocus: false,
         headlineFocus: false,
         categoryFocus: false,
+        durationFocus: false,
         title: '',
         headline: '',
-        errorMessage: '',
         content: '',
-        uploadedContent: '',
-        imageUrl: defaultAvatar,
+        storyImageUrl: defaultAvatar,
+        storyImageName: '',
         category: "",
         duration: "",
-        icon: null
+        icon: '',
+        errorMessage: ''
     }
     setNameFocus = (bool) => {
         this.setState({
@@ -54,48 +51,21 @@ class AddStoryForm extends React.Component {
     }
     setDurationFocus = (bool) => {
         this.setState({
-            categoryFocus: bool
+            durationFocus: bool
         })
     }
     setHeadlineFocus = (bool) => {
         this.setState({
-            passwordFocus: bool
-        })
-    }
-    setImageHandel = (value) => {
-        this.setState({
-            imageUrl: value
+            headlineFocus: bool
         })
     }
 
+    // change the state of story elements 
     handleChange = (event) => {
         const { name, value } = event.target;
         this.setState({ [name]: value });
     }
-    handleFormSubmit = (event) => {
-        event.preventDefault()
 
-        const title = this.state.title
-        const headline = this.state.headline
-        const content = this.state.content
-        const image = this.state.imageUrl
-        const duration = this.state.duration
-        const category = this.state.category
-
-
-        axios.post("/api/stories", { title, headline, content, image, duration, category })
-            .then((resp) => {
-                this.setState({ title: "", headline: "", content: '', image: defaultAvatar, duration: "", category: "" });
-                this.setState({ uploadedContent: resp.data.content })
-
-            }).catch((error) => {
-                console.log("Error!!");
-                console.log(error.response);
-                this.setState({
-                    errorMessage: error.response.data.message
-                })
-            })
-    }
     // data coming from the editor
     updateContent = (newContent) => {
         this.setState({
@@ -104,11 +74,67 @@ class AddStoryForm extends React.Component {
     }
 
     // category icons 
-
     iconSelected = (value) => {
         this.setState({
-            icon: value
+            icon: value.label.props.className
         })
+    }
+
+    // upload-delete images handlers 
+
+    handleImageChange = (e) => {
+        let formData = new FormData()
+        formData.append("storyImageUrl", e.target.files[0])
+        axios.post("/api/upload-img", formData).then((res) => {
+            this.setState({
+                storyImageUrl: res.data.secure_url,
+                storyImageName: res.data.imageName
+            })
+        }).catch((error) => {
+            console.log("Error!!");
+            console.log(error.response);
+        })
+    }
+
+    handleImageRemove = () => {
+        const imageName = (this.state.storyImageName)
+        axios.post(`/api/delete-upload-img/${imageName}`).then((res) => {
+            console.log(res)
+            this.setState({
+                storyImageUrl: defaultAvatar,
+                storyImageName: ''
+            })
+        }).catch((error) => {
+            console.log("Error!!");
+            console.log(error.response);
+        })
+    };
+
+
+    // submit add story form handler
+    handleFormSubmit = (event) => {
+        event.preventDefault()
+        const title = this.state.title
+        const headline = this.state.headline
+        const content = this.state.content
+        const image = this.state.storyImageUrl
+        const imageName = this.state.storyImageName
+        const duration = this.state.duration
+        const category = this.state.category
+        const icon = this.state.icon
+
+
+        axios.post("/api/stories", { title, headline, content, image, imageName, duration, category,icon })
+            .then((resp) => {
+                console.log("outPut: AddStoryForm -> handleFormSubmit -> resp", resp.data.image)
+                this.setState({ title: "", headline: "", content: '', storyImageUrl: defaultAvatar, storyImageName: '', duration: "", category: "",icon:"" });
+            }).catch((error) => {
+                console.log("Error!!");
+                console.log(error.response);
+                this.setState({
+                    errorMessage: error.response.data.message
+                })
+            })
     }
 
     render() {
@@ -121,7 +147,6 @@ class AddStoryForm extends React.Component {
                         <Row>
                             <Col></Col>
                             <Col className="px-0 my-auto" md="6">
-                                <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.state.uploadedContent) }} />
                                 <h2><b>NEW STORY</b></h2>
                                 <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
                                     <CardBody>
@@ -148,12 +173,12 @@ class AddStoryForm extends React.Component {
                                             ></Input>
                                         </InputGroup>
                                         {/* image */}
-                                            <ImageUpload imageUrl={this.state.imageUrl} setImageHandel={this.setImageHandel} />
+                                            <ImageUpload storyImageUrl={this.state.storyImageUrl} setImageHandel={this.setImageHandel} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
                                         {/* category */}
                                         <Container>
                                             <Row>
                                                 <Col xs="3">
-                                                    <DropdownIconsCategory iconValue={this.iconSelected} icon={this.state.icon} />
+                                                    <DropdownIconsCategory iconValue={this.iconSelected} />
                                                 </Col>
                                                 <Col xs="9">
                                                     <InputGroup
