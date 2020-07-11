@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+<<<<<<< HEAD
+import DOMPurify from "dompurify";
+=======
 import DOMPurify from 'dompurify'
+>>>>>>> fd73b37d6fdddcc087abc9960123f6db7c1461e0
 
 
 class StoryDetails extends Component {

@@ -93,6 +93,9 @@ const ScrollTransparentNavbar = (props) => {
                 aria-hidden={true}
                 className="now-ui-icons ui-1_email-85 p-md-3"
               ></i></Link>
+<<<<<<< HEAD
+              <Logout updateUser={props.updateUser} />
+=======
               <UncontrolledDropdown className="button-dropdown p-md-2" >
             <DropdownToggle
               caret
@@ -112,8 +115,12 @@ const ScrollTransparentNavbar = (props) => {
               <DropdownItem onClick={(e) => e.preventDefault()}>
               <Link to="/login-page" style={{textDecoration: 'none'}}><Login /></Link>
               </DropdownItem>
+              <DropdownItem onClick={(e) => e.preventDefault()}>
+              <Link to='/profile-edit'>Edit your profile</Link>
+              </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
+>>>>>>> fd73b37d6fdddcc087abc9960123f6db7c1461e0
               <NavItem>
                 <Button
                   className="nav-link btn-round"

@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
+<<<<<<< HEAD
+import EditStory from './EditStory';
+=======
 // import AddStoryForm from '../views/examples/AddStoryForm';
 // import EditStory from './EditStory';
+>>>>>>> fd73b37d6fdddcc087abc9960123f6db7c1461e0
+
+
 
 
 // reactstrap components
@@ -18,7 +24,6 @@ import {
   Modal,
   ModalFooter,
 } from "reactstrap";
-import { clearConfig } from 'dompurify';
 
 
 class ListStories extends Component {
@@ -29,14 +34,22 @@ class ListStories extends Component {
     modalClassic: false,
     // icon: this.props.icon
   }
-
   componentDidMount() {
-    axios.get('/api/stories').then((resp) => {
-      this.setState({
-        listOfStories: resp.data
-      })
-    })
+    {
+      this.props.profile
+        ? axios.get('/api/profileStories').then((resp) => {
+          this.setState({
+            listOfStories: resp.data
+          })
+        })
+        : axios.get('/api/stories').then((resp) => {
+          this.setState({
+            listOfStories: resp.data
+          })
+        })
+    }
   }
+
   deleteHandler = (storyID) => {
     axios.delete('/api/stories/' + storyID).then(() => {
       this.setState({
@@ -72,9 +85,10 @@ class ListStories extends Component {
           id="cards"
         >
           <div className="cards">
+
             <Container>
               <div className="title">
-                <h3 className="title">User Cards</h3>
+                <h3 className="title"></h3>
               </div>
               <Row  >
                 {this.state.listOfStories.length === 0
@@ -84,7 +98,7 @@ class ListStories extends Component {
                       <Col lg="4" md="6" key={p._id} >
                         {console.log('Maped List:', p)}
                         {console.log('Icon', p.icon)}
-                        <Card className="card-blog" >
+                        <Card className="card-blog"  >
                           <div className="card-image" onClick={() => this.setModalClassic(true)} style={{ cursor: 'pointer' }}>
                             {/* <Link to={`/stories/${p._id}`} key={p._id}> */}
                             <img
@@ -94,17 +108,14 @@ class ListStories extends Component {
                             ></img>
                             {/* </Link> */}
                           </div>
-
-
                           <CardBody>
                             {/* <Link to={`/stories/${p._id}`} key={p._id}> */}
                             <h6 className="category text-warning">
                               <i className={`${p.icon}`}></i> {p.category}
                             </h6>
-                            
                             <CardTitle tag="h5" onClick={() => this.setModalClassic(true)} style={{ cursor: 'pointer' }}>
                               {/* <Link to={`/stories/${p._id}`} key={p._id}> */}
-                                <strong>{p.title}</strong>
+                              <strong>{p.title}</strong>
                               {/* </Link> */}
                             </CardTitle>
                             <p className="card-description">
@@ -143,43 +154,45 @@ class ListStories extends Component {
                             </CardFooter>
                           </CardBody>
                         </Card>
-                        <Modal
-                        isOpen={this.state.modalClassic}
-                        toggle={() => this.setModalClassic(false)}
-                      >
-                        <div className="modal-header justify-content-center">
-                          <button
-                            aria-hidden={true}
-                            className="close"
-                            onClick={() => this.setModalClassic(false)}
-                            type="button"
-                          >
-                            <i className="now-ui-icons ui-1_simple-remove"></i>
-                          </button>
-                          <h4 className="title title-up">{p.title}</h4>
-                        </div>
-                        <div className="modal-body">
-                          <h5 style={{ textDecoration: 'underline' }}>{p.headline}</h5>
-                          <p>{p.content}</p>
-                        </div>
-                        <ModalFooter>
-                          <Button color="success" type="button">
-                            <i className="now-ui-icons ui-2_favourite-28 "></i>
-                          </Button>
-                          <Button color="danger" onClick={() => this.setModalClassic(false)}>
-                            Close
-                              </Button>
-                        </ModalFooter>
-                      </Modal>
-                      </Col>  
+                      </Col>
                     )
                   })
                 }
               </Row>
             </Container>
+
+
+            <Modal
+              isOpen={this.state.modalClassic}
+              toggle={() => this.setModalClassic(false)}
+            >
+              <div className="modal-header justify-content-center">
+                <button
+                  aria-hidden={true}
+                  className="close"
+                  onClick={() => this.setModalClassic(false)}
+                  type="button"
+                >
+                  <i className="now-ui-icons ui-1_simple-remove"></i>
+                </button>
+                <h4 className="title title-up">{}</h4>
+              </div>
+              <div className="modal-body">
+                <h5 style={{ textDecoration: 'underline' }}>{}</h5>
+                <p>{}</p>
+              </div>
+              <ModalFooter>
+                <Button color="success" type="button">
+                  <i className="now-ui-icons ui-2_favourite-28 "></i>
+                </Button>
+                <Button color="danger" onClick={() => this.setModalClassic(false)}>
+                  Close
+                              </Button>
+              </ModalFooter>
+            </Modal>
           </div>
         </div>
-      </div>
+      </div >
     )
   }
 }

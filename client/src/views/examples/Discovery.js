@@ -272,7 +272,7 @@ function BlogPosts(props) {
                       <div className="author">
                         <img
                           alt="..."
-                          className="avatar img-raised"
+                          className="ar img-raised"
                           src={require("assets/img/michael.jpg")}
                         ></img>
                         <span>John Black</span>
@@ -323,9 +323,9 @@ function BlogPosts(props) {
               </Row>
             </div>
           </Container>
-          </div>
         </div>
-        <FooterBlack />
+      </div>
+      <FooterBlack />
     </>
   );
 }

@@ -32,7 +32,7 @@ class AddStoryForm extends React.Component {
         title: '',
         headline: '',
         content: '',
-        storyImageUrl: defaultAvatar,
+        imageUrl: defaultAvatar,
         storyImageName: '',
         category: "",
         duration: "",
@@ -75,6 +75,8 @@ class AddStoryForm extends React.Component {
 
     // category icons 
     iconSelected = (value) => {
+        console.log("outPut: AddStoryForm -> iconSelected -> value", value)
+        console.log("outPut: AddStoryForm -> iconSelected -> value", value.label.props.className)
         this.setState({
             icon: value.label.props.className
         })
@@ -84,10 +86,10 @@ class AddStoryForm extends React.Component {
 
     handleImageChange = (e) => {
         let formData = new FormData()
-        formData.append("storyImageUrl", e.target.files[0])
+        formData.append("imageUrl", e.target.files[0])
         axios.post("/api/upload-img", formData).then((res) => {
             this.setState({
-                storyImageUrl: res.data.secure_url,
+                imageUrl: res.data.secure_url,
                 storyImageName: res.data.imageName
             })
         }).catch((error) => {
@@ -101,7 +103,7 @@ class AddStoryForm extends React.Component {
         axios.post(`/api/delete-upload-img/${imageName}`).then((res) => {
             console.log(res)
             this.setState({
-                storyImageUrl: defaultAvatar,
+                imageUrl: defaultAvatar,
                 storyImageName: ''
             })
         }).catch((error) => {
@@ -117,17 +119,18 @@ class AddStoryForm extends React.Component {
         const title = this.state.title
         const headline = this.state.headline
         const content = this.state.content
-        const image = this.state.storyImageUrl
+        const image = this.state.imageUrl
         const imageName = this.state.storyImageName
         const duration = this.state.duration
         const category = this.state.category
         const icon = this.state.icon
 
 
-        axios.post("/api/stories", { title, headline, content, image, imageName, duration, category,icon })
+        axios.post("/api/stories", { title, headline, content, image, imageName, duration, category, icon })
             .then((resp) => {
                 console.log("outPut: AddStoryForm -> handleFormSubmit -> resp", resp.data.image)
-                this.setState({ title: "", headline: "", content: '', storyImageUrl: defaultAvatar, storyImageName: '', duration: "", category: "",icon:"" });
+                this.setState({ title: "", headline: "", content: '', imageUrl: defaultAvatar, storyImageName: '', duration: "", category: "", icon: "" });
+                this.props.history.push('/profile-page')
             }).catch((error) => {
                 console.log("Error!!");
                 console.log(error.response);
@@ -139,6 +142,67 @@ class AddStoryForm extends React.Component {
 
     render() {
         return (
+<<<<<<< HEAD
+            <div>
+                <Container>
+                    <Row>
+                        <Col md="6">
+                            <h2>CREATE NEW STORY</h2>
+                            <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
+                                <CardBody>
+                                    <InputGroup
+                                        className={
+                                            this.state.nameFocus
+                                                ? "no-border input-lg input-group-focus"
+                                                : "no-border input-lg"
+                                        }
+                                    >
+                                        {/* title */}
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>
+                                                <i className="now-ui-icons users_circle-08"></i>
+                                            </InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input
+                                            placeholder="title"
+                                            name="title"
+                                            value={this.state.title}
+                                            type="text"
+                                            onFocus={() => this.setNameFocus(true)}
+                                            onBlur={() => this.setNameFocus(false)}
+                                            onChange={this.handleChange}
+                                        ></Input>
+                                    </InputGroup>
+                                    {/* image */}
+                                    <InputGroup >
+                                        <ImageUpload imageUrl={this.state.imageUrl} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
+                                    </InputGroup>
+                                    {/* category */}
+                                    <Container>
+                                        <Row>
+                                            {/* category icons dropdown list */}
+                                            <Col xs="3">
+                                                <DropdownIconsCategory iconValue={this.iconSelected} />
+                                            </Col>
+                                            <Col xs="9">
+                                                {/* category name input */}
+                                                <InputGroup
+                                                    className={
+                                                        this.state.categoryFocus
+                                                            ? "no-border input-lg input-group-focus"
+                                                            : "no-border input-lg"
+                                                    }
+                                                >
+                                                    <Input
+                                                        placeholder="Category"
+                                                        name="category"
+                                                        value={this.state.category}
+                                                        type="text"
+                                                        onFocus={() => this.setCategoryFocus(true)}
+                                                        onBlur={() => this.setCategoryFocus(false)}
+                                                        onChange={this.handleChange}
+                                                    ></Input>
+=======
             <div data-background-color="black">
                 <FixedTransparentNavbar />
                 <div style={{ height: '70px' }}></div> {/* offsets height of navbar */}
@@ -173,7 +237,7 @@ class AddStoryForm extends React.Component {
                                             ></Input>
                                         </InputGroup>
                                         {/* image */}
-                                            <ImageUpload storyImageUrl={this.state.storyImageUrl} setImageHandel={this.setImageHandel} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
+                                            <ImageUpload imageUrl={this.state.imageUrl}  handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
                                         {/* category */}
                                         <Container>
                                             <Row>
@@ -197,6 +261,7 @@ class AddStoryForm extends React.Component {
                                                             onBlur={() => this.setCategoryFocus(false)}
                                                             onChange={this.handleChange}
                                                         ></Input>
+>>>>>>> fd73b37d6fdddcc087abc9960123f6db7c1461e0
 
                                                     </InputGroup>
                                                 </Col>
