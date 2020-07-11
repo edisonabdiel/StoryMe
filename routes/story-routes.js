@@ -17,7 +17,7 @@ router.get('/stories', (req, res, next) => {
 
 // POST route => to create a new project
 router.post('/stories', (req, res, next) => {
-  console.log('POST',req.body);
+  console.log('POST', req.body);
   console.log('USER', req.user);
   Story.create({
     title: req.body.title,
@@ -27,12 +27,12 @@ router.post('/stories', (req, res, next) => {
     category: req.body.category,
     headline: req.body.headline,
     content: req.body.content,
-    likes: req.body.likes,
+    likes: [],
     duration: req.body.duration,
     owner: req.user._id
   })
     .then(newProject => {
-    
+
       res.json(newProject);
     })
 
@@ -52,19 +52,44 @@ router.put('/stories/:id', (req, res, next) => {
   console.log(req.body)
   Story.findByIdAndUpdate(req.params.id,
     {
-      title: req.body.title,
-      image: req.body.image,
-      icon: req.body.icon,
-      imageName: req.body.imageName,
-      category: req.body.category,
-      headline: req.body.headline,
-      content: req.body.content,
-      duration: req.body.duration,
+      // $set: {
+        title: req.body.title,
+        image: req.body.image,
+        icon: req.body.icon,
+        imageName: req.body.imageName,
+        category: req.body.category,
+        headline: req.body.headline,
+        content: req.body.content,
+        duration: req.body.duration,
+      // }
+    }, { new: true })
+    .then((resp) => {
+      res.json(resp);
+    }).catch(err => {
+      res.json(err);
+    })
+})
 
-    })
-    .then(() => {
-      res.json({ message: `Story with ${req.params.id} is updated successfully.` });
-    })
+router.put('/stories/:id/liked', (req, res, next) => {
+  console.log(req.body)
+  Story.findById(req.params.id).then((story) => {
+    console.log(story)
+    let promise;
+    if (story.likes.includes(req.user._id)) {
+      promise = Story.findByIdAndUpdate(req.params.id, {
+        $pull: { likes: req.user._id }
+      }, { new: true })
+    } else {
+      promise = Story.findByIdAndUpdate(req.params.id, {
+        $push: { likes: req.user._id }
+      }, { new: true })
+    }
+    promise
+      .then((resp) => {
+        res.json(resp);
+      })
+  })
+
 })
 
 // DELETE route => to delete a specific project

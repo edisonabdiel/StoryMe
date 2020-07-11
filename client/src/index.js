@@ -23,7 +23,5 @@ axios.get('/api/checkuser').then(res => {
     <App user={res.data.userDoc} />
     </Router>, 
     document.getElementById('root'));
-}).catch(err => {
-  alert('backend not running or /checkuser route not defined !')
 })
 
