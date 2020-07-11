@@ -3,7 +3,6 @@ import React from "react";
 // reactstrap components
 
 // core components
-import WhiteNavbar from "components/Navbars/WhiteNavbar.js";
 import Footer from "components/Footers/Footer.js";
 
 // sections for this page
@@ -34,7 +33,6 @@ const Sections = () => {
   });
   return (
     <>
-      <WhiteNavbar />
       <div className="wrapper">
         <div className="section-space"></div>
         <Headers />

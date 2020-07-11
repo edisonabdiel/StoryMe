@@ -1,25 +1,26 @@
-/*eslint-disable*/
 import React from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
-  Button,
   Collapse,
-  NavbarBrand,
-  Navbar,
+  DropdownToggle,
   NavItem,
-  Nav,
-  Container,
-  UncontrolledDropdown,
+  Button,
   DropdownMenu,
   DropdownItem,
-  DropdownToggle
+  UncontrolledDropdown,
+  NavbarBrand,
+  Navbar,
+  Nav,
+  Container,
 } from "reactstrap";
+
+
 import Logout from "views/examples/Logout";
-import Login from 'views/examples/Login';
+import Login from "views/examples/Login"
 
 
-function FixedTransparentNavbar(props) {
+const EditFixedNavbar = (props) => {
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   return (
     <>
@@ -32,7 +33,7 @@ function FixedTransparentNavbar(props) {
           }}
         />
       ) : null}
-      <Navbar className="navbar-absolute" expand="lg">
+      <Navbar className="navbar-absolute" color="transparent" expand="lg">
         <Container>
           <div className="navbar-translate">
             <NavbarBrand to="/" tag={Link} id="navbar-brand">
@@ -62,14 +63,7 @@ function FixedTransparentNavbar(props) {
                 aria-hidden={true}
                 className="now-ui-icons ui-1_email-85 p-md-3"
               ></i></Link>
-              <UncontrolledDropdown>
-                <DropdownMenu>
-                  <i className="now-ui-icons design_image"></i>
-                  <DropdownItem>
-                  <Logout updateUser={props.updateUser} />
-                  </DropdownItem>
-                </DropdownMenu>
-                <UncontrolledDropdown className="button-dropdown p-md-2" >
+              <UncontrolledDropdown className="button-dropdown p-md-2" >
             <DropdownToggle
               caret
               tag="a"
@@ -90,17 +84,16 @@ function FixedTransparentNavbar(props) {
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
-              </UncontrolledDropdown>
-              {/* <NavItem>
+              <NavItem>
                 <Button
-                  className="nav-link btn-success"
-                  color="success"
-                  href=""
-                  target="_blank"
+                  className="nav-link btn-round"
+                  size="sm"
+                  color='success'
                 >
-                  <p>PUBLISH</p>
+                  <Link to="/publish">
+                    <p>PUBLISH</p></Link>
                 </Button>
-              </NavItem> */}
+              </NavItem>
             </Nav>
           </Collapse>
         </Container>
@@ -109,4 +102,4 @@ function FixedTransparentNavbar(props) {
   );
 }
 
-export default FixedTransparentNavbar;
+export default EditFixedNavbar;

@@ -2,8 +2,6 @@
 import React, { useState, useRef } from 'react';
 import JoditEditor from "jodit-react";
 import '../../assets/css/App.css';
-import axios from 'axios'
-
 
 
 const Editor = (props) => {

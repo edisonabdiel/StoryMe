@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
-import AddStoryForm from '../views/examples/AddStoryForm';
-import EditStory from './EditStory';
+// import AddStoryForm from '../views/examples/AddStoryForm';
+// import EditStory from './EditStory';
 
 
 // reactstrap components
@@ -107,8 +107,8 @@ class ListStories extends Component {
                                 <strong>{p.title}</strong>
                               {/* </Link> */}
                             </CardTitle>
-                            <p className="card-description" onClick={() => this.setModalClassic(true)} style={{ cursor: 'pointer' }}>
-                              {p.headline}
+                            <p className="card-description">
+                              <strong>{p.headline}</strong> 
                             </p>
                             {/* </Link> */}
                             <CardFooter >
@@ -127,13 +127,18 @@ class ListStories extends Component {
                                 <span>{this.props.currentUser.email}</span>
                               </div>
                               <hr />
-                              <div>
+                              <div className="btn-block">
                                 {p.owner === this.props.currentUser._id ?
                                   <div>
-                                    <button onClick={() => this.editHandler(p._id)}> <Link to={`/story-edit/${p._id}`}> Edit </Link></button>
+                                    {/* <EditStory theStory={this.state} getTheStory={this.componentDidMount} {...this.props}/> */}
+                                    <button className="nav-link btn-info btn-round pull-left ml-lg-5" style={{ color: 'white', textDecoration: 'none'}}>
+                                      <Link className="text-decoration-none" to={"/story-edit/" + p._id} onClick={() => this.editHandler(p._id)}><b>Edit</b></Link>
+                                    </button>
                                   </div>
                                   : "hello"}
-                                {p.owner === this.props.currentUser._id ? <button onClick={() => this.deleteHandler(p._id)}> Delete </button> : "hello"}
+
+                                {p.owner === this.props.currentUser._id ? <button className="nav-link btn-round btn-danger pull-right mr-5" 
+                                  onClick={() => this.deleteHandler(p._id)}><b>Delete</b></button> : "hello"}
                               </div>
                             </CardFooter>
                           </CardBody>

@@ -2,7 +2,6 @@ import React from "react";
 
 // reactstrap components
 import {
-  Button,
   Container,
   Row,
   Col,
@@ -14,20 +13,6 @@ import LandingPageHeader from "components/Headers/LandingPageHeader.js";
 import FooterBlack from "components/Footers/FooterBlack";
 
 const TermsAndConditions = () => {
-  const [pills, setPills] = React.useState("1");
-  const [firstFocus, setFirstFocus] = React.useState(false);
-  const [emailFocus, setEmailFocus] = React.useState(false);
-  React.useEffect(() => {
-    document.body.classList.add("landing-page");
-    document.body.classList.add("sidebar-collapse");
-    document.documentElement.classList.remove("nav-open");
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-    return function cleanup() {
-      document.body.classList.remove("landing-page");
-      document.body.classList.remove("sidebar-collapse");
-    };
-  }, []);
   return (
     <>
       <ScrollTransparentNavbar />
@@ -40,7 +25,8 @@ const TermsAndConditions = () => {
                 <h2 className="title" >Welcome to StoryMe!</h2>
                 <h5 className="description" style={{color: 'black'}}>
                 
-<span>These terms and conditions outline the rules and regulations for the use of StoryMe's Website, located at www.storyme.com.</span>
+                  <span>These terms and conditions outline the rules and regulations for the use of StoryMe's Website, located at www.storyme.com.</span>
+                  
 
 By accessing this website we assume you accept these terms and conditions. Do not continue to use StoryMe if you do not agree to take all of the terms and conditions stated on this page. Our Terms and Conditions were created with the help of the Terms And Conditions Generator and the Free Terms & Conditions Generator.
 

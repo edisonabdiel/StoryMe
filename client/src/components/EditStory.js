@@ -22,6 +22,8 @@ import {
     InputGroup,
     ModalFooter,
 } from "reactstrap";
+import EditFixedNavbar from './Navbars/EditFixedNavbar';
+import FooterBlack from './Footers/FooterBlack';
 
 
 
@@ -172,12 +174,16 @@ class EditStory extends Component {
 
     render() {
         return (
-            <div>
-                <Container>
-                    <Row>
-                        <Col md="6">
+            <div data-background-color="black">
+                <EditFixedNavbar />
+                <div style={{ height: '75px' }}></div> {/* offsets height of navbar */}
+                <div className="text-center">
+                <Container fluid>
+                        <Row>
+                        <Col></Col>
+                        <Col  className="px-0 my-auto" md="6">
                             <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.state.uploadedContent) }} />
-                            <h2>Edit your story</h2>
+                            <h2><b>EDIT STORY</b></h2>
                             <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
                                 <CardBody>
                                     <InputGroup
@@ -203,9 +209,7 @@ class EditStory extends Component {
                                         ></Input>
                                     </InputGroup>
                                     {/* image */}
-                                    <InputGroup >
                                         <ImageUpload storyImageUrl={this.state.storyImageUrl} setImageHandel={this.setImageHandel} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
-                                    </InputGroup>
                                     {/* category */}
                                     <Container>
                                         <Row>
@@ -229,7 +233,6 @@ class EditStory extends Component {
                                                         onBlur={() => this.setCategoryFocus(false)}
                                                         onChange={this.handleChange}
                                                     ></Input>
-
                                                 </InputGroup>
                                             </Col>
                                         </Row>
@@ -267,11 +270,11 @@ class EditStory extends Component {
                                     >
                                         <InputGroupAddon addonType="prepend">
                                             <InputGroupText>
-                                                <i className="now-ui-icons ui-1_lock-circle-open"></i>
+                                                <i className="now-ui-icons files_paper"></i>
                                             </InputGroupText>
                                         </InputGroupAddon>
                                         <Input
-                                            placeholder="Headline"
+                                            placeholder="Summary"
                                             name="headline"
                                             value={this.state.headline}
                                             type="text"
@@ -287,19 +290,21 @@ class EditStory extends Component {
                                 <ModalFooter className="text-center">
                                     <Button
                                         block
-                                        className="btn-neutral btn-round"
-                                        color="info"
-                                        // href=""
+                                        className="btn-link btn-round"
+                                        color="success"
                                         type="submit"
                                         size="lg"
                                     >
-                                        EDIT
+                                        SAVE CHANGES
                           </Button>
                                 </ModalFooter>
                             </Form>
-                        </Col>
+                            </Col>
+                            <Col></Col>
                     </Row>
-                </Container>
+                    </Container>
+                    <FooterBlack />
+                    </div>
             </div>
         )
     }
