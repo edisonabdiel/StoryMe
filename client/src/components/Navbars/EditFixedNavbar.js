@@ -2,56 +2,26 @@ import React from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
-  Button,
   Collapse,
   DropdownToggle,
+  NavItem,
+  Button,
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
   NavbarBrand,
   Navbar,
-  NavItem,
   Nav,
   Container,
 } from "reactstrap";
+
 
 import Logout from "views/examples/Logout";
 import Login from "views/examples/Login"
 
 
-const ScrollTransparentNavbar = (props) => {
+const EditFixedNavbar = (props) => {
   const [collapseOpen, setCollapseOpen] = React.useState(false);
-  const [navbarColor, setNavbarColor] = React.useState(
-    (document.documentElement.scrollTop > 499 || document.body.scrollTop) > 499
-      ? ""
-      : " navbar-transparent"
-  );
-  const [buyButtonColor, setBuyButtonColor] = React.useState(
-    (document.documentElement.scrollTop > 499 || document.body.scrollTop) > 499
-      ? "info"
-      : "success"
-  );
-  React.useEffect(() => {
-    const updateNavbarColor = () => {
-      if (
-        document.documentElement.scrollTop > 499 ||
-        document.body.scrollTop > 499
-      ) {
-        setNavbarColor("");
-        setBuyButtonColor("success");
-      } else if (
-        document.documentElement.scrollTop < 500 ||
-        document.body.scrollTop < 500
-      ) {
-        setNavbarColor(" navbar-transparent");
-        setBuyButtonColor("success");
-      }
-    };
-    window.addEventListener("scroll", updateNavbarColor);
-    return function cleanup() {
-      window.removeEventListener("scroll", updateNavbarColor);
-    };
-  });
   return (
     <>
       {collapseOpen ? (
@@ -63,7 +33,7 @@ const ScrollTransparentNavbar = (props) => {
           }}
         />
       ) : null}
-      <Navbar className={"fixed-top" + navbarColor} color="dark" expand="lg">
+      <Navbar className="fixed-top" color="transparent" expand="lg">
         <Container>
           <div className="navbar-translate">
             <NavbarBrand to="/" tag={Link} id="navbar-brand">
@@ -132,4 +102,4 @@ const ScrollTransparentNavbar = (props) => {
   );
 }
 
-export default ScrollTransparentNavbar;
+export default EditFixedNavbar;

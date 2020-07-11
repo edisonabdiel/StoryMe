@@ -20,6 +20,8 @@ import {
     InputGroup,
     ModalFooter,
 } from "reactstrap";
+import EditFixedNavbar from './Navbars/EditFixedNavbar';
+import FooterBlack from './Footers/FooterBlack';
 
 
 
@@ -134,12 +136,16 @@ class EditStory extends Component {
 
     render() {
         return (
-            <div>
-                <Container>
-                    <Row>
-                        <Col md="6">
+            <div data-background-color="black">
+                <EditFixedNavbar />
+                <div style={{ height: '75px' }}></div> {/* offsets height of navbar */}
+                <div className="text-center">
+                <Container fluid>
+                        <Row>
+                        <Col></Col>
+                        <Col  className="px-0 my-auto" md="6">
                             <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.state.uploadedContent) }} />
-                            <h2>CREATE NEW STORY</h2>
+                            <h2><b>EDIT STORY</b></h2>
                             <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
                                 <CardBody>
                                     <InputGroup
@@ -249,19 +255,21 @@ class EditStory extends Component {
                                 <ModalFooter className="text-center">
                                     <Button
                                         block
-                                        className="btn-neutral btn-round"
-                                        color="info"
-                                        // href=""
+                                        className="btn-link btn-round"
+                                        color="success"
                                         type="submit"
                                         size="lg"
                                     >
-                                        EDIT
+                                        SAVE CHANGES
                           </Button>
                                 </ModalFooter>
                             </Form>
-                        </Col>
+                            </Col>
+                            <Col></Col>
                     </Row>
-                </Container>
+                    </Container>
+                    <FooterBlack />
+                    </div>
             </div>
         )
     }

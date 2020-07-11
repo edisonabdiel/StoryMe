@@ -13,20 +13,6 @@ import ScrollTransparentNavbar from 'components/Navbars/ScrollTransparentNavbar.
 import Footer from "components/Footers/Footer";
 
 const EmailSent = () => {
-  const [pills, setPills] = React.useState("1");
-  const [firstFocus, setFirstFocus] = React.useState(false);
-  const [emailFocus, setEmailFocus] = React.useState(false);
-  React.useEffect(() => {
-    document.body.classList.add("landing-page");
-    document.body.classList.add("sidebar-collapse");
-    document.documentElement.classList.remove("nav-open");
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-    return function cleanup() {
-      document.body.classList.remove("landing-page");
-      document.body.classList.remove("sidebar-collapse");
-    };
-  }, []);
   return (
     <>
       <ScrollTransparentNavbar />

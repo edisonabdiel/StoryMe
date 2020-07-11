@@ -9,7 +9,10 @@ import {
   Navbar,
   NavItem,
   Nav,
-  Container
+  Container,
+  UncontrolledDropdown,
+  DropdownMenu,
+  DropdownItem
 } from "reactstrap";
 import Logout from "views/examples/Logout";
 
@@ -27,7 +30,7 @@ function FixedTransparentNavbar(props) {
           }}
         />
       ) : null}
-      <Navbar className="navbar-absolute navbar-transparent" expand="lg">
+      <Navbar className="navbar-absolute" expand="lg">
         <Container>
           <div className="navbar-translate">
             <NavbarBrand to="/" tag={Link} id="navbar-brand">
@@ -57,9 +60,16 @@ function FixedTransparentNavbar(props) {
                 aria-hidden={true}
                 className="now-ui-icons ui-1_email-85 p-md-3"
               ></i></Link>
-              <Logout updateUser={props.updateUser} />
+              <UncontrolledDropdown>
+                <DropdownMenu>
+                  <i className="now-ui-icons design_image"></i>
+                  <DropdownItem>
+                  <Logout updateUser={props.updateUser} />
+                  </DropdownItem>
+                </DropdownMenu>
 
-              <NavItem>
+              </UncontrolledDropdown>
+              {/* <NavItem>
                 <Button
                   className="nav-link btn-success"
                   color="success"
@@ -68,7 +78,7 @@ function FixedTransparentNavbar(props) {
                 >
                   <p>PUBLISH</p>
                 </Button>
-              </NavItem>
+              </NavItem> */}
             </Nav>
           </Collapse>
         </Container>
