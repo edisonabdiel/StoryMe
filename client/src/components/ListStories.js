@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import ModalComponent from './ModalComponent';
+
+
+
+import heartFull from 'assets/img/fullHeart.jpg'
+import AddStoryForm from '../views/examples/AddStoryForm';
 import EditStory from './EditStory';
 // import AddStoryForm from '../views/examples/AddStoryForm';
 // import EditStory from './EditStory';
@@ -21,15 +27,18 @@ import {
   Modal,
   ModalFooter,
 } from "reactstrap";
+import { clearConfig } from 'dompurify';
+import { relativeTimeThreshold } from 'moment';
 
 
 class ListStories extends Component {
 
   state = {
     listOfStories: [],
-    storiesInARow: 0,
     modalClassic: false,
-    // icon: this.props.icon
+    liked: false,
+    // likesNum: 0,
+    currentOpenStory: 0
   }
   componentDidMount() {
     {
@@ -63,7 +72,45 @@ class ListStories extends Component {
   setModalClassic = (bool) => {
     this.setState({
       modalClassic: bool
+
     })
+  }
+
+  //TO DO
+  //ADD & COMMIT CHANGES NOW
+  //To display the number of likes, you should count the elements in the array
+  //Create another user and test new functionality
+  //ADD & COMMIT and merge with team.
+
+  likesNum = (storyID) => {
+
+    axios.put(`/api/stories/${storyID}/liked`)
+      .then((resp) => {                
+        console.log('Likes response:', resp.data);
+
+        const currentStory = resp.data
+
+        let newList = [...this.state.listOfStories]
+        let idx = this.state.listOfStories.findIndex(story => story._id === currentStory._id)
+        newList.splice(idx, 1, currentStory)
+
+        // let newList = this.state.listOfStories.filter(story => story._id !== currentStory._id)   
+        //  newList = newList.concat(currentStory)     
+
+        this.setState({          
+          liked: currentStory.likes.includes(this.props.currentUser._id),
+          listOfStories: newList
+       })
+      })
+  }
+  saveStoryValues = (position) => {
+    this.setState({
+      currentOpenStory: position,
+      liked: this.state.listOfStories[position].likes.includes(this.props.currentUser._id)
+    })
+    this.setModalClassic(true)
+   
+    // console.log('ALL STORY VALUES', storyValues);
   }
   // newStoryHandler = (story) => {
   //   this.setState({
@@ -71,11 +118,9 @@ class ListStories extends Component {
   //   })
   // }
   render() {
-    console.log('CURRENT USER Name:', this.props.currentUser.email);
-
+    console.log('current story',this.state.listOfStories[this.state.currentOpenStory]);
     return (
       <div>
-        {/* {console.log('ICON',this.state.icon)} */}
         <div
           className="section section-cards"
           data-background-color="gray"
@@ -90,13 +135,15 @@ class ListStories extends Component {
               <Row  >
                 {this.state.listOfStories.length === 0
                   ? <h1>LOADING...</h1>
-                  : this.state.listOfStories.map(p => {
+                  : this.state.listOfStories.map((p, idx) => {
                     return (
                       <Col lg="4" md="6" key={p._id} >
-                        {console.log('Maped List:', p)}
-                        {console.log('Icon', p.icon)}
-                        <Card className="card-blog"  >
-                          <div className="card-image" onClick={() => this.setModalClassic(true)} style={{ cursor: 'pointer' }}>
+                        {/* {JSON.stringify(p, null, 2)} */}
+                        {/* {console.log('Maped List:', p)} */}
+                        {/* {console.log('Icon', p.icon)} */}
+
+                        <Card className="card-blog" >
+                          <div className="card-image" onClick={() => this.saveStoryValues(idx)} style={{ cursor: 'pointer' }}>
                             {/* <Link to={`/stories/${p._id}`} key={p._id}> */}
                             <img
                               alt="..."
@@ -110,19 +157,20 @@ class ListStories extends Component {
                             <h6 className="category text-warning">
                               <i className={`${p.icon}`}></i> {p.category}
                             </h6>
-                            <CardTitle tag="h5" onClick={() => this.setModalClassic(true)} style={{ cursor: 'pointer' }}>
+
+                            <CardTitle tag="h5" onClick={() => this.saveStoryValues(idx)} style={{ cursor: 'pointer' }}>
                               {/* <Link to={`/stories/${p._id}`} key={p._id}> */}
                               <strong>{p.title}</strong>
                               {/* </Link> */}
                             </CardTitle>
-                            <p className="card-description">
-                              <strong>{p.headline}</strong>
+                            <p className="card-description" onClick={() => this.saveStoryValues(idx)} style={{ cursor: 'pointer' }}>
+                              {p.headline}
                             </p>
                             {/* </Link> */}
                             <CardFooter >
-                              <div className="stats stats-right" onClick={() => this.setModalClassic(true)} style={{ cursor: 'pointer' }}>
+                              <div className="stats stats-right">
                                 <i className="now-ui-icons ui-2_favourite-28"></i>
-                                    342 ·{" "}
+                                {p.likes.length}
                                 <i className="now-ui-icons tech_watch-time"></i>
                                 {p.duration}
                               </div>
@@ -155,41 +203,14 @@ class ListStories extends Component {
                     )
                   })
                 }
+                {this.state.listOfStories && this.state.listOfStories[this.state.currentOpenStory] && 
+                  <ModalComponent liked={this.state.liked} likesHandler={this.likesNum} story={this.state.listOfStories[this.state.currentOpenStory]} modalClassic={this.state.modalClassic} closeHandler={()=>this.setModalClassic(false)}/>  
+                }
               </Row>
-            </Container>
-
-
-            <Modal
-              isOpen={this.state.modalClassic}
-              toggle={() => this.setModalClassic(false)}
-            >
-              <div className="modal-header justify-content-center">
-                <button
-                  aria-hidden={true}
-                  className="close"
-                  onClick={() => this.setModalClassic(false)}
-                  type="button"
-                >
-                  <i className="now-ui-icons ui-1_simple-remove"></i>
-                </button>
-                <h4 className="title title-up">{}</h4>
-              </div>
-              <div className="modal-body">
-                <h5 style={{ textDecoration: 'underline' }}>{}</h5>
-                <p>{}</p>
-              </div>
-              <ModalFooter>
-                <Button color="success" type="button">
-                  <i className="now-ui-icons ui-2_favourite-28 "></i>
-                </Button>
-                <Button color="danger" onClick={() => this.setModalClassic(false)}>
-                  Close
-                              </Button>
-              </ModalFooter>
-            </Modal>
+            </Container> 
           </div>
         </div>
-      </div >
+      </div>
     )
   }
 }

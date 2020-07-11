@@ -39,8 +39,9 @@ const storySchema = new Schema({
   // icon: String,
   category: String,
   content: String,
-  likes: Number,
+  likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   duration: String,
+
   owner: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 

@@ -77,5 +77,5 @@ class App extends React.Component {
   }
 
 };
-
+// {...props} going to pass every props and also update the user
 export default App;
