@@ -6,24 +6,24 @@ import { Container } from "reactstrap";
 
 // core components
 
-function FooterDefault() {
+const FooterDefault = () => {
   return (
     <>
-      <footer className="footer footer-default">
-        <Container>
+      <footer className="footer footer-default" >
+        <div style={{ color: 'black' }}>
+        <Container >
           <nav>
-            <ul>
+            <ul >
               <li>
                 <a
-                  href="https://www.creative-tim.com?ref=nuk-pro-react-footer-default"
+                 to="/"
                   target="_blank"
                 >
-                  Creative Tim
+                  StoryMe
                 </a>
               </li>
               <li>
                 <a
-                  href="http://presentation.creative-tim.com?ref=nuk-pro-react-footer-default"
                   target="_blank"
                 >
                   About Us
@@ -31,7 +31,6 @@ function FooterDefault() {
               </li>
               <li>
                 <a
-                  href="http://blog.creative-tim.com?ref=nuk-pro-react-footer-default"
                   target="_blank"
                 >
                   Blog
@@ -39,24 +38,20 @@ function FooterDefault() {
               </li>
             </ul>
           </nav>
-          <div className="copyright" id="copyright">
-            © {new Date().getFullYear()}, Designed by{" "}
-            <a
-              href="https://www.invisionapp.com?ref=creativetim"
-              target="_blank"
-            >
-              Invision
-            </a>
+          <div className="copyright" id="copyright" style={{ color: 'black' }}>
+            © {new Date().getFullYear()}
             . Coded by{" "}
             <a
-              href="https://www.creative-tim.com?ref=nuk-pro-react-footer-default"
+              href="https://github.com/edisonabdiel/StoryMe"
               target="_blank"
             >
-              Creative Tim
+              Dima, Noubar & Edison
             </a>
             .
           </div>
         </Container>
+
+        </div>
       </footer>
     </>
   );

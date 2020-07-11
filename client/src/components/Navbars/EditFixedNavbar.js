@@ -2,56 +2,26 @@ import React from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
-  Button,
   Collapse,
   DropdownToggle,
+  NavItem,
+  Button,
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
   NavbarBrand,
   Navbar,
-  NavItem,
   Nav,
   Container,
 } from "reactstrap";
+
 
 import Logout from "views/examples/Logout";
 import Login from "views/examples/Login"
 
 
-const ScrollTransparentNavbar = (props) => {
+const EditFixedNavbar = (props) => {
   const [collapseOpen, setCollapseOpen] = React.useState(false);
-  const [navbarColor, setNavbarColor] = React.useState(
-    (document.documentElement.scrollTop > 499 || document.body.scrollTop) > 499
-      ? ""
-      : " navbar-transparent"
-  );
-  const [buyButtonColor, setBuyButtonColor] = React.useState(
-    (document.documentElement.scrollTop > 499 || document.body.scrollTop) > 499
-      ? "info"
-      : "success"
-  );
-  React.useEffect(() => {
-    const updateNavbarColor = () => {
-      if (
-        document.documentElement.scrollTop > 499 ||
-        document.body.scrollTop > 499
-      ) {
-        setNavbarColor("");
-        setBuyButtonColor("success");
-      } else if (
-        document.documentElement.scrollTop < 500 ||
-        document.body.scrollTop < 500
-      ) {
-        setNavbarColor(" navbar-transparent");
-        setBuyButtonColor("success");
-      }
-    };
-    window.addEventListener("scroll", updateNavbarColor);
-    return function cleanup() {
-      window.removeEventListener("scroll", updateNavbarColor);
-    };
-  });
   return (
     <>
       {collapseOpen ? (
@@ -63,7 +33,7 @@ const ScrollTransparentNavbar = (props) => {
           }}
         />
       ) : null}
-      <Navbar className={"fixed-top" + navbarColor} color="dark" expand="lg">
+      <Navbar className="navbar-absolute" color="transparent" expand="lg">
         <Container>
           <div className="navbar-translate">
             <NavbarBrand to="/" tag={Link} id="navbar-brand">
@@ -94,34 +64,31 @@ const ScrollTransparentNavbar = (props) => {
                 className="now-ui-icons ui-1_email-85 p-md-3"
               ></i></Link>
               <UncontrolledDropdown className="button-dropdown p-md-2" >
-                <DropdownToggle
-                  caret
-                  tag="a"
-                  data-toggle="dropdown"
-                  id="navbarDropdown"
+            <DropdownToggle
+              caret
+              tag="a"
+              data-toggle="dropdown"
+              id="navbarDropdown"
                   onClick={(e) => e.preventDefault()}
-                >
-                  <span className="button-bar"></span>
-                  <span className="button-bar"></span>
-                  <span className="button-bar"></span>
-                </DropdownToggle>
-                <DropdownMenu aria-labelledby="navbarDropdown" data-background-color="black">
-                  <DropdownItem onClick={(e) => e.preventDefault()}>
-                    <Logout size="sm" updateUser={props.updateUser} />
-                  </DropdownItem>
-                  <DropdownItem onClick={(e) => e.preventDefault()}>
-                    <Link to="/login-page" style={{ textDecoration: 'none' }}><Login /></Link>
-                  </DropdownItem>
-                  <DropdownItem onClick={(e) => e.preventDefault()}>
-                    <Link to='/profile-edit'>Edit your profile</Link>
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
+            >
+              <span className="button-bar"></span>
+              <span className="button-bar"></span>
+              <span className="button-bar"></span>
+            </DropdownToggle>
+            <DropdownMenu aria-labelledby="navbarDropdown" data-background-color="black">
+              <DropdownItem onClick={(e) => e.preventDefault()}>
+              <Logout size="sm" updateUser={props.updateUser} />
+              </DropdownItem>
+              <DropdownItem onClick={(e) => e.preventDefault()}>
+              <Link to="/login-page" style={{textDecoration: 'none'}}><Login /></Link>
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
               <NavItem>
                 <Button
                   className="nav-link btn-round"
                   size="sm"
-                  color={buyButtonColor}
+                  color='success'
                 >
                   <Link to="/publish">
                     <p>PUBLISH</p></Link>
@@ -135,4 +102,4 @@ const ScrollTransparentNavbar = (props) => {
   );
 }
 
-export default ScrollTransparentNavbar;
+export default EditFixedNavbar;

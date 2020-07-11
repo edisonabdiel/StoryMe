@@ -15,7 +15,7 @@ const Footer = () => {
             <ul>
               <li>
                 <a
-                  href="https://www.creative-tim.com?ref=nuk-pro-react-footer"
+                  to='/'
                   target="_blank"
                 >
                   StoryMe
@@ -23,7 +23,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="http://presentation.creative-tim.com?ref=nuk-pro-react-footer"
+                  to='/'
                   target="_blank"
                 >
                   About Us
@@ -31,7 +31,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="http://blog.creative-tim.com?ref=nuk-pro-react-footer"
+                  to="/"
                   target="_blank"
                 >
                   Blog
@@ -46,7 +46,7 @@ const Footer = () => {
               href="http://www.github.com/edisonabdiel"
               target="_blank"
             >
-              Edison Abdiel
+              Edison, Dima & Noubar
             </a>
             .
           </div>

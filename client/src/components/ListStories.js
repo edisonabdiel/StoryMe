@@ -8,6 +8,10 @@ import ModalComponent from './ModalComponent';
 import heartFull from 'assets/img/fullHeart.jpg'
 import AddStoryForm from '../views/examples/AddStoryForm';
 import EditStory from './EditStory';
+// import AddStoryForm from '../views/examples/AddStoryForm';
+// import EditStory from './EditStory';
+
+
 
 
 // reactstrap components
@@ -36,15 +40,22 @@ class ListStories extends Component {
     // likesNum: 0,
     currentOpenStory: 0
   }
-
   componentDidMount() {
-    axios.get('/api/stories').then((resp) => {
-      console.log('Response', resp.data);
-      this.setState({
-        listOfStories: resp.data,
-      })
-    })
+    {
+      this.props.profile
+        ? axios.get('/api/profileStories').then((resp) => {
+          this.setState({
+            listOfStories: resp.data
+          })
+        })
+        : axios.get('/api/stories').then((resp) => {
+          this.setState({
+            listOfStories: resp.data
+          })
+        })
+    }
   }
+
   deleteHandler = (storyID) => {
     axios.delete('/api/stories/' + storyID).then(() => {
       this.setState({
@@ -116,9 +127,10 @@ class ListStories extends Component {
           id="cards"
         >
           <div className="cards">
+
             <Container>
               <div className="title">
-                <h3 className="title">User Cards</h3>
+                <h3 className="title"></h3>
               </div>
               <Row  >
                 {this.state.listOfStories.length === 0
@@ -140,7 +152,6 @@ class ListStories extends Component {
                             ></img>
                             {/* </Link> */}
                           </div>
-
                           <CardBody>
                             {/* <Link to={`/stories/${p._id}`} key={p._id}> */}
                             <h6 className="category text-warning">
@@ -172,29 +183,31 @@ class ListStories extends Component {
                                 <span>{this.props.currentUser.email}</span>
                               </div>
                               <hr />
-                              <div>
+                              <div className="btn-block">
                                 {p.owner === this.props.currentUser._id ?
                                   <div>
-                                    <button onClick={() => this.editHandler(p._id)}> <Link to={`/story-edit/${p._id}`}> Edit </Link></button>
+                                    {/* <EditStory theStory={this.state} getTheStory={this.componentDidMount} {...this.props}/> */}
+                                    <button className="nav-link btn-info btn-round pull-left ml-lg-5" style={{ color: 'white', textDecoration: 'none' }}>
+                                      <Link className="text-decoration-none" to={"/story-edit/" + p._id} onClick={() => this.editHandler(p._id)}><b>Edit</b></Link>
+                                    </button>
                                   </div>
                                   : "hello"}
-                                {p.owner === this.props.currentUser._id ? <button onClick={() => this.deleteHandler(p._id)}> Delete </button> : "hello"}
+
+                                {p.owner === this.props.currentUser._id ? <button className="nav-link btn-round btn-danger pull-right mr-5"
+                                  onClick={() => this.deleteHandler(p._id)}><b>Delete</b></button> : "hello"}
                               </div>
                             </CardFooter>
                           </CardBody>
                         </Card>
-
                       </Col>
-
                     )
                   })
                 }
                 {this.state.listOfStories && this.state.listOfStories[this.state.currentOpenStory] && 
-                  <ModalComponent liked={this.state.liked} likesHandler={this.likesNum} story={this.state.listOfStories[this.state.currentOpenStory]} modalClassic={this.state.modalClassic} closeHandler={()=>this.setModalClassic(false)}/>
-                
+                  <ModalComponent liked={this.state.liked} likesHandler={this.likesNum} story={this.state.listOfStories[this.state.currentOpenStory]} modalClassic={this.state.modalClassic} closeHandler={()=>this.setModalClassic(false)}/>  
                 }
               </Row>
-            </Container>
+            </Container> 
           </div>
         </div>
       </div>

@@ -28,7 +28,7 @@ const uploadCloud = multer({
 
 router.post(
     "/upload-img",
-    uploadCloud.single("storyImageUrl"),
+    uploadCloud.single("imageUrl"),
     (req, res) => {
         console.log("req.file", req.file);
         res.json({ secure_url: req.file.path, imageName: req.file.originalname });

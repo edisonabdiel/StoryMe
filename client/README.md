@@ -69,10 +69,8 @@ Within the download you'll find the following directories and files:
     │   └── Navbars
     │       ├── DropdownFixedNavbar.js
     │       ├── DropdownScrollNavbar.js
-    │       ├── DropdownWhiteNavbar.js
     │       ├── FixedTransparentNavbar.js
     │       ├── ScrollTransparentNavbar.js
-    │       └── WhiteNavbar.js
     ├── index.js
     └── views
         ├── Index.js

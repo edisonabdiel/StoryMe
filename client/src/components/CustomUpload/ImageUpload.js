@@ -12,40 +12,44 @@ import {
 export class ImageUpload extends Component {
   state = {
     modalOpen: false
+
   }
 
   fileInput = React.createRef();
 
   handleClick = () => {
+    console.log(this.fileInput.current)
     this.fileInput.current.click();
   };
 
   handelRemove = () => {
     this.setState({ modalOpen: false });
     this.props.handleImageRemove()
+    this.fileInput.current.value = null;
 
   }
 
   render() {
     return (
       <div className="fileinput text-center">
-        <input type="file" name="imageUrl" onChange={(e) => this.props.handleImageChange(e)} ref={this.fileInput} />
+        <input type="file" name="stroyImageUrl" onChange={(e) => this.props.handleImageChange(e)} ref={this.fileInput} />
         <div
           className={
             "fileinput-new thumbnail img-raised" +
             (this.props.avatar ? " img-circle" : "")
           }
         >
-          <img src={this.props.storyImageUrl} alt="image" />
+          <img src={this.props.imageUrl} alt="image" />
         </div>
         <div>
-          {this.props.storyImageUrl === defaultAvatar ? (
+          {this.props.imageUrl === defaultAvatar ? (
             <Button className="btn-round" color="default" onClick={this.handleClick}>
               {this.props.avatar ? "Add Photo" : "Select image"}
             </Button>
           ) : (
               <span>
-                <Button className="btn-round" color="default" onClick={() => { this.handleClick(); this.props.handleImageRemove() }}>
+                <Button className="btn-round" color="default" onClick={() => { this.handleClick() }}>
+
                   Change
             </Button>
                 {this.props.avatar ? <br /> : null}

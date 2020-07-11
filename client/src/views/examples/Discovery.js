@@ -2,16 +2,10 @@ import React from "react";
 
 // reactstrap components
 import {
-  Button,
   Card,
   CardBody,
   CardFooter,
   CardTitle,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
   Container,
   Row,
   Col,
@@ -23,25 +17,14 @@ import DiscoveryHeader from "components/Headers/DiscoveryHeader.js";
 import FooterBlack from "components/Footers/FooterBlack.js";
 
 function BlogPosts(props) {
-  const [emailFocus, setEmailFocus] = React.useState(false);
-  React.useEffect(() => {
-    document.body.classList.add("blog-posts");
-    document.body.classList.add("sidebar-collapse");
-    document.documentElement.classList.remove("nav-open");
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-    return function cleanup() {
-      document.body.classList.remove("blog-posts");
-      document.body.classList.remove("sidebar-collapse");
-    };
-  }, []);
+  // const [emailFocus, setEmailFocus] = React.useState(false);
   return (
     <>
       <ScrollTransparentNavbar updateUser={props.updateUser} />
-      <div className="wrapper">
+      <div className="wrapper blog-posts" >
         <DiscoveryHeader />
         <div className="projects-4">
-          <Container fluid>
+          <Container fluid >
             <Row>
               <Col className="px-0" md="6">
                 <Card
@@ -54,7 +37,7 @@ function BlogPosts(props) {
                   <CardBody>
                     <CardTitle className="text-left" tag="div">
                       <h2>
-                        <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                        <a href="/" onClick={(e) => e.preventDefault()}>
                           The world's biggest yacht sets sail. It has lasers.
                         </a>
                       </h2>
@@ -216,7 +199,7 @@ function BlogPosts(props) {
         </div>
         <div className="main">
           <Container>
-            <div className="section">
+            <div className="section" >
               <h3 className="title text-center">
                 Readers also read
               </h3>
@@ -289,7 +272,7 @@ function BlogPosts(props) {
                       <div className="author">
                         <img
                           alt="..."
-                          className="avatar img-raised"
+                          className="ar img-raised"
                           src={require("assets/img/michael.jpg")}
                         ></img>
                         <span>John Black</span>
@@ -340,9 +323,9 @@ function BlogPosts(props) {
               </Row>
             </div>
           </Container>
-          </div>
         </div>
-        <FooterBlack />
+      </div>
+      <FooterBlack />
     </>
   );
 }

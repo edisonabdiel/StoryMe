@@ -23,7 +23,7 @@ require('./configs/passport');
 // IF YOU STILL DIDN'T, GO TO 'configs/passport.js' AND UN-COMMENT OUT THE WHOLE FILE
 
 mongoose
-  .connect('mongodb://127.0.0.1/storyme-server', { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect('mongodb://127.0.0.1/storyme-server', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -59,10 +59,13 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 // ADD SESSION SETTINGS HERE:
 const MongoStore = require('connect-mongo')(session);
 app.use(session({
-  secret: "doesn't matter in our case", // but it's required
+  secret: "abc", // but it's required
   resave: false,
   saveUninitialized: false, // don't create cookie for non-logged-in user
   // MongoStore makes sure the user stays logged in also when the server restarts
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000,
+  },
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
