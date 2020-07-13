@@ -64,7 +64,7 @@ app.use(session({
   saveUninitialized: false, // don't create cookie for non-logged-in user
   // MongoStore makes sure the user stays logged in also when the server restarts
   cookie: {
-    maxAge: 24 * 60 * 60 * 1000,
+    maxAge: 6 * 60 * 60 * 1000,
   },
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));

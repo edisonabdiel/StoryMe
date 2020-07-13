@@ -25,12 +25,13 @@ const userSchema = new Schema({
   about: String,
   imageName: String
 
-}, {
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-  }
-});
+},
+  {
+    timestamps: {
+      createdAt: 'created_at',
+      updatedAt: 'updated_at'
+    }
+  });
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;

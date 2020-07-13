@@ -3,6 +3,7 @@ import axios from 'axios';
 import defaultAvatar from "assets/img/placeholder.jpg";
 import Editor from "views/examples/editor";
 import ImageUpload from "components/CustomUpload/ImageUpload.js";
+import AlertMessage from "views/examples/Alert"
 
 
 // reactstrap components
@@ -31,13 +32,16 @@ class ProfileEdit extends Component {
         about: this.props.currentUser.about,
         userName: this.props.currentUser.userName,
         errorMessage: "",
+        successMessage: '',
         nameFocus: false,
         userNameFocus: false,
         oldPasswordFocus: false,
         newPasswordFocus: false,
         modalLogin: false,
         oldPassword: '',
-        newPassword: ''
+        newPassword: '',
+        aboutFocus: false,
+        alertBool: false
     }
 
     setNameFocus = (bool) => {
@@ -61,7 +65,17 @@ class ProfileEdit extends Component {
             passwordFocus: bool
         })
     }
+    setAboutFocus = (bool) => {
+        this.setState({
+            aboutFocus: bool
+        })
+    }
 
+    setAlertBool = () => {
+        this.setState({
+            alertBool: !this.state.alertBool
+        })
+    }
     // upload-delete image handlers 
 
     handleImageChange = (e) => {
@@ -108,16 +122,18 @@ class ProfileEdit extends Component {
 
     handlePasswordFormSubmit = (event) => {
         event.preventDefault()
-
         const oldPassword = this.state.oldPassword
         const newPassword = this.state.newPassword
-
         axios.put(`/api/password/${this.props.currentUser._id}`, { oldPassword, newPassword })
             .then((resp) => {
                 // this.setModalLogin(false)
-                console.log(resp.data);
+                console.log(resp.data.message);
                 // this.props.updateUser(resp.data)
-                this.setState({ newPassword: "", oldPassword: "" });
+                this.setState({
+                    newPassword: "",
+                    oldPassword: "",
+                    successMessage: resp.data.message
+                });
             }).catch((err) => {
                 console.log('error', err);
             })
@@ -158,6 +174,9 @@ class ProfileEdit extends Component {
     render() {
         return (
             <div>
+                {this.state.successMessage
+                    ? <AlertMessage color="success" successMessage={this.state.successMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
+                    : ''}
                 <Container>
                     <Row>
                         <Col md="6">
@@ -248,7 +267,29 @@ class ProfileEdit extends Component {
                                     </InputGroup>
                                     {/* about */}
 
-                                    <Editor updateContent={this.updateContent} content={this.state.about} profile />
+                                    <InputGroup
+                                        className={
+                                            this.state.aboutFocus
+                                                ? "no-border input-lg input-group-focus"
+                                                : "no-border input-lg"
+                                        }
+                                    >
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>
+                                                <i className="far fa-file-alt"></i>                                            </InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input
+                                            placeholder="About"
+                                            name="about"
+                                            value={this.state.about}
+                                            type="textarea"
+                                            onFocus={() => this.setAboutFocus(true)}
+                                            onBlur={() => this.setAboutFocus(false)}
+                                            onChange={this.handleChange}
+                                        ></Input>
+                                    </InputGroup>
+
+                                    {/* <Editor updateContent={this.updateContent} content={this.state.about} profile /> */}
                                 </CardBody>
                                 <ModalFooter className="text-center">
                                     <Button
