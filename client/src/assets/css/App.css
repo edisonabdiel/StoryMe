@@ -6,3 +6,8 @@
 .jodit-ui-group {
     background-color: lightgray !important;
 }
+
+.jodit-wysiwyg p {
+    color: black !important;
+    text-align: left;
+}

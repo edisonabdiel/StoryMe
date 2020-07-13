@@ -20,11 +20,7 @@ router.get('/profileStories', (req, res, next) => {
   let newList = []
   Story.find().then(allTheStories => {
     console.log("outPut: allTheStories", allTheStories)
-    allTheStories.forEach((e) => {
-      if (req.user.id.localeCompare(e.owner) === 0) {
-        newList.push(e)
-      }
-    })
+    newList = allTheStories.filter((story) => req.user.id.localeCompare(story.owner) === 0)
     res.json(newList);
   });
 
@@ -71,14 +67,14 @@ router.put('/stories/:id', (req, res, next) => {
   Story.findByIdAndUpdate(req.params.id,
     {
       // $set: {
-        title: req.body.title,
-        image: req.body.image,
-        icon: req.body.icon,
-        imageName: req.body.imageName,
-        category: req.body.category,
-        headline: req.body.headline,
-        content: req.body.content,
-        duration: req.body.duration,
+      title: req.body.title,
+      image: req.body.image,
+      icon: req.body.icon,
+      imageName: req.body.imageName,
+      category: req.body.category,
+      headline: req.body.headline,
+      content: req.body.content,
+      duration: req.body.duration,
       // }
     }, { new: true })
     .then((resp) => {

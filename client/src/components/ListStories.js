@@ -85,7 +85,7 @@ class ListStories extends Component {
   likesNum = (storyID) => {
 
     axios.put(`/api/stories/${storyID}/liked`)
-      .then((resp) => {                
+      .then((resp) => {
         console.log('Likes response:', resp.data);
 
         const currentStory = resp.data
@@ -97,10 +97,10 @@ class ListStories extends Component {
         // let newList = this.state.listOfStories.filter(story => story._id !== currentStory._id)   
         //  newList = newList.concat(currentStory)     
 
-        this.setState({          
+        this.setState({
           liked: currentStory.likes.includes(this.props.currentUser._id),
           listOfStories: newList
-       })
+        })
       })
   }
   saveStoryValues = (position) => {
@@ -109,7 +109,7 @@ class ListStories extends Component {
       liked: this.state.listOfStories[position].likes.includes(this.props.currentUser._id)
     })
     this.setModalClassic(true)
-   
+
     // console.log('ALL STORY VALUES', storyValues);
   }
   // newStoryHandler = (story) => {
@@ -118,7 +118,7 @@ class ListStories extends Component {
   //   })
   // }
   render() {
-    console.log('current story',this.state.listOfStories[this.state.currentOpenStory]);
+    console.log('current story', this.state.listOfStories[this.state.currentOpenStory]);
     return (
       <div>
         <div
@@ -203,11 +203,11 @@ class ListStories extends Component {
                     )
                   })
                 }
-                {this.state.listOfStories && this.state.listOfStories[this.state.currentOpenStory] && 
-                  <ModalComponent liked={this.state.liked} likesHandler={this.likesNum} story={this.state.listOfStories[this.state.currentOpenStory]} modalClassic={this.state.modalClassic} closeHandler={()=>this.setModalClassic(false)}/>  
+                {this.state.listOfStories && this.state.listOfStories[this.state.currentOpenStory] &&
+                  <ModalComponent liked={this.state.liked} likesHandler={this.likesNum} story={this.state.listOfStories[this.state.currentOpenStory]} modalClassic={this.state.modalClassic} closeHandler={() => this.setModalClassic(false)} />
                 }
               </Row>
-            </Container> 
+            </Container>
           </div>
         </div>
       </div>

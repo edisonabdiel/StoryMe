@@ -118,11 +118,11 @@ export class ProfilePage extends Component {
                 <div className="content">
                   <div className="social-description">
                     <h2>26</h2>
-                    <p>Comments</p>
+                    <p>Followers</p>
                   </div>
                   <div className="social-description">
                     <h2>26</h2>
-                    <p>Comments</p>
+                    <p>Following</p>
                   </div>
                   <div className="social-description">
                     <h2>48</h2>

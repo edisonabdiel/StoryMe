@@ -41,7 +41,7 @@ class ProfileEdit extends Component {
         oldPassword: '',
         newPassword: '',
         aboutFocus: false,
-        alertBool: false
+        alertBool: true
     }
 
     setNameFocus = (bool) => {
@@ -73,9 +73,11 @@ class ProfileEdit extends Component {
 
     setAlertBool = () => {
         this.setState({
-            alertBool: !this.state.alertBool
+            alertBool: false
         })
     }
+
+    // }
     // upload-delete image handlers 
 
     handleImageChange = (e) => {
@@ -126,15 +128,17 @@ class ProfileEdit extends Component {
         const newPassword = this.state.newPassword
         axios.put(`/api/password/${this.props.currentUser._id}`, { oldPassword, newPassword })
             .then((resp) => {
-                // this.setModalLogin(false)
                 console.log(resp.data.message);
                 // this.props.updateUser(resp.data)
                 this.setState({
                     newPassword: "",
                     oldPassword: "",
-                    successMessage: resp.data.message
+                    successMessage: resp.data.message,
+                    alertBool: true,
+                    errorMessage: resp.data.error
                 });
             }).catch((err) => {
+                console.log(err);
                 console.log('error', err);
             })
     }
@@ -175,8 +179,12 @@ class ProfileEdit extends Component {
         return (
             <div>
                 {this.state.successMessage
-                    ? <AlertMessage color="success" successMessage={this.state.successMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
+                    ? <AlertMessage color="success" message={this.state.successMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
                     : ''}
+                {this.state.errorMessage
+                    ? <AlertMessage color="danger" message={this.state.errorMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
+                    : ''}
+
                 <Container>
                     <Row>
                         <Col md="6">

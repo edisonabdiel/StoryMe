@@ -5,18 +5,20 @@ import {
 } from "reactstrap";
 
 export class AlertMessage extends Component {
-    // state = {
-    //     alertBool: true
-    // }
+
     render() {
         return (
             <div>
                 <Alert color={this.props.color} isOpen={this.props.alertBool}>
                     <Container>
                         <div className="alert-icon">
-                            <i className="now-ui-icons ui-2_like"></i>
+                            {this.props.color === 'danger'
+                                ? <i className="now-ui-icons objects_support-17"></i>
+                                : <i className="now-ui-icons ui-2_like"></i>
+
+                            }
                         </div>
-                        {this.props.successMessage}
+                        {this.props.message}
                         <button
                             type="button"
                             className="close"
@@ -28,6 +30,7 @@ export class AlertMessage extends Component {
                         </button>
                     </Container>
                 </Alert>
+
             </div>
         )
     }

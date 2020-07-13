@@ -23,7 +23,8 @@ const userSchema = new Schema({
   image: String,
   userName: String,
   about: String,
-  imageName: String
+  imageName: String,
+  followers: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 
 },
   {

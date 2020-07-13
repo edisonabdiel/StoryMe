@@ -9,17 +9,10 @@ import { Link } from 'react-router-dom'
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
-  Collapse,
-  FormGroup,
   Container,
   Row,
   Col,
-  UncontrolledTooltip,
-  PopoverBody,
-  PopoverHeader,
-  UncontrolledPopover,
   Form,
   Input,
   InputGroupAddon,
@@ -75,16 +68,14 @@ class LoginButton extends React.Component {
         console.log('USER DATA UPDATED', this.props.currentUser);
 
         this.setState({ email: "", password: "" });
+      }).then(() => {
+        this.props.history.push('/profile-page')
       }).catch((error) => {
         console.log("Error!!");
         console.log(error.response);
         this.setState({
           errorMessage: error.response.data.message
         })
-      }).then(() => {
-        if (this.props.currentUser) {
-          this.props.history.push('/profile-page')
-        }
       })
   }
 
@@ -118,15 +109,12 @@ class LoginButton extends React.Component {
                     </button>
                     <div className="header header-info text-center">
                       <div className="logo-container">
-                        <img
-                          alt="..."
-                          src={require("assets/img/now-logo.png")}
-                        ></img>
+
                       </div>
                     </div>
                   </div>
                   <div className="modal-body">
-                    {this.state.errorMessage ? <p style={{ textAlign: 'center' }}>{this.state.errorMessage}</p> : null}
+                    {this.state.errorMessage ? <p style={{ textAlign: 'center', color: "red" }}>{this.state.errorMessage}</p> : null}
                     <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
                       <CardBody>
                         <InputGroup
@@ -138,11 +126,11 @@ class LoginButton extends React.Component {
                         >
                           <InputGroupAddon addonType="prepend">
                             <InputGroupText>
-                              <i className="now-ui-icons users_circle-08"></i>
+                              <i className="now-ui-icons ui-1_email-85"></i>
                             </InputGroupText>
                           </InputGroupAddon>
                           <Input
-                            placeholder="First Name..."
+                            placeholder="Email..."
                             name="email"
                             value={this.state.email}
                             type="text"

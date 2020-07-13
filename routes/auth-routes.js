@@ -19,6 +19,8 @@ const {
   validationResult
 } = require("express-validator");
 const signUpValidation = require("../helpers/middlewares").signUpValidation;
+const loggedIn = require("../helpers/middlewares").loggedIn;
+
 
 
 // email authorization
@@ -31,10 +33,12 @@ const transporter = nodemailer.createTransport({
 });
 
 //POST /api/singup
-authRoutes.post('/signup', signUpValidation, (req, res, next) => {
+authRoutes.post('/signup', signUpValidation, loggedIn, (req, res, next) => {
   // get the validation errors 
   const errors = validationResult(req);
   console.log("outPut: errors", errors.array())
+  console.log("outPut: errors", errors)
+
   if (!errors.isEmpty()) {
     return res.status(400).json({
       errors: errors.array()
@@ -141,7 +145,7 @@ authRoutes.get("/confirmation/:token", (req, res) => {
 });
 
 //POST /api/login
-authRoutes.post('/login', (req, res, next) => {
+authRoutes.post('/login', loggedIn, (req, res, next) => {
   passport.authenticate('local', (err, theUser, failureDetails) => {
 
     if (!theUser) {
@@ -206,7 +210,7 @@ authRoutes.put("/password/:id", (req, res, next) => {
     console.log("outPut: user.password", user.password)
 
     if (!bcrypt.compareSync(req.body.oldPassword, user.password)) {
-      res.status(500).json({ message: 'Incorrect password.' })
+      res.json({ error: 'Incorrect password.' })
       return;
     } else {
       console.log("user", user.password);
@@ -218,7 +222,8 @@ authRoutes.put("/password/:id", (req, res, next) => {
       res.status(200).json({ message: 'Password has been updated' });
     })
   }).catch((err) => {
-    res.status(500).json({ message: err })
+    console.log(err);
+    res.json({ message: 'Something went wrong, please try again' })
   })
 
 })

@@ -18,7 +18,12 @@ const Editor = (props) => {
         toolbarAdaptive: true,
         // askBeforePasteFromWord: false,
         // defaultActionOnPaste: "insert_as_text",
-        askBeforePasteHTML: false
+        askBeforePasteHTML: false,
+        showPlaceholder: false,
+        style: {
+            font: 'black'
+        }
+
     }
     // config for edit profile page
     const config2 = {
@@ -43,6 +48,7 @@ const Editor = (props) => {
             tabIndex={1} // tabIndex of textarea
             onBlur={newContent => [props.updateContent(newContent), setContent(newContent)]} // preferred to use only this option to update the content for performance reasons
             onChange={newContent => { }}
+            style={{ color: 'red' }}
         />
 
     );

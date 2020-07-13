@@ -66,30 +66,30 @@ function FixedTransparentNavbar(props) {
                 <DropdownMenu>
                   <i className="now-ui-icons design_image"></i>
                   <DropdownItem>
-                  <Logout updateUser={props.updateUser} />
+                    <Logout updateUser={props.updateUser} />
                   </DropdownItem>
                 </DropdownMenu>
                 <UncontrolledDropdown className="button-dropdown p-md-2" >
-            <DropdownToggle
-              caret
-              tag="a"
-              data-toggle="dropdown"
-              id="navbarDropdown"
-                  onClick={(e) => e.preventDefault()}
-            >
-              <span className="button-bar"></span>
-              <span className="button-bar"></span>
-              <span className="button-bar"></span>
-            </DropdownToggle>
-            <DropdownMenu aria-labelledby="navbarDropdown" data-background-color="black">
-              <DropdownItem onClick={(e) => e.preventDefault()}>
-              <Logout size="sm" updateUser={props.updateUser} />
-              </DropdownItem>
-              <DropdownItem onClick={(e) => e.preventDefault()}>
-              <Link to="/login-page" style={{textDecoration: 'none'}}><Login /></Link>
-              </DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
+                  <DropdownToggle
+                    caret
+                    tag="a"
+                    data-toggle="dropdown"
+                    id="navbarDropdown"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    <span className="button-bar"></span>
+                    <span className="button-bar"></span>
+                    <span className="button-bar"></span>
+                  </DropdownToggle>
+                  <DropdownMenu aria-labelledby="navbarDropdown" data-background-color="black">
+                    <DropdownItem onClick={(e) => e.preventDefault()}>
+                      <Logout size="sm" updateUser={props.updateUser} {...props} />
+                    </DropdownItem>
+                    <DropdownItem onClick={(e) => e.preventDefault()}>
+                      <Link to="/login-page" style={{ textDecoration: 'none' }}><Login /></Link>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
               </UncontrolledDropdown>
               {/* <NavItem>
                 <Button
