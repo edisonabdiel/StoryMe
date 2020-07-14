@@ -28,6 +28,8 @@ import StoryDetails from "components/StoryDetails";
 import EditStory from "components/EditStory";
 import AddStoryForm from 'views/examples/AddStoryForm';
 import ProfileEdit from 'views/examples/ProfileEdit'
+import { Card } from "reactstrap";
+import CardComponent from "components/CardComponent";
 
 
 
@@ -52,7 +54,7 @@ class App extends React.Component {
       <div>
         {/* {this.state.loggedInUser ? <h1>Hi {this.state.loggedInUser.email}</h1> : 'Logged out'} */}
         <Switch>
-          <Route exact path="/" render={(props) => <Discovery {...props} updateUser={this.updateUser} />} />
+          <Route exact path="/" render={(props) => <Discovery {...props} updateUser={this.updateUser} currentUser={this.state.loggedInUser}/>} />
           <Route exact path="/login-button" render={(props) => <LoginButton updateUser={this.updateUser} currentUser={this.state.loggedInUser} {...props} />} />
           <Route exact path="/login-page" render={(props) => <LoginPage {...props} />} />
           <Route exact path="/sign-up" render={(props) => <SignupPage updateUser={this.updateUser} currentUser={this.state.loggedInUser} {...props} />} />
@@ -70,7 +72,6 @@ class App extends React.Component {
           <Route exact path="/stories/:id" component={StoryDetails} />
           <Route exact path="/story-edit/:id" render={(props) => <EditStory currentUser={this.state.loggedInUser} {...props} />} />
           <Route exact path="/profile-edit" render={(props) => <ProfileEdit currentUser={this.state.loggedInUser} updateUser={this.updateUser} {...props} />} />
-
         </Switch>
       </div>
     )

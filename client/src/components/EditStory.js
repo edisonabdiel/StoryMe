@@ -5,7 +5,6 @@ import Editor from "views/examples/editor";
 import DOMPurify from "dompurify";
 import ImageUpload from "components/CustomUpload/ImageUpload.js";
 import Select from "react-select";
-
 import DropdownIconsCategory from "views/examples/DropdownIconsCategory"
 
 // reactstrap components
@@ -24,9 +23,6 @@ import {
 } from "reactstrap";
 import EditFixedNavbar from './Navbars/EditFixedNavbar';
 import FooterBlack from './Footers/FooterBlack';
-
-
-
 
 class EditStory extends Component {
     state = {
@@ -83,9 +79,7 @@ class EditStory extends Component {
         })
     }
 
-
     // upload-delete image handlers 
-
     handleImageChange = (e) => {
         let formData = new FormData()
         formData.append("imageUrl", e.target.files[0])
