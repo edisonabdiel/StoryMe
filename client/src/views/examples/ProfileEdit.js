@@ -166,7 +166,7 @@ class ProfileEdit extends Component {
                     userName: ""
                 })
             }).then(() => {
-                this.props.history.push('/profile-page')
+                this.props.history.push(`/profile-page/${this.props.currentUser}`)
             })
             .catch(error => {
                 console.log("Error!", error);

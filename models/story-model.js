@@ -39,10 +39,11 @@ const storySchema = new Schema({
   // icon: String,
   category: String,
   content: String,
-  likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   duration: String,
 
-  owner: { type: Schema.Types.ObjectId, ref: 'User' }
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+
 });
 
 const Story = mongoose.model('Story', storySchema);

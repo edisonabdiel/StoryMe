@@ -71,7 +71,7 @@ export class LoginPage extends Component {
         console.log('USER DATA UPDATED', this.props.currentUser);
         this.setState({ email: "", password: "" });
       }).then(() => {
-        this.props.history.push('/profile-page')
+        this.props.history.push(`/profile-page/${this.props.currentUser._id}`)
       }).catch((error) => {
         console.log("Error!!");
         console.log(error.response);

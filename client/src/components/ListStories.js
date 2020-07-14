@@ -180,20 +180,22 @@ class ListStories extends Component {
                                   className="avatar img-raised"
                                   src={require("assets/img/james.jpg")}
                                 ></img>
-                                <span>{this.props.currentUser.email}</span>
+                                <Link to={{
+                                  pathname: `/profile-page/${p.owner._id}`,
+                                  state: p.owner
+                                }}>{p.owner.email}</Link>
                               </div>
                               <hr />
                               <div className="btn-block">
-                                {p.owner === this.props.currentUser._id ?
+                                {p.owner._id === this.props.currentUser._id ?
                                   <div>
-                                    {/* <EditStory theStory={this.state} getTheStory={this.componentDidMount} {...this.props}/> */}
                                     <button className="nav-link btn-info btn-round pull-left ml-lg-5" style={{ color: 'white', textDecoration: 'none' }}>
                                       <Link className="text-decoration-none" to={"/story-edit/" + p._id} onClick={() => this.editHandler(p._id)}><b>Edit</b></Link>
                                     </button>
                                   </div>
                                   : "hello"}
 
-                                {p.owner === this.props.currentUser._id ? <button className="nav-link btn-round btn-danger pull-right mr-5"
+                                {p.owner._id === this.props.currentUser._id ? <button className="nav-link btn-round btn-danger pull-right mr-5"
                                   onClick={() => this.deleteHandler(p._id)}><b>Delete</b></button> : "hello"}
                               </div>
                             </CardFooter>

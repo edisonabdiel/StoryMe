@@ -9,8 +9,9 @@ const Story = require('../models/story-model');
 // GET route => to get all the stories for discovery page
 router.get('/stories', (req, res, next) => {
   console.log(req.user);
-  Story.find()
+  Story.find().populate("owner")
     .then(allTheStories => {
+      console.log("outPut: allTheStories", allTheStories.owner)
       res.json(allTheStories);
     })
 });
@@ -18,9 +19,9 @@ router.get('/stories', (req, res, next) => {
 // GET route => to get all the stories for profile page
 router.get('/profileStories', (req, res, next) => {
   let newList = []
-  Story.find().then(allTheStories => {
+  Story.find().populate("owner").then(allTheStories => {
     console.log("outPut: allTheStories", allTheStories)
-    newList = allTheStories.filter((story) => req.user.id.localeCompare(story.owner) === 0)
+    newList = allTheStories.filter((story) => req.user.id.localeCompare(story.owner._id) === 0)
     res.json(newList);
   });
 
@@ -86,7 +87,7 @@ router.put('/stories/:id', (req, res, next) => {
 
 router.put('/stories/:id/liked', (req, res, next) => {
   console.log(req.body)
-  Story.findById(req.params.id).then((story) => {
+  Story.findById(req.params.id).populate("owner").then((story) => {
     console.log(story)
     let promise;
     if (story.likes.includes(req.user._id)) {
@@ -98,8 +99,9 @@ router.put('/stories/:id/liked', (req, res, next) => {
         $push: { likes: req.user._id }
       }, { new: true })
     }
-    promise
+    promise.populate("owner")
       .then((resp) => {
+        console.log("outPut: resp", resp)
         res.json(resp);
       })
   })

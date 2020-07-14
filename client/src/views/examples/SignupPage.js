@@ -71,6 +71,8 @@ class SignupPage extends React.Component {
     axios.post("/api/signup", { email, password, checked })
       .then((res) => {
         this.props.updateUser(res.data)
+        console.log("outPut: SignupPage -> user", this.props.currentUser)
+
         this.setState({
           checked: false,
           email: "",
@@ -78,7 +80,7 @@ class SignupPage extends React.Component {
           errorMessages: []
         })
       }).then(() => {
-        this.props.history.push('/profile-page')
+        this.props.history.push(`/profile-page/${this.props.currentUser._id}`)
       }).catch((error) => {
         console.log("outPut: SignupPage -> handleFormSubmit -> error", error.response)
         {

@@ -37,7 +37,7 @@ import FooterBlack from "components/Footers/FooterBlack.js";
 import BodyClassName from "react-body-classname";
 import ListStories from "components/ListStories"
 import ProfilePagePortfolio from './ProfilePagePortfolio';
-import ProfileSetting from './ProfileEdit';
+
 
 
 export class ProfilePage extends Component {
@@ -46,7 +46,8 @@ export class ProfilePage extends Component {
   // const[emailFocus, setEmailFocus] = React.useState(false);
 
   state = {
-    isClicked: false
+    isClicked: false,
+    visitedProfile: this.props.location.state
   }
 
   handelIsClicked = () => {
@@ -62,12 +63,17 @@ export class ProfilePage extends Component {
   }
 
   render() {
+    console.log("outPut: ProfilePage -> this.props.location", this.props.location)
+
     return (
       <BodyClassName className="profile-page sidebar-collapse">
         <div>
-          <ScrollTransparentNavbar updateUser={this.props.updateUser} />
+          <ScrollTransparentNavbar updateUser={this.props.updateUser} currentUser={this.props.currentUser} />
           <div className="wrapper" >
-            <ProfilePageHeader currentUser={this.props.currentUser} />
+            {this.state.visitedProfile
+              ? <ProfilePageHeader currentUser={this.state.visitedProfile} />
+              : <ProfilePageHeader currentUser={this.props.currentUser} />
+            }
             <div className="section">
               <Container >
                 <div className="button-container">
