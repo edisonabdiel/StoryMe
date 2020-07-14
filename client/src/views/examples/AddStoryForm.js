@@ -130,7 +130,7 @@ class AddStoryForm extends React.Component {
             .then((resp) => {
                 console.log("outPut: AddStoryForm -> handleFormSubmit -> resp", resp.data.image)
                 this.setState({ title: "", headline: "", content: '', imageUrl: defaultAvatar, storyImageName: '', duration: "", category: "", icon: "" });
-                this.props.history.push('/profile-page')
+                this.props.history.push(`/profile-page/${this.props.currentUser._id}`)
             }).catch((error) => {
                 console.log("Error!!");
                 console.log(error.response);
@@ -143,7 +143,7 @@ class AddStoryForm extends React.Component {
     render() {
         return (
             <div data-background-color="black">
-                <FixedTransparentNavbar updateUser={this.props.updateUser} />
+                <FixedTransparentNavbar updateUser={this.props.updateUser} currentUser={this.props.currentUser} />
                 <div style={{ height: '70px' }}></div> {/* offsets height of navbar */}
                 <div className="text-center">
                     <Container fluid>

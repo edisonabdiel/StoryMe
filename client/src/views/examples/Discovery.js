@@ -22,11 +22,11 @@ function BlogPosts(props) {
   // const [emailFocus, setEmailFocus] = React.useState(false);
   return (
     <>
-      <ScrollTransparentNavbar updateUser={props.updateUser} />
+      <ScrollTransparentNavbar updateUser={props.updateUser} currentUser={props.currentUser} />
       <div className="wrapper blog-posts" >
         <DiscoveryHeader />
         <div className="projects-4">
-        <ListStories currentUser={props.currentUser}/>
+          {/* <ListStories currentUser={props.currentUser}/> */}
           {/* <Container>
             <div className="section" >
               <h3 className="title text-center">
@@ -153,7 +153,7 @@ function BlogPosts(props) {
             </div>
           </Container>*/}
         </div>
-      </div> 
+      </div>
       <FooterBlack />
     </>
   );

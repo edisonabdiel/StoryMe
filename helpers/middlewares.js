@@ -24,8 +24,20 @@ let signUpValidation = [
     check("checked").equals("true").withMessage("must agree to terms and conditions")
 ];
 
+let loggedIn = (req, res, next) => {
+    if (req.user) {
+        res.status(400).json({
+            errors: ['It seems that you are already logged in']
+        });
+    } else {
+        next()
+    }
+};
+
+
 
 
 module.exports = {
-    signUpValidation: signUpValidation
+    signUpValidation: signUpValidation,
+    loggedIn: loggedIn
 };

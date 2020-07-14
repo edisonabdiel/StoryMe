@@ -41,8 +41,8 @@ const CardComponent = (props) => {
                                     <CardFooter >
                                         <div className="stats stats-right">
                                             {oneStory.likes.includes(props.currentUser._id) ?
-                                                <i className="fa fa-heart fa-lg" style={{marginRight:'3px'}}></i>
-                                                :<i className="now-ui-icons ui-2_favourite-28" ></i>
+                                                <i className="fa fa-heart fa-lg" style={{ marginRight: '3px' }}></i>
+                                                : <i className="now-ui-icons ui-2_favourite-28" ></i>
                                             }
                                             {oneStory.likes.length}
                                             <i className="now-ui-icons tech_watch-time"></i>
@@ -54,11 +54,14 @@ const CardComponent = (props) => {
                                                 className="avatar img-raised"
                                                 src={require("assets/img/james.jpg")}
                                             ></img>
-                                            <span>{props.currentUser.email}</span>
+                                            <Link to={{
+                                                pathname: `/profile-page/${oneStory.owner._id}`,
+                                                state: oneStory.owner
+                                            }}>{oneStory.owner.email}</Link>
                                         </div>
                                         <hr />
                                         <div className="btn-block">
-                                            {oneStory.owner === props.currentUser._id ?
+                                            {oneStory.owner._id === props.currentUser._id ?
                                                 <div>
                                                     <button className="nav-link btn-info btn-round pull-left ml-lg-5" style={{ color: 'white', textDecoration: 'none' }}>
                                                         <Link className="text-decoration-none" to={"/story-edit/" + oneStory._id} onClick={() => props.editHandler(oneStory._id)}><b>Edit</b></Link>
@@ -66,7 +69,7 @@ const CardComponent = (props) => {
                                                 </div>
                                                 : ""}
 
-                                            {oneStory.owner === props.currentUser._id ? <button className="nav-link btn-round btn-danger pull-right mr-5"
+                                            {oneStory.owner._id === props.currentUser._id ? <button className="nav-link btn-round btn-danger pull-right mr-5"
                                                 onClick={() => props.deleteHandler(oneStory._id)}><b>Delete</b></button> : "Edit/delete not available"}
                                         </div>
                                     </CardFooter>
