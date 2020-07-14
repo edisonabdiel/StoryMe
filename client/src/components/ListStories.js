@@ -163,9 +163,10 @@ class ListStories extends Component {
                               <strong>{p.title}</strong>
                               {/* </Link> */}
                             </CardTitle>
-                            <p className="card-description" onClick={() => this.saveStoryValues(idx)} style={{ cursor: 'pointer' }}>
+                            <strong><p className="card-description" onClick={() => this.saveStoryValues(idx)} style={{ cursor: 'pointer', color: 'black !important'  }}>
                               {p.headline}
-                            </p>
+                            </p></strong>
+                            
                             {/* </Link> */}
                             <CardFooter >
                               <div className="stats stats-right">

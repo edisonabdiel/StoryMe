@@ -6,3 +6,7 @@
 .jodit-ui-group {
     background-color: lightgray !important;
 }
+
+.jodit-tooltip {
+    display: none;
+}
