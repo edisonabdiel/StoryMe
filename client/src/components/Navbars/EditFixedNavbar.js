@@ -17,7 +17,8 @@ import {
 
 
 import Logout from "views/examples/Logout";
-import Login from "views/examples/Login"
+import Login from "views/examples/Login";
+import SignUp from 'views/examples/Signup';
 
 
 const EditFixedNavbar = (props) => {
@@ -59,9 +60,9 @@ const EditFixedNavbar = (props) => {
                 aria-hidden={true}
                 className="now-ui-icons users_single-02 p-md-3"
               ></i></Link>
-              <Link to="/contact-us"><i
-                aria-hidden={true}
-                className="now-ui-icons ui-1_email-85 p-md-3"
+               <Link to='/profile-edit' style={{ textDecoration: 'none' }}><i
+                      aria-hidden={true}
+                      className="now-ui-icons loader_gear p-md-3"
               ></i></Link>
               <UncontrolledDropdown className="button-dropdown p-md-2" >
             <DropdownToggle
@@ -81,7 +82,10 @@ const EditFixedNavbar = (props) => {
               </DropdownItem>
               <DropdownItem onClick={(e) => e.preventDefault()}>
               <Link to="/login-page" style={{textDecoration: 'none'}}><Login /></Link>
-              </DropdownItem>
+                  </DropdownItem>
+                  <DropdownItem onClick={(e) => e.preventDefault()}>
+              <Link to="/sign-up" style={{textDecoration: 'none'}}><SignUp /></Link>
+                  </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
               <NavItem>
