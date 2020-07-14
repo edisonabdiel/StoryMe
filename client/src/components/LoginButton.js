@@ -29,7 +29,7 @@ class LoginButton extends React.Component {
     modalLogin: false,
     email: '',
     password: '',
-    errorMessage: ''
+    errorMessages: []
   }
   setNameFocus = (bool) => {
     this.setState({
@@ -74,7 +74,7 @@ class LoginButton extends React.Component {
         console.log("Error!!");
         console.log(error.response);
         this.setState({
-          errorMessage: error.response.data.message
+          errorMessages: error.response.data.errors
         })
       })
   }
@@ -114,7 +114,9 @@ class LoginButton extends React.Component {
                     </div>
                   </div>
                   <div className="modal-body">
-                    {this.state.errorMessage ? <p style={{ textAlign: 'center', color: "red" }}>{this.state.errorMessage}</p> : null}
+                    {this.state.errorMessages.map((m) =>
+                      <p key={m} style={{ textAlign: 'center', color: "red" }}>{m}</p>
+                    )}
                     <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
                       <CardBody>
                         <InputGroup

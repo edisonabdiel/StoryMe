@@ -17,11 +17,11 @@ router.get('/stories', (req, res, next) => {
 });
 
 // GET route => to get all the stories for profile page
-router.get('/profileStories', (req, res, next) => {
+router.get('/profileStories/:id', (req, res, next) => {
   let newList = []
   Story.find().populate("owner").then(allTheStories => {
     console.log("outPut: allTheStories", allTheStories)
-    newList = allTheStories.filter((story) => req.user.id.localeCompare(story.owner._id) === 0)
+    newList = allTheStories.filter((story) => req.params.id.localeCompare(story.owner._id) === 0)
     res.json(newList);
   });
 

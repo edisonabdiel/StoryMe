@@ -194,6 +194,8 @@ class ProfileEdit extends Component {
                                     {/* image */}
                                     <InputGroup >
                                         <ImageUpload avatar imageUrl={this.state.imageUrl} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
+                                        <ImageUpload imageUrl={this.state.imageUrl} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
+
                                     </InputGroup>
                                     {/* email */}
                                     <InputGroup

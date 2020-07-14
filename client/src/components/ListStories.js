@@ -31,6 +31,8 @@ import { clearConfig } from 'dompurify';
 import { relativeTimeThreshold } from 'moment';
 
 
+
+// <ListStories loggedInUser= {}
 class ListStories extends Component {
 
   state = {
@@ -40,20 +42,22 @@ class ListStories extends Component {
     // likesNum: 0,
     currentOpenStory: 0
   }
+
+
   componentDidMount() {
-    {
-      this.props.profile
-        ? axios.get('/api/profileStories').then((resp) => {
-          this.setState({
-            listOfStories: resp.data
-          })
+
+    this.props.profile
+      ? axios.get(`/api/profileStories/${this.props.currentUser._id}`).then((resp) => {
+        this.setState({
+          listOfStories: resp.data
         })
-        : axios.get('/api/stories').then((resp) => {
-          this.setState({
-            listOfStories: resp.data
-          })
+      })
+      : axios.get('/api/stories').then((resp) => {
+        this.setState({
+          listOfStories: resp.data
         })
-    }
+      })
+
   }
 
   deleteHandler = (storyID) => {

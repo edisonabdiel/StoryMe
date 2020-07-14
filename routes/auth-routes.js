@@ -151,7 +151,11 @@ authRoutes.post('/login', loggedIn, (req, res, next) => {
     if (!theUser) {
       // "failureDetails" contains the error messages
       // from our logic in "LocalStrategy" { message: '...' }.
-      res.status(401).json(failureDetails);
+      console.log("outPut: failureDetails", failureDetails.message)
+      const errors = [failureDetails.message]
+      console.log("outPut: errors", errors)
+
+      res.status(401).json({ errors: errors });
       return;
     }
 
@@ -210,7 +214,7 @@ authRoutes.put("/password/:id", (req, res, next) => {
     console.log("outPut: user.password", user.password)
 
     if (!bcrypt.compareSync(req.body.oldPassword, user.password)) {
-      res.json({ error: 'Incorrect password.' })
+      res.json({ errors: ['Incorrect password.'] })
       return;
     } else {
       console.log("user", user.password);
@@ -219,11 +223,11 @@ authRoutes.put("/password/:id", (req, res, next) => {
     return user.save().then((user) => {
 
       // res.status(200).json(user);
-      res.status(200).json({ message: 'Password has been updated' });
+      res.status(200).json({ errors: ['Password has been updated'] });
     })
   }).catch((err) => {
     console.log(err);
-    res.json({ message: 'Something went wrong, please try again' })
+    res.json({ errors: ['Something went wrong, please try again'] })
   })
 
 })

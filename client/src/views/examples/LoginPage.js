@@ -32,7 +32,7 @@ export class LoginPage extends Component {
     modalLogin: false,
     email: '',
     password: '',
-    errorMessage: ''
+    errorMessage: []
   }
   setNameFocus = (bool) => {
     this.setState({
@@ -76,7 +76,7 @@ export class LoginPage extends Component {
         console.log("Error!!");
         console.log(error.response);
         this.setState({
-          errorMessage: error.response.data.message
+          errorMessage: error.response.data.errors
         })
       })
 
@@ -100,7 +100,10 @@ export class LoginPage extends Component {
                 <Row>
                   <Col className="ml-auto mr-auto" md="5">
                     <Card className="card-login card-plain">
-                      {this.state.errorMessage ? <p style={{ textAlign: 'center', color: "red" }}>{this.state.errorMessage}</p> : null}
+                      {/* {this.state.errorMessage ? <p style={{ textAlign: 'center', color: "red" }}>{this.state.errorMessage}</p> : null} */}
+                      {this.state.errorMessage.map((m) =>
+                        <p key={m} style={{ textAlign: 'center', color: "red" }}>{m}</p>
+                      )}
                       <Form onSubmit={this.handleFormSubmit}>
                         <CardHeader className="text-center">
                           <div className="logo-container">

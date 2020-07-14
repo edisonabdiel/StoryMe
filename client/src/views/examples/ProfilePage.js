@@ -71,7 +71,7 @@ export class ProfilePage extends Component {
           <ScrollTransparentNavbar updateUser={this.props.updateUser} currentUser={this.props.currentUser} />
           <div className="wrapper" >
             {this.state.visitedProfile
-              ? <ProfilePageHeader currentUser={this.state.visitedProfile} />
+              ? <ProfilePageHeader currentUser={this.props.location.state} />
               : <ProfilePageHeader currentUser={this.props.currentUser} />
             }
             <div className="section">
@@ -138,7 +138,10 @@ export class ProfilePage extends Component {
 
 
                 <ProfilePagePortfolio handelIsClicked={this.handelIsClicked} handelToClose={this.handelToClose} />
-                {this.state.isClicked ? <ListStories currentUser={this.props.currentUser} profile /> : ""}
+                {this.state.isClicked && <ListStories profile
+                  // currentUser={this.state.visitedProfile} /> 
+                  // :<ListStories profile
+                  currentUser={this.props.currentUser} userId={this.state.visitedProfile._id} />}
 
 
               </Container>

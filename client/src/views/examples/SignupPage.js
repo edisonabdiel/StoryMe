@@ -37,8 +37,7 @@ class SignupPage extends React.Component {
     errorMessages: [],
     password: '',
     passwordFocus: false,
-    emailFocus: false,
-    logInError: ''
+    emailFocus: false
   }
   setChecked = (bool) => {
     this.setState({
@@ -83,14 +82,9 @@ class SignupPage extends React.Component {
         this.props.history.push(`/profile-page/${this.props.currentUser._id}`)
       }).catch((error) => {
         console.log("outPut: SignupPage -> handleFormSubmit -> error", error.response)
-        {
-          error.response.data.errors ? this.setState({
-            errorMessages: error.response.data.errors,
-            logInError: ''
-          }) : this.setState({
-            logInError: error.response.data.message
-          })
-        }
+        this.setState({
+          errorMessages: error.response.data.errors,
+        })
       })
   }
 

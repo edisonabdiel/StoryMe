@@ -27,7 +27,7 @@ let signUpValidation = [
 let loggedIn = (req, res, next) => {
     if (req.user) {
         res.status(400).json({
-            message: 'It seems that you are already logged in'
+            errors: ['It seems that you are already logged in']
         });
     } else {
         next()
