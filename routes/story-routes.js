@@ -47,7 +47,6 @@ router.post('/stories', (req, res, next) => {
     owner: req.user._id
   })
     .then(newProject => {
-
       res.json(newProject);
     }).catch((err) => {
       console.log("outPut: err", err)

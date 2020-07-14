@@ -35,7 +35,7 @@ import ScrollTransparentNavbar from "components/Navbars/ScrollTransparentNavbar.
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import FooterBlack from "components/Footers/FooterBlack.js";
 import BodyClassName from "react-body-classname";
-import ListStories from "components/ListStories"
+import ListStories from "components/ListStories";
 import ProfilePagePortfolio from './ProfilePagePortfolio';
 import ProfileSetting from './ProfileEdit';
 
