@@ -28,6 +28,8 @@ import StoryDetails from "components/StoryDetails";
 import EditStory from "components/EditStory";
 import AddStoryForm from 'views/examples/AddStoryForm';
 import ProfileEdit from 'views/examples/ProfileEdit'
+import { Card } from "reactstrap";
+import CardComponent from "components/CardComponent";
 
 
 
@@ -69,8 +71,7 @@ class App extends React.Component {
           <Route exact path="/list-stories" render={(props) => <ListStories currentUser={this.state.loggedInUser} {...props} />} />
           <Route exact path="/stories/:id" component={StoryDetails} />
           <Route exact path="/story-edit/:id" render={(props) => <EditStory currentUser={this.state.loggedInUser} {...props} />} />
-          <Route exact path="/profile-edit" render={(props) => <ProfileEdit currentUser={this.state.loggedInUser} updateUser={this.updateUser} {...props} />} />
-
+          <Route exact path="/profile-edit" render={(props) => { if (this.state.loggedInUser) { return <ProfileEdit currentUser={this.state.loggedInUser} updateUser={this.updateUser} {...props} /> } else { return <Redirect to="/login-page" /> } }} />
         </Switch>
       </div>
     )

@@ -35,7 +35,7 @@ import ScrollTransparentNavbar from "components/Navbars/ScrollTransparentNavbar.
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import FooterBlack from "components/Footers/FooterBlack.js";
 import BodyClassName from "react-body-classname";
-import ListStories from "components/ListStories"
+import ListStories from "components/ListStories";
 import ProfilePagePortfolio from './ProfilePagePortfolio';
 
 
@@ -141,7 +141,8 @@ export class ProfilePage extends Component {
                 {this.state.isClicked && <ListStories profile
                   // currentUser={this.state.visitedProfile} /> 
                   // :<ListStories profile
-                  currentUser={this.props.currentUser} userId={this.state.visitedProfile._id} />}
+                  currentUser={this.props.currentUser} />}
+                {/* userId={this.state.visitedProfile._id} */}
 
 
               </Container>

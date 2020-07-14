@@ -48,7 +48,7 @@ export class ImageUpload extends Component {
             </Button>
           ) : (
               <span>
-                <Button className="btn-round" color="default" onClick={() => { this.handleClick() }}>
+                <Button className="btn-morphin btn-round btn-info" onClick={() => { this.handleClick() }}>
 
                   Change
             </Button>

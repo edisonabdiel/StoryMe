@@ -16,7 +16,9 @@ import {
 } from "reactstrap";
 
 import Logout from "views/examples/Logout";
-import Login from "views/examples/Login"
+import Login from "views/examples/Login";
+import SignUp from 'views/examples/Signup';
+
 
 
 const ScrollTransparentNavbar = (props) => {
@@ -85,13 +87,14 @@ const ScrollTransparentNavbar = (props) => {
           <Collapse isOpen={collapseOpen} navbar>
             <Nav className="ml-auto" id="ceva" navbar>
               <Link to="/" ><i className="now-ui-icons objects_globe p-md-3"></i></Link>
-              {props.currentUser && <Link to={`/profile-page/${props.currentUser._id}`} ><i
+              {props.currentUser && <Link to={`/profile-page/${props.currentUser._id}`} >
+                <i
+                  aria-hidden={true}
+                  className="now-ui-icons users_single-02 p-md-3"
+                ></i></Link>}
+              <Link to='/profile-edit' style={{ textDecoration: 'none' }}><i
                 aria-hidden={true}
-                className="now-ui-icons users_single-02 p-md-3"
-              ></i></Link>}
-              <Link to="/contact-us"><i
-                aria-hidden={true}
-                className="now-ui-icons ui-1_email-85 p-md-3"
+                className="now-ui-icons loader_gear p-md-3"
               ></i></Link>
               <UncontrolledDropdown className="button-dropdown p-md-2" >
                 <DropdownToggle
@@ -113,7 +116,7 @@ const ScrollTransparentNavbar = (props) => {
                     <Link to="/login-page" style={{ textDecoration: 'none' }}><Login /></Link>
                   </DropdownItem>
                   <DropdownItem onClick={(e) => e.preventDefault()}>
-                    <Link to='/profile-edit'>Edit your profile</Link>
+                    <Link to="/sign-up" style={{ textDecoration: 'none' }}><SignUp /></Link>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>

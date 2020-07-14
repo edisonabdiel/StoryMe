@@ -1,31 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import ModalComponent from './ModalComponent';
-
-
-
-import heartFull from 'assets/img/fullHeart.jpg'
-import AddStoryForm from '../views/examples/AddStoryForm';
-import EditStory from './EditStory';
-// import AddStoryForm from '../views/examples/AddStoryForm';
-// import EditStory from './EditStory';
-
-
-
+import CardComponent from './CardComponent';
 
 // reactstrap components
 import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardTitle,
   Container,
   Row,
-  Col,
-  Modal,
-  ModalFooter,
 } from "reactstrap";
 import { clearConfig } from 'dompurify';
 import { relativeTimeThreshold } from 'moment';
@@ -39,7 +20,6 @@ class ListStories extends Component {
     listOfStories: [],
     modalClassic: false,
     liked: false,
-    // likesNum: 0,
     currentOpenStory: 0
   }
 
@@ -86,7 +66,7 @@ class ListStories extends Component {
   //Create another user and test new functionality
   //ADD & COMMIT and merge with team.
 
-  likesNum = (storyID) => {
+  likesHandler = (storyID) => {
 
     axios.put(`/api/stories/${storyID}/liked`)
       .then((resp) => {
@@ -107,22 +87,17 @@ class ListStories extends Component {
         })
       })
   }
-  saveStoryValues = (position) => {
+  saveStoryIndex = (position) => {
     this.setState({
       currentOpenStory: position,
       liked: this.state.listOfStories[position].likes.includes(this.props.currentUser._id)
     })
-    this.setModalClassic(true)
+    // this.setModalClassic(true)
 
-    // console.log('ALL STORY VALUES', storyValues);
   }
-  // newStoryHandler = (story) => {
-  //   this.setState({
-  //     listOfStories: this.state.listOfStories.concat(story)
-  //   })
-  // }
+
+
   render() {
-    console.log('current story', this.state.listOfStories[this.state.currentOpenStory]);
     return (
       <div>
         <div
@@ -131,88 +106,25 @@ class ListStories extends Component {
           id="cards"
         >
           <div className="cards">
-
             <Container>
               <div className="title">
                 <h3 className="title"></h3>
               </div>
-              <Row  >
-                {this.state.listOfStories.length === 0
-                  ? <h1>LOADING...</h1>
-                  : this.state.listOfStories.map((p, idx) => {
-                    return (
-                      <Col lg="4" md="6" key={p._id} >
-                        {/* {JSON.stringify(p, null, 2)} */}
-                        {/* {console.log('Maped List:', p)} */}
-                        {/* {console.log('Icon', p.icon)} */}
-
-                        <Card className="card-blog" >
-                          <div className="card-image" onClick={() => this.saveStoryValues(idx)} style={{ cursor: 'pointer' }}>
-                            {/* <Link to={`/stories/${p._id}`} key={p._id}> */}
-                            <img
-                              alt="..."
-                              className="img rounded"
-                              src={p.image}
-                            ></img>
-                            {/* </Link> */}
-                          </div>
-                          <CardBody>
-                            {/* <Link to={`/stories/${p._id}`} key={p._id}> */}
-                            <h6 className="category text-warning">
-                              <i className={`${p.icon}`}></i> {p.category}
-                            </h6>
-
-                            <CardTitle tag="h5" onClick={() => this.saveStoryValues(idx)} style={{ cursor: 'pointer' }}>
-                              {/* <Link to={`/stories/${p._id}`} key={p._id}> */}
-                              <strong>{p.title}</strong>
-                              {/* </Link> */}
-                            </CardTitle>
-                            <p className="card-description" onClick={() => this.saveStoryValues(idx)} style={{ cursor: 'pointer' }}>
-                              {p.headline}
-                            </p>
-                            {/* </Link> */}
-                            <CardFooter >
-                              <div className="stats stats-right">
-                                <i className="now-ui-icons ui-2_favourite-28"></i>
-                                {p.likes.length}
-                                <i className="now-ui-icons tech_watch-time"></i>
-                                {p.duration}
-                              </div>
-                              <div className="author">
-                                <img
-                                  alt="..."
-                                  className="avatar img-raised"
-                                  src={require("assets/img/james.jpg")}
-                                ></img>
-                                <Link to={{
-                                  pathname: `/profile-page/${p.owner._id}`,
-                                  state: p.owner
-                                }}>{p.owner.email}</Link>
-                              </div>
-                              <hr />
-                              <div className="btn-block">
-                                {p.owner._id === this.props.currentUser._id ?
-                                  <div>
-                                    <button className="nav-link btn-info btn-round pull-left ml-lg-5" style={{ color: 'white', textDecoration: 'none' }}>
-                                      <Link className="text-decoration-none" to={"/story-edit/" + p._id} onClick={() => this.editHandler(p._id)}><b>Edit</b></Link>
-                                    </button>
-                                  </div>
-                                  : "hello"}
-
-                                {p.owner._id === this.props.currentUser._id ? <button className="nav-link btn-round btn-danger pull-right mr-5"
-                                  onClick={() => this.deleteHandler(p._id)}><b>Delete</b></button> : "hello"}
-                              </div>
-                            </CardFooter>
-                          </CardBody>
-                        </Card>
-                      </Col>
-                    )
-                  })
-                }
-                {this.state.listOfStories && this.state.listOfStories[this.state.currentOpenStory] &&
-                  <ModalComponent liked={this.state.liked} likesHandler={this.likesNum} story={this.state.listOfStories[this.state.currentOpenStory]} modalClassic={this.state.modalClassic} closeHandler={() => this.setModalClassic(false)} />
-                }
-              </Row>
+              <CardComponent listOfStories={this.state.listOfStories}
+                saveStoryIndex={this.saveStoryIndex}
+                currentUser={this.props.currentUser}
+                editHandler={this.editHandler}
+                deleteHandler={this.deleteHandler}
+                setModalClassic={this.setModalClassic}
+              />
+              {this.state.listOfStories && this.state.listOfStories[this.state.currentOpenStory] &&
+                <ModalComponent liked={this.state.liked}
+                  likesHandler={this.likesHandler}
+                  story={this.state.listOfStories[this.state.currentOpenStory]}
+                  modalClassic={this.state.modalClassic}
+                  closeHandler={() => this.setModalClassic(false)}
+                />
+              }
             </Container>
           </div>
         </div>
@@ -222,33 +134,3 @@ class ListStories extends Component {
 }
 
 export default ListStories;
-
-// onClick={() => this.setModalClassic(true)} style={{ cursor: 'pointer' }}
-{/* <Modal
-                            isOpen={this.state.modalClassic}
-                            toggle={() => this.setModalClassic(false)}
-                          >
-                            <div className="modal-header justify-content-center">
-                              <button
-                                aria-hidden={true}
-                                className="close"
-                                onClick={() => this.setModalClassic(false)}
-                                type="button"
-                              >
-                                <i className="now-ui-icons ui-1_simple-remove"></i>
-                              </button>
-                              <h4 className="title title-up">{p.title}</h4>
-                            </div>
-                            <div className="modal-body">
-                              <h5 style={{ textDecoration: 'underline' }}>{p.headline}</h5>
-                              <p>{p.content}</p>
-                            </div>
-                            <ModalFooter>
-                              <Button color="success" type="button">
-                                <i className="now-ui-icons ui-2_favourite-28 "></i>
-                              </Button>
-                              <Button color="danger" onClick={() => this.setModalClassic(false)}>
-                                Close
-                              </Button>
-                            </ModalFooter>
-                          </Modal> */}

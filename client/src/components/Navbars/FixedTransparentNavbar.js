@@ -17,6 +17,7 @@ import {
 } from "reactstrap";
 import Logout from "views/examples/Logout";
 import Login from 'views/examples/Login';
+import SignUp from "views/examples/Signup";
 
 
 function FixedTransparentNavbar(props) {
@@ -58,15 +59,18 @@ function FixedTransparentNavbar(props) {
                 aria-hidden={true}
                 className="now-ui-icons users_single-02 p-md-3"
               ></i></Link>
-              <Link to="/contact-us"><i
+              <Link to='/profile-edit' style={{ textDecoration: 'none' }}><i
                 aria-hidden={true}
-                className="now-ui-icons ui-1_email-85 p-md-3"
+                className="now-ui-icons loader_gear p-md-3"
               ></i></Link>
               <UncontrolledDropdown>
                 <DropdownMenu>
                   <i className="now-ui-icons design_image"></i>
                   <DropdownItem>
                     <Logout updateUser={props.updateUser} />
+                  </DropdownItem>
+                  <DropdownItem onClick={(e) => e.preventDefault()}>
+                    <Link to="/sign-up" style={{ textDecoration: 'none' }}><SignUp /></Link>
                   </DropdownItem>
                 </DropdownMenu>
                 <UncontrolledDropdown className="button-dropdown p-md-2" >
@@ -87,6 +91,9 @@ function FixedTransparentNavbar(props) {
                     </DropdownItem>
                     <DropdownItem onClick={(e) => e.preventDefault()}>
                       <Link to="/login-page" style={{ textDecoration: 'none' }}><Login /></Link>
+                    </DropdownItem>
+                    <DropdownItem onClick={(e) => e.preventDefault()}>
+                      <Link to="/sign-up" style={{ textDecoration: 'none' }}><SignUp /></Link>
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>

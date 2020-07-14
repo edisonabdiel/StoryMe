@@ -11,3 +11,7 @@
     color: black !important;
     text-align: left;
 }
+
+.jodit-tooltip {
+    display: none;
+}

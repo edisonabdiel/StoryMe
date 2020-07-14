@@ -182,11 +182,8 @@ class LoginButton extends React.Component {
                     <p>Do not have Account?
                          <Link to={"/sign-up"} style={{ fontWeight: 'bold' }}> Sign up</Link>
                     </p>
-
                   </div>
-
                 </Card>
-
               </Modal>
             </Col>
           </Row>

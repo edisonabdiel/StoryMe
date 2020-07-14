@@ -21,6 +21,9 @@ import {
     ModalFooter,
 } from "reactstrap";
 
+import EditFixedNavbar from 'components/Navbars/EditFixedNavbar';
+import FooterBlack from 'components/Footers/FooterBlack';
+
 
 
 
@@ -177,145 +180,148 @@ class ProfileEdit extends Component {
 
     render() {
         return (
-            <div>
-                {this.state.successMessage
-                    ? <AlertMessage color="success" message={this.state.successMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
-                    : ''}
-                {this.state.errorMessage
-                    ? <AlertMessage color="danger" message={this.state.errorMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
-                    : ''}
+            <div data-background-color="black">
+                <EditFixedNavbar currentUser={this.props.currentUser} updateUser={this.props.updateUser} />
 
-                <Container>
-                    <Row>
-                        <Col md="6">
-                            <h2>Edit your account</h2>
-                            <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
-                                <CardBody>
-                                    {/* image */}
-                                    <InputGroup >
-                                        <ImageUpload avatar imageUrl={this.state.imageUrl} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
-                                        <ImageUpload imageUrl={this.state.imageUrl} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
+                <div style={{ height: '75px' }}></div> {/* offsets height of navbar */}
+                <div className="text-center">
+                    <Container fluid>
+                        {this.state.successMessage
+                            ? <AlertMessage color="success" message={this.state.successMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
+                            : ''}
+                        {this.state.errorMessage
+                            ? <AlertMessage color="danger" message={this.state.errorMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
+                            : ''}
+                        <Row>
+                            <Col></Col>
+                            <Col className="px-0 my-auto" md="6">
+                                <h2><b>EDIT PROFILE</b></h2>
+                                <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
+                                    <CardBody>
+                                        {/* image */}
+                                        <InputGroup >
+                                            <ImageUpload avatar imageUrl={this.state.imageUrl} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
+                                            <ImageUpload imageUrl={this.state.imageUrl} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
+                                        </InputGroup>
+                                        {/* email */}
+                                        <InputGroup
+                                            className={
+                                                this.state.nameFocus
+                                                    ? "no-border input-lg input-group-focus"
+                                                    : "no-border input-lg"
+                                            }
+                                        >
+                                            <InputGroupAddon addonType="prepend">
+                                                <InputGroupText>
+                                                    <i className="fas fa-envelope-open-text"></i>
+                                                </InputGroupText>
+                                            </InputGroupAddon>
+                                            <Input
+                                                placeholder="email"
+                                                name="email"
+                                                value={this.state.email}
+                                                type="text"
+                                                onFocus={() => this.setNameFocus(true)}
+                                                onBlur={() => this.setNameFocus(false)}
+                                                onChange={this.handleChange}
+                                            ></Input>
+                                        </InputGroup>
+                                        {/* userName */}
+                                        <InputGroup
+                                            className={
+                                                this.state.userNameFocus
+                                                    ? "no-border input-lg input-group-focus"
+                                                    : "no-border input-lg"
+                                            }
+                                        >
+                                            <InputGroupAddon addonType="prepend">
+                                                <InputGroupText>
+                                                    <i className="now-ui-icons users_circle-08"></i>
+                                                </InputGroupText>
+                                            </InputGroupAddon>
+                                            <Input
+                                                placeholder="userName"
+                                                name="userName"
+                                                value={this.state.userName}
+                                                type="text"
+                                                onFocus={() => this.setUserNameFocus(true)}
+                                                onBlur={() => this.setUserNameFocus(false)}
+                                                onChange={this.handleChange}
+                                            ></Input>
+                                        </InputGroup>
+                                        {/* password */}
+                                        <InputGroup
+                                            className={
+                                                this.state.passwordFocus
+                                                    ? "no-border input-lg input-group-focus"
+                                                    : "no-border input-lg"
+                                            }
+                                        >
+                                            <InputGroupAddon addonType="prepend">
+                                                <InputGroupText>
+                                                    <i className="now-ui-icons ui-1_lock-circle-open"></i>                                            </InputGroupText>
+                                            </InputGroupAddon>
+                                            <Input
+                                                placeholder="Old Password"
+                                                name="oldPassword"
+                                                value={this.state.oldPassword}
+                                                type="password"
+                                                onFocus={() => this.setOldPasswordFocus(true)}
+                                                onBlur={() => this.setOldPasswordFocus(false)}
+                                                onChange={this.handleChange}
+                                            ></Input>
+                                            <Input
+                                                placeholder="New Password"
+                                                name="newPassword"
+                                                value={this.state.newPassword}
+                                                type="password"
+                                                onFocus={() => this.setNewPasswordFocus(true)}
+                                                onBlur={() => this.setNewPasswordFocus(false)}
+                                                onChange={this.handleChange}
+                                            ></Input>
+                                            <Button className=" btn-morphing btn-round btn-info" onClick={this.handlePasswordFormSubmit}> Reset</Button>
+                                        </InputGroup>
+                                        {/* about */}
 
-                                    </InputGroup>
-                                    {/* email */}
-                                    <InputGroup
-                                        className={
-                                            this.state.nameFocus
-                                                ? "no-border input-lg input-group-focus"
-                                                : "no-border input-lg"
-                                        }
-                                    >
-                                        <InputGroupAddon addonType="prepend">
-                                            <InputGroupText>
-                                                <i className="fas fa-envelope-open-text"></i>
-                                            </InputGroupText>
-                                        </InputGroupAddon>
-                                        <Input
-                                            placeholder="email"
-                                            name="email"
-                                            value={this.state.email}
-                                            type="text"
-                                            onFocus={() => this.setNameFocus(true)}
-                                            onBlur={() => this.setNameFocus(false)}
-                                            onChange={this.handleChange}
-                                        ></Input>
-                                    </InputGroup>
-                                    {/* userName */}
-                                    <InputGroup
-                                        className={
-                                            this.state.userNameFocus
-                                                ? "no-border input-lg input-group-focus"
-                                                : "no-border input-lg"
-                                        }
-                                    >
-                                        <InputGroupAddon addonType="prepend">
-                                            <InputGroupText>
-                                                <i className="now-ui-icons users_circle-08"></i>
-                                            </InputGroupText>
-                                        </InputGroupAddon>
-                                        <Input
-                                            placeholder="userName"
-                                            name="userName"
-                                            value={this.state.userName}
-                                            type="text"
-                                            onFocus={() => this.setUserNameFocus(true)}
-                                            onBlur={() => this.setUserNameFocus(false)}
-                                            onChange={this.handleChange}
-                                        ></Input>
-                                    </InputGroup>
-                                    {/* password */}
-                                    <InputGroup
-                                        className={
-                                            this.state.passwordFocus
-                                                ? "no-border input-lg input-group-focus"
-                                                : "no-border input-lg"
-                                        }
-                                    >
-                                        <InputGroupAddon addonType="prepend">
-                                            <InputGroupText>
-                                                <i className="now-ui-icons ui-1_lock-circle-open"></i>                                            </InputGroupText>
-                                        </InputGroupAddon>
-                                        <Input
-                                            placeholder="Old Password"
-                                            name="oldPassword"
-                                            value={this.state.oldPassword}
-                                            type="password"
-                                            onFocus={() => this.setOldPasswordFocus(true)}
-                                            onBlur={() => this.setOldPasswordFocus(false)}
-                                            onChange={this.handleChange}
-                                        ></Input>
-                                        <Input
-                                            placeholder="New Password"
-                                            name="newPassword"
-                                            value={this.state.newPassword}
-                                            type="password"
-                                            onFocus={() => this.setNewPasswordFocus(true)}
-                                            onBlur={() => this.setNewPasswordFocus(false)}
-                                            onChange={this.handleChange}
-                                        ></Input>
-                                        <Button onClick={this.handlePasswordFormSubmit}>  Reset</Button>
-                                    </InputGroup>
-                                    {/* about */}
+                                        <InputGroup
+                                            className={
+                                                this.state.aboutFocus
+                                                    ? "no-border input-lg input-group-focus"
+                                                    : "no-border input-lg"
+                                            }
+                                        >
+                                            <InputGroupAddon addonType="prepend">
+                                                <InputGroupText>
+                                                    <i className="far fa-file-alt"></i>                                            </InputGroupText>
+                                            </InputGroupAddon>
+                                            <Input
+                                                placeholder="About"
+                                                name="about"
+                                                value={this.state.about}
+                                                type="textarea"
+                                                onFocus={() => this.setAboutFocus(true)}
+                                                onBlur={() => this.setAboutFocus(false)}
+                                                onChange={this.handleChange}
+                                            ></Input>
+                                        </InputGroup>
 
-                                    <InputGroup
-                                        className={
-                                            this.state.aboutFocus
-                                                ? "no-border input-lg input-group-focus"
-                                                : "no-border input-lg"
-                                        }
-                                    >
-                                        <InputGroupAddon addonType="prepend">
-                                            <InputGroupText>
-                                                <i className="far fa-file-alt"></i>                                            </InputGroupText>
-                                        </InputGroupAddon>
-                                        <Input
-                                            placeholder="About"
-                                            name="about"
-                                            value={this.state.about}
-                                            type="textarea"
-                                            onFocus={() => this.setAboutFocus(true)}
-                                            onBlur={() => this.setAboutFocus(false)}
-                                            onChange={this.handleChange}
-                                        ></Input>
-                                    </InputGroup>
-
-                                    {/* <Editor updateContent={this.updateContent} content={this.state.about} profile /> */}
-                                </CardBody>
-                                <ModalFooter className="text-center">
-                                    <Button
-                                        block
-                                        className="btn-neutral btn-round"
-                                        color="info"
-                                        type="submit"
-                                        size="lg"
-                                    >
-                                        SUBMIT
+                                    </CardBody>
+                                    <ModalFooter className="text-center">
+                                        <Button
+                                            block
+                                            className="btn-morphin btn-round btn-info"
+                                            type="submit"
+                                            size="md"
+                                        >
+                                            SUBMIT
                           </Button>
-                                </ModalFooter>
-                            </Form>
-                        </Col>
-                    </Row>
-                </Container>
+                                    </ModalFooter>
+                                </Form>
+                            </Col>
+                        </Row>
+                    </Container>
+                    <FooterBlack />
+                </div>
             </div>
         )
     }
