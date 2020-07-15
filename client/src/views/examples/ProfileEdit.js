@@ -3,6 +3,7 @@ import axios from 'axios';
 import defaultAvatar from "assets/img/placeholder.jpg";
 import Editor from "views/examples/editor";
 import ImageUpload from "components/CustomUpload/ImageUpload.js";
+import AlertMessage from "views/examples/Alert"
 
 
 // reactstrap components
@@ -34,13 +35,16 @@ class ProfileEdit extends Component {
         about: this.props.currentUser.about,
         userName: this.props.currentUser.userName,
         errorMessage: "",
+        successMessage: '',
         nameFocus: false,
         userNameFocus: false,
         oldPasswordFocus: false,
         newPasswordFocus: false,
         modalLogin: false,
         oldPassword: '',
-        newPassword: ''
+        newPassword: '',
+        aboutFocus: false,
+        alertBool: true
     }
 
     setNameFocus = (bool) => {
@@ -64,7 +68,19 @@ class ProfileEdit extends Component {
             passwordFocus: bool
         })
     }
+    setAboutFocus = (bool) => {
+        this.setState({
+            aboutFocus: bool
+        })
+    }
 
+    setAlertBool = () => {
+        this.setState({
+            alertBool: false
+        })
+    }
+
+    // }
     // upload-delete image handlers 
 
     handleImageChange = (e) => {
@@ -111,17 +127,21 @@ class ProfileEdit extends Component {
 
     handlePasswordFormSubmit = (event) => {
         event.preventDefault()
-
         const oldPassword = this.state.oldPassword
         const newPassword = this.state.newPassword
-
         axios.put(`/api/password/${this.props.currentUser._id}`, { oldPassword, newPassword })
             .then((resp) => {
-                // this.setModalLogin(false)
-                console.log(resp.data);
+                console.log(resp.data.message);
                 // this.props.updateUser(resp.data)
-                this.setState({ newPassword: "", oldPassword: "" });
+                this.setState({
+                    newPassword: "",
+                    oldPassword: "",
+                    successMessage: resp.data.message,
+                    alertBool: true,
+                    errorMessage: resp.data.error
+                });
             }).catch((err) => {
+                console.log(err);
                 console.log('error', err);
             })
     }
@@ -149,7 +169,7 @@ class ProfileEdit extends Component {
                     userName: ""
                 })
             }).then(() => {
-                this.props.history.push('/profile-page')
+                this.props.history.push(`/profile-page/${this.props.currentUser}`)
             })
             .catch(error => {
                 console.log("Error!", error);
@@ -161,10 +181,17 @@ class ProfileEdit extends Component {
     render() {
         return (
             <div data-background-color="black">
-                <EditFixedNavbar />
+                <EditFixedNavbar currentUser={this.props.currentUser} updateUser={this.props.updateUser} />
+
                 <div style={{ height: '75px' }}></div> {/* offsets height of navbar */}
                 <div className="text-center">
                     <Container fluid>
+                        {this.state.successMessage
+                            ? <AlertMessage color="success" message={this.state.successMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
+                            : ''}
+                        {this.state.errorMessage
+                            ? <AlertMessage color="danger" message={this.state.errorMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
+                            : ''}
                         <Row>
                             <Col></Col>
                             <Col className="px-0 my-auto" md="6">
@@ -174,6 +201,7 @@ class ProfileEdit extends Component {
                                         {/* image */}
                                         <InputGroup >
                                             <ImageUpload avatar imageUrl={this.state.imageUrl} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
+                                            <ImageUpload imageUrl={this.state.imageUrl} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
                                         </InputGroup>
                                         {/* email */}
                                         <InputGroup
@@ -251,11 +279,32 @@ class ProfileEdit extends Component {
                                                 onBlur={() => this.setNewPasswordFocus(false)}
                                                 onChange={this.handleChange}
                                             ></Input>
-                                            <Button className=" btn-morphing btn-round btn-info"onClick={this.handlePasswordFormSubmit}> Reset</Button>
+                                            <Button className=" btn-morphing btn-round btn-info" onClick={this.handlePasswordFormSubmit}> Reset</Button>
                                         </InputGroup>
                                         {/* about */}
 
-                                        <Editor updateContent={this.updateContent} content={this.state.about} profile />
+                                        <InputGroup
+                                            className={
+                                                this.state.aboutFocus
+                                                    ? "no-border input-lg input-group-focus"
+                                                    : "no-border input-lg"
+                                            }
+                                        >
+                                            <InputGroupAddon addonType="prepend">
+                                                <InputGroupText>
+                                                    <i className="far fa-file-alt"></i>                                            </InputGroupText>
+                                            </InputGroupAddon>
+                                            <Input
+                                                placeholder="About"
+                                                name="about"
+                                                value={this.state.about}
+                                                type="textarea"
+                                                onFocus={() => this.setAboutFocus(true)}
+                                                onBlur={() => this.setAboutFocus(false)}
+                                                onChange={this.handleChange}
+                                            ></Input>
+                                        </InputGroup>
+
                                     </CardBody>
                                     <ModalFooter className="text-center">
                                         <Button
@@ -271,7 +320,7 @@ class ProfileEdit extends Component {
                             </Col>
                         </Row>
                     </Container>
-                    <FooterBlack/>
+                    <FooterBlack />
                 </div>
             </div>
         )

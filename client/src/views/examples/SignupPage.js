@@ -67,35 +67,26 @@ class SignupPage extends React.Component {
     const email = this.state.email
     const password = this.state.password
     const checked = this.state.checked
+    axios.post("/api/signup", { email, password, checked })
+      .then((res) => {
+        this.props.updateUser(res.data)
+        console.log("outPut: SignupPage -> user", this.props.currentUser)
 
-    if (!this.props.currentUser) {
-      axios.post("/api/signup", { email, password, checked })
-        .then((res) => {
-          this.props.updateUser(res.data)
-          this.setState({
-            checked: false,
-            email: "",
-            password: "",
-            errorMessages: []
-          })
-          //props.history.push('/landing-page')  
-        }).then(() => {
-          if (this.props.currentUser) {
-            this.props.history.push('/profile-page')
-          }
-        }).catch((error) => {
-          this.setState({
-            errorMessages: error.response.data.errors
-          })
+        this.setState({
+          checked: false,
+          email: "",
+          password: "",
+          errorMessages: []
         })
-    } else {
-      this.setState({
-        errorMessages: [{ param: 'login', msg: 'It seems that you are already logged in' }]
+      }).then(() => {
+        this.props.history.push(`/profile-page/${this.props.currentUser._id}`)
+      }).catch((error) => {
+        console.log("outPut: SignupPage -> handleFormSubmit -> error", error.response)
+        this.setState({
+          errorMessages: error.response.data.errors,
+        })
       })
-    }
-
   }
-
 
   render() {
     return (
@@ -156,18 +147,6 @@ class SignupPage extends React.Component {
                           Register
                     </CardTitle>
                         <div className="social text-center">
-                          <Button
-                            className="btn-icon btn-round mr-2"
-                            color="twitter"
-                          >
-                            <i className="fab fa-twitter"></i>
-                          </Button>
-                          <Button
-                            className="btn-icon btn-round mr-2"
-                            color="instagram"
-                          >
-                            <i className="fab fa-instagram"></i>
-                          </Button>
                           <Button className="btn-icon btn-round"
                             color="facebook">
                             <i className="fab fa-facebook"></i>
@@ -176,8 +155,10 @@ class SignupPage extends React.Component {
                         </div>
                         <Form className="form" onSubmit={this.handleFormSubmit}>
                           {this.state.errorMessages.map((m) =>
-                            <h6 key={m.param} style={{ color: "black", margin: '0px' }}>{m.msg}</h6>
+                            <h6 key={m.param} style={{ color: "red", margin: '0px' }}>{m.msg}</h6>
                           )}
+                          <h6 style={{ color: "red", margin: '0px' }}>{this.state.logInError}</h6>
+
                           <InputGroup
                             className={this.emailFocus ? "input-group-focus" : ""}
                           >

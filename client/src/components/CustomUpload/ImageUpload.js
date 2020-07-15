@@ -59,24 +59,24 @@ export class ImageUpload extends Component {
               </span>
             )}
           <Modal
-            modalClassName="modal-mini modal-info"
+            modalClassName="modal-mini modal-warning"
             isOpen={this.state.modalOpen}
             toggle={() => this.setState({ modalOpen: false })}
           >
             <div className="modal-header justify-content-center">
-              <div className="modal-profile">
-                <i className="now-ui-icons users_circle-08"></i>
-              </div>
+              {/* <div className="modal-profile"> */}
+              <i className="fas fa-minus-circle fa-3x"></i>
+              {/* </div> */}
             </div>
             <div className="modal-body">
               <p>Are you sure you want to delete the image?</p>
             </div>
             <ModalFooter>
-              <Button className="btn-neutral" color="link" onClick={this.handelRemove}>
+              <Button className="btn-neutral" color="neutral" onClick={this.handelRemove}>
                 Delete
                 </Button>
               <Button
-                className="btn-link"
+                className="btn-neutral"
                 color="neutral"
                 onClick={() => this.setState({ modalOpen: false })}
               >
