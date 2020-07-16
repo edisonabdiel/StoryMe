@@ -8,12 +8,13 @@ import {
   } from "reactstrap";
   
 const ModalComponent=(props)=>{
+  console.log('props Story',props.story);
     return(
         <div>
+        
             <Modal
                   isOpen={props.modalClassic}
                   toggle={() => props.closeHandler()}
-                  style={{ width: '80% !important' }}
                 >
                   <div className="modal-header justify-content-center">
                     <button
@@ -44,6 +45,7 @@ const ModalComponent=(props)=>{
                               </Button>
                   </ModalFooter>
                 </Modal>
+        
         </div>
     )
 }

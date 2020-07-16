@@ -25,9 +25,9 @@ function BlogPosts(props) {
       <ScrollTransparentNavbar updateUser={props.updateUser} currentUser={props.currentUser} />
       <div className="wrapper blog-posts" >
         <DiscoveryHeader />
-        <div className="">
-          <ListStories currentUser={props.currentUser} updateUser={props.updateUser} history={props.history}/>
-          </div>
+        <div className="projects-4">      
+          <ListStories isDiscovery={true} currentUser={props.currentUser} updateUser={props.updateUser} history={props.history} userId={props.currentUser._id}/>
+        </div>
       </div>
       <FooterBlack />
     </>
