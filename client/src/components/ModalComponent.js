@@ -27,7 +27,7 @@ const ModalComponent=(props)=>{
                     <h4 className="title title-up">{props.story.title}</h4>
                   </div>
                   <div className="modal-body">
-                    <h5 style={{ textDecoration: 'underline' }}>User</h5>
+                    <h5 style={{ textDecoration: 'underline' }}>{props.story.owner.userName ? props.story.owner.userName:props.story.owner.email}</h5>
                     <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.story.content) }}/> 
                   </div>
                   <ModalFooter>
