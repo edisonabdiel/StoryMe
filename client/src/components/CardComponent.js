@@ -9,23 +9,29 @@ import {
     Col,
     Row,
 } from "reactstrap";
+import { clearConfig } from 'dompurify';
+
+
 
 const CardComponent = (props) => {
+    console.log('List of Stories:',props.listOfStories);
+    console.log('current user', props.currentUser);
+    // let filteredCard=props.isDiscovery && props.currentUser ? props.listOfStories.filter((item)=>item.likes.length==0 && item.owner._id!=props.currentUser._id):props.listOfStories
+    
     return (
         <Row>
             {props.listOfStories.length === 0
-                ? <h1>LOADING...</h1>
+                ? <h1>No Stories found...</h1>
                 : props.listOfStories.map((oneStory, idx) => {
                     return (
                         <Col lg="4" md="6" key={oneStory._id} >
-                            <Card className="card-blog" >
-                            
+                            <Card className="card-blog" data-background-color={oneStory.cardBgColor}>   
                                 <div className="card-image" onClick={() => { props.saveStoryIndex(idx); {props.currentUser ? props.setModalClassic(true) : props.setModalLogin(true) } }} style={{ cursor: 'pointer' }}>
                                     <img
                                         alt="..."
                                         className="img rounded"
                                         src={oneStory.image}
-                                        style={{ width: '350px', height: '300px' }}
+                                        style={{ width: '100%', height: '100%' }}
                                     ></img>
                                 </div>
                                 <CardBody>
@@ -81,6 +87,7 @@ const CardComponent = (props) => {
                                     </CardFooter>
                                 </CardBody>
                             </Card>
+                            
                         </Col>
                     )
                 })

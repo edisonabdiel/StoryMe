@@ -17,6 +17,23 @@ router.get('/stories', (req, res, next) => {
     })
 });
 
+router.get('/stories/filter/:id', (req, res, next) => {
+  Story.find().populate("owner")
+  .then(allTheStories => {
+    const filterStory=allTheStories.filter((item)=>{
+      
+      console.log("outPut: allTheStories======>", item.owner._id)
+      console.log("user=======>>",req.params.id);
+      console.log("user with req.user._id=======>>",req.user._id);
+
+      //ASK HENDIRK WHY req.user._id DIDNT WORK even recieve in the console!!!!!!!!!!!!!
+      return (item.likes.length==0 && item.owner._id != req.params.id)
+      })
+      // console.log("fileStory =====>",filterStory)
+      res.json(filterStory);
+    })
+});
+
 // GET route => to get all the stories for profile page
 router.get('/profileStories/:id', (req, res, next) => {
   let newList = []
@@ -28,10 +45,13 @@ router.get('/profileStories/:id', (req, res, next) => {
 
 })
 
+
 // POST route => to create a new project
 router.post('/stories', (req, res, next) => {
   console.log('POST', req.body);
   console.log('USER', req.user);
+  let cardBgColor = ["gray", "red", "black", "green"]
+  let randomBgIdx = Math.floor(Math.random() * cardBgColor.length)
   Story.create({
     title: req.body.title,
     image: req.body.image,
@@ -41,6 +61,7 @@ router.post('/stories', (req, res, next) => {
     headline: req.body.headline,
     content: req.body.content,
     likes: [],
+    cardBgColor: cardBgColor[randomBgIdx],
     duration: req.body.duration,
     owner: req.user._id
   })

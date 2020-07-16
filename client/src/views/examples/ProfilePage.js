@@ -151,7 +151,7 @@ export class ProfilePage extends Component {
                   </div>
                 </div>
                 <ProfilePagePortfolio handelIsClicked={this.handelIsClicked} handelToClose={this.handelToClose} />
-                {this.state.isClicked && <ListStories profile currentUser={this.props.currentUser} userId={this.state.userId} />}
+                {this.state.isClicked && <ListStories profile isDiscovery={false} currentUser={this.props.currentUser} userId={this.state.userId} />}
               </Container>
             </div>
             <FooterBlack />

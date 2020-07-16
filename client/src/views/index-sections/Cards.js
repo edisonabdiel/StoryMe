@@ -32,6 +32,7 @@ const Cards = () => {
             </div>
             <Row>
               <Col lg="4" md="6">
+              {/* Red card */}
                 <Card data-background-color="red">
                   <CardBody>
                     <h6 className="category-social">
@@ -59,6 +60,7 @@ const Cards = () => {
                     </CardFooter>
                   </CardBody>
                 </Card>
+                {/* Card Blog white */}
                 <Card className="card-blog">
                   <div className="card-image">
                     <img
@@ -84,6 +86,7 @@ const Cards = () => {
                 </Card>
                 <Card>
                   <CardBody>
+                  
                     <h6 className="category text-danger">
                       <i className="now-ui-icons media-2_sound-wave"></i>{" "}
                       Trending
@@ -118,6 +121,7 @@ const Cards = () => {
                 </Card>
               </Col>
               <Col lg="4" md="6">
+              {/* Black card */}
                 <Card data-background-color="black">
                   <CardBody className="content-danger">
                     <h6 className="category-social">
@@ -181,6 +185,7 @@ const Cards = () => {
                     </CardFooter>
                   </CardBody>
                 </Card>
+                {/* Blue card */}
                 <Card data-background-color="blue">
                   <CardBody>
                     <h6 className="category-social">
