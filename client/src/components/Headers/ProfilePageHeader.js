@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
-
 // reactstrap components
 import { Container } from "reactstrap";
-import DOMPurify from "dompurify";
+import axios from "axios"
+
 
 
 
 export class ProfilePageHeader extends Component {
 
+
   pageHeader = React.createRef();
   render() {
+    console.log('header user', this.props.user);
     return (
       <div>
         <>
@@ -26,14 +28,14 @@ export class ProfilePageHeader extends Component {
             ></div>
             <Container>
               <div className="photo-container">
-                <img src={this.props.currentUser.image} alt="..."></img>
+                <img src={this.props.user.image} alt="..."></img>
                 {/* src={this.props.currentUser.image} */}
               </div>
-              <h3 className="title">{this.props.currentUser.userName}</h3>
+              <h3 className="title">{this.props.user.userName}</h3>
               <p className="category"></p>
               <div className="content">
                 <div> <h3 className="title">About </h3>
-                  <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.props.currentUser.about) }} />
+                  <p>{this.props.user.about}</p>
                 </div>
 
               </div>

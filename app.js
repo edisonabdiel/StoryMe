@@ -92,11 +92,10 @@ const index = require('./routes/index');
 app.use('/', index);
 
 app.use('/api', require('./routes/story-routes'));
-
-// app.use('/api', require('./routes/task-routes'));
-
 app.use('/api', require('./routes/auth-routes'));
 app.use('/api', require('./routes/upload-img-routes'));
+app.use('/api', require('./routes/user-routes'));
+
 
 
 

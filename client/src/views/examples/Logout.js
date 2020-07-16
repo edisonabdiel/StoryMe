@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button } from 'reactstrap';
+import { Button, ButtonToggle } from 'reactstrap';
 
 export class Logout extends Component {
     logoutHandler = () => {
@@ -8,12 +8,13 @@ export class Logout extends Component {
             // 2xx status code
             .then((resp) => {
                 this.props.updateUser(null)
+                // this.props.history.push('/login-page')
             })
     }
     render() {
         return (
             <div>
-                <Button onClick={this.logoutHandler} className="nav-link btn-link" color='primary' size='sm'>Logout</Button>
+                <div onClick={this.logoutHandler} className="nav-link btn-link" color='primary' size='sm'>Logout</div>
             </div>
         )
     }

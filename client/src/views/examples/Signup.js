@@ -5,7 +5,7 @@ export class SingUp extends Component {
     render() {
         return (
             <div>
-               <Button className="nav-link btn-link" color='info' size='sm'>Sign Up</Button>
+                <div className="nav-link btn-link" color='info' size='sm'>Sign Up</div>
             </div>
         )
     }
