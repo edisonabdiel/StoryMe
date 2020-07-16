@@ -116,7 +116,7 @@ class ListStories extends Component {
           id="cards"
         >
           <div className="cards">
-            <Container>
+            <Container fluid>
               <div className="title">
                 <h3 className="title"></h3>
               </div>
