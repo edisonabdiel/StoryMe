@@ -68,6 +68,7 @@ export class ProfilePage extends Component {
       isClicked: bool
     })
   }
+  
 
   // to handel the follow function
   followingHandler = () => {
@@ -149,13 +150,8 @@ export class ProfilePage extends Component {
                     <p>Bookmarks</p>
                   </div>
                 </div>
-
-
                 <ProfilePagePortfolio handelIsClicked={this.handelIsClicked} handelToClose={this.handelToClose} />
                 {this.state.isClicked && <ListStories profile currentUser={this.props.currentUser} userId={this.state.userId} />}
-
-
-
               </Container>
             </div>
             <FooterBlack />

@@ -63,7 +63,7 @@ class App extends React.Component {
           <Route path="/email-sent" render={(props) => <EmailSent {...props} />} />
           <Route path="/email-confirmed" render={(props) => <EmailConfirmed {...props} />} />
           <Route path="/nucleo-icons" render={(props) => <NucleoIcons {...props} />} />
-          <Route path="/profile-page/:id" render={(props) => { if (this.state.loggedInUser) { return <ProfilePage currentUser={this.state.loggedInUser} updateUser={this.updateUser} {...props} /> } else { return <Redirect to="/login-page" /> } }} />
+          <Route exact path="/profile-page/:id" render={(props) => { if (this.state.loggedInUser) { return <ProfilePage currentUser={this.state.loggedInUser} updateUser={this.updateUser} {...props} /> } else { return <Redirect to="/login-page" /> } }} />
           <Route path="/sections" render={(props) => <Sections {...props} />} />
           <Route exact path="/confirmation/:token" render={(props) => <ConfirmationPage {...props} updateUser={this.updateUser} />} />
           <Route exact path='/img-upload' component={ImageUpload} />

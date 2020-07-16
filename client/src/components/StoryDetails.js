@@ -22,7 +22,7 @@ class StoryDetails extends Component {
     }
 
     render() {
-        console.log(this.state.story);
+        console.log(this.props.match.params.id);
         return (
             <div>
                 <h1>Welcome to StoryDetails page</h1>
