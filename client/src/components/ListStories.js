@@ -27,7 +27,7 @@ class ListStories extends Component {
   componentDidMount() {
 
     this.props.profile
-      ? axios.get(`/api/profileStories/${this.props.currentUser._id}`).then((resp) => {
+      ? axios.get(`/api/profileStories/${this.props.userId}`).then((resp) => {
         this.setState({
           listOfStories: resp.data
         })
@@ -39,6 +39,8 @@ class ListStories extends Component {
       })
 
   }
+
+
 
   deleteHandler = (storyID) => {
     axios.delete('/api/stories/' + storyID).then(() => {

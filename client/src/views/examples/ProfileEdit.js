@@ -169,7 +169,7 @@ class ProfileEdit extends Component {
                     userName: ""
                 })
             }).then(() => {
-                this.props.history.push(`/profile-page/${this.props.currentUser}`)
+                this.props.history.push(`/profile-page/${this.props.currentUser._id}`)
             })
             .catch(error => {
                 console.log("Error!", error);
@@ -201,7 +201,7 @@ class ProfileEdit extends Component {
                                         {/* image */}
                                         <InputGroup >
                                             <ImageUpload avatar imageUrl={this.state.imageUrl} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
-                                            <ImageUpload imageUrl={this.state.imageUrl} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
+                                            {/* <ImageUpload imageUrl={this.state.imageUrl} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} /> */}
                                         </InputGroup>
                                         {/* email */}
                                         <InputGroup

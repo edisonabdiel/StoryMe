@@ -154,7 +154,7 @@ class EditStory extends Component {
                     icon: this.state.icon
                 })
                 if (this.props.currentUser) {
-                    this.props.history.push('/profile-page')
+                    this.props.history.push(`/profile-page/${this.props.currentUser._id}`)
                 }
             })
             .catch(error => {
@@ -169,7 +169,7 @@ class EditStory extends Component {
     render() {
         return (
             <div data-background-color="black">
-                <EditFixedNavbar />
+                <EditFixedNavbar currentUser={this.props.currentUser} updateUser={this.props.updateUser} />
                 <div style={{ height: '75px' }}></div> {/* offsets height of navbar */}
                 <div className="text-center">
                     <Container fluid>
