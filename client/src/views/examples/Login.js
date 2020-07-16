@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+// import { Button } from 'reactstrap';
 
 export class Login extends Component {
     render() {
         return (
-            <div>
-               <Button className="nav-link btn-link" color='success' size='sm'>Login</Button>
+            <div style={{color:'green', textAlign:'center', fontSize:'16px'}}>
+            Login
             </div>
         )
     }

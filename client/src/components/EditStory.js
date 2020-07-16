@@ -154,7 +154,7 @@ class EditStory extends Component {
                     icon: this.state.icon
                 })
                 if (this.props.currentUser) {
-                    this.props.history.push('/profile-page')
+                    this.props.history.push(`/profile-page/${this.props.currentUser._id}`)
                 }
             })
             .catch(error => {

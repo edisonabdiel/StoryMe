@@ -231,7 +231,16 @@ authRoutes.put("/password/:id", (req, res, next) => {
   })
 
 })
-
+authRoutes.get('/profile-page/:id', (req, res, next) => {
+  
+  User.findById(req.params.id).populate("followers")
+    .then((user) => {
+      console.log(req.params.id);
+      res.json(user);
+    }).catch((err) => {
+      console.log(err);
+    })
+});
 
 
 module.exports = authRoutes;

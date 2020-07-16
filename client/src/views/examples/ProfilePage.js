@@ -47,9 +47,21 @@ export class ProfilePage extends Component {
 
   state = {
     isClicked: false,
-    visitedProfile: this.props.location.state
+    userId: this.props.match.params.id,
+    user: ''
   }
-
+  
+  componentDidMount(){
+    console.log('route id',this.props.match.params.id)
+      axios.get(`/api/profile-page/${this.props.match.params.id}`).then((resp) => {
+        console.log("Profile Page CLIKED USER", resp.data)
+        this.setState({
+          user: resp.data
+        })
+      }) 
+  }
+  
+  
   handelIsClicked = () => {
     this.setState({
       isClicked: !this.state.isClicked
@@ -61,19 +73,15 @@ export class ProfilePage extends Component {
       isClicked: bool
     })
   }
+  
 
   render() {
-    console.log("outPut: ProfilePage -> this.props.location", this.props.location)
-
     return (
       <BodyClassName className="profile-page sidebar-collapse">
         <div>
           <ScrollTransparentNavbar updateUser={this.props.updateUser} currentUser={this.props.currentUser} />
           <div className="wrapper" >
-            {this.state.visitedProfile
-              ? <ProfilePageHeader currentUser={this.props.location.state} />
-              : <ProfilePageHeader currentUser={this.props.currentUser} />
-            }
+            <ProfilePageHeader userId={this.props.match.params.id} />
             <div className="section">
               <Container >
                 <div className="button-container">
@@ -138,13 +146,7 @@ export class ProfilePage extends Component {
 
 
                 <ProfilePagePortfolio handelIsClicked={this.handelIsClicked} handelToClose={this.handelToClose} />
-                {this.state.isClicked && <ListStories profile
-                  // currentUser={this.state.visitedProfile} /> 
-                  // :<ListStories profile
-                  currentUser={this.props.currentUser} />}
-                {/* userId={this.state.visitedProfile._id} */}
-
-
+                {this.state.isClicked && <ListStories profile currentUser={this.props.currentUser} userId={this.props.match.params.id} />}
               </Container>
             </div>
             <FooterBlack />
