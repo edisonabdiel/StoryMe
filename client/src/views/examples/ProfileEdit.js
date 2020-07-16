@@ -182,8 +182,7 @@ class ProfileEdit extends Component {
         return (
             <div data-background-color="black">
                 <EditFixedNavbar currentUser={this.props.currentUser} updateUser={this.props.updateUser} />
-
-                <div style={{ height: '75px' }}></div> {/* offsets height of navbar */}
+                <div style={{ height: '100px' }}></div> {/* offsets height of navbar */}
                 <div className="text-center">
                     <Container fluid>
                         {this.state.successMessage
@@ -193,7 +192,7 @@ class ProfileEdit extends Component {
                             ? <AlertMessage color="danger" message={this.state.errorMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
                             : ''}
                         <Row>
-                            <Col></Col>
+                            <Col md="3"></Col>
                             <Col className="px-0 my-auto" md="6">
                                 <h2><b>EDIT PROFILE</b></h2>
                                 <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
@@ -318,8 +317,10 @@ class ProfileEdit extends Component {
                                     </ModalFooter>
                                 </Form>
                             </Col>
+                            <Col md="3"></Col>
                         </Row>
                     </Container>
+                    <div style={{ height: '150px' }}></div> {/* offsets height of footer */}
                     <FooterBlack />
                 </div>
             </div>

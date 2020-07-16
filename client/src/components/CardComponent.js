@@ -25,7 +25,7 @@ const CardComponent = (props) => {
                                         alt="..."
                                         className="img rounded"
                                         src={oneStory.image}
-                                        style={{ width: '350px', height: '300px' }}
+                                        style={{ width: '100%', height: '100%' }}
                                     ></img>
                                 </div>
                                 <CardBody>
