@@ -6,27 +6,8 @@ import axios from "axios"
 
 // reactstrap components
 import {
-  Badge,
   Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardTitle,
-  Label,
-  FormGroup,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  NavItem,
-  NavLink,
-  Nav,
-  TabContent,
-  TabPane,
   Container,
-  Row,
-  Col,
   UncontrolledTooltip,
 } from "reactstrap";
 
@@ -41,27 +22,41 @@ import ProfilePagePortfolio from './ProfilePagePortfolio';
 
 
 export class ProfilePage extends Component {
-  // const[pills, setPills] = React.useState("1");
-  // const[firstFocus, setFirstFocus] = React.useState(false);
-  // const[emailFocus, setEmailFocus] = React.useState(false);
 
   state = {
     isClicked: false,
     userId: this.props.match.params.id,
     user: ''
   }
-  
-  componentDidMount(){
-    console.log('route id',this.props.match.params.id)
-      axios.get(`/api/profile-page/${this.props.match.params.id}`).then((resp) => {
-        console.log("Profile Page CLIKED USER", resp.data)
-        this.setState({
-          user: resp.data
-        })
-      }) 
+
+  componentDidMount() {
+    this.setState({
+      userId: this.props.match.params.id
+    })
+    console.log('did mount');
+    axios.get(`/api/profile-page/${this.props.match.params.id}`).then((resp) => {
+
+      console.log("outPut: ProfilePage -> componentDidMount -> resp", resp.data)
+      this.setState({
+        user: resp.data
+      })
+    }).catch((err) => {
+      console.log("outPut: ProfilePage -> componentDidMount -> err", err)
+
+    })
+
   }
-  
-  
+
+  // to change the user and user id when coming from another profile page
+  changeStateHandler = () => {
+    this.setState({
+      userId: this.props.currentUser._id,
+      user: this.props.currentUser,
+      isClicked: false
+    })
+  }
+
+  //to open/close the portfolio btn 
   handelIsClicked = () => {
     this.setState({
       isClicked: !this.state.isClicked
@@ -75,26 +70,46 @@ export class ProfilePage extends Component {
   }
   
 
+  // to handel the follow function
+  followingHandler = () => {
+    axios.put(`/api/user/${this.state.userId}/follow`)
+      .then((resp) => {
+        console.log('follow response:', resp.data);
+        this.setState({
+          user: resp.data
+        })
+      }).catch((err) => {
+        console.log("outPut: followingHandler -> err", err)
+
+      })
+  }
+
   render() {
+    console.log("outPut: ProfilePage -> userId ", this.state.userId)
+    console.log("outPut: ProfilePage -> current user ", this.props.currentUser)
+    console.log("outPut: ProfilePage ->  user id ", this.props.match.params.id)
+    console.log("outPut: ProfilePage ->  user ", this.state.user)
+
     return (
-      <BodyClassName className="profile-page sidebar-collapse">
+      <BodyClassName className="profile-page sidebar-collapse" >
         <div>
-          <ScrollTransparentNavbar updateUser={this.props.updateUser} currentUser={this.props.currentUser} />
+          <ScrollTransparentNavbar updateUser={this.props.updateUser} currentUser={this.props.currentUser} changeStateHandler={this.changeStateHandler} profilePageNav />
           <div className="wrapper" >
-            <ProfilePageHeader userId={this.props.match.params.id} />
+
+            <ProfilePageHeader userId={this.state.userId} user={this.state.user} />
+
             <div className="section">
               <Container >
                 <div className="button-container">
                   <Button
                     className="btn-round mr-1"
                     color="info"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
+                    onClick={this.followingHandler}
                     size="lg"
                   >
                     ReadMe
                 </Button>
-                  <Button
+                  {/* <Button
                     className="btn-round btn-icon mr-1"
                     color="default"
                     href="#pablo"
@@ -119,19 +134,11 @@ export class ProfilePage extends Component {
                   </Button>
                   <UncontrolledTooltip delay={0} target="tooltip259363830">
                     Follow me on Instagram
-                </UncontrolledTooltip>
+                  </UncontrolledTooltip> */}
                 </div>
-                {/* <div> <h3 className="title">About me</h3>
-                  {/* <h5 className="description text-center">
-                    An artist of considerable range, Ryan — the name taken by
-                    Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs
-                    and records all of his own music, giving it a warm, intimate feel
-                    with a solid groove structure. An artist of considerable range.
-                  </h5> 
-                </div> */}
                 <div className="content">
                   <div className="social-description">
-                    <h2>26</h2>
+                    <h2>{this.state.user && this.state.user.followers.length}</h2>
                     <p>Followers</p>
                   </div>
                   <div className="social-description">
@@ -143,10 +150,8 @@ export class ProfilePage extends Component {
                     <p>Bookmarks</p>
                   </div>
                 </div>
-
-
                 <ProfilePagePortfolio handelIsClicked={this.handelIsClicked} handelToClose={this.handelToClose} />
-                {this.state.isClicked && <ListStories profile currentUser={this.props.currentUser} userId={this.props.match.params.id} />}
+                {this.state.isClicked && <ListStories profile currentUser={this.props.currentUser} userId={this.state.userId} />}
               </Container>
             </div>
             <FooterBlack />

@@ -155,7 +155,7 @@ class SignupPage extends React.Component {
                         </div>
                         <Form className="form" onSubmit={this.handleFormSubmit}>
                           {this.state.errorMessages.map((m) =>
-                            <h6 key={m.param} style={{ color: "red", margin: '0px' }}>{m.msg}</h6>
+                            <h6 key={m} style={{ color: "red", margin: '0px' }}>{m}</h6>
                           )}
                           <h6 style={{ color: "red", margin: '0px' }}>{this.state.logInError}</h6>
 

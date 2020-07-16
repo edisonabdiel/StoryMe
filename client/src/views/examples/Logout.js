@@ -8,6 +8,7 @@ export class Logout extends Component {
             // 2xx status code
             .then((resp) => {
                 this.props.updateUser(null)
+                // this.props.history.push('/login-page')
             })
     }
     render() {

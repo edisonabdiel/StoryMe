@@ -40,6 +40,8 @@ class ListStories extends Component {
 
   }
 
+
+
   deleteHandler = (storyID) => {
     axios.delete('/api/stories/' + storyID).then(() => {
       this.setState({

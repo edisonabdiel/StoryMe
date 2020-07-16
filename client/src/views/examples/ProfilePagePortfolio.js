@@ -2,28 +2,11 @@ import React, { Component } from 'react'
 import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
 import {
-    Badge,
-    Button,
-    Card,
-    CardHeader,
-    CardBody,
-    CardTitle,
-    Label,
-    FormGroup,
-    Form,
-    Input,
-    InputGroupAddon,
-    InputGroupText,
-    InputGroup,
     NavItem,
     NavLink,
     Nav,
-    TabContent,
-    TabPane,
-    Container,
     Row,
     Col,
-    UncontrolledTooltip,
 } from "reactstrap";
 
 

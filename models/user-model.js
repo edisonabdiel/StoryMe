@@ -24,6 +24,8 @@ const userSchema = new Schema({
   userName: String,
   about: String,
   imageName: String,
+  bgImage: String,
+  bdImageName: String,
   followers: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 
 },

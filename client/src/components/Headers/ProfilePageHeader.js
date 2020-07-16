@@ -1,29 +1,17 @@
 import React, { Component } from 'react'
-import axios from "axios"
-
-
 // reactstrap components
 import { Container } from "reactstrap";
-import DOMPurify from "dompurify";
+import axios from "axios"
+
 
 
 
 export class ProfilePageHeader extends Component {
-  state = {
-    user: {}
-  }
-  componentDidMount() {
-    axios.get(`/api/profile-page/${this.props.userId}`).then((resp) => {
-      console.log("outPut: ProfilePage -> componentDidMount -> resp", resp.data)
-      this.setState({
-        user: resp.data
-      })
-    }).catch((err) => {
-      console.log("outPut: ProfilePageHeader -> componentDidMount -> err", err)
-    })
-  }
+
+
   pageHeader = React.createRef();
   render() {
+    console.log('header user', this.props.user);
     return (
       <div>
         <>
@@ -40,14 +28,14 @@ export class ProfilePageHeader extends Component {
             ></div>
             <Container>
               <div className="photo-container">
-                <img src={this.state.user.image} alt="..."></img>
+                <img src={this.props.user.image} alt="..."></img>
                 {/* src={this.props.currentUser.image} */}
               </div>
-              <h3 className="title">{this.state.user.userName}</h3>
+              <h3 className="title">{this.props.user.userName}</h3>
               <p className="category"></p>
               <div className="content">
                 <div> <h3 className="title">About </h3>
-                  <p>{this.state.user.about}</p>
+                  <p>{this.props.user.about}</p>
                 </div>
               </div>
             </Container>
