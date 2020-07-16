@@ -68,7 +68,7 @@ class App extends React.Component {
           <Route exact path="/confirmation/:token" render={(props) => <ConfirmationPage {...props} updateUser={this.updateUser} />} />
           <Route exact path='/img-upload' component={ImageUpload} />
           <Route exact path='/publish' render={(props) => { if (this.state.loggedInUser) { return <AddStoryForm currentUser={this.state.loggedInUser} updateUser={this.updateUser} {...props} /> } else { return <Redirect to="/login-page" /> } }} />
-          <Route exact path="/list-stories" render={(props) => <ListStories currentUser={this.state.loggedInUser} {...props} />} />
+          <Route exact path="/list-stories" render={(props) => <ListStories currentUser={this.state.loggedInUser} updateUser={this.updateUser} {...props} />} />
           <Route exact path="/stories/:id" component={StoryDetails} />
           <Route exact path="/story-edit/:id" render={(props) => <EditStory currentUser={this.state.loggedInUser} updateUser={this.updateUser}  {...props} />} />
           <Route exact path="/profile-edit" render={(props) => { if (this.state.loggedInUser) { return <ProfileEdit currentUser={this.state.loggedInUser} updateUser={this.updateUser} {...props} /> } else { return <Redirect to="/login-page" /> } }} />

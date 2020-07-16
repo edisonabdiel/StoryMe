@@ -29,7 +29,6 @@ export class LoginPage extends Component {
   state = {
     nameFocus: false,
     passwordFocus: false,
-    modalLogin: false,
     email: '',
     password: '',
     errorMessage: []
@@ -44,15 +43,7 @@ export class LoginPage extends Component {
       passwordFocus: bool
     })
   }
-  setModalLogin = (bool) => {
-    this.setState({
-      modalLogin: bool
-    })
-  }
-  loginHandler = (e) => {
-    e.preventDefault();
-    console.log("Im a modal, and i work")
-  }
+  
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });

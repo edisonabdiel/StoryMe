@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import ModalComponent from './ModalComponent';
 import CardComponent from './CardComponent';
+import LoginButton from './LoginButton';
 
 // reactstrap components
 import {
@@ -20,7 +21,8 @@ class ListStories extends Component {
     listOfStories: [],
     modalClassic: false,
     liked: false,
-    currentOpenStory: 0
+    currentOpenStory: 0,
+    modalLogin: false
   }
 
 
@@ -61,12 +63,11 @@ class ListStories extends Component {
 
     })
   }
-
-  //TO DO
-  //ADD & COMMIT CHANGES NOW
-  //To display the number of likes, you should count the elements in the array
-  //Create another user and test new functionality
-  //ADD & COMMIT and merge with team.
+  setModalLogin = (bool) => {
+    this.setState({
+      modalLogin: bool
+    })
+  }
 
   likesHandler = (storyID) => {
 
@@ -90,16 +91,20 @@ class ListStories extends Component {
       })
   }
   saveStoryIndex = (position) => {
-    this.setState({
-      currentOpenStory: position,
-      liked: this.state.listOfStories[position].likes.includes(this.props.currentUser._id)
-    })
+    if(this.props.currentUser){
+      this.setState({
+        currentOpenStory: position,
+        liked: this.state.listOfStories[position].likes.includes(this.props.currentUser._id)
+      })
+    }
+    
     // this.setModalClassic(true)
 
   }
 
 
   render() {
+
     return (
       <div>
         <div
@@ -118,6 +123,7 @@ class ListStories extends Component {
                 editHandler={this.editHandler}
                 deleteHandler={this.deleteHandler}
                 setModalClassic={this.setModalClassic}
+                setModalLogin={this.setModalLogin}
               />
               {this.state.listOfStories && this.state.listOfStories[this.state.currentOpenStory] &&
                 <ModalComponent liked={this.state.liked}
@@ -127,6 +133,7 @@ class ListStories extends Component {
                   closeHandler={() => this.setModalClassic(false)}
                 />
               }
+              <LoginButton modalLogin={this.state.modalLogin} setModalLogin={this.setModalLogin} updateUser={this.props.updateUser} history={this.props.history} currentUser={this.props.currentUser}/>
             </Container>
           </div>
         </div>

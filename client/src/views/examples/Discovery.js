@@ -26,7 +26,7 @@ function BlogPosts(props) {
       <div className="wrapper blog-posts" >
         <DiscoveryHeader />
         <div className="projects-4">
-          <ListStories currentUser={props.currentUser}/>
+          <ListStories currentUser={props.currentUser} updateUser={props.updateUser} history={props.history}/>
           {/* <Container>
             <div className="section" >
               <h3 className="title text-center">

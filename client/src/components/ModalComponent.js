@@ -1,11 +1,11 @@
 import React from 'react';
+import DOMPurify from 'dompurify'
 
 import {
     Button,
     Modal,
     ModalFooter,
   } from "reactstrap";
-import { clearConfig } from 'dompurify';
   
 const ModalComponent=(props)=>{
     return(
@@ -28,7 +28,7 @@ const ModalComponent=(props)=>{
                   </div>
                   <div className="modal-body">
                     <h5 style={{ textDecoration: 'underline' }}>User</h5>
-                    <p>{props.story.content}</p>
+                    <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.story.content) }}/> 
                   </div>
                   <ModalFooter>
                     {props.liked ?

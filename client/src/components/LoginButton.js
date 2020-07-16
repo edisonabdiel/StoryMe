@@ -26,7 +26,6 @@ class LoginButton extends React.Component {
   state = {
     nameFocus: false,
     passwordFocus: false,
-    modalLogin: false,
     email: '',
     password: '',
     errorMessages: []
@@ -41,11 +40,7 @@ class LoginButton extends React.Component {
       passwordFocus: bool
     })
   }
-  setModalLogin = (bool) => {
-    this.setState({
-      modalLogin: bool
-    })
-  }
+  
   loginHandler = (e) => {
     e.preventDefault();
     console.log("Im a modal, and i work")
@@ -62,17 +57,13 @@ class LoginButton extends React.Component {
 
     axios.post("/api/login", { email, password })
       .then((resp) => {
-
-
         this.props.updateUser(resp.data)
         console.log('USER DATA UPDATED', this.props.currentUser);
-
         this.setState({ email: "", password: "" });
       }).then(() => {
-        this.props.history.push('/profile-page')
+        this.props.history.push("/")
       }).catch((error) => {
-        console.log("Error!!");
-        console.log(error.response);
+        console.log("Error!!",error);
         this.setState({
           errorMessages: error.response.data.errors
         })
@@ -85,14 +76,14 @@ class LoginButton extends React.Component {
         <Container>
           <Row id="modals">
             <Col md="6">
-              <Button color="info" className="nav-link btn-success" onClick={() => this.setModalLogin(true)}>
+              {/* <Button color="info" className="nav-link btn-success" onClick={() => this.setModalLogin(true)}>
                 <i className="now-ui-icons users_single-02"></i> Login Modal
-              </Button>
+              </Button> */}
               <Modal
                 className="modal-login"
                 modalClassName="modal-info"
-                isOpen={this.state.modalLogin}
-                toggle={() => this.setModalLogin(false)}
+                isOpen={this.props.modalLogin}
+                toggle={() => this.props.setModalLogin(false)}
               >
                 <Card
                   className="card-login card-plain"
@@ -102,7 +93,7 @@ class LoginButton extends React.Component {
                     <button
                       aria-hidden={true}
                       className="close"
-                      onClick={() => this.setModalLogin(false)}
+                      onClick={() => this.props.setModalLogin(false)}
                       type="button"
                     >
                       <i className="now-ui-icons ui-1_simple-remove"></i>
@@ -165,15 +156,14 @@ class LoginButton extends React.Component {
                         </InputGroup>
                       </CardBody>
                       <ModalFooter className="text-center">
-
                         <Button
-
                           block
                           className="btn-neutral btn-round"
                           color="info"
                           // href=""
                           type="submit"
                           size="lg"
+                          onClick={() => this.props.setModalLogin(false)}
                         >
                           Get Started
                         </Button>

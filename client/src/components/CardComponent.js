@@ -19,7 +19,8 @@ const CardComponent = (props) => {
                     return (
                         <Col lg="4" md="6" key={oneStory._id} >
                             <Card className="card-blog" >
-                                <div className="card-image" onClick={() => { props.saveStoryIndex(idx); props.setModalClassic(true) }} style={{ cursor: 'pointer' }}>
+                            
+                                <div className="card-image" onClick={() => { props.saveStoryIndex(idx); {props.currentUser ? props.setModalClassic(true) : props.setModalLogin(true) } }} style={{ cursor: 'pointer' }}>
                                     <img
                                         alt="..."
                                         className="img rounded"
@@ -40,10 +41,12 @@ const CardComponent = (props) => {
                                     </p>
                                     <CardFooter >
                                         <div className="stats stats-right">
-                                            {oneStory.likes.includes(props.currentUser._id) ?
+                                            {props.currentUser && oneStory.likes.includes(props.currentUser._id) ?
                                                 <i className="fa fa-heart fa-lg" style={{ marginRight: '3px' }}></i>
                                                 : <i className="now-ui-icons ui-2_favourite-28" ></i>
                                             }
+                                            
+                                            {!props.currentUser && <i className="fa fa-heart fa-lg" style={{ marginRight: '3px' }}></i>}                                            
                                             {oneStory.likes.length}
                                             <i className="now-ui-icons tech_watch-time"></i>
                                             {oneStory.duration}
@@ -61,16 +64,19 @@ const CardComponent = (props) => {
                                         </div>
                                         <hr />
                                         <div className="btn-block">
-                                            {oneStory.owner._id === props.currentUser._id ?
+                                            {props.currentUser && oneStory.owner._id === props.currentUser._id ?
                                                 <div>
                                                     <button className="nav-link btn-info btn-round pull-left ml-lg-5" style={{ color: 'white', textDecoration: 'none' }}>
                                                         <Link className="text-decoration-none" to={"/story-edit/" + oneStory._id} onClick={() => props.editHandler(oneStory._id)}><b>Edit</b></Link>
                                                     </button>
+                                                    <button className="nav-link btn-round btn-danger pull-right mr-5"
+                                                    onClick={() => props.deleteHandler(oneStory._id)}><b>Delete</b>
+                                                    </button> 
                                                 </div>
                                                 : ""}
-
-                                            {oneStory.owner._id === props.currentUser._id ? <button className="nav-link btn-round btn-danger pull-right mr-5"
-                                                onClick={() => props.deleteHandler(oneStory._id)}><b>Delete</b></button> : "Edit/delete not available"}
+                                            
+                                            {/* { oneStory.owner._id === props.currentUser._id ? <button className="nav-link btn-round btn-danger pull-right mr-5"
+                                                onClick={() => props.deleteHandler(oneStory._id)}><b>Delete</b></button> : "Edit/delete not available"} */}
                                         </div>
                                     </CardFooter>
                                 </CardBody>
