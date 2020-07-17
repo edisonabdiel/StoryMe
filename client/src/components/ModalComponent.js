@@ -11,7 +11,6 @@ const ModalComponent=(props)=>{
   console.log('props Story',props.story);
     return(
         <div>
-        
             <Modal
                   isOpen={props.modalClassic}
                   toggle={() => props.closeHandler()}
