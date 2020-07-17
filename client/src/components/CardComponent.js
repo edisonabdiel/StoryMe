@@ -10,13 +10,10 @@ import {
     Col,
     Row,
 } from "reactstrap";
-import { clearConfig } from 'dompurify';
 
 
 const CardComponent = (props) => {
-    
-    // let filteredCard=props.isDiscovery && props.currentUser ? props.listOfStories.filter((item)=>item.likes.length==0 && item.owner._id!=props.currentUser._id):props.listOfStories
-    
+
     return (
         <Row>
             {props.listOfStories.length === 0
@@ -24,10 +21,12 @@ const CardComponent = (props) => {
                 : props.listOfStories.map((oneStory, idx) => {
                     return (
                         <Col lg="4" md="6" key={oneStory._id} >
-                            <Card className="card-blog" data-background-color={oneStory.cardBgColor}>   
-                                <div className="card-image" onClick={() => { props.saveStoryIndex(idx); 
-                                {props.currentUser ? props.setModalClassic(true) : props.setModalLogin(true) } }} 
-                                style={{ cursor: 'pointer' }}
+                            <Card className="card-blog" data-background-color={oneStory.cardBgColor}>
+                                <div className="card-image" onClick={() => {
+                                    props.saveStoryIndex(idx);
+                                    { props.currentUser ? props.setModalClassic(true) : props.setModalLogin(true) }
+                                }}
+                                    style={{ cursor: 'pointer' }}
                                 >
                                     <img
                                         alt="..."
@@ -52,7 +51,7 @@ const CardComponent = (props) => {
                                             {props.currentUser && oneStory.likes.includes(props.currentUser._id) ?
                                                 <i className="fa fa-heart fa-lg" style={{ marginRight: '3px' }}></i>
                                                 : <i className="now-ui-icons ui-2_favourite-28" ></i>
-                                            }                                            
+                                            }
                                             {oneStory.likes.length}
                                             <i className="now-ui-icons tech_watch-time"></i>
                                             {oneStory.duration}
@@ -66,7 +65,7 @@ const CardComponent = (props) => {
                                             <Link to={{
                                                 pathname: `/profile-page/${oneStory.owner._id}`,
                                                 state: oneStory.owner
-                                            }}>{oneStory.owner.userName ? oneStory.owner.userName: oneStory.owner.email}</Link>
+                                            }}>{oneStory.owner.userName ? oneStory.owner.userName : oneStory.owner.email}</Link>
                                         </div>
                                         <hr />
                                         <div className="btn-block">
@@ -76,23 +75,23 @@ const CardComponent = (props) => {
                                                         <Link className="text-decoration-none" to={"/story-edit/" + oneStory._id} onClick={() => props.editHandler(oneStory._id)}><b>Edit</b></Link>
                                                     </button>
                                                     <button className="nav-link btn-round btn-danger pull-right mr-5"
-                                                    onClick={() => props.deleteHandler(oneStory._id)}><b>Delete</b>
-                                                    </button> 
+                                                        onClick={() => props.deleteHandler(oneStory._id)}><b>Delete</b>
+                                                    </button>
                                                 </div>
                                                 : ""}
-                                            
+
                                             {/* { oneStory.owner._id === props.currentUser._id ? <button className="nav-link btn-round btn-danger pull-right mr-5"
                                                 onClick={() => props.deleteHandler(oneStory._id)}><b>Delete</b></button> : "Edit/delete not available"} */}
                                         </div>
                                     </CardFooter>
                                 </CardBody>
                             </Card>
-                            
+
                         </Col>
                     )
                 })
             }
-        </Row>
+        </Row >
     )
 }
 

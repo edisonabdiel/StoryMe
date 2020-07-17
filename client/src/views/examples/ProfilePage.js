@@ -25,7 +25,7 @@ export class ProfilePage extends Component {
 
   state = {
     isClickedStories: false,
-    isClickedLikes:false,
+    isClickedLikes: false,
     userId: this.props.match.params.id,
     user: ''
   }
@@ -81,13 +81,14 @@ export class ProfilePage extends Component {
       isClickedLikes: bool
     })
   }
-  
+
 
   // to handel the follow function
   followingHandler = () => {
     axios.put(`/api/user/${this.state.userId}/follow`)
       .then((resp) => {
         console.log('follow response:', resp.data);
+        this.props.updateUser(resp.data)
         this.setState({
           user: resp.data
         })
@@ -98,6 +99,14 @@ export class ProfilePage extends Component {
   }
 
   render() {
+    console.log("outPut: ProfilePage -> userId ", this.state.userId)
+    console.log("outPut: ProfilePage -> current user ", this.props.currentUser)
+    console.log("outPut: ProfilePage ->  user id ", this.props.match.params.id)
+    console.log("outPut: ProfilePage ->  user ", this.state.user)
+    // console.log(this.state.user.followers.map((follow) => follow._id))
+    console.log(this.state.user._id)
+
+
     return (
       <BodyClassName className="profile-page sidebar-collapse" >
         <div>
@@ -115,8 +124,8 @@ export class ProfilePage extends Component {
                     onClick={this.followingHandler}
                     size="lg"
                   >
-                    ReadMe
-                </Button>
+                    {this.state.user && !this.state.user.followers.includes(this.props.currentUser._id) ? <h6>unreadMe</h6> : <h6>ReadMe</h6>}
+                  </Button>
                 </div>
                 <div className="content">
                   <div className="social-description">
@@ -132,15 +141,15 @@ export class ProfilePage extends Component {
                     <p>Bookmarks</p>
                   </div>
                 </div>
-                <ProfilePagePortfolio handelIsClickedStories={this.handelIsClickedStories} 
-                handelToCloseStories={this.handelToCloseStories} 
-                handelIsClickedLikes={this.handelIsClickedLikes} 
-                handelToCloseLikes={this.handelToCloseLikes}
-                currentUser={this.props.currentUser} 
-                userId={this.state.userId}
+                <ProfilePagePortfolio handelIsClickedStories={this.handelIsClickedStories}
+                  handelToCloseStories={this.handelToCloseStories}
+                  handelIsClickedLikes={this.handelIsClickedLikes}
+                  handelToCloseLikes={this.handelToCloseLikes}
+                  currentUser={this.props.currentUser}
+                  userId={this.state.userId}
                 />
                 {this.state.isClickedStories && <ListStories profileStories isDiscovery={false} currentUser={this.props.currentUser} userId={this.state.userId} />}
-                {this.state.isClickedLikes && <ListStories profileLikes isDiscovery={false} currentUser={this.props.currentUser} /> }
+                {this.state.isClickedLikes && <ListStories profileLikes isDiscovery={false} currentUser={this.props.currentUser} />}
               </Container>
             </div>
             <FooterBlack />

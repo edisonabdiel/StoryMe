@@ -9,8 +9,7 @@ import {
   Container,
   Row,
 } from "reactstrap";
-import { clearConfig } from 'dompurify';
-import { relativeTimeThreshold } from 'moment';
+
 
 
 
@@ -28,33 +27,33 @@ class ListStories extends Component {
 
   componentDidMount() {
 
-    if(this.props.profileStories){
+    if (this.props.profileStories) {
       axios.get(`/api/profileStories/${this.props.userId}`).then((resp) => {
         this.setState({
           listOfStories: resp.data
         })
       })
     }
-    else if (this.props.currentStory){
+    else if (this.props.currentStory) {
       axios.get(`/api/stories/filter/${this.props.currentUser._id}`).then((resp) => {
         this.setState({
           listOfStories: resp.data
         })
       })
-    } else if(this.props.profileLikes){
+    } else if (this.props.profileLikes) {
       axios.get(`/api/stories/${this.props.currentUser._id}/liked`)
-      .then((resp)=>{
-        this.setState({
-          listOfStories: resp.data
+        .then((resp) => {
+          this.setState({
+            listOfStories: resp.data
+          })
         })
-      })
     } else {
-      axios.get("/api/stories").then((resp)=>{
+      axios.get("/api/stories").then((resp) => {
         this.setState({
           listOfStories: resp.data
         })
-      }).catch((err)=>{
-        console.log('Erro!',err);
+      }).catch((err) => {
+        console.log('Erro!', err);
       })
     }
   }
@@ -107,15 +106,12 @@ class ListStories extends Component {
       })
   }
   saveStoryIndex = (position) => {
-    if(this.props.currentUser){
+    if (this.props.currentUser) {
       this.setState({
         currentOpenStory: position,
         liked: this.state.listOfStories[position].likes.includes(this.props.currentUser._id)
       })
     }
-    
-    
-
   }
 
   render() {
@@ -141,6 +137,7 @@ class ListStories extends Component {
                 setModalLogin={this.setModalLogin}
                 isDiscovery={this.props.isDiscovery}
               />
+              <h1>Please do something</h1>
               {this.state.listOfStories && this.state.listOfStories[this.state.currentOpenStory] &&
                 <ModalComponent liked={this.state.liked}
                   likesHandler={this.likesHandler}
@@ -149,7 +146,7 @@ class ListStories extends Component {
                   closeHandler={() => this.setModalClassic(false)}
                 />
               }
-              <LoginButton modalLogin={this.state.modalLogin} setModalLogin={this.setModalLogin} updateUser={this.props.updateUser} history={this.props.history} currentUser={this.props.currentUser}/>
+              <LoginButton modalLogin={this.state.modalLogin} setModalLogin={this.setModalLogin} updateUser={this.props.updateUser} history={this.props.history} currentUser={this.props.currentUser} />
             </Container>
           </div>
         </div>

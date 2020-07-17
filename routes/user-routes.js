@@ -22,6 +22,8 @@ router.put("/user/:id", (req, res, next) => {
             imageName: req.body.imageName,
             userName: req.body.userName,
             about: req.body.about,
+            bgImage: req.body.bgImageUrl,
+            bgImageName: req.body.bdImageName
         }, {
         new: true
     }).then((user) => {

@@ -20,6 +20,7 @@ const {
 } = require("express-validator");
 const signUpValidation = require("../helpers/middlewares").signUpValidation;
 const loggedIn = require("../helpers/middlewares").loggedIn;
+// const userDefaultImage = require('../client/src/assets/img/placeholder.jpg')
 
 
 
@@ -52,18 +53,11 @@ authRoutes.post('/signup', signUpValidation, loggedIn, (req, res, next) => {
   console.log("outPut: password", password)
   const checked = req.body.checked;
   console.log("outPut: checked", checked)
+  const image = req.body.image
+  const bgImage = req.body.bgImage
+
 
   User.findOne({ email }, (err, foundUser) => {
-    // because of signUpValidation middleware
-    // if (err) {
-    //   res.status(500).json({ message: "Username check went bad." });
-    //   return;
-    // }
-
-    // if (foundUser) {
-    //   res.status(400).json({ message: 'Email taken. Choose another one.' });
-    //   return;
-    // }
 
     //Save new user
     const salt = bcrypt.genSaltSync(10);
@@ -73,7 +67,9 @@ authRoutes.post('/signup', signUpValidation, loggedIn, (req, res, next) => {
       email: email,
       password: hashPass,
       userName: '',
-      about: ''
+      about: '',
+      image: image,
+      bgImage
     });
 
     return newUser.save().then((user) => {
@@ -95,7 +91,7 @@ authRoutes.post('/signup', signUpValidation, loggedIn, (req, res, next) => {
         subject: "Account Verification Token",
         html: `<p>Hi there,<br></br>
           To verify your email, simply click below.</p><br>
-          <a href= "${process.env.EMAIL_HOST}confirmation/${token.token}">verify your email</a><br>
+          <a href= "${process.env.EMAIL_HOST}email-confirmed/${token.token}">verify your email</a><br>
           <h4>Enjoy<br>
           The StoryMe Team</h4>`
       };

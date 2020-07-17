@@ -40,7 +40,7 @@ class LoginButton extends React.Component {
       passwordFocus: bool
     })
   }
-  
+
   loginHandler = (e) => {
     e.preventDefault();
     console.log("Im a modal, and i work")
@@ -63,7 +63,7 @@ class LoginButton extends React.Component {
       }).then(() => {
         this.props.history.push("/")
       }).catch((error) => {
-        console.log("Error!!",error);
+        console.log("Error!!", error);
         this.setState({
           errorMessages: error.response.data.errors
         })
@@ -76,9 +76,6 @@ class LoginButton extends React.Component {
         <Container>
           <Row id="modals">
             <Col md="6">
-              {/* <Button color="info" className="nav-link btn-success" onClick={() => this.setModalLogin(true)}>
-                <i className="now-ui-icons users_single-02"></i> Login Modal
-              </Button> */}
               <Modal
                 className="modal-login"
                 modalClassName="modal-info"
