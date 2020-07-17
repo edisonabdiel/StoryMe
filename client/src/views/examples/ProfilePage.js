@@ -24,7 +24,8 @@ import ProfilePagePortfolio from './ProfilePagePortfolio';
 export class ProfilePage extends Component {
 
   state = {
-    isClicked: false,
+    isClickedStories: false,
+    isClickedLikes:false,
     userId: this.props.match.params.id,
     user: ''
   }
@@ -52,20 +53,32 @@ export class ProfilePage extends Component {
     this.setState({
       userId: this.props.currentUser._id,
       user: this.props.currentUser,
-      isClicked: false
+      isClickedStories: false,
+      isClickedLikes: false
     })
   }
 
   //to open/close the portfolio btn 
-  handelIsClicked = () => {
+  handelIsClickedStories = () => {
     this.setState({
-      isClicked: !this.state.isClicked
+      isClickedStories: !this.state.isClickedStories
     })
   }
 
-  handelToClose = (bool) => {
+  handelToCloseStories = (bool) => {
     this.setState({
-      isClicked: bool
+      isClickedStories: bool
+    })
+  }
+  handelIsClickedLikes = () => {
+    this.setState({
+      isClickedLikes: !this.state.isClickedLikes
+    })
+  }
+
+  handelToCloseLikes = (bool) => {
+    this.setState({
+      isClickedLikes: bool
     })
   }
   
@@ -85,11 +98,6 @@ export class ProfilePage extends Component {
   }
 
   render() {
-    console.log("outPut: ProfilePage -> userId ", this.state.userId)
-    console.log("outPut: ProfilePage -> current user ", this.props.currentUser)
-    console.log("outPut: ProfilePage ->  user id ", this.props.match.params.id)
-    console.log("outPut: ProfilePage ->  user ", this.state.user)
-
     return (
       <BodyClassName className="profile-page sidebar-collapse" >
         <div>
@@ -109,32 +117,6 @@ export class ProfilePage extends Component {
                   >
                     ReadMe
                 </Button>
-                  {/* <Button
-                    className="btn-round btn-icon mr-1"
-                    color="default"
-                    href="#pablo"
-                    id="tooltip871723210"
-                    onClick={(e) => e.preventDefault()}
-                    size="lg"
-                  >
-                    <i className="fab fa-twitter"></i>
-                  </Button>
-                  <UncontrolledTooltip delay={0} target="tooltip871723210">
-                    Follow me on Twitter
-                </UncontrolledTooltip>
-                  <Button
-                    className="btn-round btn-icon"
-                    color="default"
-                    href="#pablo"
-                    id="tooltip259363830"
-                    onClick={(e) => e.preventDefault()}
-                    size="lg"
-                  >
-                    <i className="fab fa-instagram"></i>
-                  </Button>
-                  <UncontrolledTooltip delay={0} target="tooltip259363830">
-                    Follow me on Instagram
-                  </UncontrolledTooltip> */}
                 </div>
                 <div className="content">
                   <div className="social-description">
@@ -150,8 +132,15 @@ export class ProfilePage extends Component {
                     <p>Bookmarks</p>
                   </div>
                 </div>
-                <ProfilePagePortfolio handelIsClicked={this.handelIsClicked} handelToClose={this.handelToClose} />
-                {this.state.isClicked && <ListStories profile isDiscovery={false} currentUser={this.props.currentUser} userId={this.state.userId} />}
+                <ProfilePagePortfolio handelIsClickedStories={this.handelIsClickedStories} 
+                handelToCloseStories={this.handelToCloseStories} 
+                handelIsClickedLikes={this.handelIsClickedLikes} 
+                handelToCloseLikes={this.handelToCloseLikes}
+                currentUser={this.props.currentUser} 
+                userId={this.state.userId}
+                />
+                {this.state.isClickedStories && <ListStories profileStories isDiscovery={false} currentUser={this.props.currentUser} userId={this.state.userId} />}
+                {this.state.isClickedLikes && <ListStories profileLikes isDiscovery={false} currentUser={this.props.currentUser} /> }
               </Container>
             </div>
             <FooterBlack />

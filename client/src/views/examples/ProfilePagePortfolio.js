@@ -37,7 +37,8 @@ export class ProfilePagePortfolio extends Component {
                                     <NavLink
                                         onClick={(e) => {
                                             e.preventDefault();
-                                            this.props.handelIsClicked()
+                                            this.props.handelToCloseLikes(false)
+                                            this.props.handelIsClickedStories()
                                             this.setState({
                                                 pills: '1'
                                             })
@@ -54,20 +55,23 @@ export class ProfilePagePortfolio extends Component {
 
                                     </NavLink>
                                 </NavItem>
-                                <NavItem>
-                                    <NavLink
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            this.props.handelToClose(false)
-                                            this.setState({
-                                                pills: '2'
-                                            })
-                                        }}
-                                        className={this.state.pills === "2" ? "active" : ""}
-                                    >
-                                        <i className="now-ui-icons ui-2_favourite-28"></i>
-                                    </NavLink>
-                                </NavItem>
+                                {this.props.currentUser._id === this.props.userId &&
+                                    <NavItem>
+                                        <NavLink
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                this.props.handelToCloseStories(false)
+                                                this.props.handelIsClickedLikes()
+                                                this.setState({
+                                                    pills: '2'
+                                                })
+                                            }}
+                                            className={this.state.pills === "2" ? "active" : ""}
+                                        >
+                                            <i className="now-ui-icons ui-2_favourite-28"></i>
+                                        </NavLink>
+                                    </NavItem>
+                                }
                             </Nav>
                         </div>
 

@@ -106,6 +106,21 @@ router.put('/stories/:id', (req, res, next) => {
     })
 })
 
+router.get('/stories/:id/liked',(req,res,next)=>{
+  Story.find().populate("owner")
+  .then(allTheStories => {
+    console.log('HELLOOOOOOOOOO');
+    const filterLikedStory=allTheStories.filter((item)=>{ 
+      return (item.likes.includes(req.params.id))
+      })
+      // console.log("fileStory =====>",filterStory)
+      res.json(filterLikedStory);
+    }).catch((err)=>{
+      console.log('Error', err);
+      res.json(err)
+    })
+})
+
 router.put('/stories/:id/liked', (req, res, next) => {
   console.log(req.body)
   Story.findById(req.params.id).populate("owner").then((story) => {
