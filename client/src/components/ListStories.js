@@ -48,18 +48,16 @@ class ListStories extends Component {
           listOfStories: resp.data
         })
       })
-      .catch((err)=>{
-        console.log('Error!',err);
-      })
     } else {
       axios.get("/api/stories").then((resp)=>{
         this.setState({
           listOfStories: resp.data
         })
+      }).catch((err)=>{
+        console.log('Erro!',err);
       })
     }
   }
-
 
 
   deleteHandler = (storyID) => {

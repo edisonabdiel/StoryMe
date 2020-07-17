@@ -52,9 +52,7 @@ const CardComponent = (props) => {
                                             {props.currentUser && oneStory.likes.includes(props.currentUser._id) ?
                                                 <i className="fa fa-heart fa-lg" style={{ marginRight: '3px' }}></i>
                                                 : <i className="now-ui-icons ui-2_favourite-28" ></i>
-                                            }
-                                            
-                                            {!props.currentUser && <i className="fa fa-heart fa-lg" style={{ marginRight: '3px' }}></i>}                                            
+                                            }                                            
                                             {oneStory.likes.length}
                                             <i className="now-ui-icons tech_watch-time"></i>
                                             {oneStory.duration}
