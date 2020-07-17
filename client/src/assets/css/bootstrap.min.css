@@ -6211,7 +6211,7 @@ a.close.disabled {
 
 .modal {
     position: fixed;
-    top: 0;
+    top: 20%;
     left: 0;
     z-index: 1050;
     display: none;
@@ -6392,7 +6392,7 @@ a.close.disabled {
 
 @media (min-width:576px) {
     .modal-dialog {
-        max-width: 500px;
+        max-width: 80%;
         margin: 1.75rem auto
     }
 
