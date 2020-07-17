@@ -65,6 +65,11 @@ export class ProfilePagePortfolio extends Component {
                                                 this.setState({
                                                     pills: '2'
                                                 })
+                                                scroller.scrollTo('myScrollToElement', {
+                                                    duration: 1500,
+                                                    delay: 100,
+                                                    smooth: true,
+                                                })
                                             }}
                                             className={this.state.pills === "2" ? "active" : ""}
                                         >
