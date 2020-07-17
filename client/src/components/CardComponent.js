@@ -79,7 +79,6 @@ const CardComponent = (props) => {
                                                     </button>
                                                 </div>
                                                 : ""}
-
                                             {/* { oneStory.owner._id === props.currentUser._id ? <button className="nav-link btn-round btn-danger pull-right mr-5"
                                                 onClick={() => props.deleteHandler(oneStory._id)}><b>Delete</b></button> : "Edit/delete not available"} */}
                                         </div>
