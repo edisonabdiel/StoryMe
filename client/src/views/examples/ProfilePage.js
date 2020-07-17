@@ -24,7 +24,8 @@ import ProfilePagePortfolio from './ProfilePagePortfolio';
 export class ProfilePage extends Component {
 
   state = {
-    isClicked: false,
+    isClickedStories: false,
+    isClickedLikes: false,
     userId: this.props.match.params.id,
     user: ''
   }
@@ -52,20 +53,32 @@ export class ProfilePage extends Component {
     this.setState({
       userId: this.props.currentUser._id,
       user: this.props.currentUser,
-      isClicked: false
+      isClickedStories: false,
+      isClickedLikes: false
     })
   }
 
   //to open/close the portfolio btn 
-  handelIsClicked = () => {
+  handelIsClickedStories = () => {
     this.setState({
-      isClicked: !this.state.isClicked
+      isClickedStories: !this.state.isClickedStories
     })
   }
 
-  handelToClose = (bool) => {
+  handelToCloseStories = (bool) => {
     this.setState({
-      isClicked: bool
+      isClickedStories: bool
+    })
+  }
+  handelIsClickedLikes = () => {
+    this.setState({
+      isClickedLikes: !this.state.isClickedLikes
+    })
+  }
+
+  handelToCloseLikes = (bool) => {
+    this.setState({
+      isClickedLikes: bool
     })
   }
 
@@ -128,8 +141,15 @@ export class ProfilePage extends Component {
                     <p>Bookmarks</p>
                   </div>
                 </div>
-                <ProfilePagePortfolio handelIsClicked={this.handelIsClicked} handelToClose={this.handelToClose} />
-                {this.state.isClicked && <ListStories profile isDiscovery={false} currentUser={this.props.currentUser} userId={this.state.userId} />}
+                <ProfilePagePortfolio handelIsClickedStories={this.handelIsClickedStories}
+                  handelToCloseStories={this.handelToCloseStories}
+                  handelIsClickedLikes={this.handelIsClickedLikes}
+                  handelToCloseLikes={this.handelToCloseLikes}
+                  currentUser={this.props.currentUser}
+                  userId={this.state.userId}
+                />
+                {this.state.isClickedStories && <ListStories profileStories isDiscovery={false} currentUser={this.props.currentUser} userId={this.state.userId} />}
+                {this.state.isClickedLikes && <ListStories profileLikes isDiscovery={false} currentUser={this.props.currentUser} />}
               </Container>
             </div>
             <FooterBlack />

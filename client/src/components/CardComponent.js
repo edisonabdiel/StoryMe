@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+
 import {
     Card,
     CardBody,
@@ -20,12 +21,13 @@ const CardComponent = (props) => {
                 : props.listOfStories.map((oneStory, idx) => {
                     return (
                         <Col lg="4" md="6" key={oneStory._id} >
-                            {console.log('One Story:', oneStory)}
                             <Card className="card-blog" data-background-color={oneStory.cardBgColor}>
                                 <div className="card-image" onClick={() => {
                                     props.saveStoryIndex(idx);
                                     { props.currentUser ? props.setModalClassic(true) : props.setModalLogin(true) }
-                                }} style={{ cursor: 'pointer' }}>
+                                }}
+                                    style={{ cursor: 'pointer' }}
+                                >
                                     <img
                                         alt="..."
                                         className="img rounded"
@@ -50,8 +52,6 @@ const CardComponent = (props) => {
                                                 <i className="fa fa-heart fa-lg" style={{ marginRight: '3px' }}></i>
                                                 : <i className="now-ui-icons ui-2_favourite-28" ></i>
                                             }
-
-                                            {!props.currentUser && <i className="fa fa-heart fa-lg" style={{ marginRight: '3px' }}></i>}
                                             {oneStory.likes.length}
                                             <i className="now-ui-icons tech_watch-time"></i>
                                             {oneStory.duration}
