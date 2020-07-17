@@ -11,7 +11,7 @@ import {
 import ScrollTransparentNavbar from 'components/Navbars/ScrollTransparentNavbar.js'
 import Footer from "components/Footers/Footer";
 
-const EmailSent = () => {
+const EmailSent = (props) => {
   return (
     <>
       <ScrollTransparentNavbar />
@@ -20,8 +20,9 @@ const EmailSent = () => {
           <Container>
             <Row>
               <Col className="ml-auto mr-auto text-center" md="8">
-                <h1 className="title">Hey! Check your email!</h1>
-                <h5 className="description" style={{color: 'black'}}>
+                <h1 className="title">Hey! Check your email! </h1>
+                <h4> Verification email has ben sent to {props.currentUser.email}</h4>
+                <h5 className="description" style={{ color: 'black' }}>
                 </h5>
                 <div >
                   <h3 >Didn't get an email?</h3>
@@ -37,8 +38,8 @@ const EmailSent = () => {
             <div className="separator separator-info"></div>
           </Container>
         </div>
-        </div>
-        <Footer />
+      </div>
+      <Footer />
     </>
   );
 }

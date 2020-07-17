@@ -68,13 +68,14 @@ export class ProfilePage extends Component {
       isClicked: bool
     })
   }
-  
+
 
   // to handel the follow function
   followingHandler = () => {
     axios.put(`/api/user/${this.state.userId}/follow`)
       .then((resp) => {
         console.log('follow response:', resp.data);
+        this.props.updateUser(resp.data)
         this.setState({
           user: resp.data
         })
@@ -89,6 +90,9 @@ export class ProfilePage extends Component {
     console.log("outPut: ProfilePage -> current user ", this.props.currentUser)
     console.log("outPut: ProfilePage ->  user id ", this.props.match.params.id)
     console.log("outPut: ProfilePage ->  user ", this.state.user)
+    // console.log(this.state.user.followers.map((follow) => follow._id))
+    console.log(this.state.user._id)
+
 
     return (
       <BodyClassName className="profile-page sidebar-collapse" >
@@ -107,34 +111,8 @@ export class ProfilePage extends Component {
                     onClick={this.followingHandler}
                     size="lg"
                   >
-                    ReadMe
-                </Button>
-                  {/* <Button
-                    className="btn-round btn-icon mr-1"
-                    color="default"
-                    href="#pablo"
-                    id="tooltip871723210"
-                    onClick={(e) => e.preventDefault()}
-                    size="lg"
-                  >
-                    <i className="fab fa-twitter"></i>
+                    {this.state.user && !this.state.user.followers.includes(this.props.currentUser._id) ? <h6>unreadMe</h6> : <h6>ReadMe</h6>}
                   </Button>
-                  <UncontrolledTooltip delay={0} target="tooltip871723210">
-                    Follow me on Twitter
-                </UncontrolledTooltip>
-                  <Button
-                    className="btn-round btn-icon"
-                    color="default"
-                    href="#pablo"
-                    id="tooltip259363830"
-                    onClick={(e) => e.preventDefault()}
-                    size="lg"
-                  >
-                    <i className="fab fa-instagram"></i>
-                  </Button>
-                  <UncontrolledTooltip delay={0} target="tooltip259363830">
-                    Follow me on Instagram
-                  </UncontrolledTooltip> */}
                 </div>
                 <div className="content">
                   <div className="social-description">

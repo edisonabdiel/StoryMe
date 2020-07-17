@@ -9,12 +9,9 @@ import {
     Col,
     Row,
 } from "reactstrap";
-import { clearConfig } from 'dompurify';
 
 
 const CardComponent = (props) => {
-
-    // let filteredCard=props.isDiscovery && props.currentUser ? props.listOfStories.filter((item)=>item.likes.length==0 && item.owner._id!=props.currentUser._id):props.listOfStories
 
     return (
         <Row>
@@ -25,7 +22,10 @@ const CardComponent = (props) => {
                         <Col lg="4" md="6" key={oneStory._id} >
                             {console.log('One Story:', oneStory)}
                             <Card className="card-blog" data-background-color={oneStory.cardBgColor}>
-                                <div className="card-image" onClick={() => { props.saveStoryIndex(idx); { props.currentUser ? props.setModalClassic(true) : props.setModalLogin(true) } }} style={{ cursor: 'pointer' }}>
+                                <div className="card-image" onClick={() => {
+                                    props.saveStoryIndex(idx);
+                                    { props.currentUser ? props.setModalClassic(true) : props.setModalLogin(true) }
+                                }} style={{ cursor: 'pointer' }}>
                                     <img
                                         alt="..."
                                         className="img rounded"
@@ -91,7 +91,7 @@ const CardComponent = (props) => {
                     )
                 })
             }
-        </Row>
+        </Row >
     )
 }
 

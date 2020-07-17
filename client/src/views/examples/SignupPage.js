@@ -83,7 +83,7 @@ class SignupPage extends React.Component {
           errorMessages: []
         })
       }).then(() => {
-        this.props.history.push(`/profile-page/${this.props.currentUser._id}`)
+        this.props.history.push(`/email-sent`)
       }).catch((error) => {
         console.log("outPut: SignupPage -> handleFormSubmit -> error", error.response)
         this.setState({
