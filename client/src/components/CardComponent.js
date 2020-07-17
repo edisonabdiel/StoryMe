@@ -12,10 +12,8 @@ import {
 import { clearConfig } from 'dompurify';
 
 
-
 const CardComponent = (props) => {
-    console.log('List of Stories:',props.listOfStories);
-    console.log('current user', props.currentUser);
+    
     // let filteredCard=props.isDiscovery && props.currentUser ? props.listOfStories.filter((item)=>item.likes.length==0 && item.owner._id!=props.currentUser._id):props.listOfStories
     
     return (
@@ -25,6 +23,7 @@ const CardComponent = (props) => {
                 : props.listOfStories.map((oneStory, idx) => {
                     return (
                         <Col lg="4" md="6" key={oneStory._id} >
+                        {console.log('One Story:',oneStory)}
                             <Card className="card-blog" data-background-color={oneStory.cardBgColor}>   
                                 <div className="card-image" onClick={() => { props.saveStoryIndex(idx); {props.currentUser ? props.setModalClassic(true) : props.setModalLogin(true) } }} style={{ cursor: 'pointer' }}>
                                     <img
@@ -61,12 +60,12 @@ const CardComponent = (props) => {
                                             <img
                                                 alt="..."
                                                 className="avatar img-raised"
-                                                src={require("assets/img/james.jpg")}
+                                                src={oneStory.image}
                                             ></img>
                                             <Link to={{
                                                 pathname: `/profile-page/${oneStory.owner._id}`,
                                                 state: oneStory.owner
-                                            }}>{oneStory.owner.email}</Link>
+                                            }}>{oneStory.owner.userName ? oneStory.owner.userName: oneStory.owner.email}</Link>
                                         </div>
                                         <hr />
                                         <div className="btn-block">

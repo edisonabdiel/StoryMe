@@ -26,7 +26,7 @@ function BlogPosts(props) {
       <div className="wrapper blog-posts" >
         <DiscoveryHeader />
         <div className="projects-4">      
-          <ListStories isDiscovery={true} currentUser={props.currentUser} updateUser={props.updateUser} history={props.history} userId={props.currentUser._id}/>
+          <ListStories isDiscovery={true} currentUser={props.currentUser} updateUser={props.updateUser} history={props.history} />
         </div>
       </div>
       <FooterBlack />

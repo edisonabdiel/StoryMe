@@ -28,19 +28,40 @@ class ListStories extends Component {
 
   componentDidMount() {
 
-    this.props.profile
-      ? axios.get(`/api/profileStories/${this.props.userId}`).then((resp) => {
+    // this.props.profile
+    //   ? axios.get(`/api/profileStories/${this.props.userId}`).then((resp) => {
+    //     this.setState({
+    //       listOfStories: resp.data
+    //     })
+    //   })
+    //   : axios.get(`/api/stories/filter/${this.props.userId}`).then((resp) => {
+    //     console.log('Response Data', resp.data);
+    //     this.setState({
+    //       listOfStories: resp.data
+    //     })
+    //   })
+    if(this.props.profile){
+      axios.get(`/api/profileStories/${this.props.userId}`).then((resp) => {
         this.setState({
           listOfStories: resp.data
         })
       })
-      : axios.get(`/api/stories/filter/${this.props.userId}`).then((resp) => {
+    }
+    else if (this.props.currentStory){
+      axios.get(`/api/stories/filter/${this.props.currentUser._id}`).then((resp) => {
         console.log('Response Data', resp.data);
         this.setState({
           listOfStories: resp.data
         })
       })
-
+    } else {
+      axios.get("/api/stories").then((resp)=>{
+        this.setState({
+          listOfStories: resp.data
+        })
+      })
+    }
+       
    
 
   }
