@@ -98,6 +98,10 @@ export class LoginPage extends Component {
                       <Form onSubmit={this.handleFormSubmit}>
                         <CardHeader className="text-center">
                           <div className="logo-container">
+                          <img
+                          alt="..."
+                          src={require("assets/img/logo.png")}
+                        ></img>
                           </div>
                         </CardHeader>
                         <CardBody>

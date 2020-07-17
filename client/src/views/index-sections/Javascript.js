@@ -265,7 +265,7 @@ const Javascript = () => {
                       <div className="logo-container">
                         <img
                           alt="..."
-                          src={require("assets/img/now-logo.png")}
+                          src={require("assets/img/logo1.png")}
                         ></img>
                       </div>
                     </div>

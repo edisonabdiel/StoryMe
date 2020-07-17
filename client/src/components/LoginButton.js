@@ -78,7 +78,7 @@ class LoginButton extends React.Component {
             <Col md="6">
               <Modal
                 className="modal-login"
-                modalClassName="modal-info"
+                modalClassName=" modal-primary"
                 isOpen={this.props.modalLogin}
                 toggle={() => this.props.setModalLogin(false)}
               >
@@ -97,7 +97,10 @@ class LoginButton extends React.Component {
                     </button>
                     <div className="header header-info text-center">
                       <div className="logo-container">
-
+                      <img
+                          alt="..."
+                          src={require("assets/img/logo1.png")}
+                        ></img>
                       </div>
                     </div>
                   </div>
@@ -156,7 +159,7 @@ class LoginButton extends React.Component {
                         <Button
                           block
                           className="btn-neutral btn-round"
-                          color="info"
+                          color="success"
                           // href=""
                           type="submit"
                           size="lg"

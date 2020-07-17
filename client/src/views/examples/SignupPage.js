@@ -147,6 +147,11 @@ class SignupPage extends React.Component {
                   <Col className="mr-auto" md="6" lg="4">
                     <Card className="card-signup" >
                       <CardBody>
+                      <img
+                          style={{height: "40px", width: '40px'}}
+                          alt="..."
+                          src={require("assets/img/logo.png")}
+                        ></img>
                         <CardTitle className="text-center" tag="h4">
                           Register
                     </CardTitle>
@@ -162,7 +167,6 @@ class SignupPage extends React.Component {
                             <h6 key={m} style={{ color: "red", margin: '0px' }}>{m}</h6>
                           )}
                           <h6 style={{ color: "red", margin: '0px' }}>{this.state.logInError}</h6>
-
                           <InputGroup
                             className={this.emailFocus ? "input-group-focus" : ""}
                           >
