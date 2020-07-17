@@ -36,7 +36,7 @@ class AddStoryForm extends React.Component {
         storyImageName: '',
         category: "",
         duration: "",
-        icon: '',
+        icon: 'now-ui-icons users_single-02',
         errorMessage: ''
     }
     setNameFocus = (bool) => {
@@ -129,7 +129,7 @@ class AddStoryForm extends React.Component {
         axios.post("/api/stories", { title, headline, content, image, imageName, duration, category, icon })
             .then((resp) => {
                 console.log("outPut: AddStoryForm -> handleFormSubmit -> resp", resp.data.image)
-                this.setState({ title: "", headline: "", content: '', imageUrl: defaultAvatar, storyImageName: '', duration: "", category: "", icon: "" });
+                this.setState({ title: "", headline: "", content: '', imageUrl: defaultAvatar, storyImageName: '', duration: "", category: "", icon: 'now-ui-icons users_single-02' });
                 this.props.history.push(`/profile-page/${this.props.currentUser._id}`)
             }).catch((error) => {
                 console.log("Error!!");

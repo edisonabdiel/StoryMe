@@ -85,7 +85,7 @@ function FixedTransparentNavbar(props) {
                     <span className="button-bar"></span>
                     <span className="button-bar"></span>
                   </DropdownToggle>
-                  <DropdownMenu aria-labelledby="navbarDropdown" data-background-color="black">
+                  <DropdownMenu aria-labelledby="navbarDropdown" data-background-color="black"> 
                     <DropdownItem onClick={(e) => e.preventDefault()}>
                       <Logout size="sm" updateUser={props.updateUser} {...props} />
                     </DropdownItem>

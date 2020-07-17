@@ -34,11 +34,14 @@ class ListStories extends Component {
           listOfStories: resp.data
         })
       })
-      : axios.get('/api/stories').then((resp) => {
+      : axios.get(`/api/stories/filter/${this.props.userId}`).then((resp) => {
+        console.log('Response Data', resp.data);
         this.setState({
           listOfStories: resp.data
         })
       })
+
+   
 
   }
 
@@ -98,7 +101,7 @@ class ListStories extends Component {
       })
     }
     
-    // this.setModalClassic(true)
+    
 
   }
 
@@ -113,7 +116,7 @@ class ListStories extends Component {
           id="cards"
         >
           <div className="cards">
-            <Container>
+            <Container fluid>
               <div className="title">
                 <h3 className="title"></h3>
               </div>
@@ -124,6 +127,7 @@ class ListStories extends Component {
                 deleteHandler={this.deleteHandler}
                 setModalClassic={this.setModalClassic}
                 setModalLogin={this.setModalLogin}
+                isDiscovery={this.props.isDiscovery}
               />
               {this.state.listOfStories && this.state.listOfStories[this.state.currentOpenStory] &&
                 <ModalComponent liked={this.state.liked}

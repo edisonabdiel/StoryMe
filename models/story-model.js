@@ -34,9 +34,10 @@ const storySchema = new Schema({
       'now-ui-icons design_palette',
       'now-ui-icons business_money-coins',
       'now-ui-icons business_bulb-63'
-    ]
+    ],
+    default:'now-ui-icons users_single-02'
   },
-  // icon: String,
+  cardBgColor: String,
   category: String,
   content: String,
   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],

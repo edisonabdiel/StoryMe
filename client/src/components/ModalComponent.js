@@ -8,12 +8,13 @@ import {
   } from "reactstrap";
   
 const ModalComponent=(props)=>{
+  console.log('props Story',props.story);
     return(
         <div>
+        
             <Modal
                   isOpen={props.modalClassic}
                   toggle={() => props.closeHandler()}
-                  style={{ width: '80% !important' }}
                 >
                   <div className="modal-header justify-content-center">
                     <button
@@ -27,7 +28,7 @@ const ModalComponent=(props)=>{
                     <h4 className="title title-up">{props.story.title}</h4>
                   </div>
                   <div className="modal-body">
-                    <h5 style={{ textDecoration: 'underline' }}>User</h5>
+                    <h5 style={{ textDecoration: 'underline' }}>{props.story.owner.userName ? props.story.owner.userName:props.story.owner.email}</h5>
                     <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.story.content) }}/> 
                   </div>
                   <ModalFooter>
@@ -44,6 +45,7 @@ const ModalComponent=(props)=>{
                               </Button>
                   </ModalFooter>
                 </Modal>
+        
         </div>
     )
 }

@@ -50,7 +50,7 @@ export class ProfilePagePortfolio extends Component {
                                         className={this.state.pills === "1" ? "active" : ""}
 
                                     >
-                                        <i className="now-ui-icons design_image"></i>
+                                        <i className="now-ui-icons files_single-copy-04"></i>
 
                                     </NavLink>
                                 </NavItem>
@@ -65,21 +65,7 @@ export class ProfilePagePortfolio extends Component {
                                         }}
                                         className={this.state.pills === "2" ? "active" : ""}
                                     >
-                                        <i className="now-ui-icons location_world"></i>
-                                    </NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            this.props.handelToClose(false)
-                                            this.setState({
-                                                pills: '3'
-                                            })
-                                        }}
-                                        className={this.state.pills === "3" ? "active" : ""}
-                                    >
-                                        <i className="now-ui-icons design-2_ruler-pencil"></i>
+                                        <i className="now-ui-icons ui-2_favourite-28"></i>
                                     </NavLink>
                                 </NavItem>
                             </Nav>
