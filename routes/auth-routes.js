@@ -20,6 +20,7 @@ const {
 } = require("express-validator");
 const signUpValidation = require("../helpers/middlewares").signUpValidation;
 const loggedIn = require("../helpers/middlewares").loggedIn;
+// const userDefaultImage = require('../client/src/assets/img/placeholder.jpg')
 
 
 
@@ -52,6 +53,9 @@ authRoutes.post('/signup', signUpValidation, loggedIn, (req, res, next) => {
   console.log("outPut: password", password)
   const checked = req.body.checked;
   console.log("outPut: checked", checked)
+  const image = req.body.image
+  const bgImage = req.body.bgImage
+
 
   User.findOne({ email }, (err, foundUser) => {
     // because of signUpValidation middleware
@@ -73,7 +77,9 @@ authRoutes.post('/signup', signUpValidation, loggedIn, (req, res, next) => {
       email: email,
       password: hashPass,
       userName: '',
-      about: ''
+      about: '',
+      image: image,
+      bgImage
     });
 
     return newUser.save().then((user) => {

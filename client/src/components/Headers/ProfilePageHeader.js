@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // reactstrap components
 import { Container } from "reactstrap";
-import axios from "axios"
+// import defaultAvatar from "assets/img/placeholder.jpg";
 
 
 
@@ -22,7 +22,7 @@ export class ProfilePageHeader extends Component {
             <div
               className="page-header-image"
               style={{
-                // backgroundImage: "url(" + require("assets/img/bg5.jpg") + ")",
+                backgroundImage: `url(${this.props.user.bgImage}`,
               }}
               ref={this.pageHeader}
             ></div>

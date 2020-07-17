@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import BodyClassName from 'react-body-classname';
+import defaultAvatar from "assets/img/placeholder.jpg";
+
 
 
 
@@ -67,7 +69,9 @@ class SignupPage extends React.Component {
     const email = this.state.email
     const password = this.state.password
     const checked = this.state.checked
-    axios.post("/api/signup", { email, password, checked })
+    const image = defaultAvatar
+    const bgImage = defaultAvatar
+    axios.post("/api/signup", { email, password, checked, image, bgImage })
       .then((res) => {
         this.props.updateUser(res.data)
         console.log("outPut: SignupPage -> user", this.props.currentUser)

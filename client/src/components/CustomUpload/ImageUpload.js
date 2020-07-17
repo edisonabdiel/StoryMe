@@ -32,7 +32,7 @@ export class ImageUpload extends Component {
   render() {
     return (
       <div className="fileinput text-center">
-        <input type="file" name="stroyImageUrl" onChange={(e) => this.props.handleImageChange(e)} ref={this.fileInput} />
+        <input type="file" name="imageUrl" onChange={(e) => this.props.handleImageChange(e)} ref={this.fileInput} />
         <div
           className={
             "fileinput-new thumbnail img-raised" +

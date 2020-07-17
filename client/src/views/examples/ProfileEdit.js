@@ -44,7 +44,10 @@ class ProfileEdit extends Component {
         oldPassword: '',
         newPassword: '',
         aboutFocus: false,
-        alertBool: true
+        alertBool: true,
+        bgImageUrl: this.props.currentUser.bgImage,
+        uploadedBgImageName: ''
+
     }
 
     setNameFocus = (bool) => {
@@ -99,13 +102,44 @@ class ProfileEdit extends Component {
     }
 
     handleImageRemove = () => {
-        const name = (this.state.imageName)
+        const name = (this.state.uploadedImageName)
         console.log("outPut: ImageUpload -> handleRemove -> name", name)
         axios.post(`/api/delete-upload-img/${name}`).then((res) => {
             console.log(res)
             this.setState({
                 imageUrl: defaultAvatar,
                 uploadedImageName: ''
+            })
+        }).catch((error) => {
+            console.log("Error!!");
+            console.log(error.response);
+        })
+    };
+
+    // bg images handler
+    handleBgImageChange = (e) => {
+        let formData = new FormData()
+        formData.append("imageUrl", e.target.files[0])
+        axios.post("/api/upload-img", formData).then((res) => {
+            console.log(res.data)
+            this.setState({
+                bgImageUrl: res.data.secure_url,
+                uploadedBgImageName: res.data.imageName
+            })
+        }).catch((error) => {
+            console.log("Error!!");
+            console.log(error.response);
+        })
+    }
+
+    handleBgImageRemove = () => {
+        const name = (this.state.uploadedBgImageName)
+        console.log("outPut: ImageUpload -> handleRemove -> name", name)
+        axios.post(`/api/delete-upload-img/${name}`).then((res) => {
+            console.log(res)
+            this.setState({
+                bgImageUrl: defaultAvatar,
+                uploadedBgImageName: ''
             })
         }).catch((error) => {
             console.log("Error!!");
@@ -153,9 +187,11 @@ class ProfileEdit extends Component {
         const about = this.state.about;
         const imageUrl = this.state.imageUrl
         const imageName = this.state.uploadedImageName
+        const bgImageUrl = this.state.bgImageUrl
+        const bgImageName = this.state.uploadedBgImageName
         const userName = this.state.userName;
         const newPassword = this.state.newPassword
-        axios.put(`/api/user/${this.props.currentUser._id}`, { email, password, about, imageUrl, imageName, userName, newPassword })
+        axios.put(`/api/user/${this.props.currentUser._id}`, { email, password, about, imageUrl, imageName, userName, newPassword, bgImageUrl, bgImageName })
             .then((resp) => {
                 this.props.updateUser(resp.data)
                 console.log("outPut: handleFormSubmit -> resp", resp.data)
@@ -200,7 +236,7 @@ class ProfileEdit extends Component {
                                         {/* image */}
                                         <InputGroup >
                                             <ImageUpload avatar imageUrl={this.state.imageUrl} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
-                                            {/* <ImageUpload imageUrl={this.state.imageUrl} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} /> */}
+                                            <ImageUpload imageUrl={this.state.bgImageUrl} handleImageChange={this.handleBgImageChange} handleImageRemove={this.handleBgImageRemove} />
                                         </InputGroup>
                                         {/* email */}
                                         <InputGroup
