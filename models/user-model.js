@@ -10,11 +10,6 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  // role: {
-  //   type: String,
-  //   enum: ['admin', 'member'],
-  //   default: 'member'
-  // },
   isVerified: {
     type: Boolean,
     default: false
@@ -25,7 +20,7 @@ const userSchema = new Schema({
   about: String,
   imageName: String,
   bgImage: String,
-  bdImageName: String,
+  bgImageName: String,
   followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 
 },

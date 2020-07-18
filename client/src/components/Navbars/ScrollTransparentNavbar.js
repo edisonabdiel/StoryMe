@@ -88,7 +88,8 @@ const ScrollTransparentNavbar = (props) => {
             <Nav className="ml-auto" id="ceva" navbar>
               <Link to="/" ><i className="now-ui-icons objects_globe p-md-3"></i></Link>
               {props.currentUser && props.profilePageNav &&
-                <Link to={`/profile-page/${props.currentUser._id}`} onClick={() => props.changeStateHandler()}>
+                <Link to={`/profile-page/${props.currentUser._id}`}
+                  onClick={props.changeStateHandler}>
                   <i
                     aria-hidden={true}
                     className="now-ui-icons users_single-02 p-md-3"

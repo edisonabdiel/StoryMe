@@ -137,7 +137,6 @@ class ListStories extends Component {
                 setModalLogin={this.setModalLogin}
                 isDiscovery={this.props.isDiscovery}
               />
-              <h1>Please do something</h1>
               {this.state.listOfStories && this.state.listOfStories[this.state.currentOpenStory] &&
                 <ModalComponent liked={this.state.liked}
                   likesHandler={this.likesHandler}
@@ -146,7 +145,11 @@ class ListStories extends Component {
                   closeHandler={() => this.setModalClassic(false)}
                 />
               }
-              <LoginButton modalLogin={this.state.modalLogin} setModalLogin={this.setModalLogin} updateUser={this.props.updateUser} history={this.props.history} currentUser={this.props.currentUser} />
+              <LoginButton modalLogin={this.state.modalLogin}
+                setModalLogin={this.setModalLogin}
+                updateUser={this.props.updateUser}
+                history={this.props.history}
+                currentUser={this.props.currentUser} />
             </Container>
           </div>
         </div>
