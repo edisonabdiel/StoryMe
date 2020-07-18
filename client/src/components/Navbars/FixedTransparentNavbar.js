@@ -98,16 +98,6 @@ function FixedTransparentNavbar(props) {
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </UncontrolledDropdown>
-              {/* <NavItem>
-                <Button
-                  className="nav-link btn-success"
-                  color="success"
-                  href=""
-                  target="_blank"
-                >
-                  <p>PUBLISH</p>
-                </Button>
-              </NavItem> */}
             </Nav>
           </Collapse>
         </Container>
