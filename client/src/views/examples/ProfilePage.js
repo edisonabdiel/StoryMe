@@ -1,6 +1,9 @@
 
 import React, { Component } from 'react'
 import axios from "axios"
+import { BsFillPersonPlusFill, BsFillPersonDashFill } from "react-icons/bs";
+import { IconContext } from "react-icons";
+
 
 
 
@@ -28,20 +31,21 @@ export class ProfilePage extends Component {
     isClickedLikes: false,
     userId: this.props.match.params.id,
     user: '',
-    following: []
+    following: [],
+    followers: []
   }
 
   componentDidMount() {
-    this.setState({
-      userId: this.props.match.params.id
-    })
+
     console.log('did mount');
     axios.get(`/api/profile-page/${this.props.match.params.id}`).then((resp) => {
       console.log('follow response:', resp.data.user)
       console.log("outPut: ProfilePage -> componentDidMount -> resp", resp.data)
       this.setState({
         user: resp.data.user,
-        following: resp.data.following
+        following: resp.data.following,
+        followers: resp.data.user.followers.map((follower) => follower._id),
+        userId: resp.data.user._id,
       })
     }).catch((err) => {
       console.log("outPut: ProfilePage -> componentDidMount -> err", err)
@@ -58,6 +62,7 @@ export class ProfilePage extends Component {
       this.setState({
         user: resp.data.user,
         following: resp.data.following,
+        followers: resp.data.user.followers.map((follower) => follower._id),
         userId: resp.data.user._id,
         isClickedStories: false,
         isClickedLikes: false
@@ -100,7 +105,8 @@ export class ProfilePage extends Component {
         console.log('follow response:', resp)
         // this.props.updateUser(resp.data)
         this.setState({
-          user: resp.data
+          user: resp.data,
+          followers: resp.data.followers.map((follower) => follower._id),
         })
       }).catch((err) => {
         console.log("outPut: followingHandler -> err", err)
@@ -109,10 +115,14 @@ export class ProfilePage extends Component {
   }
 
   render() {
+    // const fUser = this.state.user.followers
+    // console.log("outPut: render -> fUser", fUser)
+    // const f = fUser.map((follower) => follower._id)
+    // console.log("outPut: render -> f", f)
     console.log("outPut: ProfilePage -> userId ", this.state.userId)
     console.log("outPut: ProfilePage -> current user ", this.props.currentUser)
     console.log("outPut: ProfilePage ->  user id ", this.props.match.params.id)
-    console.log("outPut: ProfilePage ->  user  followers", this.state.user.followers)
+    console.log("outPut: ProfilePage ->  user  followers", this.state.followers)
     // console.log(this.state.user.followers.map((follow) => follow._id))
     console.log(this.state.user._id)
 
@@ -134,10 +144,12 @@ export class ProfilePage extends Component {
                   <Button
                     className="btn-round mr-1"
                     color="info"
-                    onClick={this.followingHandler}
+                    onClick={() => { this.followingHandler() }}
                     size="lg"
                   >
-                    {this.state.user && !this.state.user.followers.includes(this.props.currentUser) ? <h6>ReadMe</h6> : <h6>UnReadMe</h6>}
+                    {!this.state.followers.includes(this.props.currentUser._id)
+                      ? <IconContext.Provider value={{ size: "2em" }}> <BsFillPersonPlusFill /> </IconContext.Provider>
+                      : <IconContext.Provider value={{ size: "2em" }}><BsFillPersonDashFill /></IconContext.Provider>}
                   </Button>
                 </div>
                 <div className="content">
