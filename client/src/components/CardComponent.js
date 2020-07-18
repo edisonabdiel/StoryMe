@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import { FacebookIcon, FacebookShareButton, TwitterShareButton, TwitterIcon } from "react-share";
 
 import {
     Card,
@@ -79,8 +79,20 @@ const CardComponent = (props) => {
                                                     </button>
                                                 </div>
                                                 : ""}
-                                            {/* { oneStory.owner._id === props.currentUser._id ? <button className="nav-link btn-round btn-danger pull-right mr-5"
-                                                onClick={() => props.deleteHandler(oneStory._id)}><b>Delete</b></button> : "Edit/delete not available"} */}
+                                            <FacebookShareButton
+                                                url={`${process.env.EMAIL_HOST}stories/${oneStory._id}`}
+                                            // quote={props.joke.setup + props.joke.punchline}
+                                            // hashtag="#programing joke"
+                                            >
+                                                <FacebookIcon logoFillColor="white" size={32} round={true} />
+                                            </FacebookShareButton>
+                                            <TwitterShareButton
+                                                url={`${process.env.EMAIL_HOST}stories/${oneStory._id}`}
+                                            // quote={props.joke.setup + props.joke.punchline}
+                                            // hashtag="#programing joke"
+                                            >
+                                                <TwitterIcon logoFillColor="white" size={32} round={true} />
+                                            </TwitterShareButton>
                                         </div>
                                     </CardFooter>
                                 </CardBody>
