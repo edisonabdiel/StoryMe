@@ -19,15 +19,15 @@ router.get('/stories', (req, res, next) => {
 
 router.get('/stories/filter/:id', (req, res, next) => {
   Story.find().populate("owner")
-  .then(allTheStories => {
-    const filterStory=allTheStories.filter((item)=>{
-      
-      console.log("outPut: allTheStories======>", item.owner._id)
-      console.log("user=======>>",req.params.id);
-      console.log("user with req.user._id=======>>",req.user._id);
+    .then(allTheStories => {
+      const filterStory = allTheStories.filter((item) => {
 
-      //ASK HENDIRK WHY req.user._id DIDNT WORK even recieve in the console!!!!!!!!!!!!!
-      return (item.likes.length==0 && item.owner._id != req.params.id)
+        console.log("outPut: allTheStories======>", item.owner._id)
+        console.log("user=======>>", req.params.id);
+        console.log("user with req.user._id=======>>", req.user._id);
+
+        //ASK HENDIRK WHY req.user._id DIDNT WORK even recieve in the console!!!!!!!!!!!!!
+        return (item.likes.length == 0 && item.owner._id != req.params.id)
       })
       // console.log("fileStory =====>",filterStory)
       res.json(filterStory);
@@ -106,16 +106,16 @@ router.put('/stories/:id', (req, res, next) => {
     })
 })
 
-router.get('/stories/:id/liked',(req,res,next)=>{
+router.get('/stories/:id/liked', (req, res, next) => {
   Story.find().populate("owner")
-  .then(allTheStories => {
-    console.log('HELLOOOOOOOOOO');
-    const filterLikedStory=allTheStories.filter((item)=>{ 
-      return (item.likes.includes(req.params.id))
+    .then(allTheStories => {
+      console.log('HELLOOOOOOOOOO');
+      const filterLikedStory = allTheStories.filter((item) => {
+        return (item.likes.includes(req.params.id))
       })
       // console.log("fileStory =====>",filterStory)
       res.json(filterLikedStory);
-    }).catch((err)=>{
+    }).catch((err) => {
       console.log('Error', err);
       res.json(err)
     })
@@ -141,6 +141,7 @@ router.put('/stories/:id/liked', (req, res, next) => {
         res.json(resp);
       })
   })
+
 
 })
 
