@@ -41,10 +41,7 @@ class LoginButton extends React.Component {
     })
   }
 
-  loginHandler = (e) => {
-    e.preventDefault();
-    console.log("Im a modal, and i work")
-  }
+
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
@@ -97,7 +94,7 @@ class LoginButton extends React.Component {
                     </button>
                     <div className="header header-info text-center">
                       <div className="logo-container">
-                      <img
+                        <img
                           alt="..."
                           src={require("assets/img/logo1.png")}
                         ></img>

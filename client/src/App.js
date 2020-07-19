@@ -62,12 +62,25 @@ class App extends React.Component {
           <Route path="/email-sent" render={(props) => <EmailSent currentUser={this.state.loggedInUser} {...props} />} />
           <Route path="/email-confirmed/:token" render={(props) => <EmailConfirmed currentUser={this.state.loggedInUser} {...props} />} />
           <Route path="/nucleo-icons" render={(props) => <NucleoIcons {...props} />} />
-          <Route exact path="/profile-page/:id" render={(props) => { if (this.state.loggedInUser) { return <ProfilePage currentUser={this.state.loggedInUser} updateUser={this.updateUser} {...props} /> } else { return <Redirect to="/login-page" /> } }} />
+          <Route exact path="/profile-page/:id" render={(props) => {
+            if (this.state.loggedInUser && this.state.loggedInUser.isVerified) {
+              return <ProfilePage currentUser={this.state.loggedInUser}
+                updateUser={this.updateUser} {...props} />
+            }
+            else {
+              return <Redirect
+                to={{
+                  pathname: '/',
+                  state: 'verify your email'
+                }} />
+            }
+          }} />
           <Route path="/sections" render={(props) => <Sections {...props} />} />
           <Route exact path="/confirmation/:token" render={(props) => <ConfirmationPage {...props} updateUser={this.updateUser} />} />
           <Route exact path='/img-upload' component={ImageUpload} />
           <Route exact path='/publish' render={(props) => { if (this.state.loggedInUser) { return <AddStoryForm currentUser={this.state.loggedInUser} updateUser={this.updateUser} {...props} /> } else { return <Redirect to="/login-page" /> } }} />
-          <Route exact path="/list-stories" render={(props) => <ListStories currentUser={this.state.loggedInUser} updateUser={this.updateUser} {...props} />} />
+          <Route exact path="/list-stories" render={(props) => <ListStories currentUser={this.state.loggedInUser}
+            updateUser={this.updateUser} {...props} />} />
           <Route exact path="/stories/:id" component={StoryDetails} />
           <Route exact path="/story-edit/:id" render={(props) => <EditStory currentUser={this.state.loggedInUser} updateUser={this.updateUser}  {...props} />} />
           <Route exact path="/profile-edit" render={(props) => { if (this.state.loggedInUser) { return <ProfileEdit currentUser={this.state.loggedInUser} updateUser={this.updateUser} {...props} /> } else { return <Redirect to="/login-page" /> } }} />

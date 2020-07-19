@@ -139,7 +139,9 @@ authRoutes.get("/confirmation/:token", (req, res) => {
         // We can use also: res.status(200).json(req.user);
         res.status(200).json(user);
       });
-    });
+    }).catch((err) => {
+      console.log("outPut: err", err)
+    })
 });
 
 //POST /api/login

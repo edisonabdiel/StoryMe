@@ -26,7 +26,8 @@ export class ProfilePage extends Component {
     userId: this.props.match.params.id,
     user: '',
     following: [],
-    followers: []
+    followers: [],
+    emailVerification: false
   }
 
   componentDidMount() {
@@ -91,7 +92,6 @@ export class ProfilePage extends Component {
     })
   }
 
-
   // to handel the follow function
   followingHandler = () => {
     axios.put(`/api/user/${this.state.userId}/follow`)
@@ -120,7 +120,7 @@ export class ProfilePage extends Component {
 
     return (
       <BodyClassName className="profile-page sidebar-collapse" >
-        <div>
+        <div onClick={this.emailVerification}>
           <ScrollTransparentNavbar updateUser={this.props.updateUser}
             currentUser={this.props.currentUser}
             changeStateHandler={this.changeStateHandler}
@@ -143,7 +143,7 @@ export class ProfilePage extends Component {
                       : <IconContext.Provider value={{ size: "2em" }}><BsFillPersonDashFill /></IconContext.Provider>}
                   </Button>
                 </div>
-                <div className="content">
+                <div className="content" style={{ textAlign: 'center' }}>
                   <div className="social-description">
                     <h2>{this.state.user && this.state.user.followers.length}</h2>
                     <p>Followers</p>
