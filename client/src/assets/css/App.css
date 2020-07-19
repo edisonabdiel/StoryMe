@@ -15,3 +15,22 @@
 .jodit-tooltip {
     display: none;
 }
+
+.text-story {
+    color: black !important
+}
+
+.story-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.story-details-container h3 {
+    align-self: flex-end;
+}
+
+.story-details-container p {
+    align-self: flex-start;
+}

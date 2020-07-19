@@ -3,11 +3,12 @@ import axios from 'axios';
 import ModalComponent from './ModalComponent';
 import CardComponent from './CardComponent';
 import LoginButton from './LoginButton';
+import EmailVerificationModal from './EmailVerificationModal';
+
 
 // reactstrap components
 import {
   Container,
-  Row,
 } from "reactstrap";
 
 
@@ -21,7 +22,8 @@ class ListStories extends Component {
     modalClassic: false,
     liked: false,
     currentOpenStory: 0,
-    modalLogin: false
+    modalLogin: false,
+    emailVerification: false
   }
 
 
@@ -29,6 +31,7 @@ class ListStories extends Component {
 
     if (this.props.profileStories) {
       axios.get(`/api/profileStories/${this.props.userId}`).then((resp) => {
+        console.log("outPut: ListStories -> componentDidMount -> resp", resp)
         this.setState({
           listOfStories: resp.data
         })
@@ -36,6 +39,8 @@ class ListStories extends Component {
     }
     else if (this.props.currentStory) {
       axios.get(`/api/stories/filter/${this.props.currentUser._id}`).then((resp) => {
+        console.log("outPut: ListStories -> resp", resp)
+
         this.setState({
           listOfStories: resp.data
         })
@@ -43,12 +48,14 @@ class ListStories extends Component {
     } else if (this.props.profileLikes) {
       axios.get(`/api/stories/${this.props.currentUser._id}/liked`)
         .then((resp) => {
+          console.log("outPut: ListStories -> resp", resp)
           this.setState({
             listOfStories: resp.data
           })
         })
     } else {
       axios.get("/api/stories").then((resp) => {
+        console.log("outPut: ListStories -> resp", resp)
         this.setState({
           listOfStories: resp.data
         })
@@ -81,6 +88,11 @@ class ListStories extends Component {
   setModalLogin = (bool) => {
     this.setState({
       modalLogin: bool
+    })
+  }
+  setModalVerification = (bool) => {
+    this.setState({
+      emailVerification: bool
     })
   }
 
@@ -126,7 +138,6 @@ class ListStories extends Component {
           <div className="cards">
             <Container fluid>
               <div className="title">
-                <h3 className="title"></h3>
               </div>
               <CardComponent listOfStories={this.state.listOfStories}
                 saveStoryIndex={this.saveStoryIndex}
@@ -136,6 +147,7 @@ class ListStories extends Component {
                 setModalClassic={this.setModalClassic}
                 setModalLogin={this.setModalLogin}
                 isDiscovery={this.props.isDiscovery}
+                setModalVerification={this.setModalVerification}
               />
               {this.state.listOfStories && this.state.listOfStories[this.state.currentOpenStory] &&
                 <ModalComponent liked={this.state.liked}
@@ -151,6 +163,7 @@ class ListStories extends Component {
                 history={this.props.history}
                 currentUser={this.props.currentUser} />
             </Container>
+            <EmailVerificationModal modalVerification={this.state.emailVerification} setModalVerification={this.setModalVerification} />
           </div>
         </div>
       </div>

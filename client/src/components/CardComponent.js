@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import { FacebookIcon, FacebookShareButton, TwitterShareButton, TwitterIcon } from "react-share";
 
 import {
     Card,
@@ -21,10 +21,19 @@ const CardComponent = (props) => {
                 : props.listOfStories.map((oneStory, idx) => {
                     return (
                         <Col lg="4" md="6" key={oneStory._id} >
+                            {console.log(oneStory)}
+                            {console.log(oneStory.owner.email)}
                             <Card className="card-blog" data-background-color={oneStory.cardBgColor}>
                                 <div className="card-image" onClick={() => {
                                     props.saveStoryIndex(idx);
-                                    { props.currentUser ? props.setModalClassic(true) : props.setModalLogin(true) }
+                                    {
+                                        props.currentUser && props.currentUser.isVerified
+                                            ? props.setModalClassic(true)
+                                            : !props.currentUser
+                                                ? props.setModalLogin(true)
+                                                : props.setModalVerification(true)
+
+                                    }
                                 }}
                                     style={{ cursor: 'pointer' }}
                                 >
@@ -40,10 +49,28 @@ const CardComponent = (props) => {
                                         <i className={`${oneStory.icon}`}></i> {oneStory.category}
                                     </h6>
 
-                                    <CardTitle tag="h5" onClick={() => { props.saveStoryIndex(idx); props.setModalClassic(true) }} style={{ cursor: 'pointer' }}>
+                                    <CardTitle tag="h5" onClick={() => {
+                                        props.saveStoryIndex(idx);
+                                        {
+                                            props.currentUser && props.currentUser.isVerified
+                                                ? props.setModalClassic(true)
+                                                : !props.currentUser
+                                                    ? props.setModalLogin(true)
+                                                    : props.setModalVerification(true)
+                                        }
+                                    }} style={{ cursor: 'pointer' }}>
                                         <strong>{oneStory.title}</strong>
                                     </CardTitle>
-                                    <p className="card-description" onClick={() => { props.saveStoryIndex(idx); props.setModalClassic(true) }} style={{ cursor: 'pointer' }}>
+                                    <p className="card-description" onClick={() => {
+                                        props.saveStoryIndex(idx);
+                                        {
+                                            props.currentUser && props.currentUser.isVerified
+                                                ? props.setModalClassic(true)
+                                                : !props.currentUser
+                                                    ? props.setModalLogin(true)
+                                                    : props.setModalVerification(true)
+                                        }
+                                    }} style={{ cursor: 'pointer' }}>
                                         {oneStory.headline}
                                     </p>
                                     <CardFooter >
@@ -71,16 +98,32 @@ const CardComponent = (props) => {
                                         <div className="btn-block">
                                             {props.currentUser && oneStory.owner._id === props.currentUser._id ?
                                                 <div>
-                                                    <button className="nav-link btn-info btn-round pull-left ml-lg-5" style={{ color: 'white', textDecoration: 'none' }}>
-                                                        <Link className="text-decoration-none" to={"/story-edit/" + oneStory._id} onClick={() => props.editHandler(oneStory._id)}><b>Edit</b></Link>
-                                                    </button>
-                                                    <button className="nav-link btn-round btn-danger pull-right mr-5"
-                                                        onClick={() => props.deleteHandler(oneStory._id)}><b>Delete</b>
-                                                    </button>
+                                                    <div>
+
+                                                        <button className="nav-link btn-info btn-round pull-left ml-lg-5" style={{ color: 'white', textDecoration: 'none' }}>
+                                                            <Link className="text-decoration-none" to={"/story-edit/" + oneStory._id} onClick={() => props.editHandler(oneStory._id)}><b>Edit</b></Link>
+                                                        </button>
+                                                        <button className="nav-link btn-round btn-danger pull-right mr-5"
+                                                            onClick={() => props.deleteHandler(oneStory._id)}><b>Delete</b>
+                                                        </button>
+                                                    </div>
+
+                                                    <FacebookShareButton
+                                                        url={`${process.env.EMAIL_HOST}stories/${oneStory._id}`}
+                                                    // quote={props.joke.setup + props.joke.punchline}
+                                                    // hashtag="#programing joke"
+                                                    >
+                                                        <FacebookIcon logoFillColor="white" size={32} round={true} />
+                                                    </FacebookShareButton>
+                                                    <TwitterShareButton
+                                                        url={`${process.env.EMAIL_HOST}stories/${oneStory._id}`}
+                                                    // quote={props.joke.setup + props.joke.punchline}
+                                                    // hashtag="#programing joke"
+                                                    >
+                                                        <TwitterIcon logoFillColor="white" size={32} round={true} />
+                                                    </TwitterShareButton>
                                                 </div>
                                                 : ""}
-                                            {/* { oneStory.owner._id === props.currentUser._id ? <button className="nav-link btn-round btn-danger pull-right mr-5"
-                                                onClick={() => props.deleteHandler(oneStory._id)}><b>Delete</b></button> : "Edit/delete not available"} */}
                                         </div>
                                     </CardFooter>
                                 </CardBody>

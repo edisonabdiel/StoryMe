@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import defaultAvatar from "assets/img/placeholder.jpg";
-import Editor from "views/examples/editor";
 import ImageUpload from "components/CustomUpload/ImageUpload.js";
 import AlertMessage from "views/examples/Alert"
 

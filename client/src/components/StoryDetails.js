@@ -1,20 +1,30 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import DOMPurify from 'dompurify'
+import EditFixedNavbar from './Navbars/EditFixedNavbar';
+import StoryDetailsHeader from './Headers/StoryDetailsHeader';
+import BodyClassName from "react-body-classname";
+import { Container } from 'reactstrap';
+
+
+
 
 
 class StoryDetails extends Component {
     state = {
-        story: ''
+        story: '',
+        storyOwner: ''
     }
 
     componentDidMount() {
         axios.get(`/api/stories/${this.props.match.params.id}`)
             .then(resp => {
-                console.log('Details response', resp);
+                console.log('Details response', resp.data);
                 this.setState({
-                    story: resp.data
+                    story: resp.data,
+                    storyOwner: resp.data.owner
                 })
+
             })
             .catch((err) => {
                 console.log(err);
@@ -22,25 +32,30 @@ class StoryDetails extends Component {
     }
 
     render() {
-        console.log(this.props.match.params.id);
+
         return (
-            <div>
-                <h1>Welcome to StoryDetails page</h1>
-                <h2>title:</h2>
-                <h3>{this.state.story.title}</h3>
-                <h2>Image</h2>
-                <img src={this.state.story.image} alt="image" />
-                <h2>Icon:</h2>
-                <i className={this.state.story.icon}></i>
-                <h2>Category:</h2>
-                <h3>{this.state.story.category}</h3>
-                <h2>Headline:</h2>
-                <h3>{this.state.story.headline}</h3>
-                <h2>Content</h2>
-                <h3 dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.state.story.content) }} />
-                <h2>Duration:</h2>
-                <h3>{this.state.story.duration}</h3>
-            </div>
+            <BodyClassName className="profile-page sidebar-collapse" >
+                <div data-background-color="black">
+                    <EditFixedNavbar currentUser={this.props.currentUser} updateUser={this.props.updateUser} />
+                    <div style={{ height: '75px' }}></div>
+                    <StoryDetailsHeader story={this.state.story} storyOwner={this.state.storyOwner} />
+                    <div className="wrapper" style={{ backgroundColor: 'white' }}>
+                        <Container className='story-details-container' >
+                            <h2 className='text-story'> {this.state.story.title}</h2>
+                            <h3 className='text-story' >
+                                <i className={this.state.story.icon} ></i>
+                                {this.state.story.category}
+                            </h3>
+                            <h3 className='text-story'><i className='now-ui-icons tech_watch-time'></i> {this.state.story.duration}</h3>
+                            <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.state.story.content) }} style={{ color: 'white !important' }} />
+
+                        </Container>
+                    </div>
+                </div>
+
+
+            </BodyClassName>
+
         )
     }
 }

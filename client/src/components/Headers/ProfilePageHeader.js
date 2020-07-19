@@ -11,7 +11,6 @@ export class ProfilePageHeader extends Component {
 
   pageHeader = React.createRef();
   render() {
-    console.log('header user', this.props.user);
     return (
       <div>
         <>
@@ -22,14 +21,13 @@ export class ProfilePageHeader extends Component {
             <div
               className="page-header-image"
               style={{
-                backgroundImage: `url(${this.props.user.bgImage}`,
+                backgroundImage: `url(${this.props.user.bgImage})`,
               }}
               ref={this.pageHeader}
             ></div>
             <Container>
               <div className="photo-container">
                 <img src={this.props.user.image} alt="..."></img>
-                {/* src={this.props.currentUser.image} */}
               </div>
               <h3 className="title">{this.props.user.userName}</h3>
               <p className="category"></p>

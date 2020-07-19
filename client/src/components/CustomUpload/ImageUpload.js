@@ -39,7 +39,7 @@ export class ImageUpload extends Component {
             (this.props.avatar ? " img-circle" : "")
           }
         >
-          <img src={this.props.imageUrl} alt="image" />
+          <img src={this.props.imageUrl} alt="" />
         </div>
         <div>
           {this.props.imageUrl === defaultAvatar ? (
