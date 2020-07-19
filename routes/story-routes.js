@@ -50,7 +50,7 @@ router.get('/profileStories/:id', (req, res, next) => {
 router.post('/stories', (req, res, next) => {
   console.log('POST', req.body);
   console.log('USER', req.user);
-  let cardBgColor = ["gray", "red", "black", "green"]
+  let cardBgColor = ["gray","red", "black"]
   let randomBgIdx = Math.floor(Math.random() * cardBgColor.length)
   Story.create({
     title: req.body.title,

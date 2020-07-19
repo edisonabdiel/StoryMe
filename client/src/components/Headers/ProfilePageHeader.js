@@ -16,7 +16,7 @@ export class ProfilePageHeader extends Component {
         <>
           <div
             className="page-header clear-filter page-header-small"
-            filter-color="blue"
+            filter-color="dark"
           >
             <div
               className="page-header-image"

@@ -69,7 +69,7 @@ class LoginButton extends React.Component {
 
   render() {
     return (
-      <div className="section section-javascript" id="javascriptComponents">
+      <div className="" id="javascriptComponents">
         <Container>
           <Row id="modals">
             <Col md="6">

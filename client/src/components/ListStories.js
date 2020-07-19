@@ -132,11 +132,10 @@ class ListStories extends Component {
       <div>
         <div
           className="section section-cards"
-          data-background-color="gray"
           id="cards"
         >
           <div className="cards">
-            <Container fluid>
+            <Container >
               <div className="title">
               </div>
               <CardComponent listOfStories={this.state.listOfStories}
