@@ -102,7 +102,7 @@ class ProfileEdit extends Component {
     }
 
     handleImageRemove = () => {
-        const name = (this.state.uploadedImageName)
+        const name = (this.props.currentUser.imageName)
         console.log("outPut: ImageUpload -> handleRemove -> name", name)
         axios.post(`/api/delete-upload-img/${name}`).then((res) => {
             console.log(res)
@@ -133,7 +133,7 @@ class ProfileEdit extends Component {
     }
 
     handleBgImageRemove = () => {
-        const name = (this.state.uploadedBgImageName)
+        const name = (this.props.currentUser.bgImageName)
         console.log("outPut: ImageUpload -> handleRemove -> name", name)
         axios.post(`/api/delete-upload-img/${name}`).then((res) => {
             console.log(res)

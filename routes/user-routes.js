@@ -13,17 +13,17 @@ const User = require('../models/user-model');
 
 router.put("/user/:id", (req, res, next) => {
     console.log(req.params.id);
-    console.log(req.body);
+    console.log('req.body update user', req.body);
 
     User.findByIdAndUpdate(req.params.id,
         {
             email: req.body.email,
             image: req.body.imageUrl,
             imageName: req.body.imageName,
+            bgImageName: req.body.bgImageName,
+            bgImage: req.body.bgImageUrl,
             userName: req.body.userName,
             about: req.body.about,
-            bgImage: req.body.bgImageUrl,
-            bgImageName: req.body.bdImageName
         }, {
         new: true
     }).then((user) => {
@@ -65,38 +65,48 @@ router.put("/password/:id", (req, res, next) => {
 
 router.get('/profile-page/:id', (req, res, next) => {
     console.log(req.params.id);
-    User.findById(req.params.id).populate("followers")
-        .then((user) => {
-            console.log("outPut: user", user)
-            res.json(user);
+    Promise.all([
+        User.findById(
+            req.params.id
+        ).populate("followers"),
+        User.find({
+            followers: req.params.id
+        })]).then((resp) => {
+            console.log("outPut: resp profile page follow and followers", resp)
+            const user = resp[0]
+            const following = resp[1].map((user) => user._id)
+            res.json({ user: user, following: following });
         }).catch((err) => {
             console.log(err);
         })
+
 });
 
 
 router.put('/user/:id/follow', (req, res, next) => {
     console.log(req.body)
-    User.findById(req.params.id).then((user) => {
-        console.log("user", user)
-        let promise;
-        if (user.followers.includes(req.user._id)) {
-            promise = User.findByIdAndUpdate(req.params.id, {
-                $pull: { followers: req.user._id }
-            }, { new: true })
-        } else {
-            promise = User.findByIdAndUpdate(req.params.id, {
-                $push: { followers: req.user._id }
-            }, { new: true })
-        }
-        promise.populate("followers")
-            .then((resp) => {
-                console.log("outPut: resp", resp)
-                res.json(resp);
-            })
-    }).catch((err) => {
-        console.log("add follower error", err);
-    })
+    if (req.user.id != req.params.id) {
+        User.findById(req.params.id).then((user) => {
+            console.log("user", user)
+            let promise;
+            if (user.followers.includes(req.user._id)) {
+                promise = User.findByIdAndUpdate(req.params.id, {
+                    $pull: { followers: req.user._id }
+                }, { new: true })
+            } else {
+                promise = User.findByIdAndUpdate(req.params.id, {
+                    $push: { followers: req.user._id }
+                }, { new: true })
+            }
+            promise.populate("followers")
+                .then((resp) => {
+                    console.log("outPut: resp", resp)
+                    res.json(resp);
+                })
+        }).catch((err) => {
+            console.log("add follower error", err);
+        })
+    }
 
 })
 
