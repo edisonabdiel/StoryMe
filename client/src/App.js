@@ -28,8 +28,7 @@ import StoryDetails from "components/StoryDetails";
 import EditStory from "components/EditStory";
 import AddStoryForm from 'views/examples/AddStoryForm';
 import ProfileEdit from 'views/examples/ProfileEdit'
-import { Card } from "reactstrap";
-import CardComponent from "components/CardComponent";
+
 
 
 

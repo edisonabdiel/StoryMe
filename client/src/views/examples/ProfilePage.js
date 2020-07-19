@@ -3,17 +3,6 @@ import React, { Component } from 'react'
 import axios from "axios"
 import { BsFillPersonPlusFill, BsFillPersonDashFill } from "react-icons/bs";
 import { IconContext } from "react-icons";
-
-
-
-
-// reactstrap components
-import {
-  Button,
-  Container,
-  UncontrolledTooltip,
-} from "reactstrap";
-
 // core components
 import ScrollTransparentNavbar from "components/Navbars/ScrollTransparentNavbar.js";
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
@@ -23,6 +12,11 @@ import ListStories from "components/ListStories";
 import ProfilePagePortfolio from './ProfilePagePortfolio';
 
 
+// reactstrap components
+import {
+  Button,
+  Container,
+} from "reactstrap";
 
 export class ProfilePage extends Component {
 
@@ -115,14 +109,11 @@ export class ProfilePage extends Component {
   }
 
   render() {
-    // const fUser = this.state.user.followers
-    // console.log("outPut: render -> fUser", fUser)
-    // const f = fUser.map((follower) => follower._id)
-    // console.log("outPut: render -> f", f)
     console.log("outPut: ProfilePage -> userId ", this.state.userId)
     console.log("outPut: ProfilePage -> current user ", this.props.currentUser)
     console.log("outPut: ProfilePage ->  user id ", this.props.match.params.id)
     console.log("outPut: ProfilePage ->  user  followers", this.state.followers)
+    // question to ask ?????
     // console.log(this.state.user.followers.map((follow) => follow._id))
     console.log(this.state.user._id)
 
@@ -163,10 +154,10 @@ export class ProfilePage extends Component {
                     </h2>
                     <p>Following</p>
                   </div>
-                  <div className="social-description">
+                  {/* <div className="social-description">
                     <h2>48</h2>
                     <p>Bookmarks</p>
-                  </div>
+                  </div> */}
                 </div>
                 <ProfilePagePortfolio handelIsClickedStories={this.handelIsClickedStories}
                   handelToCloseStories={this.handelToCloseStories}

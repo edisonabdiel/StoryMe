@@ -1,15 +1,15 @@
 import React from "react";
 
 // reactstrap components
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardTitle,
-  Container,
-  Row,
-  Col,
-} from "reactstrap";
+// import {
+//   Card,
+//   CardBody,
+//   CardFooter,
+//   CardTitle,
+//   Container,
+//   Row,
+//   Col,
+// } from "reactstrap";
 
 // core components
 import ScrollTransparentNavbar from "components/Navbars/ScrollTransparentNavbar.js";
@@ -25,7 +25,7 @@ function BlogPosts(props) {
       <ScrollTransparentNavbar updateUser={props.updateUser} currentUser={props.currentUser} />
       <div className="wrapper blog-posts" >
         <DiscoveryHeader />
-        <div className="projects-4">      
+        <div className="projects-4">
           <ListStories isDiscovery={true} currentUser={props.currentUser} updateUser={props.updateUser} history={props.history} />
         </div>
       </div>

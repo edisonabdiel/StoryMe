@@ -77,7 +77,7 @@ router.post('/stories', (req, res, next) => {
 // GET route => to get a specific project/detailed view
 router.get('/stories/:id', (req, res, next) => {
   console.log(req.params.id);
-  Story.findById(req.params.id)
+  Story.findById(req.params.id).populate('owner')
     .then(response => {
       res.json(response);
     })

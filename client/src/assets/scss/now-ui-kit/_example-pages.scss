@@ -1,11 +1,11 @@
 // style for the landing page
 .index-page,
-.presentation-page{
-    .page-header{
+.presentation-page {
+    .page-header {
         height: 125vh;
 
-        .container{
-            > .content-center{
+        .container {
+            >.content-center {
                 top: 37%;
             }
         }
@@ -13,230 +13,237 @@
 }
 
 .index-page,
-.presentation-page{
-    .category-absolute{
+.presentation-page {
+    .category-absolute {
         position: absolute;
         top: 100vh;
         margin-top: -60px;
         padding: 0 15px;
         width: 100%;
         text-align: center;
-        color: rgba(255,255,255,.5);
+        color: rgba(255, 255, 255, .5);
     }
 }
 
-.presentation-page{
-    .section-sections{
+.presentation-page {
+    .section-sections {
         // padding-bottom: 0;
         // margin-bottom: -120px;
 
-        .section-description{
+        .section-description {
             text-align: center;
             margin-bottom: 60px;
         }
 
-        .col-md-3{
+        .col-md-3 {
             padding: 7.5px;
         }
 
-        img{
+        img {
             width: 100%;
             border-radius: $border-radius-small;
             transition: all .2s $transition-ease;
             box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
 
-            &:hover{
+            &:hover {
                 @include transform-scale(1.02);
             }
         }
     }
 
-    .section-pricing{
-        .card-pricing{
+    .section-pricing {
+        .card-pricing {
             margin-top: 45px;
         }
 
-        .card-margin{
+        .card-margin {
             margin-top: 90px;
         }
     }
 }
 
-.blog-posts{
-    .projects-4{
+.blog-posts {
+    .projects-4 {
         padding-top: 0;
     }
 }
 
-.ecommerce-page{
-    .container{
+.ecommerce-page {
+    .container {
         position: relative;
         z-index: 2;
     }
 
-    .card-header{
+    .card-header {
         padding-left: 0;
         padding-right: 0;
 
-        &:after{
+        &:after {
             width: 100%;
             left: 0;
         }
     }
 
-    .slider-refine{
+    .slider-refine {
         margin: 15px 0;
     }
 
-    .card-refine{
-        & > .card-title{
+    .card-refine {
+        &>.card-title {
             margin-bottom: 30px;
         }
 
-        [role="tabpanel"]{
-          max-height: 273px;
-          overflow-y: scroll;
+        [role="tabpanel"] {
+            max-height: 273px;
+            overflow-y: scroll;
         }
 
-        h6{
-          margin-top: .5rem;
+        h6 {
+            margin-top: .5rem;
         }
 
-        .card-body{
+        .card-body {
             padding-left: 25px;
             padding-right: 25px;
             padding-bottom: 0;
 
-            &.panel-refine{
+            &.panel-refine {
                 padding-left: 15px;
                 padding-right: 15px;
             }
         }
 
         .price-right,
-        .price-left{
+        .price-left {
             font-weight: 500;
         }
 
-        .btn{
+        .btn {
             margin: -5px -12px;
         }
 
-        .checkbox input[type=checkbox]:checked + .checkbox-material .check{
+        .checkbox input[type=checkbox]:checked+.checkbox-material .check {
             background: $primary-color;
         }
     }
 
-    .card-product{
-        .card-image{
+    .card-product {
+        .card-image {
             width: 200px;
             margin: 0 auto;
         }
     }
 }
 
-.product-page{
+.product-page {
     background-color: #eee;
 
-   .carousel{
+    .carousel {
         margin: -90px 0px 0;
 
         img {
-          border-radius: $border-radius-small;
-          height: auto;
+            border-radius: $border-radius-small;
+            height: auto;
         }
     }
-    .section{
+
+    .section {
         padding-top: 30px;
     }
-    .main-price{
-      margin: 10px 0 25px;
-      font-weight: $font-weight-light;
+
+    .main-price {
+        margin: 10px 0 25px;
+        font-weight: $font-weight-light;
     }
 
-    .blockquote{
+    .blockquote {
         width: 90%;
         margin-top: -10px;
         margin-left: 5%;
     }
 
-    .pick-size{
+    .pick-size {
         margin-top: 15px;
         margin-bottom: 15px;
-        .form-group{
+
+        .form-group {
             margin-top: 5px;
         }
     }
 
-    .related-products{
+    .related-products {
 
-        .title{
+        .title {
             margin-bottom: 80px;
         }
     }
-    .features{
-      padding-top: 30px;
+
+    .features {
+        padding-top: 30px;
     }
-    .accordeon .card{
+
+    .accordeon .card {
         margin-bottom: 15px;
     }
 }
 
-.landing-page{
+.landing-page {
 
-    .page-header{
+    .page-header {
         height: 100vh;
         position: relative;
 
-        .share{
+        .share {
             margin-top: 150px;
         }
-        h1{
+
+        h1 {
             font-weight: 600;
         }
-        .title{
+
+        .title {
             color: $white-color;
         }
     }
 
-    .section-team{
-        .team .team-player img{
+    .section-team {
+        .team .team-player img {
             max-width: 100px;
         }
 
-        .team-player{
+        .team-player {
             margin-bottom: 15px;
         }
     }
 
-    .section-contact-us{
-        .title{
+    .section-contact-us {
+        .title {
             margin-bottom: 15px;
         }
 
-        .description{
+        .description {
             margin-bottom: 30px;
         }
 
         .input-group,
         .send-button,
-        .textarea-container{
+        .textarea-container {
             padding: 0 40px;
         }
 
-        .textarea-container{
+        .textarea-container {
             margin: 40px 0;
         }
 
-        a.btn{
+        a.btn {
             margin-top: 35px;
         }
     }
 }
 
 .profile-page,
-.blog-post{
-    .button-container{
+.blog-post {
+    .button-container {
         text-align: center;
         margin-top: -112px;
         position: relative;
@@ -245,11 +252,12 @@
 }
 
 // style for the profile page
-.profile-page{
-    .profile-container{
+.profile-page {
+    .profile-container {
         color: #FFFFFF;
     }
-    .photo-container{
+
+    .photo-container {
         width: 100px;
         height: 100px;
         border-radius: 50%;
@@ -258,60 +266,70 @@
         box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3);
     }
 
-    .title{
+    .photo-container-Story {
+        width: 100px;
+        height: 100px;
+        border-radius: 0;
+        overflow: hidden;
+        margin: 0 auto;
+        box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3);
+    }
+
+    .title {
         text-align: center;
         margin-top: 30px;
     }
 
-    .category{
+    .category {
         text-align: center;
     }
 
-    h5.description{
+    h5.description {
         max-width: 700px;
         margin: 20px auto 75px;
     }
 
-    .nav-align-center{
+    .nav-align-center {
         margin-top: 30px;
     }
 
-    .info-horizontal{
+    .info-horizontal {
         padding: 15px 0 0;
     }
-    .content{
+
+    .content {
         max-width: 450px;
         margin: 0 auto;
 
-        .social-description{
+        .social-description {
             display: inline-block;
             max-width: 150px;
             width: 145px;
             text-align: center;
             margin: 15px 0 0px;
 
-            h2{
+            h2 {
                 margin-bottom: 5px;
             }
         }
     }
 
-    .collections{
-        img{
+    .collections {
+        img {
             margin-bottom: 30px;
         }
     }
 
-    .gallery{
+    .gallery {
         margin-top: 45px;
         padding-bottom: 50px;
     }
 }
 
-.section-full-page{
+.section-full-page {
 
     &:after,
-    &:before{
+    &:before {
         display: block;
         content: "";
         position: absolute;
@@ -322,34 +340,34 @@
         z-index: 2;
     }
 
-    &:before{
-        background-color: rgba(0,0,0,.5);
+    &:before {
+        background-color: rgba(0, 0, 0, .5);
     }
 
     &[filter-color="purple"],
-    &[filter-color="primary"]{
-        &:after{
-            @include linear-gradient(rgba($light-gray,.26), rgba($primary-color,.95));
+    &[filter-color="primary"] {
+        &:after {
+            @include linear-gradient(rgba($light-gray, .26), rgba($primary-color, .95));
 
         }
 
     }
 
-    &[data-image]:after{
+    &[data-image]:after {
         opacity: .5;
     }
 
-    > .content,
-    > .footer{
+    >.content,
+    >.footer {
         position: relative;
         z-index: 4;
     }
 
-    > .content{
+    >.content {
         min-height: calc(100vh - 80px);
     }
 
-    .full-page-background{
+    .full-page-background {
         position: absolute;
         z-index: 1;
         height: 100%;
@@ -362,205 +380,223 @@
 
     }
 
-    .footer nav > ul a:not(.btn),
+    .footer nav>ul a:not(.btn),
     .footer,
-    .footer .copyright a{
+    .footer .copyright a {
         color: $white-color;
     }
 
 }
 
-.signup-page{
-    .section{
+.signup-page {
+    .section {
         padding-top: 180px;
         padding-bottom: 0;
     }
 
-    .input-group, .form-group{
+    .input-group,
+    .form-group {
         margin-bottom: 20px;
     }
 
-    .card-signup{
+    .card-signup {
         max-width: 100%;
         margin-bottom: 130px;
         padding: 15px 0px;
 
-        &:not([data-background-color]) .card-title{
+        &:not([data-background-color]) .card-title {
             color: initial;
         }
 
-        .checkbox label{
+        .checkbox label {
             margin-left: 14px;
             padding-left: 39px;
             color: initial;
         }
     }
 
-    .info-horizontal{
+    .info-horizontal {
         padding: 0px 0px 20px;
     }
-    .social{
-        .btn{
+
+    .social {
+        .btn {
             margin: 5px;
         }
-        h4{
+
+        h4 {
             margin-top: 20px;
         }
     }
 }
 
-.login-page{
+.login-page {
 
-    .page-header{
-      display: block;
-      align-items: unset;
+    .page-header {
+        display: block;
+        align-items: unset;
     }
 
-    .card-login{
+    .card-login {
         border-radius: $border-radius-large;
         padding-bottom: $padding-base-horizontal;
         max-width: 320px;
 
-        .btn-wd{
+        .btn-wd {
             min-width: 180px;
         }
 
-        .logo-container{
+        .logo-container {
             width: 65px;
             margin: 0 auto;
             margin-bottom: 55px;
 
-            img{
+            img {
                 width: 100%;
             }
         }
 
-        .input-group:last-child{
+        .input-group:last-child {
             margin-bottom: 40px;
         }
 
-        &.card-plain{
+        &.card-plain {
             @include input-coloured-bg($opacity-5, $white-color, $white-color, $transparent-bg, $opacity-1, $opacity-2);
 
             .input-group-text,
             .form-group.no-border .input-group-text,
-            .input-group.no-border .input-group-text{
+            .input-group.no-border .input-group-text {
                 color: $opacity-8;
             }
         }
     }
 
-    .link{
+    .link {
         font-size: 10px;
         color: $white-color !important;
         text-decoration: none;
 
         &:hover,
-        &:focus{
+        &:focus {
             border-color: $white-color !important;
         }
     }
 }
 
-.contact-page{
-    .contact-content{
+.contact-page {
+    .contact-content {
         padding-bottom: 40px;
         padding-top: 40px;
     }
-    .container{
+
+    .container {
         max-width: 970px;
     }
-    .big-map{
+
+    .big-map {
         height: 55vh;
         width: 100%;
         display: block;
         position: relative;
     }
-    .message{
+
+    .message {
         margin-top: 20px;
     }
-    .info{
+
+    .info {
         padding-bottom: 10px;
         padding-top: 0px;
-        .title{
+
+        .title {
             margin: 25px 0 10px;
         }
     }
 }
 
 
-.blog-post{
-    .section-blog-info{
+.blog-post {
+    .section-blog-info {
         padding-top: 30px;
         padding-bottom: 0px;
 
-        .btn{
+        .btn {
             margin-top: 0;
             margin-bottom: 0;
         }
-        .blog-tags{
+
+        .blog-tags {
             padding-top: 8px;
         }
-        .card-profile{
+
+        .card-profile {
             margin-top: 0;
             text-align: left;
 
-            .description{
+            .description {
                 font-size: $font-size-base;
             }
-            .btn{
+
+            .btn {
                 margin-top: 25px;
             }
         }
     }
-    .section-comments{
-        .title{
+
+    .section-comments {
+        .title {
             margin-bottom: 30px;
         }
     }
 
-    .media{
-        p{
+    .media {
+        p {
             color: $default-color;
         }
     }
 }
 
-.about-us{
-    .page-header{
-        .container{
+.about-us {
+    .page-header {
+        .container {
             color: #FFFFFF;
             text-align: center;
         }
-        .title{
+
+        .title {
             color: $white-color;
         }
     }
-    .about-description{
+
+    .about-description {
         padding: 70px 0px 0px 0px;
     }
-    .about-services{
+
+    .about-services {
         padding-top: 10px;
     }
-    .about-office{
-        .description{
+
+    .about-office {
+        .description {
             margin-bottom: 70px;
         }
-        img{
+
+        img {
             margin: 20px 0px;
         }
     }
 
     .about-contact,
-    .about-office{
+    .about-office {
         padding: 80px 0px;
-        .description{
+
+        .description {
             margin-bottom: 70px;
         }
     }
 }
 
-.sections-page .page-header{
-  display: flex;
-  align-items: center;
+.sections-page .page-header {
+    display: flex;
+    align-items: center;
 }

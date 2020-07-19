@@ -7,7 +7,6 @@ import LoginButton from './LoginButton';
 // reactstrap components
 import {
   Container,
-  Row,
 } from "reactstrap";
 
 
@@ -126,7 +125,7 @@ class ListStories extends Component {
           <div className="cards">
             <Container fluid>
               <div className="title">
-                <h3 className="title"></h3>
+                {/* <h3 className="title"></h3> */}
               </div>
               <CardComponent listOfStories={this.state.listOfStories}
                 saveStoryIndex={this.saveStoryIndex}

@@ -61,10 +61,10 @@ const EditFixedNavbar = (props) => {
                   aria-hidden={true}
                   className="now-ui-icons users_single-02 p-md-3"
                 ></i></Link>}
-              <Link to='/profile-edit' style={{ textDecoration: 'none' }}><i
+              {props.currentUser && <Link to='/profile-edit' style={{ textDecoration: 'none' }}><i
                 aria-hidden={true}
                 className="now-ui-icons loader_gear p-md-3"
-              ></i></Link>
+              ></i></Link>}
               <UncontrolledDropdown className="button-dropdown p-md-2" >
                 <DropdownToggle
                   caret

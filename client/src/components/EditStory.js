@@ -4,8 +4,10 @@ import defaultAvatar from "assets/img/placeholder.jpg";
 import Editor from "views/examples/editor";
 import DOMPurify from "dompurify";
 import ImageUpload from "components/CustomUpload/ImageUpload.js";
-import Select from "react-select";
+// import Select from "react-select";
 import DropdownIconsCategory from "views/examples/DropdownIconsCategory"
+import EditFixedNavbar from './Navbars/EditFixedNavbar';
+import FooterBlack from './Footers/FooterBlack';
 
 // reactstrap components
 import {
@@ -21,8 +23,7 @@ import {
     InputGroup,
     ModalFooter,
 } from "reactstrap";
-import EditFixedNavbar from './Navbars/EditFixedNavbar';
-import FooterBlack from './Footers/FooterBlack';
+
 
 class EditStory extends Component {
     state = {
