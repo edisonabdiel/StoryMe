@@ -37,7 +37,7 @@ const EditFixedNavbar = (props) => {
       <Navbar className="navbar-absolute" color="transparent" expand="lg">
         <Container>
           <div className="navbar-translate">
-            <NavbarBrand to="/" tag={Link} id="navbar-brand">
+            <NavbarBrand to="/" tag={Link} id="navbar-brand" >
               StoryMe
             </NavbarBrand>
             <button

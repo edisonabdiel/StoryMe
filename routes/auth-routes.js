@@ -37,10 +37,7 @@ const transporter = nodemailer.createTransport({
 authRoutes.post('/signup', signUpValidation, loggedIn, (req, res, next) => {
   // get the validation errors 
   const errors = validationResult(req);
-  console.log("outPut: errors", errors.array())
   const newErrorList = errors.array().map((error) => error.msg)
-  console.log("outPut: newErrorList", newErrorList)
-  console.log("outPut: errors", errors)
 
   if (!errors.isEmpty()) {
     return res.status(400).json({
@@ -48,14 +45,10 @@ authRoutes.post('/signup', signUpValidation, loggedIn, (req, res, next) => {
     });
   }
   const email = req.body.email;
-  console.log("outPut: email", email)
   const password = req.body.password;
-  console.log("outPut: password", password)
   const checked = req.body.checked;
-  console.log("outPut: checked", checked)
   const image = req.body.image
   const bgImage = req.body.bgImage
-
 
   User.findOne({ email }, (err, foundUser) => {
 
@@ -83,8 +76,7 @@ authRoutes.post('/signup', signUpValidation, loggedIn, (req, res, next) => {
       return token.save()
     }).then((token) => {
       //Send email verification
-      console.log("email", email);
-      console.log(process.env.EMAIL_HOST);
+      console.log('new user', newUser)
       const mailOptions = {
         from: "storymewebapp@gmail.com",
         to: email,
