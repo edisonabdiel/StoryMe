@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FacebookIcon, FacebookShareButton, TwitterShareButton, TwitterIcon } from "react-share";
+import defaultAvatar from "assets/img/placeholder.jpg";
 import CircleLoader from "react-spinners/CircleLoader";
 
 
@@ -40,12 +41,15 @@ const CardComponent = (props) => {
                                 }}
                                     style={{ cursor: 'pointer' }}
                                 >
+                                {oneStory.image !== defaultAvatar ? 
                                     <img
                                         alt="..."
                                         className="img rounded"
                                         src={oneStory.image}
                                         style={{ width: '100%', height: '100%' }}
                                     ></img>
+                                    :''
+                                }
                                 </div>
                                 <CardBody>
                                     <h6 className="category text-warning">
@@ -135,7 +139,7 @@ const CardComponent = (props) => {
                     )
                 })
             }
-        </Row >
+        </Row>
     )
 }
 

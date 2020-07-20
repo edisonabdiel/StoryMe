@@ -225,7 +225,7 @@ class SignupPage extends React.Component {
                             <Input
                               autoComplete="password"
                               placeholder="Password..."
-                              type="text"
+                              type="password"
                               onFocus={() => this.setPasswordFocus(true)}
                               onBlur={() => this.setPasswordFocus(false)}
                               name="password"

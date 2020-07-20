@@ -28,7 +28,8 @@ class ListStories extends Component {
 
 
   componentDidMount() {
-    if (this.props.profileStories) {
+
+    if (this.props.profileStories && this.props.currentUser) {
       axios.get(`/api/profileStories/${this.props.userId}`).then((resp) => {
         console.log("outPut: ListStories -> componentDidMount -> resp", resp)
         this.setState({
@@ -36,15 +37,15 @@ class ListStories extends Component {
         })
       })
     }
-    else if (this.props.currentStory) {
-      axios.get(`/api/stories/filter/${this.props.currentUser._id}`).then((resp) => {
-        console.log("outPut: ListStories -> resp", resp)
+    else if (this.props.isDiscovery && this.props.currentUser) {
+      axios.get(`/api/stories/filter`).then((resp) => {
+        console.log("outPut: ListStories -> resp", resp.data)
 
         this.setState({
           listOfStories: resp.data
         })
       })
-    } else if (this.props.profileLikes) {
+    } else if (this.props.profileLikes && this.props.currentUser) {
       axios.get(`/api/stories/${this.props.currentUser._id}/liked`)
         .then((resp) => {
           console.log("outPut: ListStories -> resp", resp)
