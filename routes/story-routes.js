@@ -20,15 +20,11 @@ router.get('/stories', (req, res, next) => {
 router.get('/stories/filter', (req, res, next) => {
   Story.find().populate("owner")
     .then(allTheStories => {
-      const filterStory = allTheStories.filter((item) => {
-        console.log('filter the Story',item);
-        console.log("Story Owner ID", item.owner._id)
-        // console.log("User ID with params", req.params.id);
-        console.log("User ID with req.user._id=======>>", req.user._id);
-
-        //ASK HENDIRK WHY req.user._id DIDNT WORK even recieve in the console!!!!!!!!!!!!!
-        return (item.owner._id != req.user._id && !item.likes.includes(req.user._id))
-      })
+      const filterStory = allTheStories.filter((story) => {
+        return (req.user._id).toString().localeCompare(story.owner._id) === 1 &&
+          !story.likes.includes(req.user._id)
+      }
+      )
       // console.log("fileStory =====>",filterStory)
       res.json(filterStory);
     })
@@ -50,7 +46,7 @@ router.get('/profileStories/:id', (req, res, next) => {
 router.post('/stories', (req, res, next) => {
   console.log('POST', req.body);
   console.log('USER', req.user);
-  let cardBgColor = ["gray","red", "black"]
+  let cardBgColor = ["gray", "red", "black"]
   let randomBgIdx = Math.floor(Math.random() * cardBgColor.length)
   Story.create({
     title: req.body.title,
