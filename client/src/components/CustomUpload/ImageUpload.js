@@ -41,19 +41,18 @@ export class ImageUpload extends Component {
         >
           <img src={this.props.imageUrl} alt="" />
         </div>
-        <div>
+        <div className='btn-block text-center'>
           {this.props.imageUrl === defaultAvatar ? (
-            <Button className="btn-round" color="default" onClick={this.handleClick}>
-              {this.props.avatar ? "Add Photo" : "Select image"}
+            <Button className="btn-morphin btn-round" size='sm' color="info" onClick={this.handleClick}>
+              {this.props.avatar ? "Profile Photo" : "Story Cover"}
             </Button>
           ) : (
               <span>
-                <Button className="btn-morphin btn-round btn-info" onClick={() => { this.handleClick() }}>
-
+                <Button className="btn-morphing btn-info" size='sm' onClick={() => { this.handleClick() }}>
                   Change
             </Button>
                 {this.props.avatar ? <br /> : null}
-                <Button color="danger" className="btn-round" onClick={() => this.setState({ modalOpen: true })}>
+                <Button color="danger" className="btn-morphing btn-info" size='sm' onClick={() => this.setState({ modalOpen: true })}>
                   <i className="fa fa-times" /> Remove
             </Button>
               </span>
@@ -90,7 +89,7 @@ export class ImageUpload extends Component {
   }
 }
 
-export default ImageUpload
+export default ImageUpload;
 
 
 

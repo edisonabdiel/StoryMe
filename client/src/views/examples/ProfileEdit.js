@@ -4,7 +4,6 @@ import defaultAvatar from "assets/img/placeholder.jpg";
 import ImageUpload from "components/CustomUpload/ImageUpload.js";
 import AlertMessage from "views/examples/Alert"
 
-
 // reactstrap components
 import {
     Button,
@@ -233,10 +232,8 @@ class ProfileEdit extends Component {
                                 <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
                                     <CardBody>
                                         {/* image */}
-                                        <InputGroup >
                                             <ImageUpload avatar imageUrl={this.state.imageUrl} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
                                             <ImageUpload imageUrl={this.state.bgImageUrl} handleImageChange={this.handleBgImageChange} handleImageRemove={this.handleBgImageRemove} />
-                                        </InputGroup>
                                         {/* email */}
                                         <InputGroup
                                             className={
@@ -274,7 +271,7 @@ class ProfileEdit extends Component {
                                                 </InputGroupText>
                                             </InputGroupAddon>
                                             <Input
-                                                placeholder="userName"
+                                                placeholder="@userName"
                                                 name="userName"
                                                 value={this.state.userName}
                                                 type="text"
@@ -293,7 +290,8 @@ class ProfileEdit extends Component {
                                         >
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
-                                                    <i className="now-ui-icons ui-1_lock-circle-open"></i>                                            </InputGroupText>
+                                                    <i className="now-ui-icons ui-1_lock-circle-open"></i>
+                                                </InputGroupText>
                                             </InputGroupAddon>
                                             <Input
                                                 placeholder="Old Password"
@@ -313,7 +311,7 @@ class ProfileEdit extends Component {
                                                 onBlur={() => this.setNewPasswordFocus(false)}
                                                 onChange={this.handleChange}
                                             ></Input>
-                                            <Button className=" btn-morphing btn-round btn-info" onClick={this.handlePasswordFormSubmit}> Reset</Button>
+                                            <Button className=" btn-morphing btn-info" onClick={this.handlePasswordFormSubmit}> Reset</Button>
                                         </InputGroup>
                                         {/* about */}
 

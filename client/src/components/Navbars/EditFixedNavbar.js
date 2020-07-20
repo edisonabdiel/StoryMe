@@ -80,7 +80,7 @@ const EditFixedNavbar = (props) => {
                 </DropdownToggle>
                 <DropdownMenu aria-labelledby="navbarDropdown" data-background-color="black">
                   <DropdownItem onClick={(e) => e.preventDefault()}>
-                    <Logout size="sm" updateUser={props.updateUser} />
+                    <Link to="/login-page" style={{ textDecoration: 'none' }}><Logout updateUser={props.updateUser} currentUser={props.currentUser} /></Link>
                   </DropdownItem>
                   <DropdownItem onClick={(e) => e.preventDefault()}>
                     <Link to="/login-page" style={{ textDecoration: 'none' }}><Login /></Link>

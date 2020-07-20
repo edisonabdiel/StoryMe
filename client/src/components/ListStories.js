@@ -65,7 +65,6 @@ class ListStories extends Component {
     }
   }
 
-
   deleteHandler = (storyID) => {
     axios.delete('/api/stories/' + storyID).then(() => {
       this.setState({
@@ -97,7 +96,6 @@ class ListStories extends Component {
   }
 
   likesHandler = (storyID) => {
-
     axios.put(`/api/stories/${storyID}/liked`)
       .then((resp) => {
         console.log('Likes response:', resp.data);
@@ -125,13 +123,17 @@ class ListStories extends Component {
       })
     }
   }
+  changeStateHandler = (id) => {
+    this.props.changeStateHandler(id)
+
+  }
 
   render() {
     console.log('List of Stories profile:', this.state.listOfStories);
     return (
       <div>
         <div
-          className="section section-cards"
+          className="justify-content-evenly "
           id="cards"
         >
           <div className="cards">
@@ -147,6 +149,8 @@ class ListStories extends Component {
                 setModalLogin={this.setModalLogin}
                 isDiscovery={this.props.isDiscovery}
                 setModalVerification={this.setModalVerification}
+                changeStateHandler={this.changeStateHandler}
+
               />
               {this.state.listOfStories && this.state.listOfStories[this.state.currentOpenStory] &&
                 <ModalComponent liked={this.state.liked}

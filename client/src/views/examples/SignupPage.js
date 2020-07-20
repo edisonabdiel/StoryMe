@@ -38,8 +38,11 @@ class SignupPage extends React.Component {
     checked: false,
     errorMessages: [],
     password: '',
+    userName: '',
     passwordFocus: false,
-    emailFocus: false
+    emailFocus: false,
+    userNameFocus: false
+
   }
   setChecked = (bool) => {
     this.setState({
@@ -52,6 +55,11 @@ class SignupPage extends React.Component {
     })
   }
   setEmailFocus = (bool) => {
+    this.setState({
+      emailFocus: bool
+    })
+  }
+  setUserNameFocus = (bool) => {
     this.setState({
       emailFocus: bool
     })
@@ -71,7 +79,8 @@ class SignupPage extends React.Component {
     const checked = this.state.checked
     const image = defaultAvatar
     const bgImage = defaultAvatar
-    axios.post("/api/signup", { email, password, checked, image, bgImage })
+    const userName = this.state.userName
+    axios.post("/api/signup", { email, password, checked, image, bgImage, userName })
       .then((res) => {
         this.props.updateUser(res.data)
         console.log("outPut: SignupPage -> user", this.props.currentUser)
@@ -147,8 +156,8 @@ class SignupPage extends React.Component {
                   <Col className="mr-auto" md="6" lg="4">
                     <Card className="card-signup" >
                       <CardBody>
-                      <img
-                          style={{height: "40px", width: '40px'}}
+                        <img
+                          style={{ height: "40px", width: '40px' }}
                           alt="..."
                           src={require("assets/img/logo.png")}
                         ></img>
@@ -183,6 +192,25 @@ class SignupPage extends React.Component {
                               onBlur={() => this.setEmailFocus(false)}
                               name="email"
                               value={this.state.email}
+                              onChange={this.handleChange}
+                            ></Input>
+                          </InputGroup>
+                          <InputGroup
+                            className={this.userNameFocus ? "input-group-focus" : ""}
+                          >
+                            <InputGroupAddon addonType="prepend">
+                              <InputGroupText>
+                                <i className="now-ui-icons users_single-02"></i>
+                              </InputGroupText>
+                            </InputGroupAddon>
+                            <Input
+                              autoComplete="userName"
+                              placeholder="Your user name..."
+                              type="text"
+                              onFocus={() => this.setUserNameFocus(true)}
+                              onBlur={() => this.setUserNameFocus(false)}
+                              name="userName"
+                              value={this.state.userName}
                               onChange={this.handleChange}
                             ></Input>
                           </InputGroup>
