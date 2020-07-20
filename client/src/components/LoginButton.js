@@ -3,7 +3,8 @@ import React from "react";
 // react plugin used to create datetimepicker
 import ReactDatetime from "react-datetime";
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 // reactstrap components
 import {
@@ -66,7 +67,7 @@ class LoginButton extends React.Component {
         })
       })
   }
-
+  
   render() {
     return (
       <div className="" id="javascriptComponents">
@@ -153,6 +154,7 @@ class LoginButton extends React.Component {
                         </InputGroup>
                       </CardBody>
                       <ModalFooter className="text-center">
+                      
                         <Button
                           block
                           className="btn-neutral btn-round"
@@ -160,7 +162,7 @@ class LoginButton extends React.Component {
                           // href=""
                           type="submit"
                           size="lg"
-                          onClick={() => this.props.setModalLogin(false)}
+                          onClick={() => {this.props.setModalLogin(false)}}
                         >
                           Get Started
                         </Button>
