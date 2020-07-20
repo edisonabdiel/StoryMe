@@ -64,7 +64,6 @@ export class ProfilePage extends Component {
       })
     }).catch((err) => {
       console.log("outPut: ProfilePage -> componentDidMount -> err", err)
-
     })
   }
 
@@ -132,6 +131,7 @@ export class ProfilePage extends Component {
             <div className="section">
               <Container >
                 <div className="button-container">
+                  {/* follow btn */}
                   <Button
                     className="btn-round mr-1"
                     color="info"

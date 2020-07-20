@@ -43,7 +43,7 @@ export class LoginPage extends Component {
       passwordFocus: bool
     })
   }
-  
+
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
@@ -92,18 +92,19 @@ export class LoginPage extends Component {
                   <Col className="ml-auto mr-auto" md="5">
                     <Card className="card-login card-plain">
                       {/* {this.state.errorMessage ? <p style={{ textAlign: 'center', color: "red" }}>{this.state.errorMessage}</p> : null} */}
-                      {this.state.errorMessage.map((m) =>
-                        <p key={m} style={{ textAlign: 'center', color: "red" }}>{m}</p>
-                      )}
+
                       <Form onSubmit={this.handleFormSubmit}>
                         <CardHeader className="text-center">
                           <div className="logo-container">
-                          <img
-                          alt="..."
-                          src={require("assets/img/logo.png")}
-                        ></img>
+                            <img
+                              alt="..."
+                              src={require("assets/img/logo.png")}
+                            ></img>
                           </div>
                         </CardHeader>
+                        {this.state.errorMessage.map((m) =>
+                          <p key={m} style={{ textAlign: 'center', color: "red" }}>{m}</p>
+                        )}
                         <CardBody>
                           <InputGroup
                             className={
