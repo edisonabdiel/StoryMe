@@ -67,7 +67,7 @@ class LoginButton extends React.Component {
         })
       })
   }
-  
+
   render() {
     return (
       <div className="" id="javascriptComponents">
@@ -154,7 +154,7 @@ class LoginButton extends React.Component {
                         </InputGroup>
                       </CardBody>
                       <ModalFooter className="text-center">
-                      
+
                         <Button
                           block
                           className="btn-neutral btn-round"
@@ -162,14 +162,14 @@ class LoginButton extends React.Component {
                           // href=""
                           type="submit"
                           size="lg"
-                          onClick={() => {this.props.setModalLogin(false)}}
+                          onClick={() => { this.props.setModalLogin(false) }}
                         >
                           Get Started
                         </Button>
                       </ModalFooter>
                     </Form>
                     <p>Do not have Account?
-                         <Link to={"/sign-up"} style={{ fontWeight: 'bold' }}> Sign up</Link>
+                    <Link to={"/sign-up"} style={{ fontWeight: 'bold' }}> Sign up</Link>
                     </p>
                   </div>
                 </Card>

@@ -73,7 +73,7 @@ class App extends React.Component {
               return <Redirect
                 to={{
                   pathname: '/',
-                  state: 'verify your email'
+                  state: true
                 }} />
             }
           }} />

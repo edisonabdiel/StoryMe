@@ -20,8 +20,8 @@ const CardComponent = (props) => {
     return (
         <Row>
             {props.listOfStories.length === 0
-                ? 
-                <h3>NO LIKED STORIES YET<CircleLoader/></h3>
+                ?
+                <h3>NO LIKED STORIES YET<CircleLoader /></h3>
                 : props.listOfStories.map((oneStory, idx) => {
                     return (
                         <Col lg="4" md="6" key={oneStory._id} >
@@ -41,15 +41,15 @@ const CardComponent = (props) => {
                                 }}
                                     style={{ cursor: 'pointer' }}
                                 >
-                                {oneStory.image !== defaultAvatar ? 
-                                    <img
-                                        alt="..."
-                                        className="img rounded"
-                                        src={oneStory.image}
-                                        style={{ width: '100%', height: '100%' }}
-                                    ></img>
-                                    :''
-                                }
+                                    {oneStory.image !== defaultAvatar ?
+                                        <img
+                                            alt="..."
+                                            className="img rounded"
+                                            src={oneStory.image}
+                                            style={{ width: '100%', height: '100%' }}
+                                        ></img>
+                                        : ''
+                                    }
                                 </div>
                                 <CardBody>
                                     <h6 className="category text-warning">
@@ -109,7 +109,7 @@ const CardComponent = (props) => {
                                                     <div>
                                                         <button className=" btn-info btn-round pull-left ml-lg-5"
                                                             size="sm"
-                                                            
+
                                                         >
                                                             <Link className="text-decoration-none" to={"/story-edit/" + oneStory._id} onClick={() => props.editHandler(oneStory._id)}><b>Edit</b></Link>
                                                         </button>
@@ -121,12 +121,12 @@ const CardComponent = (props) => {
                                                     <FacebookShareButton
                                                         url={`${process.env.EMAIL_HOST}stories/${oneStory._id}`}
                                                     >
-                                                        <FacebookIcon logoFillColor="white" size={32} round={true} />
+                                                        <FacebookIcon size={32} round={true} />
                                                     </FacebookShareButton>
                                                     <TwitterShareButton
                                                         url={`${process.env.EMAIL_HOST}stories/${oneStory._id}`}
                                                     >
-                                                        <TwitterIcon logoFillColor="white" size={32} round={true} />
+                                                        <TwitterIcon size={32} round={true} />
                                                     </TwitterShareButton>
                                                 </div>
                                                 : ""}
