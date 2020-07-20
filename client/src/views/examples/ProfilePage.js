@@ -166,8 +166,10 @@ export class ProfilePage extends Component {
                   currentUser={this.props.currentUser}
                   userId={this.state.userId}
                 />
+
                 {this.state.isClickedStories && <ListStories profileStories isDiscovery={false} currentUser={this.props.currentUser} userId={this.state.userId} changeStateHandler={this.changeStateHandler} />}
                 {this.state.isClickedLikes && <ListStories profileLikes isDiscovery={false} currentUser={this.props.currentUser} changeStateHandler={this.changeStateHandler} />}
+
               </Container>
             </div>
             <FooterBlack />

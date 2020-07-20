@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FacebookIcon, FacebookShareButton, TwitterShareButton, TwitterIcon } from "react-share";
+import CircleLoader from "react-spinners/CircleLoader";
+
 
 import {
     Card,
@@ -17,7 +19,8 @@ const CardComponent = (props) => {
     return (
         <Row>
             {props.listOfStories.length === 0
-                ? <h1>No Stories found...</h1>
+                ? 
+                <h3>NO LIKED STORIES YET<CircleLoader/></h3>
                 : props.listOfStories.map((oneStory, idx) => {
                     return (
                         <Col lg="4" md="6" key={oneStory._id} >
@@ -73,7 +76,7 @@ const CardComponent = (props) => {
                                     }} style={{ cursor: 'pointer' }}>
                                         {oneStory.headline}
                                     </p>
-                                    <CardFooter >
+                                    <CardFooter className=" flex-fill" >
                                         <div className="stats stats-right">
                                             {props.currentUser && oneStory.likes.includes(props.currentUser._id) ?
                                                 <i className="fa fa-heart fa-lg" style={{ marginRight: '3px' }}></i>
@@ -96,30 +99,28 @@ const CardComponent = (props) => {
                                                     {oneStory.owner.userName ? oneStory.owner.userName : oneStory.owner.email}</Link>}
                                         </div>
                                         <hr />
-                                        <div className="btn-block">
+                                        <div className="btn-block text-center ">
                                             {props.currentUser && oneStory.owner._id === props.currentUser._id ?
                                                 <div>
                                                     <div>
-
-                                                        <button className="nav-link btn-info btn-round pull-left ml-lg-5" style={{ color: 'white', textDecoration: 'none' }}>
+                                                        <button className=" btn-info btn-round pull-left ml-lg-5"
+                                                            size="sm"
+                                                            
+                                                        >
                                                             <Link className="text-decoration-none" to={"/story-edit/" + oneStory._id} onClick={() => props.editHandler(oneStory._id)}><b>Edit</b></Link>
                                                         </button>
-                                                        <button className="nav-link btn-round btn-danger pull-right mr-5"
+                                                        <button className=" btn-round btn-danger pull-right mr-5"
+                                                            size="sm"
                                                             onClick={() => props.deleteHandler(oneStory._id)}><b>Delete</b>
                                                         </button>
                                                     </div>
-
                                                     <FacebookShareButton
                                                         url={`${process.env.EMAIL_HOST}stories/${oneStory._id}`}
-                                                    // quote={props.joke.setup + props.joke.punchline}
-                                                    // hashtag="#programing joke"
                                                     >
                                                         <FacebookIcon logoFillColor="white" size={32} round={true} />
                                                     </FacebookShareButton>
                                                     <TwitterShareButton
                                                         url={`${process.env.EMAIL_HOST}stories/${oneStory._id}`}
-                                                    // quote={props.joke.setup + props.joke.punchline}
-                                                    // hashtag="#programing joke"
                                                     >
                                                         <TwitterIcon logoFillColor="white" size={32} round={true} />
                                                     </TwitterShareButton>
