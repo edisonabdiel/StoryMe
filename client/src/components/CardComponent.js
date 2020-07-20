@@ -89,10 +89,11 @@ const CardComponent = (props) => {
                                                 className="avatar img-raised"
                                                 src={oneStory.owner.image}
                                             ></img>
-                                            <Link to={{
-                                                pathname: `/profile-page/${oneStory.owner._id}`,
-                                                state: oneStory.owner
-                                            }}>{oneStory.owner.userName ? oneStory.owner.userName : oneStory.owner.email}</Link>
+                                            {!props.isDiscovery ? <Link to={`/profile-page/${oneStory.owner._id}`}
+                                                onClick={() => props.changeStateHandler(oneStory.owner._id)}>
+                                                {oneStory.owner.userName ? oneStory.owner.userName : oneStory.owner.email}</Link>
+                                                : <Link to={`/profile-page/${oneStory.owner._id}`}>
+                                                    {oneStory.owner.userName ? oneStory.owner.userName : oneStory.owner.email}</Link>}
                                         </div>
                                         <hr />
                                         <div className="btn-block">

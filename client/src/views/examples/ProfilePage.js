@@ -50,10 +50,10 @@ export class ProfilePage extends Component {
   }
 
   // to change the user and user id when coming from another profile page
-  changeStateHandler = () => {
-    axios.get(`/api/profile-page/${this.props.currentUser._id}`).then((resp) => {
+  changeStateHandler = (id) => {
+    axios.get(`/api/profile-page/${id}`).then((resp) => {
       console.log('follow response:', resp.data.user)
-      console.log("outPut: ProfilePage -> componentDidMount -> resp", resp.data)
+      console.log("outPut: ProfilePage -> change state handler -> resp", resp.data)
       this.setState({
         user: resp.data.user,
         following: resp.data.following,
@@ -166,8 +166,8 @@ export class ProfilePage extends Component {
                   currentUser={this.props.currentUser}
                   userId={this.state.userId}
                 />
-                {this.state.isClickedStories && <ListStories profileStories isDiscovery={false} currentUser={this.props.currentUser} userId={this.state.userId} />}
-                {this.state.isClickedLikes && <ListStories profileLikes isDiscovery={false} currentUser={this.props.currentUser} />}
+                {this.state.isClickedStories && <ListStories profileStories isDiscovery={false} currentUser={this.props.currentUser} userId={this.state.userId} changeStateHandler={this.changeStateHandler} />}
+                {this.state.isClickedLikes && <ListStories profileLikes isDiscovery={false} currentUser={this.props.currentUser} changeStateHandler={this.changeStateHandler} />}
               </Container>
             </div>
             <FooterBlack />
