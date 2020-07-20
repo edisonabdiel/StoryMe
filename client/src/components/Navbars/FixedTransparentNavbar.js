@@ -67,7 +67,8 @@ function FixedTransparentNavbar(props) {
                 <DropdownMenu>
                   <i className="now-ui-icons design_image"></i>
                   <DropdownItem>
-                    <Logout updateUser={props.updateUser} />
+                    <Link to="/logout" style={{ textDecoration: 'none' }}><Logout /></Link>
+                    {/* <Logout updateUser={props.updateUser} /> */}
                   </DropdownItem>
                   <DropdownItem onClick={(e) => e.preventDefault()}>
                     <Link to="/sign-up" style={{ textDecoration: 'none' }}><SignUp /></Link>
@@ -85,9 +86,9 @@ function FixedTransparentNavbar(props) {
                     <span className="button-bar"></span>
                     <span className="button-bar"></span>
                   </DropdownToggle>
-                  <DropdownMenu aria-labelledby="navbarDropdown" data-background-color="black"> 
+                  <DropdownMenu aria-labelledby="navbarDropdown" data-background-color="black">
                     <DropdownItem onClick={(e) => e.preventDefault()}>
-                      <Logout size="sm" updateUser={props.updateUser} {...props} />
+                      <Link to="/login-page" style={{ textDecoration: 'none' }}><Logout updateUser={props.updateUser} currentUser={props.currentUser} /></Link>
                     </DropdownItem>
                     <DropdownItem onClick={(e) => e.preventDefault()}>
                       <Link to="/login-page" style={{ textDecoration: 'none' }}><Login /></Link>

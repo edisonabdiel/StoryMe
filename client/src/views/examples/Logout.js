@@ -13,8 +13,8 @@ export class Logout extends Component {
     }
     render() {
         return (
-            <div onClick={this.logoutHandler} style={{color:'#e13e20', textAlign:'center', fontSize:'16px'}} >
-            Logout
+            <div onClick={this.logoutHandler} style={{ color: '#e13e20', textAlign: 'center', fontSize: '16px' }} >
+                Logout
             </div>
         )
     }
