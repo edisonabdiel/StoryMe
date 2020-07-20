@@ -28,7 +28,6 @@ class ListStories extends Component {
 
 
   componentDidMount() {
-
     if (this.props.profileStories) {
       axios.get(`/api/profileStories/${this.props.userId}`).then((resp) => {
         console.log("outPut: ListStories -> componentDidMount -> resp", resp)
@@ -65,7 +64,6 @@ class ListStories extends Component {
     }
   }
 
-
   deleteHandler = (storyID) => {
     axios.delete('/api/stories/' + storyID).then(() => {
       this.setState({
@@ -97,7 +95,6 @@ class ListStories extends Component {
   }
 
   likesHandler = (storyID) => {
-
     axios.put(`/api/stories/${storyID}/liked`)
       .then((resp) => {
         console.log('Likes response:', resp.data);
@@ -131,7 +128,7 @@ class ListStories extends Component {
     return (
       <div>
         <div
-          className="section section-cards"
+          className="justify-content-evenly "
           id="cards"
         >
           <div className="cards">
