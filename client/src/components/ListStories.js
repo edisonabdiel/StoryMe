@@ -122,6 +122,10 @@ class ListStories extends Component {
       })
     }
   }
+  changeStateHandler = (id) => {
+    this.props.changeStateHandler(id)
+
+  }
 
   render() {
     console.log('List of Stories profile:', this.state.listOfStories);
@@ -144,6 +148,8 @@ class ListStories extends Component {
                 setModalLogin={this.setModalLogin}
                 isDiscovery={this.props.isDiscovery}
                 setModalVerification={this.setModalVerification}
+                changeStateHandler={this.changeStateHandler}
+
               />
               {this.state.listOfStories && this.state.listOfStories[this.state.currentOpenStory] &&
                 <ModalComponent liked={this.state.liked}

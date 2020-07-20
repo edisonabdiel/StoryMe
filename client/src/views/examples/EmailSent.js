@@ -20,7 +20,6 @@ const EmailSent = (props) => {
       {/* <ScrollTransparentNavbar /> */}
       <div data-background-color="black">
         <EditFixedNavbar currentUser={props.currentUser} updateUser={props.updateUser} />
-
         <div style={{ height: '75px' }}></div>
         <div className="wrapper" >
           <div className="section section-about-us text-dark">

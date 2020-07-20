@@ -49,6 +49,7 @@ authRoutes.post('/signup', signUpValidation, loggedIn, (req, res, next) => {
   const checked = req.body.checked;
   const image = req.body.image
   const bgImage = req.body.bgImage
+  const userName = req.body.userName
 
   User.findOne({ email }, (err, foundUser) => {
 
@@ -57,11 +58,11 @@ authRoutes.post('/signup', signUpValidation, loggedIn, (req, res, next) => {
     const hashPass = bcrypt.hashSync(password, salt);
 
     const newUser = new User({
-      email: email,
+      email,
       password: hashPass,
-      userName: '',
+      userName,
       about: '',
-      image: image,
+      image,
       bgImage
     });
 
