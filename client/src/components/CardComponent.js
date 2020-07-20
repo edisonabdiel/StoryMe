@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FacebookIcon, FacebookShareButton, TwitterShareButton, TwitterIcon } from "react-share";
+import defaultAvatar from "assets/img/placeholder.jpg";
+
 
 import {
     Card,
@@ -17,7 +19,7 @@ const CardComponent = (props) => {
     return (
         <Row>
             {props.listOfStories.length === 0
-                ? <h1>No Stories found...</h1>
+                ? <h1>No Stories yet...</h1>
                 : props.listOfStories.map((oneStory, idx) => {
                     return (
                         <Col lg="4" md="6" key={oneStory._id} >
@@ -37,12 +39,15 @@ const CardComponent = (props) => {
                                 }}
                                     style={{ cursor: 'pointer' }}
                                 >
+                                {oneStory.image !== defaultAvatar ? 
                                     <img
                                         alt="..."
                                         className="img rounded"
                                         src={oneStory.image}
                                         style={{ width: '100%', height: '100%' }}
                                     ></img>
+                                    :''
+                                }
                                 </div>
                                 <CardBody>
                                     <h6 className="category text-warning">

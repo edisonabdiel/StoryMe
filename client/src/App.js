@@ -60,7 +60,7 @@ class App extends React.Component {
           <Route path="/index" render={(props) => <Index {...props} />} />
           <Route path="/terms-and-conditions" render={(props) => <TermsAndConditions {...props} />} />
           <Route path="/email-sent" render={(props) => <EmailSent currentUser={this.state.loggedInUser} {...props} />} />
-          <Route path="/email-confirmed/:token" render={(props) => <EmailConfirmed currentUser={this.state.loggedInUser} {...props} />} />
+          <Route path="/email-confirmed/:token" render={(props) => <EmailConfirmed currentUser={this.state.loggedInUser} updateUser={this.updateUser} {...props} />} />
           <Route path="/nucleo-icons" render={(props) => <NucleoIcons {...props} />} />
           <Route exact path="/profile-page/:id" render={(props) => {
             if (this.state.loggedInUser && this.state.loggedInUser.isVerified) {

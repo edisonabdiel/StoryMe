@@ -42,7 +42,6 @@ class LoginButton extends React.Component {
                                             type="button"
                                         >
                                             <i className="now-ui-icons ui-1_simple-remove"></i>
-
                                         </button>
                                         <div className="header header-info text-center">
                                             <div className="logo-container">
@@ -53,7 +52,6 @@ class LoginButton extends React.Component {
                                     <div className="modal-body" style={{ textAlign: 'center' }}>
                                         <h3>Please verify your email first</h3>
                                         <ModalFooter>
-
                                             <Button
                                                 className="btn-neutral"
                                                 color="neutral"
@@ -62,7 +60,6 @@ class LoginButton extends React.Component {
                                                 OK
                                             </Button>
                                         </ModalFooter>
-
                                     </div>
                                 </Card>
                             </Modal>

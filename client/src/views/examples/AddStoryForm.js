@@ -219,7 +219,7 @@ class AddStoryForm extends React.Component {
                                                 </InputGroupText>
                                             </InputGroupAddon>
                                             <Input
-                                                placeholder="Duration"
+                                                placeholder="Duration in min"
                                                 name="duration"
                                                 value={this.state.duration}
                                                 type="text"

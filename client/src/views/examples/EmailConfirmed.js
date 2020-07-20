@@ -20,19 +20,18 @@ const EmailConfirmed = (props) => {
   useEffect(() => {
     axios.get(`/api/confirmation/${props.match.params.token}`)
       .then((res) => {
-        this.props.updateUser(res.data)
+        props.updateUser(res.data)
         console.log("outPut: SignupPage -> user", props.currentUser)
-      }).then(() => {
-        this.props.history.push(`/profile-page/${props.currentUser._id}`)
-      }).catch((error) => {
+      })
+      .catch((error) => {
         console.log("outPut: SignupPage -> handleFormSubmit -> error", error.response)
 
       })
-  })
+  },[])
 
   return (
     <>
-      <ScrollTransparentNavbar />
+      <ScrollTransparentNavbar currentUser={props.currentUser} updateUser={props.updateUser} />
       <div className="wrapper">
         <div className="section section-about-us">
           <Container>
