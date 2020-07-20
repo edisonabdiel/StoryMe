@@ -21,7 +21,11 @@ router.get('/stories/filter', (req, res, next) => {
   Story.find().populate("owner")
     .then(allTheStories => {
       const filterStory = allTheStories.filter((story) => {
-        return (req.user._id).toString().localeCompare(story.owner._id) === 1 &&
+        console.log(typeof (req.user._id))
+        console.log(req.user._id)
+        console.log(typeof (story.owner._id))
+        console.log(story.owner._id)
+        return String(req.user._id) !== String(story.owner._id) &&
           !story.likes.includes(req.user._id)
       }
       )
