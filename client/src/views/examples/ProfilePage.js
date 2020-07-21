@@ -197,7 +197,7 @@ export class ProfilePage extends Component {
 
 
         </div>
-      </BodyClassName >
+      </BodyClassName>
     )
   }
 }
