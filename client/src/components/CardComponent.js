@@ -18,7 +18,7 @@ import {
 const CardComponent = (props) => {
 
     return (
-        <Row>
+        <Row className=' align-items-lg-start'>
             {props.listOfStories.length === 0 && props.profileStories
                 ?
                 <h3>NO STORIES WRITTEN YET... <CircleLoader/></h3>
@@ -42,7 +42,6 @@ const CardComponent = (props) => {
                                             : !props.currentUser
                                                 ? props.setModalLogin(true)
                                                 : props.setModalVerification(true)
-
                                     }
                                 }}
                                     style={{ cursor: 'pointer' }}
@@ -140,7 +139,6 @@ const CardComponent = (props) => {
                                     </CardFooter>
                                 </CardBody>
                             </Card>
-
                         </Col>
                     )
                 })

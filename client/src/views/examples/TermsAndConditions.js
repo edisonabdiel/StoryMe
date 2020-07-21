@@ -9,7 +9,7 @@ import {
 
 // core components
 import ScrollTransparentNavbar from 'components/Navbars/ScrollTransparentNavbar.js'
-import LandingPageHeader from "components/Headers/LandingPageHeader.js";
+import TermsAndConditionsHeader from "components/Headers/TermsAndConditionsHeader.js";
 import FooterBlack from "components/Footers/FooterBlack";
 
 const TermsAndConditions = () => {
@@ -17,7 +17,7 @@ const TermsAndConditions = () => {
     <>
       <ScrollTransparentNavbar />
       <div className="wrapper">
-        <LandingPageHeader />
+        <TermsAndConditionsHeader />
         <div className="section section-about-us">
           <Container>
             <Row>

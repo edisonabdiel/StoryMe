@@ -147,9 +147,9 @@ class ListStories extends Component {
     console.log('Current USER:',this.props.currentUser);
     console.log('Is DISCOVERY', this.props.isDiscovery);
     return (
-      <div>
+      <div className='d-flex justify-content-center'>
         <div
-          className="justify-content-evenly "
+          className=" d-lg-inline-flex "
           id="cards"
         >
           <div className="cards">
