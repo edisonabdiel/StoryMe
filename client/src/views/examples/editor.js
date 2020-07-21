@@ -32,7 +32,8 @@ const Editor = (props) => {
         buttons: "|,bold,strikethrough,underline,italic,|,|,ul,ol,|,,fontsize,brush,,|,\n,cut,copy,paste,|",
         removeButtons: ['hr', 'source', 'image', 'video', 'about', 'file', "copyformat", 'table', 'link'],
         toolbarAdaptive: false,
-        askBeforePasteHTML: false
+        askBeforePasteHTML: false,
+        height: 200
     }
 
 

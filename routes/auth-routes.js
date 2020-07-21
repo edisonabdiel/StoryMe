@@ -175,6 +175,29 @@ authRoutes.get("/checkuser", (req, res, next) => {
   }
 });
 
+
+authRoutes.get('/auth/facebook', passport.authenticate('facebook'));
+
+authRoutes.get('/auth/facebook/callback',
+  passport.authenticate('facebook', (err, theUser, failureDetails) => {
+
+    if (!theUser) {
+      // "failureDetails" contains the error messages
+      console.log("outPut: failureDetails", failureDetails.message)
+      const errors = [failureDetails.message]
+      console.log("outPut: errors", errors)
+
+      res.status(401).json({ errors: errors });
+      return;
+    }
+
+    // save user in session
+    req.login(theUser, (err) => {
+      // We are now logged in (that's why we can also send req.user)
+      res.status(200).json(theUser);
+    });
+  })(req, res, next));
+
 module.exports = authRoutes;
 
 
