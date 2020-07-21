@@ -219,12 +219,12 @@ class ProfileEdit extends Component {
                 <div style={{ height: '100px' }}></div> {/* offsets height of navbar */}
                 <div className="text-center">
                     <Container fluid>
-                        {this.state.successMessage
+                        {/* {this.state.successMessage
                             ? <AlertMessage color="success" message={this.state.successMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
                             : ''}
                         {this.state.errorMessage
                             ? <AlertMessage color="danger" message={this.state.errorMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
-                            : ''}
+                            : ''} */}
                         <Row>
                             <Col md="3"></Col>
                             <Col className="px-0 my-auto" md="6">
@@ -232,9 +232,15 @@ class ProfileEdit extends Component {
                                 <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
                                     <CardBody>
                                         {/* image */}
-                                            <ImageUpload avatar imageUrl={this.state.imageUrl} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
-                                            <ImageUpload imageUrl={this.state.bgImageUrl} handleImageChange={this.handleBgImageChange} handleImageRemove={this.handleBgImageRemove} />
+                                        <ImageUpload avatar imageUrl={this.state.imageUrl} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
+                                        <ImageUpload imageUrl={this.state.bgImageUrl} handleImageChange={this.handleBgImageChange} handleImageRemove={this.handleBgImageRemove} />
                                         {/* email */}
+                                        {this.state.successMessage
+                                            ? <AlertMessage color="success" message={this.state.successMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
+                                            : ''}
+                                        {this.state.errorMessage
+                                            ? <AlertMessage color="danger" message={this.state.errorMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
+                                            : ''}
                                         <InputGroup
                                             className={
                                                 this.state.nameFocus

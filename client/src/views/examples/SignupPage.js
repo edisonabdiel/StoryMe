@@ -196,25 +196,6 @@ class SignupPage extends React.Component {
                             ></Input>
                           </InputGroup>
                           <InputGroup
-                            className={this.userNameFocus ? "input-group-focus" : ""}
-                          >
-                            <InputGroupAddon addonType="prepend">
-                              <InputGroupText>
-                                <i className="now-ui-icons users_single-02"></i>
-                              </InputGroupText>
-                            </InputGroupAddon>
-                            <Input
-                              autoComplete="userName"
-                              placeholder="Your user name..."
-                              type="text"
-                              onFocus={() => this.setUserNameFocus(true)}
-                              onBlur={() => this.setUserNameFocus(false)}
-                              name="userName"
-                              value={this.state.userName}
-                              onChange={this.handleChange}
-                            ></Input>
-                          </InputGroup>
-                          <InputGroup
                             className={this.passwordFocus ? "input-group-focus" : ""}
                           >
                             <InputGroupAddon addonType="prepend">
@@ -230,6 +211,25 @@ class SignupPage extends React.Component {
                               onBlur={() => this.setPasswordFocus(false)}
                               name="password"
                               value={this.state.password}
+                              onChange={this.handleChange}
+                            ></Input>
+                          </InputGroup>
+                          <InputGroup
+                            className={this.userNameFocus ? "input-group-focus" : ""}
+                          >
+                            <InputGroupAddon addonType="prepend">
+                              <InputGroupText>
+                                <i className="now-ui-icons users_single-02"></i>
+                              </InputGroupText>
+                            </InputGroupAddon>
+                            <Input
+                              autoComplete="userName"
+                              placeholder="Your user name..."
+                              type="text"
+                              onFocus={() => this.setUserNameFocus(true)}
+                              onBlur={() => this.setUserNameFocus(false)}
+                              name="userName"
+                              value={this.state.userName}
                               onChange={this.handleChange}
                             ></Input>
                           </InputGroup>
