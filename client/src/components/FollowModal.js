@@ -47,7 +47,6 @@ const FollowModal = (props) => {
                                         <img src={follower.image} alt='...' className='follower-image' />
                                         <h3>{follower.userName}</h3>
                                     </div>)
-
                                 })}
                                 <ModalFooter>
                                     <Button
@@ -63,7 +62,7 @@ const FollowModal = (props) => {
                     </Col>
                 </Row>
             </Container>
-        </div >
+        </div>
     )
 }
 export default FollowModal;

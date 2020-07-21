@@ -1,5 +1,5 @@
 import React from 'react';
-import DOMPurify from 'dompurify'
+import DOMPurify from 'dompurify';
 
 import {
   Button,
@@ -24,10 +24,12 @@ const ModalComponent = (props) => {
           >
             <i className="now-ui-icons ui-1_simple-remove"></i>
           </button>
-          <h4 className="title title-up">{props.story.title}</h4>
+          <h2 className="title title-up">{props.story.title}</h2>
         </div>
-        <div className="modal-body">
-          <h5 style={{ textDecoration: 'underline' }}>{props.story.owner.userName ? props.story.owner.userName : props.story.owner.email}</h5>
+        <div className="modal-body text-center">
+          <h6><b>Writen By</b></h6>
+          <h4>{props.story.owner.userName ? props.story.owner.userName : props.story.owner.email}</h4>
+          <div style={{ height: '100px'}}></div>
           <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.story.content) }} />
         </div>
         <ModalFooter>
@@ -39,12 +41,9 @@ const ModalComponent = (props) => {
               <i className="now-ui-icons ui-2_favourite-28 "></i>
             </Button>
           }
-          <Button color="danger" onClick={() => props.closeHandler()}>
-            Close
-                              </Button>
+          <Button color="danger" onClick={() => props.closeHandler()}><i className="now-ui-icons ui-1_simple-remove"></i></Button>
         </ModalFooter>
       </Modal>
-
     </div>
   )
 }

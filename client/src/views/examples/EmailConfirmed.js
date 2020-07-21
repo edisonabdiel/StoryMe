@@ -32,12 +32,11 @@ const EmailConfirmed = (props) => {
 
   return (
     <>
-      {/* <ScrollTransparentNavbar /> */}
       <div data-background-color="black">
         <EditFixedNavbar currentUser={props.currentUser} updateUser={props.updateUser} />
         <div style={{ height: '75px' }}></div>
-        <div className="wrapper">
-          <div className="section section-about-us text-dark">
+        <div className="wrapper ">
+          <div className="section text-center text-dark">
             <Container>
               <Row>
                 <Col className="ml-auto mr-auto text-center text-dark" md="8">
@@ -46,12 +45,13 @@ const EmailConfirmed = (props) => {
                     Thanks for confirming your email! You are now ready to discover the most exciting
                     stories from your favourite independent Writers & Poets!!
                 </h5>
-                </Col>
-              </Row>
-              <div className="separator separator-info text-dark"></div>
+                <div className="justify-content-center d-flex">
               <Button className="nav-link btn-round"
                 color='info'><Link to='/' style={{ color: "black", textDecoration: "none" }}>
                   <b>Keep discovering</b></Link></Button>
+              </div>   
+                </Col>
+              </Row>
             </Container>
           </div>
           <Footer />

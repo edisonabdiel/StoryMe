@@ -458,7 +458,7 @@ function ContentAreas() {
                               <div className="img-container">
                                 <img
                                   alt="..."
-                                  src={require("assets/img/balmain.jpg")}
+                                  src={require("assets/img/gucci.jpg")}
                                 ></img>
                               </div>
                             </td>

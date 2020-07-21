@@ -18,10 +18,10 @@ import {
 const CardComponent = (props) => {
 
     return (
-        <Row>
+        <Row className=' align-items-lg-start'>
             {props.listOfStories.length === 0
                 ?
-                <h3>NO LIKED STORIES YET<CircleLoader /></h3>
+                <h3>NO LIKED STORIES YET<CircleLoader  /></h3>
                 : props.listOfStories.map((oneStory, idx) => {
                     return (
                         <Col lg="4" md="6" key={oneStory._id} >
@@ -36,7 +36,6 @@ const CardComponent = (props) => {
                                             : !props.currentUser
                                                 ? props.setModalLogin(true)
                                                 : props.setModalVerification(true)
-
                                     }
                                 }}
                                     style={{ cursor: 'pointer' }}
@@ -134,7 +133,6 @@ const CardComponent = (props) => {
                                     </CardFooter>
                                 </CardBody>
                             </Card>
-
                         </Col>
                     )
                 })
