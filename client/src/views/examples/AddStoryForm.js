@@ -75,8 +75,6 @@ class AddStoryForm extends React.Component {
 
     // category icons 
     iconSelected = (value) => {
-        console.log("outPut: AddStoryForm -> iconSelected -> value", value)
-        console.log("outPut: AddStoryForm -> iconSelected -> value", value.label.props.className)
         this.setState({
             icon: value.label.props.className
         })
@@ -92,26 +90,18 @@ class AddStoryForm extends React.Component {
                 imageUrl: res.data.secure_url,
                 storyImageName: res.data.imageName
             })
-        }).catch((error) => {
-            console.log("Error!!");
-            console.log(error.response);
         })
     }
 
     handleImageRemove = () => {
         const imageName = (this.state.storyImageName)
         axios.post(`/api/delete-upload-img/${imageName}`).then((res) => {
-            console.log(res)
             this.setState({
                 imageUrl: defaultAvatar,
                 storyImageName: ''
             })
-        }).catch((error) => {
-            console.log("Error!!");
-            console.log(error.response);
         })
     };
-
 
     // submit add story form handler
     handleFormSubmit = (event) => {
@@ -128,12 +118,9 @@ class AddStoryForm extends React.Component {
 
         axios.post("/api/stories", { title, headline, content, image, imageName, duration, category, icon })
             .then((resp) => {
-                console.log("outPut: AddStoryForm -> handleFormSubmit -> resp", resp.data.image)
                 this.setState({ title: "", headline: "", content: '', imageUrl: defaultAvatar, storyImageName: '', duration: "", category: "", icon: 'now-ui-icons users_single-02' });
                 this.props.history.push(`/profile-page/${this.props.currentUser._id}`)
             }).catch((error) => {
-                console.log("Error!!");
-                console.log(error.response);
                 this.setState({
                     errorMessage: error.response.data.message
                 })

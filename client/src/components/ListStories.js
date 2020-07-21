@@ -26,12 +26,9 @@ class ListStories extends Component {
     emailVerification: false
   }
 
-
   componentDidMount() {
-    console.log('Mounted');
     if (this.props.profileStories && this.props.currentUser) {
       axios.get(`/api/profileStories/${this.props.userId}`).then((resp) => {
-        console.log("outPut: ListStories -> componentDidMount -> resp", resp)
         this.setState({
           listOfStories: resp.data
         })
@@ -39,8 +36,6 @@ class ListStories extends Component {
     }
     else if (this.props.isDiscovery && this.props.currentUser) {
       axios.get(`/api/stories/filter`).then((resp) => {
-        console.log("outPut: ListStories -> resp", resp.data)
-
         this.setState({
           listOfStories: resp.data
         })
@@ -49,19 +44,15 @@ class ListStories extends Component {
     else if (this.props.profileLikes && this.props.currentUser) {
       axios.get(`/api/stories/${this.props.currentUser._id}/liked`)
         .then((resp) => {
-          console.log("outPut: ListStories -> resp", resp)
           this.setState({
             listOfStories: resp.data
           })
         })
     } else {
       axios.get("/api/stories").then((resp) => {
-        // console.log("outPut: ListStories -> resp", resp)
         this.setState({
           listOfStories: resp.data
         })
-      }).catch((err) => {
-        console.log('Erro!', err);
       })
     }
   }
@@ -74,7 +65,6 @@ class ListStories extends Component {
     })
   }
   editHandler = (storyID) => {
-    console.log(this.state.listOfStories);
     this.setState({
       listOfStories: this.state.listOfStories.filter(p => p._id === storyID)
     })
@@ -85,23 +75,16 @@ class ListStories extends Component {
       })
   }
   setModalLogin = (bool) => {
-    console.log('Set modal login triggered')
-
     this.setState({
       modalLogin: bool
     })
     if (!bool) {
-      console.log('Axios triggered')
       axios.get(`/api/stories/filter`).then((resp) => {
-        console.log('Filtered Stories response:', resp.data);
         this.setState({
           listOfStories:resp.data,
         })
       })
-    }
-   
-
-    
+    } 
   }
   setModalVerification = (bool) => {
     this.setState({
@@ -112,17 +95,10 @@ class ListStories extends Component {
   likesHandler = (storyID) => {
     axios.put(`/api/stories/${storyID}/liked`)
       .then((resp) => {
-        console.log('Likes response:', resp.data);
-
         const currentStory = resp.data
-
         let newList = [...this.state.listOfStories]
         let idx = this.state.listOfStories.findIndex(story => story._id === currentStory._id)
-        newList.splice(idx, 1, currentStory)
-
-        // let newList = this.state.listOfStories.filter(story => story._id !== currentStory._id)   
-        //  newList = newList.concat(currentStory)     
-
+        newList.splice(idx, 1, currentStory)  
         this.setState({
           liked: currentStory.likes.includes(this.props.currentUser._id),
           listOfStories: newList
@@ -143,9 +119,6 @@ class ListStories extends Component {
   }
 
   render() {
-    // console.log('List of Stories profile:', this.state.listOfStories);
-    console.log('Current USER:',this.props.currentUser);
-    console.log('Is DISCOVERY', this.props.isDiscovery);
     return (
       <div>
         <div

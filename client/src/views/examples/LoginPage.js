@@ -57,15 +57,11 @@ export class LoginPage extends Component {
 
     axios.post("/api/login", { email, password })
       .then((resp) => {
-        console.log("outPut: LoginPage -> handleFormSubmit -> resp", resp)
         this.props.updateUser(resp.data)
-        console.log('USER DATA UPDATED', this.props.currentUser);
         this.setState({ email: "", password: "" });
       }).then(() => {
         this.props.history.push(`/profile-page/${this.props.currentUser._id}`)
       }).catch((error) => {
-        console.log("Error!!");
-        console.log(error.response);
         this.setState({
           errorMessage: error.response.data.errors
         })

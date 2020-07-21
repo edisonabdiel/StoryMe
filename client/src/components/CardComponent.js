@@ -31,8 +31,6 @@ const CardComponent = (props) => {
                 : props.listOfStories.map((oneStory, idx) => {
                     return (
                         <Col lg="4" md="6" key={oneStory._id} >
-                            {/* {console.log(oneStory)}
-                            {console.log(oneStory.owner.email)} */}
                             <Card className="card-blog" data-background-color={oneStory.cardBgColor}>
                                 <div className="card-image" onClick={() => {
                                     props.saveStoryIndex(idx);

@@ -88,29 +88,20 @@ class ProfileEdit extends Component {
         let formData = new FormData()
         formData.append("imageUrl", e.target.files[0])
         axios.post("/api/upload-img", formData).then((res) => {
-            console.log(res.data)
             this.setState({
                 imageUrl: res.data.secure_url,
                 uploadedImageName: res.data.imageName
             })
-        }).catch((error) => {
-            console.log("Error!!");
-            console.log(error.response);
         })
     }
 
     handleImageRemove = () => {
         const name = (this.props.currentUser.imageName)
-        console.log("outPut: ImageUpload -> handleRemove -> name", name)
         axios.post(`/api/delete-upload-img/${name}`).then((res) => {
-            console.log(res)
             this.setState({
                 imageUrl: defaultAvatar,
                 uploadedImageName: ''
             })
-        }).catch((error) => {
-            console.log("Error!!");
-            console.log(error.response);
         })
     };
 
@@ -119,29 +110,20 @@ class ProfileEdit extends Component {
         let formData = new FormData()
         formData.append("imageUrl", e.target.files[0])
         axios.post("/api/upload-img", formData).then((res) => {
-            console.log(res.data)
             this.setState({
                 bgImageUrl: res.data.secure_url,
                 uploadedBgImageName: res.data.imageName
             })
-        }).catch((error) => {
-            console.log("Error!!");
-            console.log(error.response);
         })
     }
 
     handleBgImageRemove = () => {
         const name = (this.props.currentUser.bgImageName)
-        console.log("outPut: ImageUpload -> handleRemove -> name", name)
         axios.post(`/api/delete-upload-img/${name}`).then((res) => {
-            console.log(res)
             this.setState({
                 bgImageUrl: defaultAvatar,
                 uploadedBgImageName: ''
             })
-        }).catch((error) => {
-            console.log("Error!!");
-            console.log(error.response);
         })
     };
     // update state of story elements 
@@ -163,7 +145,6 @@ class ProfileEdit extends Component {
         const newPassword = this.state.newPassword
         axios.put(`/api/password/${this.props.currentUser._id}`, { oldPassword, newPassword })
             .then((resp) => {
-                console.log(resp.data.message);
                 // this.props.updateUser(resp.data)
                 this.setState({
                     newPassword: "",
@@ -172,9 +153,6 @@ class ProfileEdit extends Component {
                     alertBool: true,
                     errorMessage: resp.data.error
                 });
-            }).catch((err) => {
-                console.log(err);
-                console.log('error', err);
             })
     }
 
@@ -192,7 +170,6 @@ class ProfileEdit extends Component {
         axios.put(`/api/user/${this.props.currentUser._id}`, { email, password, about, imageUrl, imageName, userName, newPassword, bgImageUrl, bgImageName })
             .then((resp) => {
                 this.props.updateUser(resp.data)
-                console.log("outPut: handleFormSubmit -> resp", resp.data)
                 this.setState({
                     email: "",
                     password: "",
@@ -204,10 +181,6 @@ class ProfileEdit extends Component {
                 })
             }).then(() => {
                 this.props.history.push(`/profile-page/${this.props.currentUser._id}`)
-            })
-            .catch(error => {
-                console.log("Error!", error);
-
             })
     }
 

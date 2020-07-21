@@ -12,7 +12,6 @@ import {
 } from "reactstrap";
 
 const FollowModal = (props) => {
-    console.log('props Story', props.story);
     return (
         <div >
             <Container>

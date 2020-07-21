@@ -57,13 +57,10 @@ class LoginButton extends React.Component {
       .then((resp) => {
         this.props.updateUser(resp.data)
         this.props.setModalLogin(false)
-
-        console.log('USER DATA UPDATED', this.props.currentUser);
         this.setState({ email: "", password: "" });
       }).then(() => {
         this.props.history.push("/")
       }).catch((error) => {
-        console.log("Error!!", error);
         this.setState({
           errorMessages: error.response.data.errors
         })

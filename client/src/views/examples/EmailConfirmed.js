@@ -24,9 +24,6 @@ const EmailConfirmed = (props) => {
     axios.get(`/api/confirmation/${props.match.params.token}`)
       .then((res) => {
         props.updateUser(res.data)
-        console.log("outPut: SignupPage -> user", props.currentUser)
-      }).catch((error) => {
-        console.log("outPut: SignupPage -> handleFormSubmit -> error", error.response)
       })
   }, [])
 

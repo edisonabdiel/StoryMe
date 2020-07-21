@@ -61,7 +61,6 @@ const Javascript = () => {
 
   const loginHandler = (e) => {
     e.preventDefault();
-    console.log("Im a modal, and i work")
   }
 
   return (

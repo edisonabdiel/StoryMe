@@ -5,10 +5,8 @@ import '../../assets/css/App.css';
 
 
 const Editor = (props) => {
-    console.log(props);
     const editor = useRef(null)
     const [content, setContent] = useState("")
-    console.log("outPut: Editor -> content", content)
     // config for the add story page
     const config = {
         readonly: false, // all options from https://xdsoft.net/jodit/doc/
