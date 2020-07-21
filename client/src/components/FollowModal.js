@@ -42,7 +42,7 @@ const FollowModal = (props) => {
                                             <IconContext.Provider value={{ size: "2em" }}><BsFillPersonPlusFill /></IconContext.Provider>                                        </div>
                                     </div>
                                 </div>
-                                {props.followers.map((follower) => {
+                                {props.data.map((follower) => {
                                     return (<div className="modal-body modal-flex" style={{ textAlign: 'center' }} key={follower._id}>
                                         <img src={follower.image} alt='...' className='follower-image' />
                                         <h3>{follower.userName}</h3>
