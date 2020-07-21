@@ -74,7 +74,7 @@ router.get('/profile-page/:id', (req, res, next) => {
         })]).then((resp) => {
             console.log("outPut: resp profile page follow and followers", resp)
             const user = resp[0]
-            const following = resp[1].map((user) => user._id)
+            const following = resp[1]
             res.json({ user: user, following: following });
         }).catch((err) => {
             console.log(err);

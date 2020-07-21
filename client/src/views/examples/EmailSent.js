@@ -1,5 +1,4 @@
 import React from "react";
-import ScrollTransparentNavbar from 'components/Navbars/ScrollTransparentNavbar.js'
 import Footer from "components/Footers/Footer";
 import EditFixedNavbar from 'components/Navbars/EditFixedNavbar';
 

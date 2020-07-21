@@ -34,3 +34,22 @@
 .story-details-container p {
     align-self: flex-start;
 }
+
+.follower-image {
+    border-radius: 50%;
+    width: 50px;
+    margin: 20px;
+}
+
+.modal-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0 !important;
+
+}
+
+.modal-flex h3 {
+    margin: 0;
+}
