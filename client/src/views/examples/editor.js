@@ -22,7 +22,8 @@ const Editor = (props) => {
         showPlaceholder: false,
         style: {
             font: 'black'
-        }
+        },
+        height: 400
 
     }
     // config for edit profile page
@@ -32,7 +33,8 @@ const Editor = (props) => {
         buttons: "|,bold,strikethrough,underline,italic,|,|,ul,ol,|,,fontsize,brush,,|,\n,cut,copy,paste,|",
         removeButtons: ['hr', 'source', 'image', 'video', 'about', 'file', "copyformat", 'table', 'link'],
         toolbarAdaptive: false,
-        askBeforePasteHTML: false
+        askBeforePasteHTML: false,
+        height: 200
     }
 
 

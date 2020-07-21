@@ -28,7 +28,7 @@ class ListStories extends Component {
 
 
   componentDidMount() {
-
+    console.log('Mounted');
     if (this.props.profileStories && this.props.currentUser) {
       axios.get(`/api/profileStories/${this.props.userId}`).then((resp) => {
         console.log("outPut: ListStories -> componentDidMount -> resp", resp)
@@ -45,7 +45,8 @@ class ListStories extends Component {
           listOfStories: resp.data
         })
       })
-    } else if (this.props.profileLikes && this.props.currentUser) {
+    } 
+    else if (this.props.profileLikes && this.props.currentUser) {
       axios.get(`/api/stories/${this.props.currentUser._id}/liked`)
         .then((resp) => {
           console.log("outPut: ListStories -> resp", resp)
@@ -55,7 +56,7 @@ class ListStories extends Component {
         })
     } else {
       axios.get("/api/stories").then((resp) => {
-        console.log("outPut: ListStories -> resp", resp)
+        // console.log("outPut: ListStories -> resp", resp)
         this.setState({
           listOfStories: resp.data
         })
@@ -79,15 +80,28 @@ class ListStories extends Component {
     })
   }
   setModalClassic = (bool) => {
-    this.setState({
-      modalClassic: bool
-
-    })
+      this.setState({
+        modalClassic: bool
+      })
   }
   setModalLogin = (bool) => {
+    console.log('Set modal login triggered')
+
     this.setState({
       modalLogin: bool
     })
+    if (!bool) {
+      console.log('Axios triggered')
+      axios.get(`/api/stories/filter`).then((resp) => {
+        console.log('Filtered Stories response:', resp.data);
+        this.setState({
+          listOfStories:resp.data,
+        })
+      })
+    }
+   
+
+    
   }
   setModalVerification = (bool) => {
     this.setState({
@@ -129,7 +143,9 @@ class ListStories extends Component {
   }
 
   render() {
-    console.log('List of Stories profile:', this.state.listOfStories);
+    // console.log('List of Stories profile:', this.state.listOfStories);
+    console.log('Current USER:',this.props.currentUser);
+    console.log('Is DISCOVERY', this.props.isDiscovery);
     return (
       <div className='d-flex justify-content-center'>
         <div
@@ -150,7 +166,9 @@ class ListStories extends Component {
                 isDiscovery={this.props.isDiscovery}
                 setModalVerification={this.setModalVerification}
                 changeStateHandler={this.changeStateHandler}
-
+                profileStories={this.props.profileStories}
+                profileLikes={this.props.profileLikes}
+                isDiscovery={this.props.isDiscovery}
               />
               {this.state.listOfStories && this.state.listOfStories[this.state.currentOpenStory] &&
                 <ModalComponent liked={this.state.liked}
