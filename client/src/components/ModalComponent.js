@@ -27,13 +27,14 @@ const ModalComponent = (props) => {
           <img src={props.story.image} alt="" style={{ width: '400px' }} />
         </div>
         <div className="modal-body text-center">
-           <h2 className="title title-up">{props.story.title}</h2>
-        <div className="modal-body text-center">
+          <h2 className="title title-up">{props.story.title}</h2>
+          </div>
+        <div className="modal-body align-content-center">
           <h6><b>Writen By</b></h6>
           <h4>{props.story.owner.userName ? props.story.owner.userName : props.story.owner.email}</h4>
           <div style={{ height: '100px'}}></div>
           <h4>{props.story.duration}</h4>
-          <i className={props.story.icon}></i><h4>{props.story.category}</h4><br />
+          <i className={props.story.icon}></i><h4>{props.story.category}</h4><br/>
           {props.story.likes.length ?
             <i className="fa fa-heart fa-lg" style={{ marginRight: '3px' }}></i>
             : <i className="now-ui-icons ui-2_favourite-28" ></i>
