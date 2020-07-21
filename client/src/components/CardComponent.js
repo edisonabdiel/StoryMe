@@ -120,6 +120,8 @@ const CardComponent = (props) => {
                                                     </div>
                                                     <FacebookShareButton
                                                         url={`${process.env.EMAIL_HOST}stories/${oneStory._id}`}
+                                                    // url={'www.google.com'}
+
                                                     >
                                                         <FacebookIcon size={32} round={true} />
                                                     </FacebookShareButton>

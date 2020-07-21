@@ -49,7 +49,8 @@ passport.use(new FacebookStrategy({
   callbackURL: "http://localhost3000/auth/facebook/callback"
 },
   function (accessToken, refreshToken, profile, done) {
-    User.findOrCreate(... function (err, user) {
+    // change something
+    User.findOrCreate({ email }, function (err, user) {
       if (err) { return done(err); }
       done(null, user);
     });
