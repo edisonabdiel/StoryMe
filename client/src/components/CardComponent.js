@@ -19,14 +19,20 @@ const CardComponent = (props) => {
 
     return (
         <Row>
-            {props.listOfStories.length === 0
+            {props.listOfStories.length === 0 && props.profileStories
                 ?
-                <h3>NO LIKED STORIES YET<CircleLoader /></h3>
+                <h3>NO STORIES WRITTEN YET... <CircleLoader/></h3>
+                : props.listOfStories.length === 0 && props.profileLikes
+                ?
+                <h3>NO LIKED STORIES YET... <CircleLoader/></h3>
+                : props.listOfStories.length === 0 && props.isDiscovery 
+                ?
+                <h3>NO STORIES TO DISCOVER YET... <CircleLoader/></h3>
                 : props.listOfStories.map((oneStory, idx) => {
                     return (
                         <Col lg="4" md="6" key={oneStory._id} >
-                            {console.log(oneStory)}
-                            {console.log(oneStory.owner.email)}
+                            {/* {console.log(oneStory)}
+                            {console.log(oneStory.owner.email)} */}
                             <Card className="card-blog" data-background-color={oneStory.cardBgColor}>
                                 <div className="card-image" onClick={() => {
                                     props.saveStoryIndex(idx);

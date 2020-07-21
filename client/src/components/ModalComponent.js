@@ -8,7 +8,7 @@ import {
 } from "reactstrap";
 
 const ModalComponent = (props) => {
-  console.log('props Story', props.story);
+  // console.log('props Story', props.story);
   return (
     <div>
       <Modal

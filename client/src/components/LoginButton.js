@@ -56,6 +56,8 @@ class LoginButton extends React.Component {
     axios.post("/api/login", { email, password })
       .then((resp) => {
         this.props.updateUser(resp.data)
+        this.props.setModalLogin(false)
+
         console.log('USER DATA UPDATED', this.props.currentUser);
         this.setState({ email: "", password: "" });
       }).then(() => {
@@ -154,7 +156,7 @@ class LoginButton extends React.Component {
                         </InputGroup>
                       </CardBody>
                       <ModalFooter className="text-center">
-
+                        {JSON.stringify(this.props,null,2)}
                         <Button
                           block
                           className="btn-neutral btn-round"
@@ -162,7 +164,7 @@ class LoginButton extends React.Component {
                           // href=""
                           type="submit"
                           size="lg"
-                          onClick={() => { this.props.setModalLogin(false) }}
+                          // onClick={() => { this.props.setModalLogin(false) }}
                         >
                           Get Started
                         </Button>

@@ -63,7 +63,7 @@ const FollowModal = (props) => {
                     </Col>
                 </Row>
             </Container>
-        </div >
+        </div>
     )
 }
 export default FollowModal;
