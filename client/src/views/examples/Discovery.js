@@ -11,7 +11,6 @@ import EmailVerificationModal from 'components/EmailVerificationModal';
 
 
 function BlogPosts(props) {
-  // console.log(props.location.state)
   const [modalVerification, setModalVerification] = React.useState(props.location.state);
   const setModalHandler = (bool) => {
     setModalVerification(bool)

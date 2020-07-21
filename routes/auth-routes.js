@@ -77,7 +77,6 @@ authRoutes.post('/signup', signUpValidation, loggedIn, (req, res, next) => {
       return token.save()
     }).then((token) => {
       //Send email verification
-      console.log('new user', newUser)
       const mailOptions = {
         from: "storymewebapp@gmail.com",
         to: email,
@@ -91,7 +90,6 @@ authRoutes.post('/signup', signUpValidation, loggedIn, (req, res, next) => {
       // render the res after signup
       transporter.sendMail(mailOptions, (err) => {
         if (err) {
-          console.log("erro", err);
           res.status(500).json({ message: 'Email could not be sent' })
         };
         // Automatically log in user after sign up
@@ -109,7 +107,6 @@ authRoutes.post('/signup', signUpValidation, loggedIn, (req, res, next) => {
 });
 
 authRoutes.get("/confirmation/:token", (req, res) => {
-  console.log(req.params);
   Token.findOne({
     token: req.params.token,
   })
@@ -118,7 +115,6 @@ authRoutes.get("/confirmation/:token", (req, res) => {
         _id: token._userId
       })
     }).then((user) => {
-      console.log("outPut: user backend", user)
       user.isVerified = true;
       return user.save();
     })
@@ -144,9 +140,7 @@ authRoutes.post('/login', loggedIn, (req, res, next) => {
     if (!theUser) {
       // "failureDetails" contains the error messages
       // from our logic in "LocalStrategy" { message: '...' }.
-      console.log("outPut: failureDetails", failureDetails.message)
       const errors = [failureDetails.message]
-      console.log("outPut: errors", errors)
 
       res.status(401).json({ errors: errors });
       return;

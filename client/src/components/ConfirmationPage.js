@@ -11,9 +11,7 @@ export class ConfirmationPage extends Component {
 
     componentDidMount() {
         const token = this.props.match.params.token
-        console.log("outPut: ConfirmationPage -> componentDidMount -> token", token)
         axios.get(`/api/confirmation/${token}`).then((resp) => {
-            console.log("front end res.data", resp.data)
             this.props.updateUser(resp.data)
             this.setState({
                 loading: false

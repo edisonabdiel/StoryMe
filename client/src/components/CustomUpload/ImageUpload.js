@@ -18,7 +18,6 @@ export class ImageUpload extends Component {
   fileInput = React.createRef();
 
   handleClick = () => {
-    console.log(this.fileInput.current)
     this.fileInput.current.click();
   };
 
