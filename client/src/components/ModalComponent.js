@@ -1,5 +1,5 @@
 import React from 'react';
-import DOMPurify from 'dompurify'
+import DOMPurify from 'dompurify';
 
 import {
   Button,
@@ -14,7 +14,11 @@ const ModalComponent = (props) => {
         isOpen={props.modalClassic}
         toggle={() => props.closeHandler()}
       >
-        <div className="modal-header justify-content-center clear-filter" filter-color="orange">
+        <div className="modal-header justify-content-center"
+          style={{
+            backgroundImage: `url(${props.story.image})`, height: '500px'
+          }} filter-color="blue"
+        >
           <button
             aria-hidden={true}
             className="close"
@@ -23,19 +27,16 @@ const ModalComponent = (props) => {
           >
             <i className="now-ui-icons ui-1_simple-remove"></i>
           </button>
-          <img src={props.story.image} alt="" style={{ width: '400px' }} />
         </div>
-        <div className="modal-body">
-          <h4 className="title title-up">{props.story.title}</h4>
-          <h4>{props.story.duration}</h4>
-          <i className={props.story.icon}></i><h4>{props.story.category}</h4><br />
-          {props.story.likes.length ?
-            <i className="fa fa-heart fa-lg" style={{ marginRight: '3px' }}></i>
-            : <i className="now-ui-icons ui-2_favourite-28" ></i>
-          } {props.story.likes.length}
-          <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.story.content) }} />
+        <div className="modal-body text-center">
+          <h2 className="title title-up">{props.story.title}</h2>
+        </div>
+        <div className="modal-body text-center">
+          <h6><b>Writen By</b></h6>
           <img src={props.story.owner.image} alt="" style={{ borderRadius: '50%', width: '50px' }} />
-          <h5 >{props.story.owner.userName ? props.story.owner.userName : props.story.owner.email}</h5>
+          <h4>{props.story.owner.userName ? props.story.owner.userName : props.story.owner.email}</h4>
+          <div style={{ height: '100px' }}></div>
+          <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.story.content) }} />
         </div>
         <ModalFooter>
           {props.liked ?
@@ -46,12 +47,9 @@ const ModalComponent = (props) => {
               <i className="now-ui-icons ui-2_favourite-28 "></i>
             </Button>
           }
-          <Button color="danger" onClick={() => props.closeHandler()}>
-            Close
-                              </Button>
+          <Button color="danger" onClick={() => props.closeHandler()}><i className="now-ui-icons ui-1_simple-remove"></i></Button>
         </ModalFooter>
       </Modal>
-
     </div>
   )
 }

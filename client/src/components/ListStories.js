@@ -120,9 +120,9 @@ class ListStories extends Component {
 
   render() {
     return (
-      <div>
+      <div className='d-flex justify-content-center'>
         <div
-          className="justify-content-evenly "
+          className=" d-lg-inline-flex "
           id="cards"
         >
           <div className="cards">

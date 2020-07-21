@@ -1,29 +1,27 @@
 /*eslint-disable*/
 import React from "react";
+import { Link } from 'react-router-dom';
 
 // reactstrap components
-import { Container } from "reactstrap";
+import { Container, NavbarBrand } from "reactstrap";
 
 // core components
 
 function FooterBlack() {
   return (
     <>
-      <footer className="footer " data-background-color="black">
-        <Container>
+      <footer className="footer align-items-baseline" data-background-color="black">
+        <Container className='justify-content-center'>
           <nav>
             <ul>
               <li>
-                <a
-                  // href=""
-                  target="_blank"
-                >
-                  StoryMe
-                </a>
+              <NavbarBrand to="/" tag={Link} id="navbar-brand">
+              StoryMe
+            </NavbarBrand>
               </li>
               <li>
                 <a
-                  // href=""
+                  href="https://github.com/edisonabdiel/StoryMe"
                   target="_blank"
                 >
                   About Us
@@ -43,10 +41,22 @@ function FooterBlack() {
             © {new Date().getFullYear()}
             . Coded by{" "}
             <a
-              href=""
+              href="http://www.github.com/edisonabdiel"
               target="_blank"
             >
-              Dima, Edison & Noubar
+              Edison
+            </a>,
+            <a
+              href="http://www.github.com/dkoushha"
+              target="_blank"
+            >
+              Dima
+            </a>,
+            <a
+              href="http://www.github.com/noutop"
+              target="_blank"
+            >
+              Noubar
             </a>
             .
           </div>

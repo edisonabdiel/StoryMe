@@ -27,7 +27,7 @@ const BlogPostsHeader = () => {
         <div
           className="page-header-image"
           style={{
-            backgroundImage: "url(" + require("assets/img/universe-bg.png") + ")",
+            backgroundImage: "url(" + require("assets/img/bg11.jpg") + ")",
           }}
           ref={pageHeader}
         ></div>
