@@ -46,12 +46,18 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, nex
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: "http://localhost3000/auth/facebook/callback",
+  callbackURL: "http://localhost3000/api/auth/facebook/callback",
+  profileFields: [
+    'email',
+  ],
 
 },
   function (accessToken, refreshToken, profile, done) {
+    console.log("outPut: refreshToken", refreshToken)
+    console.log("outPut: accessToken", accessToken)
     // change something
-    User.findOne({ email: profile.email }, function (err, user) {
+    console.log('profile', profile)
+    User.findOne({ 'facebookId': profile.id }, function (err, user) {
       if (err)
         return done(err);
       if (user)
@@ -61,6 +67,8 @@ passport.use(new FacebookStrategy({
         newUser.image = profile.picture
         newUser.userName = profile.name.givenName;
         newUser.email = profile.emails[0].value;
+        newUser.token = accessToken
+        newUser.facebookId = profile.id
         newUser.save(function (err) {
           if (err)
             throw err;
