@@ -181,7 +181,6 @@ authRoutes.get('/auth/facebook', passport.authenticate('facebook', { scope: 'ema
 
 authRoutes.get('/auth/facebook/callback', (req, res, next) => {
   passport.authenticate('facebook', (err, theUser, failureDetails) => {
-
     if (!theUser) {
       // "failureDetails" contains the error messages
       console.log("outPut: failureDetails", failureDetails.message)

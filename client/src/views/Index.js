@@ -18,7 +18,7 @@ import Notifications from "./index-sections/Notifications.js";
 import PreFooter from "./index-sections/PreFooter.js";
 import Footers from "./index-sections/Footers.js";
 import Typography from "./index-sections/Typography.js";
-import ContentAreas from "./index-sections/ContentAreas.js";
+// import ContentAreas from "./index-sections/ContentAreas.js";
 import Cards from "./index-sections/Cards.js";
 import PlainCards from "./index-sections/PlainCards.js";
 import Javascript from "./index-sections/Javascript.js";
@@ -54,7 +54,7 @@ const App = () => {
           <PreFooter />
           <Footers />
           <Typography />
-          <ContentAreas />
+          {/* <ContentAreas /> */}
           <Cards />
           <PlainCards />
           <Javascript />

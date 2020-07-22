@@ -47,15 +47,7 @@ passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
   callbackURL: "http://localhost3000/auth/facebook/callback",
-  profileFields: [
-    'id',
-    'displayName',
-    'picture.width(200).height(200)',
-    'first_name',
-    'middle_name',
-    'last_name',
-    'email',
-  ],
+
 },
   function (accessToken, refreshToken, profile, done) {
     // change something
@@ -66,11 +58,9 @@ passport.use(new FacebookStrategy({
         return done(null, user);
       else {
         let newUser = new User();
-        // newUser.facebook.id = profile.id;
-        // newUser.facebook.token = accessToken;
+        newUser.image = profile.picture
         newUser.userName = profile.name.givenName;
         newUser.email = profile.emails[0].value;
-
         newUser.save(function (err) {
           if (err)
             throw err;
@@ -78,9 +68,19 @@ passport.use(new FacebookStrategy({
         })
         console.log(profile);
       }
-    });
-  })
+    })
+  }))
 
 
+
+  // profileFields: [
+  //   'id',
+  //   'displayName',
+  //   'picture.width(200).height(200)',
+  //   'first_name',
+  //   'middle_name',
+  //   'last_name',
+  //   'email',
+  // ],
 
 
