@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import BodyClassName from 'react-body-classname';
 import defaultAvatar from "assets/img/placeholder.jpg";
+import FacebookLogin from 'react-facebook-login';
 
 
 
@@ -72,6 +73,15 @@ class SignupPage extends React.Component {
       checked: checked
     });
   }
+
+  responseFacebook = (response) => {
+    console.log("outPut: SignupPage -> responseFacebook -> resp", response)
+  }
+
+  componentClicked = () => {
+    console.log('is clicked facebook')
+  }
+
   handleFormSubmit = (event) => {
     event.preventDefault()
     const email = this.state.email
@@ -165,10 +175,19 @@ class SignupPage extends React.Component {
                           Register
                     </CardTitle>
                         <div className="social text-center">
-                          <Button className="btn-icon btn-round"
+                          <FacebookLogin
+                            appId="591193318424358"
+                            autoLoad={true}
+                            fields="name,email,picture"
+                            callback={this.responseFacebook}
+                            cssClass="my-facebook-button-class"
+                            icon="fa-facebook"
+                            onClick={this.componentClicked}
+                          />
+                          {/* <Button className="btn-icon btn-round"
                             color="facebook">
                             <i className="fab fa-facebook"></i>
-                          </Button>
+                          </Button> */}
                           <h5 className="card-description">or go old school</h5>
                         </div>
                         <Form className="form" onSubmit={this.handleFormSubmit}>

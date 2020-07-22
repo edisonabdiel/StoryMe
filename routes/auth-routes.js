@@ -176,9 +176,10 @@ authRoutes.get("/checkuser", (req, res, next) => {
 });
 
 
-authRoutes.get('/auth/facebook', passport.authenticate('facebook'));
+authRoutes.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
 
-authRoutes.get('/auth/facebook/callback',
+
+authRoutes.get('/auth/facebook/callback', (req, res, next) => {
   passport.authenticate('facebook', (err, theUser, failureDetails) => {
 
     if (!theUser) {
@@ -190,13 +191,13 @@ authRoutes.get('/auth/facebook/callback',
       res.status(401).json({ errors: errors });
       return;
     }
-
     // save user in session
     req.login(theUser, (err) => {
       // We are now logged in (that's why we can also send req.user)
       res.status(200).json(theUser);
     });
-  })(req, res, next));
+  })(req, res, next)
+});
 
 module.exports = authRoutes;
 
