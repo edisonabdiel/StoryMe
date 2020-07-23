@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import defaultAvatar from "assets/img/placeholder.jpg";
 import ImageUpload from "components/CustomUpload/ImageUpload.js";
-import AlertMessage from "views/examples/Alert"
+import AlertMessage from "views/examples/Alert";
+
 
 // reactstrap components
 import {

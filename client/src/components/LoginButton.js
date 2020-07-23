@@ -153,7 +153,6 @@ class LoginButton extends React.Component {
                         </InputGroup>
                       </CardBody>
                       <ModalFooter className="text-center">
-                        {JSON.stringify(this.props,null,2)}
                         <Button
                           block
                           className="btn-neutral btn-round"
@@ -161,7 +160,7 @@ class LoginButton extends React.Component {
                           // href=""
                           type="submit"
                           size="lg"
-                          // onClick={() => { this.props.setModalLogin(false) }}
+                        // onClick={() => { this.props.setModalLogin(false) }}
                         >
                           Get Started
                         </Button>
