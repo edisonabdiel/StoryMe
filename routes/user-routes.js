@@ -66,12 +66,11 @@ router.get('/profile-page/:id', (req, res, next) => {
             const user = resp[0]
             const following = resp[1]
             const userStory = resp[2].filter((story) => req.params.id.localeCompare(story.owner._id) === 0)
-            const userLikedStory = resp[2].filter((story) => {
-                return (story.likes.includes(req.params.id))
-            })
-            console.log("outPut: userLikedStory", userLikedStory)
+            // const userLikedStory = resp[2].filter((story) => {
+            //     return (story.likes.includes(req.params.id))
+            // })
             console.log("outPut: userStory", userStory)
-            res.json({ user: user, following: following, listOfStories: userStory, userLikedStories: userLikedStory });
+            res.json({ user: user, following: following, listOfStories: userStory });
         }).catch((err) => {
             console.log(err);
         })

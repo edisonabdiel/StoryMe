@@ -92,17 +92,17 @@ router.put('/stories/:id', (req, res, next) => {
     })
 })
 
-// router.get('/stories/:id/liked', (req, res, next) => {
-//   Story.find().populate("owner")
-//     .then(allTheStories => {
-//       const filterLikedStory = allTheStories.filter((item) => {
-//         return (item.likes.includes(req.params.id))
-//       })
-//       res.json(filterLikedStory);
-//     }).catch((err) => {
-//       res.json(err)
-//     })
-// })
+router.get('/stories/:id/liked', (req, res, next) => {
+  Story.find().populate("owner")
+    .then(allTheStories => {
+      const filterLikedStory = allTheStories.filter((item) => {
+        return (item.likes.includes(req.params.id))
+      })
+      res.json(filterLikedStory);
+    }).catch((err) => {
+      res.json(err)
+    })
+})
 
 router.put('/stories/:id/liked', (req, res, next) => {
   Story.findById(req.params.id).populate("owner").then((story) => {

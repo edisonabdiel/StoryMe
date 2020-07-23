@@ -45,8 +45,7 @@ export class ProfilePage extends Component {
         following: resp.data.following,
         followers: resp.data.user.followers,
         userId: resp.data.user._id,
-        listOfStories: resp.data.listOfStories,
-        userLikedStories: resp.data.userLikedStories
+        listOfStories: resp.data.listOfStories
       })
     })
   }
@@ -61,8 +60,7 @@ export class ProfilePage extends Component {
         userId: resp.data.user._id,
         isClickedStories: false,
         isClickedLikes: false,
-        listOfStories: resp.data.listOfStories,
-        userLikedStories: resp.data.userLikedStories
+        listOfStories: resp.data.listOfStories
       })
     })
   }
@@ -177,8 +175,8 @@ export class ProfilePage extends Component {
                 {this.state.isClickedLikes && <ListStories profileLikes
                   isDiscovery={false}
                   currentUser={this.props.currentUser}
-                  // changeStateHandler={this.changeStateHandler}
-                  listOfStories={this.state.userLikedStories}
+                  changeStateHandler={this.changeStateHandler}
+
                 />}
 
               </Container>

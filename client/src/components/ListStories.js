@@ -42,12 +42,12 @@ class ListStories extends Component {
       })
     }
     else if (this.props.profileLikes && this.props.currentUser) {
-      // axios.get(`/api/stories/${this.props.currentUser._id}/liked`)
-      // .then((resp) => {
-      this.setState({
-        listOfStories: this.props.listOfStories
-      })
-      // })
+      axios.get(`/api/stories/${this.props.currentUser._id}/liked`)
+        .then((resp) => {
+          this.setState({
+            listOfStories: resp.data
+          })
+        })
     } else {
       axios.get("/api/stories").then((resp) => {
         this.setState({
