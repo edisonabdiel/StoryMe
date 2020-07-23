@@ -153,7 +153,6 @@ class LoginButton extends React.Component {
                         </InputGroup>
                       </CardBody>
                       <ModalFooter className="text-center">
-                        {JSON.stringify(this.props,null,2)}
                         <Button
                           block
                           className="btn-neutral btn-round"
