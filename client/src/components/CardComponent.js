@@ -18,7 +18,7 @@ import {
 const CardComponent = (props) => {
 
     return (
-        <Row className=' align-items-lg-start'>
+        <Row className=' card-component'>
             {props.listOfStories.length === 0 && props.profileStories
                 ?
                 <h3>NO STORIES WRITTEN YET... <CircleLoader/></h3>
@@ -34,13 +34,11 @@ const CardComponent = (props) => {
                             <Card className="card-blog" data-background-color={oneStory.cardBgColor}>
                                 <div className="card-image" onClick={() => {
                                     props.saveStoryIndex(idx);
-                                    {
                                         props.currentUser && props.currentUser.isVerified
                                             ? props.setModalClassic(true)
                                             : !props.currentUser
                                                 ? props.setModalLogin(true)
                                                 : props.setModalVerification(true)
-                                    }
                                 }}
                                     style={{ cursor: 'pointer' }}
                                 >
@@ -61,25 +59,21 @@ const CardComponent = (props) => {
 
                                     <CardTitle tag="h5" onClick={() => {
                                         props.saveStoryIndex(idx);
-                                        {
                                             props.currentUser && props.currentUser.isVerified
                                                 ? props.setModalClassic(true)
                                                 : !props.currentUser
                                                     ? props.setModalLogin(true)
                                                     : props.setModalVerification(true)
-                                        }
                                     }} style={{ cursor: 'pointer' }}>
                                         <strong>{oneStory.title}</strong>
                                     </CardTitle>
                                     <p className="card-description" onClick={() => {
                                         props.saveStoryIndex(idx);
-                                        {
                                             props.currentUser && props.currentUser.isVerified
                                                 ? props.setModalClassic(true)
                                                 : !props.currentUser
                                                     ? props.setModalLogin(true)
                                                     : props.setModalVerification(true)
-                                        }
                                     }} style={{ cursor: 'pointer' }}>
                                         {oneStory.headline}
                                     </p>

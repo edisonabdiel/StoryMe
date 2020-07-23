@@ -122,7 +122,7 @@ class ListStories extends Component {
     return (
       <div className='d-flex justify-content-center'>
         <div
-          className=" d-lg-inline-flex "
+          className=" "
           id="cards"
         >
           <div className="cards">
@@ -141,7 +141,6 @@ class ListStories extends Component {
                 changeStateHandler={this.changeStateHandler}
                 profileStories={this.props.profileStories}
                 profileLikes={this.props.profileLikes}
-                isDiscovery={this.props.isDiscovery}
               />
               {this.state.listOfStories && this.state.listOfStories[this.state.currentOpenStory] &&
                 <ModalComponent liked={this.state.liked}

@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import JoditEditor from "jodit-react";
 import '../../assets/css/App.css';
@@ -50,7 +49,6 @@ const Editor = (props) => {
             onChange={newContent => { }}
             style={{ color: 'red' }}
         />
-
     );
 }
 

@@ -23,6 +23,16 @@
     margin: auto;
 }
 
+.card-component{
+  display: inline-flexbox;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-blog {
+    min-width: 315px !important;
+}
+
 .story-details-container {
     display: flex;
     flex-direction: column;

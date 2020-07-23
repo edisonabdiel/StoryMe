@@ -20,7 +20,7 @@ import {
 
 const EmailConfirmed = (props) => {
 
-  useEffect(() => {
+  useEffect((props) => {
     axios.get(`/api/confirmation/${props.match.params.token}`)
       .then((res) => {
         props.updateUser(res.data)
