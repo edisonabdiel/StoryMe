@@ -17,6 +17,10 @@ import {
 
 const CardComponent = (props) => {
 
+    let message = () => {
+        return
+    }
+
     return (
         <Row className=' card-component'>
             {props.listOfStories.length === 0 && props.profileStories
