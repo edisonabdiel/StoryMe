@@ -23,93 +23,56 @@ const CardComponent = (props) => {
                 ?
                 <h3>NO STORIES WRITTEN YET... <CircleLoader /></h3>
                 : props.listOfStories.length === 0 && props.profileLikes
-                ?
-                <h3>NO LIKED STORIES YET... <CircleLoader/></h3>
-                : props.listOfStories.length === 0 && props.isDiscovery 
-                ?
-                <h3>NO STORIES TO DISCOVER YET... <CircleLoader/></h3>
-                : props.listOfStories.map((oneStory, idx) => {
-                    return (
-                        <Col lg="4" md="6" key={oneStory._id} >
-                            <Card className="card-blog" data-background-color={oneStory.cardBgColor}>
-                                <div className="card-image" onClick={() => {
-                                    props.saveStoryIndex(idx);
-                                        props.currentUser && props.currentUser.isVerified
-                                            ? props.setModalClassic(true)
-                                            : !props.currentUser
-                                                ? props.setModalLogin(true)
-                                                : props.setModalVerification(true)
-                                }}
-                                    style={{ cursor: 'pointer' }}
-                                >
-                                    {oneStory.image !== defaultAvatar ?
-                                        <img
-                                            alt="..."
-                                            className="img rounded"
-                                            src={oneStory.image}
-                                            style={{ width: '100%', height: '100%' }}
-                                        ></img>
-                                        : ''
-                                    }
-                                </div>
-                                <CardBody>
-                                    <h6 className="category text-warning">
-                                        <i className={`${oneStory.icon}`}></i> {oneStory.category}
-                                    </h6>
-
-                                    <CardTitle tag="h5" onClick={() => {
-                                        props.saveStoryIndex(idx);
+                    ?
+                    <h3>NO LIKED STORIES YET... <CircleLoader /></h3>
+                    : props.listOfStories.length === 0 && props.isDiscovery
+                        ?
+                        <h3>NO STORIES TO DISCOVER YET... <CircleLoader /></h3>
+                        : props.listOfStories.map((oneStory, idx) => {
+                            return (
+                                <Col lg="4" md="6" key={oneStory._id} >
+                                    <Card className="card-blog" data-background-color={oneStory.cardBgColor}>
+                                        <div className="card-image" onClick={() => {
+                                            props.saveStoryIndex(idx);
                                             props.currentUser && props.currentUser.isVerified
                                                 ? props.setModalClassic(true)
                                                 : !props.currentUser
                                                     ? props.setModalLogin(true)
                                                     : props.setModalVerification(true)
-                                    }} style={{ cursor: 'pointer' }}>
-                                        <strong>{oneStory.title}</strong>
-                                    </CardTitle>
-                                    <p className="card-description" onClick={() => {
-                                        props.saveStoryIndex(idx);
-                                            props.currentUser && props.currentUser.isVerified
-                                                ? props.setModalClassic(true)
-                                                : !props.currentUser
-                                                    ? props.setModalLogin(true)
-                                                    : props.setModalVerification(true)
-                                    }} style={{ cursor: 'pointer' }}>
-                                        {oneStory.headline}
-                                    </p>
-                                    <CardFooter className=" flex-fill" >
-                                        <div className="stats stats-right">
-                                            {props.currentUser && oneStory.likes.includes(props.currentUser._id) ?
-                                                <i className="fa fa-heart fa-lg" style={{ marginRight: '3px' }}></i>
-                                                : <i className="now-ui-icons ui-2_favourite-28" ></i>
+                                        }}
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            {oneStory.image !== defaultAvatar ?
+                                                <img
+                                                    alt="..."
+                                                    className="img rounded"
+                                                    src={oneStory.image}
+                                                    style={{ width: '100%', height: '100%' }}
+                                                ></img>
+                                                : ''
                                             }
                                         </div>
                                         <CardBody>
                                             <h6 className="category text-warning">
                                                 <i className={`${oneStory.icon}`}></i> {oneStory.category}
                                             </h6>
-
                                             <CardTitle tag="h5" onClick={() => {
                                                 props.saveStoryIndex(idx);
-                                                {
-                                                    props.currentUser && props.currentUser.isVerified
-                                                        ? props.setModalClassic(true)
-                                                        : !props.currentUser
-                                                            ? props.setModalLogin(true)
-                                                            : props.setModalVerification(true)
-                                                }
+                                                props.currentUser && props.currentUser.isVerified
+                                                    ? props.setModalClassic(true)
+                                                    : !props.currentUser
+                                                        ? props.setModalLogin(true)
+                                                        : props.setModalVerification(true)
                                             }} style={{ cursor: 'pointer' }}>
                                                 <strong>{oneStory.title}</strong>
                                             </CardTitle>
                                             <p className="card-description" onClick={() => {
                                                 props.saveStoryIndex(idx);
-                                                {
-                                                    props.currentUser && props.currentUser.isVerified
-                                                        ? props.setModalClassic(true)
-                                                        : !props.currentUser
-                                                            ? props.setModalLogin(true)
-                                                            : props.setModalVerification(true)
-                                                }
+                                                props.currentUser && props.currentUser.isVerified
+                                                    ? props.setModalClassic(true)
+                                                    : !props.currentUser
+                                                        ? props.setModalLogin(true)
+                                                        : props.setModalVerification(true)
                                             }} style={{ cursor: 'pointer' }}>
                                                 {oneStory.headline}
                                             </p>
@@ -142,7 +105,6 @@ const CardComponent = (props) => {
                                                             <div>
                                                                 <button className=" btn-info btn-round pull-left ml-lg-5"
                                                                     size="sm"
-
                                                                 >
                                                                     <Link className="text-decoration-none" to={"/story-edit/" + oneStory._id} onClick={() => props.editHandler(oneStory._id)}><b>Edit</b></Link>
                                                                 </button>
