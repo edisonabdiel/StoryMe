@@ -46,7 +46,7 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, nex
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: "http://localhost3000/api/auth/facebook/callback",
+  callbackURL: "https://storyme-app.herokuapp.com/api/auth/facebook/callback",
   profileFields: [
     'email',
   ],

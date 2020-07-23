@@ -3,17 +3,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import BodyClassName from 'react-body-classname';
 import defaultAvatar from "assets/img/placeholder.jpg";
-<<<<<<< HEAD
 import FacebookLogin from 'react-facebook-login';
-=======
 import defaultAvatarBg from "assets/img/dense-spider-web.jpg";
-
->>>>>>> origin
-
-
-
-
-
 
 // reactstrap components
 import {
