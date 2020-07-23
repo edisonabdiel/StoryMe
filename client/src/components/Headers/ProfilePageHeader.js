@@ -15,8 +15,8 @@ export class ProfilePageHeader extends Component {
       <div>
         <>
           <div
-            className="page-header clear-filter page-header-small"
-            filter-color="orange"
+            className="page-header page-header-small"
+            filter-color="blue"
           >
             <div
               className="page-header-image"
@@ -32,8 +32,8 @@ export class ProfilePageHeader extends Component {
               <h3 className="title">{this.props.user.userName}</h3>
               <p className="category"></p>
               <div className="content">
-                <div> <h3 className="title">About </h3>
-                  <p>{this.props.user.about}</p>
+                <div><h3 className="title">About </h3>
+                  <p><b>{this.props.user.about}</b></p>
                 </div>
               </div>
             </Container>

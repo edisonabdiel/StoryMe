@@ -45,7 +45,6 @@ class EditStory extends Component {
 
     componentDidMount() {
         axios.get(`/api/stories/${this.props.match.params.id}`).then((resp) => {
-            console.log('Response edit:', resp.data);
             this.setState({
                 title: resp.data.title,
                 headline: resp.data.headline,
@@ -85,29 +84,20 @@ class EditStory extends Component {
         let formData = new FormData()
         formData.append("imageUrl", e.target.files[0])
         axios.post("/api/upload-img", formData).then((res) => {
-            console.log(res.data)
             this.setState({
                 imageUrl: res.data.secure_url,
                 storyImageName: res.data.imageName
             })
-        }).catch((error) => {
-            console.log("Error!!");
-            console.log(error.response);
         })
     }
 
     handleImageRemove = () => {
         const name = (this.state.storyImageName)
-        console.log("outPut: ImageUpload -> handleRemove -> name", name)
         axios.post(`/api/delete-upload-img/${name}`).then((res) => {
-            console.log(res)
             this.setState({
                 imageUrl: defaultAvatar,
                 storyImageName: ''
             })
-        }).catch((error) => {
-            console.log("Error!!");
-            console.log(error.response);
         })
     };
     // update state of story elements 
@@ -159,7 +149,6 @@ class EditStory extends Component {
                 }
             })
             .catch(error => {
-                console.log("Error!", error.response);
                 this.setState({
                     errorMessage: error.response.data.message
                 })

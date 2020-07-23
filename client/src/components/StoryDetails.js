@@ -19,20 +19,15 @@ class StoryDetails extends Component {
     componentDidMount() {
         axios.get(`/api/stories/${this.props.match.params.id}`)
             .then(resp => {
-                console.log('Details response', resp.data);
                 this.setState({
                     story: resp.data,
                     storyOwner: resp.data.owner
                 })
 
             })
-            .catch((err) => {
-                console.log(err);
-            })
     }
 
     render() {
-
         return (
             <BodyClassName className="profile-page sidebar-collapse" >
                 <div data-background-color="black">

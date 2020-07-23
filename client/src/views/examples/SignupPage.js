@@ -3,7 +3,12 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import BodyClassName from 'react-body-classname';
 import defaultAvatar from "assets/img/placeholder.jpg";
+<<<<<<< HEAD
 import FacebookLogin from 'react-facebook-login';
+=======
+import defaultAvatarBg from "assets/img/dense-spider-web.jpg";
+
+>>>>>>> origin
 
 
 
@@ -103,12 +108,11 @@ class SignupPage extends React.Component {
     const password = this.state.password
     const checked = this.state.checked
     const image = defaultAvatar
-    const bgImage = defaultAvatar
+    const bgImage = defaultAvatarBg
     const userName = this.state.userName
     axios.post("/api/signup", { email, password, checked, image, bgImage, userName })
       .then((res) => {
         this.props.updateUser(res.data)
-        console.log("outPut: SignupPage -> user", this.props.currentUser)
 
         this.setState({
           checked: false,
@@ -119,7 +123,6 @@ class SignupPage extends React.Component {
       }).then(() => {
         this.props.history.push(`/email-sent`)
       }).catch((error) => {
-        console.log("outPut: SignupPage -> handleFormSubmit -> error", error.response)
         this.setState({
           errorMessages: error.response.data.errors,
         })
@@ -206,7 +209,7 @@ class SignupPage extends React.Component {
                           <h5 className="card-description">or go old school</h5>
                         </div>
                         <Form className="form" onSubmit={this.handleFormSubmit}>
-                          {this.state.errorMessages.map((m) =>
+                          {this.state.errorMessages && this.state.errorMessages.map((m) =>
                             <h6 key={m} style={{ color: "red", margin: '0px' }}>{m}</h6>
                           )}
                           <h6 style={{ color: "red", margin: '0px' }}>{this.state.logInError}</h6>
@@ -230,25 +233,6 @@ class SignupPage extends React.Component {
                             ></Input>
                           </InputGroup>
                           <InputGroup
-                            className={this.userNameFocus ? "input-group-focus" : ""}
-                          >
-                            <InputGroupAddon addonType="prepend">
-                              <InputGroupText>
-                                <i className="now-ui-icons users_single-02"></i>
-                              </InputGroupText>
-                            </InputGroupAddon>
-                            <Input
-                              autoComplete="userName"
-                              placeholder="Your user name..."
-                              type="text"
-                              onFocus={() => this.setUserNameFocus(true)}
-                              onBlur={() => this.setUserNameFocus(false)}
-                              name="userName"
-                              value={this.state.userName}
-                              onChange={this.handleChange}
-                            ></Input>
-                          </InputGroup>
-                          <InputGroup
                             className={this.passwordFocus ? "input-group-focus" : ""}
                           >
                             <InputGroupAddon addonType="prepend">
@@ -264,6 +248,25 @@ class SignupPage extends React.Component {
                               onBlur={() => this.setPasswordFocus(false)}
                               name="password"
                               value={this.state.password}
+                              onChange={this.handleChange}
+                            ></Input>
+                          </InputGroup>
+                          <InputGroup
+                            className={this.userNameFocus ? "input-group-focus" : ""}
+                          >
+                            <InputGroupAddon addonType="prepend">
+                              <InputGroupText>
+                                <i className="now-ui-icons users_single-02"></i>
+                              </InputGroupText>
+                            </InputGroupAddon>
+                            <Input
+                              autoComplete="userName"
+                              placeholder="Your user name..."
+                              type="text"
+                              onFocus={() => this.setUserNameFocus(true)}
+                              onBlur={() => this.setUserNameFocus(false)}
+                              name="userName"
+                              value={this.state.userName}
                               onChange={this.handleChange}
                             ></Input>
                           </InputGroup>

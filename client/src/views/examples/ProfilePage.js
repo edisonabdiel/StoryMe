@@ -30,43 +30,38 @@ export class ProfilePage extends Component {
     user: '',
     following: [],
     followers: [],
-    emailVerification: false
+    emailVerification: false,
+    listOfStories: [],
+    userLikedStories: []
+
+
   }
 
   componentDidMount() {
 
-    console.log('did mount');
     axios.get(`/api/profile-page/${this.props.match.params.id}`).then((resp) => {
-      console.log('follow response:', resp.data.user)
-      console.log("outPut: ProfilePage -> componentDidMount -> resp", resp.data)
       this.setState({
         user: resp.data.user,
         following: resp.data.following,
         followers: resp.data.user.followers,
         userId: resp.data.user._id,
+        listOfStories: resp.data.listOfStories
       })
-    }).catch((err) => {
-      console.log("outPut: ProfilePage -> componentDidMount -> err", err)
-
     })
-
   }
 
   // to change the user and user id when coming from another profile page
   changeStateHandler = (id) => {
     axios.get(`/api/profile-page/${id}`).then((resp) => {
-      console.log('follow response:', resp.data.user)
-      console.log("outPut: ProfilePage -> change state handler -> resp", resp.data)
       this.setState({
         user: resp.data.user,
         following: resp.data.following,
         followers: resp.data.user.followers,
         userId: resp.data.user._id,
         isClickedStories: false,
-        isClickedLikes: false
+        isClickedLikes: false,
+        listOfStories: resp.data.listOfStories
       })
-    }).catch((err) => {
-      console.log("outPut: ProfilePage -> componentDidMount -> err", err)
     })
   }
 
@@ -109,24 +104,16 @@ export class ProfilePage extends Component {
   followingHandler = () => {
     axios.put(`/api/user/${this.state.userId}/follow`)
       .then((resp) => {
-        console.log('follow response:', resp)
-        // this.props.updateUser(resp.data)
         this.setState({
           user: resp.data,
           followers: resp.data.followers,
         })
       }).catch((err) => {
-        console.log("outPut: followingHandler -> err", err)
 
       })
   }
 
   render() {
-    console.log("outPut: ProfilePage -> userId ", this.state.userId)
-    console.log("outPut: ProfilePage -> current user ", this.props.currentUser)
-    console.log("outPut: ProfilePage ->  user id ", this.props.match.params.id)
-    console.log("outPut: ProfilePage ->  user  followers", this.state.followers)
-    console.log("outPut: ProfilePage ->  user  following", this.state.following)
 
     // question to ask ?????
     // console.log(this.state.user.followers.map((follow) => follow._id))
@@ -180,8 +167,17 @@ export class ProfilePage extends Component {
                   userId={this.state.userId}
                 />
 
-                {this.state.isClickedStories && <ListStories profileStories isDiscovery={false} currentUser={this.props.currentUser} userId={this.state.userId} changeStateHandler={this.changeStateHandler} />}
-                {this.state.isClickedLikes && <ListStories profileLikes isDiscovery={false} currentUser={this.props.currentUser} changeStateHandler={this.changeStateHandler} />}
+                {this.state.isClickedStories && <ListStories profileStories
+                  isDiscovery={false} currentUser={this.props.currentUser}
+                  userId={this.state.userId}
+                  // changeStateHandler={this.changeStateHandler}
+                  listOfStories={this.state.listOfStories} />}
+                {this.state.isClickedLikes && <ListStories profileLikes
+                  isDiscovery={false}
+                  currentUser={this.props.currentUser}
+                  changeStateHandler={this.changeStateHandler}
+
+                />}
 
               </Container>
             </div>
@@ -197,7 +193,7 @@ export class ProfilePage extends Component {
 
 
         </div>
-      </BodyClassName >
+      </BodyClassName>
     )
   }
 }

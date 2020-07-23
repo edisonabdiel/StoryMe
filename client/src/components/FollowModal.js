@@ -12,7 +12,6 @@ import {
 } from "reactstrap";
 
 const FollowModal = (props) => {
-    console.log('props Story', props.story);
     return (
         <div >
             <Container>
@@ -47,7 +46,6 @@ const FollowModal = (props) => {
                                         <img src={follower.image} alt='...' className='follower-image' />
                                         <h3>{follower.userName}</h3>
                                     </div>)
-
                                 })}
                                 <ModalFooter>
                                     <Button
@@ -63,7 +61,7 @@ const FollowModal = (props) => {
                     </Col>
                 </Row>
             </Container>
-        </div >
+        </div>
     )
 }
 export default FollowModal;

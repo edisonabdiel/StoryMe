@@ -1,5 +1,5 @@
 import React from 'react';
-import DOMPurify from 'dompurify'
+import DOMPurify from 'dompurify';
 
 import {
   Button,
@@ -8,14 +8,17 @@ import {
 } from "reactstrap";
 
 const ModalComponent = (props) => {
-  console.log('props Story', props.story);
   return (
     <div>
       <Modal
         isOpen={props.modalClassic}
         toggle={() => props.closeHandler()}
       >
-        <div className="modal-header justify-content-center clear-filter" filter-color="orange">
+        <div className="modal-header justify-content-center page-header-image " id='bg-story'
+          style={{
+            backgroundImage: `url(${props.story.image})`, height: '400px'
+          }} filter-color="blue"
+        >
           <button
             aria-hidden={true}
             className="close"
@@ -24,19 +27,32 @@ const ModalComponent = (props) => {
           >
             <i className="now-ui-icons ui-1_simple-remove"></i>
           </button>
-          <img src={props.story.image} alt="" style={{ width: '400px' }} />
         </div>
-        <div className="modal-body">
-          <h4 className="title title-up">{props.story.title}</h4>
-          <h4>{props.story.duration}</h4>
-          <i className={props.story.icon}></i><h4>{props.story.category}</h4><br />
-          {props.story.likes.length ?
-            <i className="fa fa-heart fa-lg" style={{ marginRight: '3px' }}></i>
-            : <i className="now-ui-icons ui-2_favourite-28" ></i>
-          } {props.story.likes.length}
+        <div className="modal-body text-center">
+          <h2 className="title title-up">{props.story.title}</h2>
+        </div>
+        <div className="modal-body text-center">
+          <h6><b>Writen By</b></h6>
+          <div className='flex-story-modal'>
+            <img src={props.story.owner.image} alt="" style={{ borderRadius: '50%', width: '50px' }} />
+            <h4>{props.story.owner.userName ? props.story.owner.userName : props.story.owner.email}</h4>
+          </div>
+          <div className='flex-data-story-modal' width='100px'>
+            <div className='flex-icon-story-modal'>
+              <i className="now-ui-icons tech_watch-time"></i>
+              <h5 style={{ margin: ' 0 ' }} >{props.story.duration}</h5>
+            </div>
+            <div className='flex-icon-story-modal'>
+              <i className={props.story.icon}></i>
+              <h5 style={{ margin: ' 0 ' }}>{props.story.category}</h5></div>
+            <div className='flex-icon-story-modal'>
+              {props.story.likes.length ? <i className="fa fa-heart fa-lg"></i>
+                : <i className="now-ui-icons ui-2_favourite-28" ></i>
+              }
+              <h5 style={{ margin: ' 0 ' }}>{props.story.likes.length}</h5></div>
+
+          </div>
           <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.story.content) }} />
-          <img src={props.story.owner.image} alt="" style={{ borderRadius: '50%', width: '50px' }} />
-          <h5 >{props.story.owner.userName ? props.story.owner.userName : props.story.owner.email}</h5>
         </div>
         <ModalFooter>
           {props.liked ?
@@ -47,12 +63,9 @@ const ModalComponent = (props) => {
               <i className="now-ui-icons ui-2_favourite-28 "></i>
             </Button>
           }
-          <Button color="danger" onClick={() => props.closeHandler()}>
-            Close
-                              </Button>
+          <Button color="danger" onClick={() => props.closeHandler()}><i className="now-ui-icons ui-1_simple-remove"></i></Button>
         </ModalFooter>
       </Modal>
-
     </div>
   )
 }

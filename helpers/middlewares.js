@@ -21,6 +21,7 @@ let signUpValidation = [
             min: 5,
         })
         .withMessage("Password must be at least 5 chars long"),
+    check('userName').not().isEmpty().withMessage("user Name is required"),
     check("checked").equals("true").withMessage("must agree to terms and conditions")
 ];
 

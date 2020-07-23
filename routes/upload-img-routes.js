@@ -30,12 +30,10 @@ router.post(
     "/upload-img",
     uploadCloud.single("imageUrl"),
     (req, res) => {
-        console.log("req.file", req.file);
         res.json({ secure_url: req.file.path, imageName: req.file.originalname });
     })
 
 router.post("/delete-upload-img/:name", (req, res) => {
-    console.log(req.params.name)
     cloudinary.uploader.destroy(`images/${req.params.name}`, (err, result) => { console.log(result); console.log(err) })
     res.json({ message: "deleted" });
 

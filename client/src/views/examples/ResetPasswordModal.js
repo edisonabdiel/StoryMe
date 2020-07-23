@@ -60,12 +60,7 @@ class PasswordReset extends React.Component {
 
         axios.put(`/api/password/${this.props.currentUser._id}`, { oldPassword, newPassword })
             .then((resp) => {
-                // this.setModalLogin(false)
-                console.log(resp.data);
-                // this.props.updateUser(resp.data)
                 this.setState({ newPassword: "", oldPassword: "" });
-            }).catch((err) => {
-                console.log('error', err);
             })
     }
 

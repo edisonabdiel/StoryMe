@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Button } from "reactstrap";
 import defaultAvatar from "assets/img/placeholder.jpg";
+import defaultAvatarBg from "assets/img/dense-spider-web.jpg";
+
 
 
 import {
@@ -18,7 +20,6 @@ export class ImageUpload extends Component {
   fileInput = React.createRef();
 
   handleClick = () => {
-    console.log(this.fileInput.current)
     this.fileInput.current.click();
   };
 
@@ -31,7 +32,7 @@ export class ImageUpload extends Component {
 
   render() {
     return (
-      <div className="fileinput text-center">
+      <div className="fileinput text-center" style={{ width: '100%' }}>
         <input type="file" name="imageUrl" onChange={(e) => this.props.handleImageChange(e)} ref={this.fileInput} />
         <div
           className={
@@ -41,13 +42,13 @@ export class ImageUpload extends Component {
         >
           <img src={this.props.imageUrl} alt="" />
         </div>
-        <div className='btn-block text-center'>
+        <div className='btn-block justify-content-center'>
           {this.props.imageUrl === defaultAvatar ? (
-            <Button className="btn-morphin btn-round" size='sm' color="info" onClick={this.handleClick}>
+            <Button className="btn-morphing btn-round" size='sm' color="info" onClick={this.handleClick}>
               {this.props.avatar ? "Profile Photo" : "Story Cover"}
             </Button>
           ) : (
-              <span>
+              <span className='d-flex justify-content-center'>
                 <Button className="btn-morphing btn-info" size='sm' onClick={() => { this.handleClick() }}>
                   Change
             </Button>

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import defaultAvatar from "assets/img/placeholder.jpg";
 import ImageUpload from "components/CustomUpload/ImageUpload.js";
-import AlertMessage from "views/examples/Alert"
+import AlertMessage from "views/examples/Alert";
+
 
 // reactstrap components
 import {
@@ -88,29 +89,20 @@ class ProfileEdit extends Component {
         let formData = new FormData()
         formData.append("imageUrl", e.target.files[0])
         axios.post("/api/upload-img", formData).then((res) => {
-            console.log(res.data)
             this.setState({
                 imageUrl: res.data.secure_url,
                 uploadedImageName: res.data.imageName
             })
-        }).catch((error) => {
-            console.log("Error!!");
-            console.log(error.response);
         })
     }
 
     handleImageRemove = () => {
         const name = (this.props.currentUser.imageName)
-        console.log("outPut: ImageUpload -> handleRemove -> name", name)
         axios.post(`/api/delete-upload-img/${name}`).then((res) => {
-            console.log(res)
             this.setState({
                 imageUrl: defaultAvatar,
                 uploadedImageName: ''
             })
-        }).catch((error) => {
-            console.log("Error!!");
-            console.log(error.response);
         })
     };
 
@@ -119,29 +111,20 @@ class ProfileEdit extends Component {
         let formData = new FormData()
         formData.append("imageUrl", e.target.files[0])
         axios.post("/api/upload-img", formData).then((res) => {
-            console.log(res.data)
             this.setState({
                 bgImageUrl: res.data.secure_url,
                 uploadedBgImageName: res.data.imageName
             })
-        }).catch((error) => {
-            console.log("Error!!");
-            console.log(error.response);
         })
     }
 
     handleBgImageRemove = () => {
         const name = (this.props.currentUser.bgImageName)
-        console.log("outPut: ImageUpload -> handleRemove -> name", name)
         axios.post(`/api/delete-upload-img/${name}`).then((res) => {
-            console.log(res)
             this.setState({
                 bgImageUrl: defaultAvatar,
                 uploadedBgImageName: ''
             })
-        }).catch((error) => {
-            console.log("Error!!");
-            console.log(error.response);
         })
     };
     // update state of story elements 
@@ -163,7 +146,6 @@ class ProfileEdit extends Component {
         const newPassword = this.state.newPassword
         axios.put(`/api/password/${this.props.currentUser._id}`, { oldPassword, newPassword })
             .then((resp) => {
-                console.log(resp.data.message);
                 // this.props.updateUser(resp.data)
                 this.setState({
                     newPassword: "",
@@ -172,9 +154,6 @@ class ProfileEdit extends Component {
                     alertBool: true,
                     errorMessage: resp.data.error
                 });
-            }).catch((err) => {
-                console.log(err);
-                console.log('error', err);
             })
     }
 
@@ -192,7 +171,6 @@ class ProfileEdit extends Component {
         axios.put(`/api/user/${this.props.currentUser._id}`, { email, password, about, imageUrl, imageName, userName, newPassword, bgImageUrl, bgImageName })
             .then((resp) => {
                 this.props.updateUser(resp.data)
-                console.log("outPut: handleFormSubmit -> resp", resp.data)
                 this.setState({
                     email: "",
                     password: "",
@@ -205,10 +183,6 @@ class ProfileEdit extends Component {
             }).then(() => {
                 this.props.history.push(`/profile-page/${this.props.currentUser._id}`)
             })
-            .catch(error => {
-                console.log("Error!", error);
-
-            })
     }
 
 
@@ -219,12 +193,12 @@ class ProfileEdit extends Component {
                 <div style={{ height: '100px' }}></div> {/* offsets height of navbar */}
                 <div className="text-center">
                     <Container fluid>
-                        {this.state.successMessage
+                        {/* {this.state.successMessage
                             ? <AlertMessage color="success" message={this.state.successMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
                             : ''}
                         {this.state.errorMessage
                             ? <AlertMessage color="danger" message={this.state.errorMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
-                            : ''}
+                            : ''} */}
                         <Row>
                             <Col md="3"></Col>
                             <Col className="px-0 my-auto" md="6">
@@ -232,9 +206,15 @@ class ProfileEdit extends Component {
                                 <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
                                     <CardBody>
                                         {/* image */}
-                                            <ImageUpload avatar imageUrl={this.state.imageUrl} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
-                                            <ImageUpload imageUrl={this.state.bgImageUrl} handleImageChange={this.handleBgImageChange} handleImageRemove={this.handleBgImageRemove} />
+                                        <ImageUpload avatar imageUrl={this.state.imageUrl} handleImageChange={this.handleImageChange} handleImageRemove={this.handleImageRemove} />
+                                        <ImageUpload imageUrl={this.state.bgImageUrl} handleImageChange={this.handleBgImageChange} handleImageRemove={this.handleBgImageRemove} />
                                         {/* email */}
+                                        {this.state.successMessage
+                                            ? <AlertMessage color="success" message={this.state.successMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
+                                            : ''}
+                                        {this.state.errorMessage
+                                            ? <AlertMessage color="danger" message={this.state.errorMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
+                                            : ''}
                                         <InputGroup
                                             className={
                                                 this.state.nameFocus

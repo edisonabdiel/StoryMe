@@ -1,14 +1,11 @@
-
 import React, { useState, useRef } from 'react';
 import JoditEditor from "jodit-react";
 import '../../assets/css/App.css';
 
 
 const Editor = (props) => {
-    console.log(props);
     const editor = useRef(null)
     const [content, setContent] = useState("")
-    console.log("outPut: Editor -> content", content)
     // config for the add story page
     const config = {
         readonly: false, // all options from https://xdsoft.net/jodit/doc/
@@ -22,7 +19,8 @@ const Editor = (props) => {
         showPlaceholder: false,
         style: {
             font: 'black'
-        }
+        },
+        height: 400
 
     }
     // config for edit profile page
@@ -51,7 +49,6 @@ const Editor = (props) => {
             onChange={newContent => { }}
             style={{ color: 'red' }}
         />
-
     );
 }
 

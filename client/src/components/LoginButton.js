@@ -56,12 +56,11 @@ class LoginButton extends React.Component {
     axios.post("/api/login", { email, password })
       .then((resp) => {
         this.props.updateUser(resp.data)
-        console.log('USER DATA UPDATED', this.props.currentUser);
+        this.props.setModalLogin(false)
         this.setState({ email: "", password: "" });
       }).then(() => {
         this.props.history.push("/")
       }).catch((error) => {
-        console.log("Error!!", error);
         this.setState({
           errorMessages: error.response.data.errors
         })
@@ -103,7 +102,7 @@ class LoginButton extends React.Component {
                     </div>
                   </div>
                   <div className="modal-body">
-                    {this.state.errorMessages.map((m) =>
+                    {this.state.errorMessages && this.state.errorMessages.map((m) =>
                       <p key={m} style={{ textAlign: 'center', color: "red" }}>{m}</p>
                     )}
                     <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
@@ -154,7 +153,6 @@ class LoginButton extends React.Component {
                         </InputGroup>
                       </CardBody>
                       <ModalFooter className="text-center">
-
                         <Button
                           block
                           className="btn-neutral btn-round"
@@ -162,7 +160,7 @@ class LoginButton extends React.Component {
                           // href=""
                           type="submit"
                           size="lg"
-                          onClick={() => { this.props.setModalLogin(false) }}
+                        // onClick={() => { this.props.setModalLogin(false) }}
                         >
                           Get Started
                         </Button>

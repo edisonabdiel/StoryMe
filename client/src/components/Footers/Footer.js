@@ -15,7 +15,7 @@ const Footer = () => {
             <ul>
               <li>
                 <a
-                  to='/'
+                  href='/'
                   target="_blank"
                 >
                   StoryMe
@@ -23,7 +23,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  to='/'
+                  href="https://github.com/edisonabdiel/StoryMe"
                   target="_blank"
                 >
                   About Us
@@ -46,7 +46,19 @@ const Footer = () => {
               href="http://www.github.com/edisonabdiel"
               target="_blank"
             >
-              Edison, Dima & Noubar
+              Edison
+            </a>,
+            <a
+              href="http://www.github.com/dkoushha"
+              target="_blank"
+            >
+              Dima
+            </a>,
+            <a
+              href="http://www.github.com/noutop"
+              target="_blank"
+            >
+              Noubar
             </a>
             .
           </div>
