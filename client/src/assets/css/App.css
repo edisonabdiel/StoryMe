@@ -90,3 +90,7 @@
     align-items: center;
     gap: 10px;
 }
+
+.card-blog {
+    min-width: 315px !important;
+}

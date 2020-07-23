@@ -28,14 +28,15 @@ router.get('/stories/filter', (req, res, next) => {
 });
 
 // GET route => to get all the stories for profile page
-router.get('/profileStories/:id', (req, res, next) => {
-  let newList = []
-  Story.find().populate("owner").then(allTheStories => {
-    newList = allTheStories.filter((story) => req.params.id.localeCompare(story.owner._id) === 0)
-    res.json(newList);
-  });
+// router.get('/profileStories/:id', (req, res, next) => {
+//   let newList = []
+//   Story.find().populate("owner").then(allTheStories => {
+//     newList = allTheStories.filter((story) => req.params.id.localeCompare(story.owner._id) === 0)
 
-})
+//     res.json(newList);
+//   });
+
+// })
 
 
 // POST route => to create a new project
@@ -91,17 +92,17 @@ router.put('/stories/:id', (req, res, next) => {
     })
 })
 
-router.get('/stories/:id/liked', (req, res, next) => {
-  Story.find().populate("owner")
-    .then(allTheStories => {
-      const filterLikedStory = allTheStories.filter((item) => {
-        return (item.likes.includes(req.params.id))
-      })
-      res.json(filterLikedStory);
-    }).catch((err) => {
-      res.json(err)
-    })
-})
+// router.get('/stories/:id/liked', (req, res, next) => {
+//   Story.find().populate("owner")
+//     .then(allTheStories => {
+//       const filterLikedStory = allTheStories.filter((item) => {
+//         return (item.likes.includes(req.params.id))
+//       })
+//       res.json(filterLikedStory);
+//     }).catch((err) => {
+//       res.json(err)
+//     })
+// })
 
 router.put('/stories/:id/liked', (req, res, next) => {
   Story.findById(req.params.id).populate("owner").then((story) => {

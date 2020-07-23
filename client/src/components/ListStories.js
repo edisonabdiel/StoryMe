@@ -28,11 +28,11 @@ class ListStories extends Component {
 
   componentDidMount() {
     if (this.props.profileStories && this.props.currentUser) {
-      axios.get(`/api/profileStories/${this.props.userId}`).then((resp) => {
-        this.setState({
-          listOfStories: resp.data
-        })
+      // axios.get(`/api/profileStories/${this.props.userId}`).then((resp) => {
+      this.setState({
+        listOfStories: this.props.listOfStories
       })
+      // })
     }
     else if (this.props.isDiscovery && this.props.currentUser) {
       axios.get(`/api/stories/filter`).then((resp) => {
@@ -42,12 +42,12 @@ class ListStories extends Component {
       })
     }
     else if (this.props.profileLikes && this.props.currentUser) {
-      axios.get(`/api/stories/${this.props.currentUser._id}/liked`)
-        .then((resp) => {
-          this.setState({
-            listOfStories: resp.data
-          })
-        })
+      // axios.get(`/api/stories/${this.props.currentUser._id}/liked`)
+      // .then((resp) => {
+      this.setState({
+        listOfStories: this.props.listOfStories
+      })
+      // })
     } else {
       axios.get("/api/stories").then((resp) => {
         this.setState({
@@ -114,7 +114,7 @@ class ListStories extends Component {
     }
   }
   changeStateHandler = (id) => {
-    this.props.changeStateHandler(id)
+    // this.props.changeStateHandler(id)
 
   }
 
