@@ -82,7 +82,7 @@ app.locals.title = 'Express - StoryMe Database';
 // allow access to the API from different domains/origins
 app.use(cors({
   // this could be multiple domains/origins, but we will allow just our React app
-  origin: ["http://localhost:3000"]
+  origin: ['https://storyme-app.herokuapp.com/']
 }));
 
 // ROUTES MIDDLEWARE STARTS HERE:
