@@ -144,7 +144,7 @@ class SignupPage extends React.Component {
                         <h5 className="info-title">StoryMe</h5>
                         <p className="description">
                           Here is where your stories become alive
-                         </p>
+                          </p>
                       </div>
                     </div>
                     <div className="info info-horizontal">
@@ -185,7 +185,7 @@ class SignupPage extends React.Component {
                     </CardTitle>
                         <div className="social text-center">
                           <FacebookLogin
-                            appId="591193318424358"
+                            appId="565328274160052"
                             autoLoad={true}
                             fields="name,email,picture"
                             callback={this.responseFacebook}
