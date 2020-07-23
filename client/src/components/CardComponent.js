@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { FacebookIcon, FacebookShareButton, TwitterShareButton, TwitterIcon } from "react-share";
 import defaultAvatar from "assets/img/placeholder.jpg";
 import CircleLoader from "react-spinners/CircleLoader";
-
-
 import {
     Card,
     CardBody,
@@ -13,10 +11,7 @@ import {
     Col,
     Row,
 } from "reactstrap";
-
-
 const CardComponent = (props) => {
-
     return (
         <Row className=' card-component'>
             {props.listOfStories.length === 0 && props.profileStories
@@ -56,7 +51,6 @@ const CardComponent = (props) => {
                                     <h6 className="category text-warning">
                                         <i className={`${oneStory.icon}`}></i> {oneStory.category}
                                     </h6>
-
                                     <CardTitle tag="h5" onClick={() => {
                                         props.saveStoryIndex(idx);
                                             props.currentUser && props.currentUser.isVerified
@@ -106,7 +100,6 @@ const CardComponent = (props) => {
                                                     <div>
                                                         <button className=" btn-info btn-round pull-left ml-lg-5"
                                                             size="sm"
-
                                                         >
                                                             <Link className="text-decoration-none" to={"/story-edit/" + oneStory._id} onClick={() => props.editHandler(oneStory._id)}><b>Edit</b></Link>
                                                         </button>
@@ -138,5 +131,4 @@ const CardComponent = (props) => {
         </Row>
     )
 }
-
 export default CardComponent;
