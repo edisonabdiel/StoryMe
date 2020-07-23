@@ -21,7 +21,7 @@ const CardComponent = (props) => {
         <Row className=' card-component'>
             {props.listOfStories.length === 0 && props.profileStories
                 ?
-                <h3>NO STORIES WRITTEN YET... <CircleLoader /></h3>
+                <h3>NO STORIES WRITTEN YET... <CircleLoader/></h3>
                 : props.listOfStories.length === 0 && props.profileLikes
                 ?
                 <h3>NO LIKED STORIES YET... <CircleLoader/></h3>
@@ -83,93 +83,57 @@ const CardComponent = (props) => {
                                                 <i className="fa fa-heart fa-lg" style={{ marginRight: '3px' }}></i>
                                                 : <i className="now-ui-icons ui-2_favourite-28" ></i>
                                             }
+                                            {oneStory.likes.length}
+                                            <i className="now-ui-icons tech_watch-time"></i>
+                                            {oneStory.duration}
                                         </div>
-                                        <CardBody>
-                                            <h6 className="category text-warning">
-                                                <i className={`${oneStory.icon}`}></i> {oneStory.category}
-                                            </h6>
+                                        <div className="author">
+                                            <img
+                                                alt="..."
+                                                className="avatar img-raised"
+                                                src={oneStory.owner.image}
+                                            ></img>
+                                            {!props.isDiscovery ? <Link to={`/profile-page/${oneStory.owner._id}`}
+                                                onClick={() => props.changeStateHandler(oneStory.owner._id)}>
+                                                {oneStory.owner.userName ? oneStory.owner.userName : oneStory.owner.email}</Link>
+                                                : <Link to={`/profile-page/${oneStory.owner._id}`}>
+                                                    {oneStory.owner.userName ? oneStory.owner.userName : oneStory.owner.email}</Link>}
+                                        </div>
+                                        <hr />
+                                        <div className="btn-block text-center ">
+                                            {props.currentUser && oneStory.owner._id === props.currentUser._id ?
+                                                <div>
+                                                    <div>
+                                                        <button className=" btn-info btn-round pull-left ml-lg-5"
+                                                            size="sm"
 
-                                            <CardTitle tag="h5" onClick={() => {
-                                                props.saveStoryIndex(idx);
-                                                {
-                                                    props.currentUser && props.currentUser.isVerified
-                                                        ? props.setModalClassic(true)
-                                                        : !props.currentUser
-                                                            ? props.setModalLogin(true)
-                                                            : props.setModalVerification(true)
-                                                }
-                                            }} style={{ cursor: 'pointer' }}>
-                                                <strong>{oneStory.title}</strong>
-                                            </CardTitle>
-                                            <p className="card-description" onClick={() => {
-                                                props.saveStoryIndex(idx);
-                                                {
-                                                    props.currentUser && props.currentUser.isVerified
-                                                        ? props.setModalClassic(true)
-                                                        : !props.currentUser
-                                                            ? props.setModalLogin(true)
-                                                            : props.setModalVerification(true)
-                                                }
-                                            }} style={{ cursor: 'pointer' }}>
-                                                {oneStory.headline}
-                                            </p>
-                                            <CardFooter className=" flex-fill" >
-                                                <div className="stats stats-right">
-                                                    {props.currentUser && oneStory.likes.includes(props.currentUser._id) ?
-                                                        <i className="fa fa-heart fa-lg" style={{ marginRight: '3px' }}></i>
-                                                        : <i className="now-ui-icons ui-2_favourite-28" ></i>
-                                                    }
-                                                    {oneStory.likes.length}
-                                                    <i className="now-ui-icons tech_watch-time"></i>
-                                                    {oneStory.duration}
+                                                        >
+                                                            <Link className="text-decoration-none" to={"/story-edit/" + oneStory._id} onClick={() => props.editHandler(oneStory._id)}><b>Edit</b></Link>
+                                                        </button>
+                                                        <button className=" btn-round btn-danger pull-right mr-5"
+                                                            size="sm"
+                                                            onClick={() => props.deleteHandler(oneStory._id)}><b>Delete</b>
+                                                        </button>
+                                                    </div>
+                                                    <FacebookShareButton
+                                                        url={`${process.env.EMAIL_HOST}stories/${oneStory._id}`}
+                                                    >
+                                                        <FacebookIcon size={32} round={true} />
+                                                    </FacebookShareButton>
+                                                    <TwitterShareButton
+                                                        url={`${process.env.EMAIL_HOST}stories/${oneStory._id}`}
+                                                    >
+                                                        <TwitterIcon size={32} round={true} />
+                                                    </TwitterShareButton>
                                                 </div>
-                                                <div className="author">
-                                                    <img
-                                                        alt="..."
-                                                        className="avatar img-raised"
-                                                        src={oneStory.owner.image}
-                                                    ></img>
-                                                    {!props.isDiscovery ? <Link to={`/profile-page/${oneStory.owner._id}`}
-                                                        onClick={() => props.changeStateHandler(oneStory.owner._id)}>
-                                                        {oneStory.owner.userName ? oneStory.owner.userName : oneStory.owner.email}</Link>
-                                                        : <Link to={`/profile-page/${oneStory.owner._id}`}>
-                                                            {oneStory.owner.userName ? oneStory.owner.userName : oneStory.owner.email}</Link>}
-                                                </div>
-                                                <hr />
-                                                <div className="btn-block text-center ">
-                                                    {props.currentUser && oneStory.owner._id === props.currentUser._id ?
-                                                        <div>
-                                                            <div>
-                                                                <button className=" btn-info btn-round pull-left ml-lg-5"
-                                                                    size="sm"
-
-                                                                >
-                                                                    <Link className="text-decoration-none" to={"/story-edit/" + oneStory._id} onClick={() => props.editHandler(oneStory._id)}><b>Edit</b></Link>
-                                                                </button>
-                                                                <button className=" btn-round btn-danger pull-right mr-5"
-                                                                    size="sm"
-                                                                    onClick={() => props.deleteHandler(oneStory._id)}><b>Delete</b>
-                                                                </button>
-                                                            </div>
-                                                            <FacebookShareButton
-                                                                url={`${process.env.EMAIL_HOST}stories/${oneStory._id}`}
-                                                            >
-                                                                <FacebookIcon size={32} round={true} />
-                                                            </FacebookShareButton>
-                                                            <TwitterShareButton
-                                                                url={`${process.env.EMAIL_HOST}stories/${oneStory._id}`}
-                                                            >
-                                                                <TwitterIcon size={32} round={true} />
-                                                            </TwitterShareButton>
-                                                        </div>
-                                                        : ""}
-                                                </div>
-                                            </CardFooter>
-                                        </CardBody>
-                                    </Card>
-                                </Col>
-                            )
-                        })
+                                                : ""}
+                                        </div>
+                                    </CardFooter>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    )
+                })
             }
         </Row>
     )
