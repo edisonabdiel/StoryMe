@@ -8,6 +8,8 @@ const bcrypt = require('bcryptjs');
 
 // require the user model !!!!
 const User = require('../models/user-model');
+const Story = require('../models/story-model');
+
 
 
 
@@ -60,13 +62,19 @@ router.get('/profile-page/:id', (req, res, next) => {
         ).populate("followers"),
         User.find({
             followers: req.params.id
-        })]).then((resp) => {
+        }), Story.find().populate('owner')]).then((resp) => {
             const user = resp[0]
             const following = resp[1]
-            res.json({ user: user, following: following });
+            const userStory = resp[2].filter((story) => req.params.id.localeCompare(story.owner._id) === 0)
+            // const userLikedStory = resp[2].filter((story) => {
+            //     return (story.likes.includes(req.params.id))
+            // })
+            console.log("outPut: userStory", userStory)
+            res.json({ user: user, following: following, listOfStories: userStory });
         }).catch((err) => {
             console.log(err);
         })
+
 
 });
 

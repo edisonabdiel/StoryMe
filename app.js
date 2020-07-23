@@ -1,4 +1,3 @@
-require('dotenv').config();
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -9,6 +8,7 @@ const logger = require('morgan');
 const path = require('path');
 const cors = require("cors");
 
+require('dotenv').config();
 
 // WHEN INTRODUCING USERS DO THIS:
 // INSTALL THESE DEPENDENCIES: passport-local, passport, bcryptjs, express-session
@@ -52,7 +52,8 @@ app.use(require('node-sass-middleware')({
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/client/build')));
+// app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 // ADD SESSION SETTINGS HERE:
@@ -84,7 +85,6 @@ app.use(cors({
   origin: ["http://localhost:3000"]
 }));
 
-
 // ROUTES MIDDLEWARE STARTS HERE:
 
 const index = require('./routes/index');
@@ -95,6 +95,10 @@ app.use('/api', require('./routes/auth-routes'));
 app.use('/api', require('./routes/upload-img-routes'));
 app.use('/api', require('./routes/user-routes'));
 
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/client/build/index.html");
+});
 
 
 

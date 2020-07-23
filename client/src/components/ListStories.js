@@ -28,11 +28,11 @@ class ListStories extends Component {
 
   componentDidMount() {
     if (this.props.profileStories && this.props.currentUser) {
-      axios.get(`/api/profileStories/${this.props.userId}`).then((resp) => {
-        this.setState({
-          listOfStories: resp.data
-        })
+      // axios.get(`/api/profileStories/${this.props.userId}`).then((resp) => {
+      this.setState({
+        listOfStories: this.props.listOfStories
       })
+      // })
     }
     else if (this.props.isDiscovery && this.props.currentUser) {
       axios.get(`/api/stories/filter`).then((resp) => {
@@ -40,7 +40,7 @@ class ListStories extends Component {
           listOfStories: resp.data
         })
       })
-    } 
+    }
     else if (this.props.profileLikes && this.props.currentUser) {
       axios.get(`/api/stories/${this.props.currentUser._id}/liked`)
         .then((resp) => {
@@ -70,9 +70,9 @@ class ListStories extends Component {
     })
   }
   setModalClassic = (bool) => {
-      this.setState({
-        modalClassic: bool
-      })
+    this.setState({
+      modalClassic: bool
+    })
   }
   setModalLogin = (bool) => {
     this.setState({
@@ -81,10 +81,10 @@ class ListStories extends Component {
     if (!bool) {
       axios.get(`/api/stories/filter`).then((resp) => {
         this.setState({
-          listOfStories:resp.data,
+          listOfStories: resp.data,
         })
       })
-    } 
+    }
   }
   setModalVerification = (bool) => {
     this.setState({
@@ -98,7 +98,7 @@ class ListStories extends Component {
         const currentStory = resp.data
         let newList = [...this.state.listOfStories]
         let idx = this.state.listOfStories.findIndex(story => story._id === currentStory._id)
-        newList.splice(idx, 1, currentStory)  
+        newList.splice(idx, 1, currentStory)
         this.setState({
           liked: currentStory.likes.includes(this.props.currentUser._id),
           listOfStories: newList
@@ -114,7 +114,7 @@ class ListStories extends Component {
     }
   }
   changeStateHandler = (id) => {
-    this.props.changeStateHandler(id)
+    // this.props.changeStateHandler(id)
 
   }
 

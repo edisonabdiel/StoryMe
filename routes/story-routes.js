@@ -28,14 +28,15 @@ router.get('/stories/filter', (req, res, next) => {
 });
 
 // GET route => to get all the stories for profile page
-router.get('/profileStories/:id', (req, res, next) => {
-  let newList = []
-  Story.find().populate("owner").then(allTheStories => {
-    newList = allTheStories.filter((story) => req.params.id.localeCompare(story.owner._id) === 0)
-    res.json(newList);
-  });
+// router.get('/profileStories/:id', (req, res, next) => {
+//   let newList = []
+//   Story.find().populate("owner").then(allTheStories => {
+//     newList = allTheStories.filter((story) => req.params.id.localeCompare(story.owner._id) === 0)
 
-})
+//     res.json(newList);
+//   });
+
+// })
 
 
 // POST route => to create a new project

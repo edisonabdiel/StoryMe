@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Button } from "reactstrap";
 import defaultAvatar from "assets/img/placeholder.jpg";
+import defaultAvatarBg from "assets/img/dense-spider-web.jpg";
+
 
 
 import {
@@ -30,7 +32,7 @@ export class ImageUpload extends Component {
 
   render() {
     return (
-      <div className="fileinput text-center" style={{width: '100%'}}>
+      <div className="fileinput text-center" style={{ width: '100%' }}>
         <input type="file" name="imageUrl" onChange={(e) => this.props.handleImageChange(e)} ref={this.fileInput} />
         <div
           className={

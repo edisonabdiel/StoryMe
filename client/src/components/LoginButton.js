@@ -102,7 +102,7 @@ class LoginButton extends React.Component {
                     </div>
                   </div>
                   <div className="modal-body">
-                    {this.state.errorMessages.map((m) =>
+                    {this.state.errorMessages && this.state.errorMessages.map((m) =>
                       <p key={m} style={{ textAlign: 'center', color: "red" }}>{m}</p>
                     )}
                     <Form action="" className="form" method="" onSubmit={this.handleFormSubmit}>
@@ -160,7 +160,7 @@ class LoginButton extends React.Component {
                           // href=""
                           type="submit"
                           size="lg"
-                          // onClick={() => { this.props.setModalLogin(false) }}
+                        // onClick={() => { this.props.setModalLogin(false) }}
                         >
                           Get Started
                         </Button>

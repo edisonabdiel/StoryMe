@@ -19,7 +19,8 @@
 .text-story {
     color: black !important
 }
-.css-1d9ls5a{
+
+.css-1d9ls5a {
     margin: auto;
 }
 
@@ -65,4 +66,41 @@
 
 .modal-flex h3 {
     margin: 0;
+}
+
+#bg-story {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.flex-story-modal {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+}
+
+.flex-data-story-modal {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.flex-icon-story-modal {
+
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-blog {
+    min-width: 315px !important;
 }
