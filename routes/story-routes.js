@@ -41,7 +41,7 @@ router.get('/stories/filter', (req, res, next) => {
 
 // POST route => to create a new project
 router.post('/stories', (req, res, next) => {
-  let cardBgColor = ["gray", "neutral", "black"]
+  let cardBgColor = ["gray", "black"]
   let randomBgIdx = Math.floor(Math.random() * cardBgColor.length)
   Story.create({
     title: req.body.title,
