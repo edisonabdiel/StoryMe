@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const favicon = require('serve-favicon');
-const hbs = require('hbs');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 const path = require('path');
@@ -23,7 +22,7 @@ require('./configs/passport');
 // IF YOU STILL DIDN'T, GO TO 'configs/passport.js' AND UN-COMMENT OUT THE WHOLE FILE
 
 mongoose
-  .connect('mongodb://127.0.0.1/storyme-server', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
