@@ -30,7 +30,11 @@ export class ProfilePage extends Component {
     user: '',
     following: [],
     followers: [],
-    emailVerification: false
+    emailVerification: false,
+    listOfStories: [],
+    userLikedStories: []
+
+
   }
 
   componentDidMount() {
@@ -41,6 +45,7 @@ export class ProfilePage extends Component {
         following: resp.data.following,
         followers: resp.data.user.followers,
         userId: resp.data.user._id,
+        listOfStories: resp.data.listOfStories
       })
     })
   }
@@ -54,7 +59,8 @@ export class ProfilePage extends Component {
         followers: resp.data.user.followers,
         userId: resp.data.user._id,
         isClickedStories: false,
-        isClickedLikes: false
+        isClickedLikes: false,
+        listOfStories: resp.data.listOfStories
       })
     })
   }
@@ -161,8 +167,17 @@ export class ProfilePage extends Component {
                   userId={this.state.userId}
                 />
 
-                {this.state.isClickedStories && <ListStories profileStories isDiscovery={false} currentUser={this.props.currentUser} userId={this.state.userId} changeStateHandler={this.changeStateHandler} />}
-                {this.state.isClickedLikes && <ListStories profileLikes isDiscovery={false} currentUser={this.props.currentUser} changeStateHandler={this.changeStateHandler} />}
+                {this.state.isClickedStories && <ListStories profileStories
+                  isDiscovery={false} currentUser={this.props.currentUser}
+                  userId={this.state.userId}
+                  // changeStateHandler={this.changeStateHandler}
+                  listOfStories={this.state.listOfStories} />}
+                {this.state.isClickedLikes && <ListStories profileLikes
+                  isDiscovery={false}
+                  currentUser={this.props.currentUser}
+                  changeStateHandler={this.changeStateHandler}
+
+                />}
 
               </Container>
             </div>

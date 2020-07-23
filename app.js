@@ -85,7 +85,6 @@ app.use(cors({
   origin: ["http://localhost:3000"]
 }));
 
-
 // ROUTES MIDDLEWARE STARTS HERE:
 
 const index = require('./routes/index');

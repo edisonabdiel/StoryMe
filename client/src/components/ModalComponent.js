@@ -14,9 +14,9 @@ const ModalComponent = (props) => {
         isOpen={props.modalClassic}
         toggle={() => props.closeHandler()}
       >
-        <div className="modal-header justify-content-center"
+        <div className="modal-header justify-content-center page-header-image " id='bg-story'
           style={{
-            backgroundImage: `url(${props.story.image})`, height: '500px'
+            backgroundImage: `url(${props.story.image})`, height: '400px'
           }} filter-color="blue"
         >
           <button
@@ -33,9 +33,25 @@ const ModalComponent = (props) => {
         </div>
         <div className="modal-body text-center">
           <h6><b>Writen By</b></h6>
-          <img src={props.story.owner.image} alt="" style={{ borderRadius: '50%', width: '50px' }} />
-          <h4>{props.story.owner.userName ? props.story.owner.userName : props.story.owner.email}</h4>
-          <div style={{ height: '100px' }}></div>
+          <div className='flex-story-modal'>
+            <img src={props.story.owner.image} alt="" style={{ borderRadius: '50%', width: '50px' }} />
+            <h4>{props.story.owner.userName ? props.story.owner.userName : props.story.owner.email}</h4>
+          </div>
+          <div className='flex-data-story-modal' width='100px'>
+            <div className='flex-icon-story-modal'>
+              <i className="now-ui-icons tech_watch-time"></i>
+              <h5 style={{ margin: ' 0 ' }} >{props.story.duration}</h5>
+            </div>
+            <div className='flex-icon-story-modal'>
+              <i className={props.story.icon}></i>
+              <h5 style={{ margin: ' 0 ' }}>{props.story.category}</h5></div>
+            <div className='flex-icon-story-modal'>
+              {props.story.likes.length ? <i className="fa fa-heart fa-lg"></i>
+                : <i className="now-ui-icons ui-2_favourite-28" ></i>
+              }
+              <h5 style={{ margin: ' 0 ' }}>{props.story.likes.length}</h5></div>
+
+          </div>
           <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.story.content) }} />
         </div>
         <ModalFooter>

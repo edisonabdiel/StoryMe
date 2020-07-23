@@ -98,7 +98,7 @@ export class LoginPage extends Component {
                             ></img>
                           </div>
                         </CardHeader>
-                        {this.state.errorMessage.map((m) =>
+                        {this.state.errorMessage && this.state.errorMessage.map((m) =>
                           <p key={m} style={{ textAlign: 'center', color: "red" }}>{m}</p>
                         )}
                         <CardBody>

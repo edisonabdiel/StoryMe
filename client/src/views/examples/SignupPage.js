@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import BodyClassName from 'react-body-classname';
 import defaultAvatar from "assets/img/placeholder.jpg";
+import defaultAvatarBg from "assets/img/dense-spider-web.jpg";
+
 
 
 
@@ -78,7 +80,7 @@ class SignupPage extends React.Component {
     const password = this.state.password
     const checked = this.state.checked
     const image = defaultAvatar
-    const bgImage = defaultAvatar
+    const bgImage = defaultAvatarBg
     const userName = this.state.userName
     axios.post("/api/signup", { email, password, checked, image, bgImage, userName })
       .then((res) => {
@@ -170,7 +172,7 @@ class SignupPage extends React.Component {
                           <h5 className="card-description">or go old school</h5>
                         </div>
                         <Form className="form" onSubmit={this.handleFormSubmit}>
-                          {this.state.errorMessages.map((m) =>
+                          {this.state.errorMessages && this.state.errorMessages.map((m) =>
                             <h6 key={m} style={{ color: "red", margin: '0px' }}>{m}</h6>
                           )}
                           <h6 style={{ color: "red", margin: '0px' }}>{this.state.logInError}</h6>
