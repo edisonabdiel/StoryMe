@@ -19,9 +19,6 @@ const chunkArray = (myArray, chunk_size) => {
 
 const CardComponent = (props) => {
 
-<<<<<<< HEAD
-
-=======
     let chunkedArr = chunkArray(props.listOfStories, Math.ceil(props.listOfStories.length / 3))
 
     if (chunkedArr.length === 0 && props.profileStories) {
@@ -31,7 +28,6 @@ const CardComponent = (props) => {
     } else if (chunkedArr.length === 0 && props.isDiscovery) {
         return (<h3>NO STORIES TO DISCOVER YET... <CircleLoader /></h3>)
     }
->>>>>>> origin
 
     return (
         <Row className=' align-items-lg-start'>
