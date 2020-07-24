@@ -93,8 +93,6 @@
 }
 
 .flex-icon-story-modal {
-
-
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -103,4 +101,13 @@
 
 .card-blog {
     min-width: 315px !important;
+}
+
+.footer{
+  padding: 0.5rem 0 !important;
+}
+
+.footer ul li a{
+    padding: 0 !important;
+    padding-right: 0.7rem !important;
 }

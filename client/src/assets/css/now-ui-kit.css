@@ -7195,7 +7195,6 @@ img {
 }
 
 .footer {
-  padding: 1.125rem 0;
   text-align: center;
 }
 
@@ -7276,7 +7275,6 @@ img {
 
 .footer ul li a {
   color: inherit;
-  padding: 13px 0.5rem;
   font-size: 0.8571em;
   text-transform: uppercase;
   text-decoration: none;

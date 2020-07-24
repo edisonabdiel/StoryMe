@@ -73,6 +73,7 @@ router.get('/profile-page/:id', (req, res, next) => {
             res.json({ user: user, following: following, listOfStories: userStory });
         }).catch((err) => {
             console.log(err);
+            res.status(500).json({ msg: "error" })
         })
 
 

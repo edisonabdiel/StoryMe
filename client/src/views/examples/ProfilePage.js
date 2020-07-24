@@ -67,12 +67,14 @@ export class ProfilePage extends Component {
 
   //to open/close the portfolio btn 
   handelIsClickedStories = () => {
+    //this.changeStateHandler()
     this.setState({
       isClickedStories: !this.state.isClickedStories
     })
   }
 
   handelToCloseStories = (bool) => {
+    //this.changeStateHandler()
     this.setState({
       isClickedStories: bool
     })
