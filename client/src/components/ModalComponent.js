@@ -34,7 +34,7 @@ const ModalComponent = (props) => {
         <div className="modal-body text-center">
           <h6><b>Writen By</b></h6>
           <div className='flex-story-modal'>
-            <img src={props.story.owner.image} alt="" style={{ borderRadius: '50%', width: '50px' }} />
+            <img src={props.story.owner.image} alt="" style={{ borderRadius: '50%', width: '40px', height: '40px' }} />
             <h4>{props.story.owner.userName ? props.story.owner.userName : props.story.owner.email}</h4>
           </div>
           <div className='flex-data-story-modal' width='100px'>
