@@ -5,6 +5,8 @@ import BodyClassName from 'react-body-classname';
 import defaultAvatar from "assets/img/placeholder.jpg";
 import FacebookLogin from 'react-facebook-login';
 import defaultAvatarBg from "assets/img/dense-spider-web.jpg";
+import { IoLogoFacebook } from "react-icons/io";
+import { IconContext } from "react-icons";
 
 // reactstrap components
 import {
@@ -180,14 +182,11 @@ class SignupPage extends React.Component {
                             appId="565328274160052"
                             fields="name,email,picture"
                             callback={this.responseFacebook}
-                            cssClass="my-facebook-button-class"
-                            icon="fa-facebook"
+                            icon={<IconContext.Provider value={{ size: "2em" }}><IoLogoFacebook /></IconContext.Provider>}
                             onClick={this.componentClicked}
+                            textButton=' '
                           />
-                          {/* <Button className="btn-icon btn-round"
-                            color="facebook">
-                            <i className="fab fa-facebook"></i>
-                          </Button> */}
+
                           <h5 className="card-description">or go old school</h5>
                         </div>
                         <Form className="form" onSubmit={this.handleFormSubmit}>

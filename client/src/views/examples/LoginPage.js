@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import FacebookLogin from 'react-facebook-login';
 import { IoLogoFacebook } from "react-icons/io";
+import { IconContext } from "react-icons";
+
 
 
 
@@ -116,9 +118,9 @@ export class LoginPage extends Component {
                             // autoLoad={true}
                             fields="name,email,picture"
                             callback={this.responseFacebook}
-                            // cssClass="my-facebook-button-class"
-                            icon={<IoLogoFacebook />}
+                            icon={<IconContext.Provider value={{ size: "2em" }}><IoLogoFacebook /></IconContext.Provider>}
                             onClick={this.componentClicked}
+                            textButton=' '
                           />
                         </CardHeader>
                         {this.state.errorMessage && this.state.errorMessage.map((m) =>

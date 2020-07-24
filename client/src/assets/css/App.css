@@ -156,10 +156,12 @@
     left: 0 !important;
     z-index: -1 !important;
   }
-
 }
 
 .thumbnail .img-raised {
   width: 50px !important;
   height: 50px !important;
+}
+.kep-login-facebook {
+  border-radius: 50% !important;
 }
