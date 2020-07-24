@@ -73,7 +73,8 @@ class SignupPage extends React.Component {
   responseFacebook = (response) => {
     console.log("outPut: SignupPage -> responseFacebook -> resp", response)
     const email = response.email
-    axios.get("/api/auth/facebook", { email })
+    console.log("outPut: SignupPage -> responseFacebook -> email", email)
+    axios.post("/api/facebook", { response })
       .then((res) => {
         console.log("outPut: SignupPage -> responseFacebook -> res", res)
         // console.log("outPut: SignupPage -> responseFacebook -> res", res)

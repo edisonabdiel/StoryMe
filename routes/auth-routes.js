@@ -192,11 +192,9 @@ authRoutes.get("/checkuser", (req, res, next) => {
 //   })(req, res, next)
 // });
 
-authRoutes.get('/auth/facebook', (req, res, next) => {
+authRoutes.post('/facebook', (req, res, next) => {
   console.log('req.body', req.body)
   User.findOne({ token: req.body.token, email: req.body.email }).then((user) => {
-    if (err)
-      return res.json(err);
     if (user)
       req.login(user, (err) => {
         // We are now logged in (that's why we can also send req.user)
