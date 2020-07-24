@@ -12,8 +12,6 @@ import {
 } from "reactstrap";
 
 
-
-
 // <ListStories loggedInUser= {}
 class ListStories extends Component {
 
