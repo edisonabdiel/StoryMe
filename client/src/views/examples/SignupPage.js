@@ -100,7 +100,7 @@ class SignupPage extends React.Component {
     const checked = this.state.checked
     const image = defaultAvatar
     const bgImage = defaultAvatarBg
-    const userName = this.state.userName
+    const userName = '@' + this.state.userName
     axios.post("/api/signup", { email, password, checked, image, bgImage, userName })
       .then((res) => {
         this.props.updateUser(res.data)

@@ -2,13 +2,17 @@
 
 const express = require('express');
 const router = express.Router();
-
-const passport = require('passport');
 const bcrypt = require('bcryptjs');
 
 // require the user model !!!!
 const User = require('../models/user-model');
 const Story = require('../models/story-model');
+const {
+    validationResult
+} = require("express-validator");
+const editProfilePasswordValidation = require("../helpers/middlewares").editProfilePasswordValidation
+editProfileValidation = require('../helpers/middlewares').editProfileValidation
+
 
 
 
@@ -33,13 +37,22 @@ router.put("/user/:id", (req, res, next) => {
     })
 })
 
-router.put("/password/:id", (req, res, next) => {
+router.put("/password/:id", editProfilePasswordValidation, (req, res, next) => {
+    const errors = validationResult(req);
+    const newErrorList = errors.array().map((error) => error.msg)
+    console.log("outPut: newErrorList", newErrorList)
+
+    if (!errors.isEmpty()) {
+        return res.json({
+            error: newErrorList
+        });
+    }
     const salt = bcrypt.genSaltSync(10);
     const hashPass = bcrypt.hashSync(req.body.newPassword, salt)
     User.findOne({ _id: req.params.id }).then((user) => {
 
         if (!bcrypt.compareSync(req.body.oldPassword, user.password)) {
-            res.json({ errors: ['Incorrect password.'] })
+            res.json({ error: ['Incorrect password.'] })
             return;
         } else {
             user.password = hashPass
@@ -50,7 +63,7 @@ router.put("/password/:id", (req, res, next) => {
             res.status(200).json({ message: ['Password has been updated'] });
         })
     }).catch((err) => {
-        res.json({ errors: ['Something went wrong, please try again'] })
+        res.json({ error: ['Something went wrong, please try again'] })
     })
 
 })
@@ -69,10 +82,11 @@ router.get('/profile-page/:id', (req, res, next) => {
             // const userLikedStory = resp[2].filter((story) => {
             //     return (story.likes.includes(req.params.id))
             // })
-            console.log("outPut: userStory", userStory)
+            // console.log("outPut: userStory", userStory)
             res.json({ user: user, following: following, listOfStories: userStory });
         }).catch((err) => {
             console.log(err);
+            res.status(500).json({ msg: "error" })
         })
 
 

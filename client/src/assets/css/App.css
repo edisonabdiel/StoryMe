@@ -1,106 +1,158 @@
 .modal-footer,
 .modal-content {
-    justify-content: center !important;
+  justify-content: center !important;
 }
 
 .jodit-ui-group {
-    background-color: lightgray !important;
+  background-color: lightgray !important;
 }
 
 .jodit-wysiwyg p {
-    color: black !important;
-    text-align: left;
+  color: black !important;
+  text-align: left;
 }
 
 .jodit-tooltip {
-    display: none;
+  display: none;
 }
 
 .text-story {
-    color: black !important
+  color: black !important;
 }
 
 .css-1d9ls5a {
-    margin: auto;
+  margin: auto;
 }
 
-.card-component{
+.card-component {
   display: inline-flexbox;
   justify-content: center;
   align-items: center;
 }
 
 .card-blog {
-    min-width: 315px !important;
+  min-width: 315px !important;
 }
 
 .story-details-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .story-details-container h3 {
-    align-self: flex-end;
+  align-self: flex-end;
 }
 
 .story-details-container p {
-    align-self: flex-start;
+  align-self: flex-start;
 }
 
 .follower-image {
-    border-radius: 50%;
-    width: 50px;
-    margin: 20px;
+  border-radius: 50%;
+  width: 50px;
+  margin: 20px;
 }
 
 .modal-flex {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0 !important;
-
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0 !important;
 }
 
 .modal-flex h3 {
-    margin: 0;
+  margin: 0;
 }
 
 #bg-story {
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .flex-story-modal {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 .flex-data-story-modal {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 20px;
-    margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 20px;
+  margin-top: 20px;
 }
 
 .flex-icon-story-modal {
-
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
 }
 
 .card-blog {
-    min-width: 315px !important;
+  min-width: 315px !important;
+}
+
+.footer {
+  padding: 0.5rem 0 !important;
+}
+
+.footer ul li a {
+  padding: 0 !important;
+  padding-right: 0.7rem !important;
+}
+
+@media screen and (max-width: 991px) {
+  /* [class*="navbar-expand-"] .navbar-collapse {
+        width: 42% !important;
+    } */
+
+  .button-dropdown {
+    display: inline-flex !important;
+  }
+
+  .navbar .dropdown .dropdown-item {
+    padding: 5px 5px !important;
+  }
+
+  .navbar .dropdown.show .dropdown-menu,
+  .navbar .dropdown .dropdown-menu {
+    height: auto !important;
+    margin: 0 !important;
+  }
+
+  .div-log {
+    text-align: left !important;
+  }
+}
+
+.navbar-collapse:before {
+  background: #2c2c2c !important;
+  /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#2c2c2c 0%, #000 80%) !important;
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#2c2c2c 0%, #000 80%) !important;
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#2c2c2c 0%, #000 80%) !important;
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#2c2c2c 0%, #000 80%) !important;
+  /* Standard syntax (must be last) */
+  opacity: 0.76 !important;
+  filter: alpha(opacity=76);
+  display: block !important;
+  content: "" !important;
+  position: absolute !important;
+  width: 100% !important;
+  height: 100% !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: -1 !important;
 }

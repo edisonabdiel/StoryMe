@@ -67,12 +67,14 @@ export class ProfilePage extends Component {
 
   //to open/close the portfolio btn 
   handelIsClickedStories = () => {
+    //this.changeStateHandler()
     this.setState({
       isClickedStories: !this.state.isClickedStories
     })
   }
 
   handelToCloseStories = (bool) => {
+    //this.changeStateHandler()
     this.setState({
       isClickedStories: bool
     })
@@ -185,10 +187,16 @@ export class ProfilePage extends Component {
           </div>
           {this.state.isClickedFollowers
             && <FollowModal setIsClickedFollow={this.setIsClickedFollowers}
-              isClickedFollow={this.state.isClickedFollowers} data={this.state.followers} />}
+              isClickedFollow={this.state.isClickedFollowers}
+              data={this.state.followers}
+              changeStateHandler={this.changeStateHandler}
+            />}
           {this.state.isClickedFollowing &&
             <FollowModal setIsClickedFollow={this.setIsClickedFollowing}
-              isClickedFollow={this.state.isClickedFollowing} data={this.state.following} />
+              isClickedFollow={this.state.isClickedFollowing}
+              data={this.state.following}
+              changeStateHandler={this.changeStateHandler}
+            />
           }
 
 
