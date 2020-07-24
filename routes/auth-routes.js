@@ -169,6 +169,34 @@ authRoutes.get("/checkuser", (req, res, next) => {
   }
 });
 
+
+authRoutes.post('/facebook', (req, res, next) => {
+  console.log('req.body', req.body)
+  User.findOne({ token: req.body.response.token, email: req.body.response.email }).then((user) => {
+    if (user)
+      req.login(user, (err) => {
+        console.log("outPut: user", user)
+        // We are now logged in (that's why we can also send req.user)
+        res.status(200).json(user);
+      });
+    else {
+      const newUser = new User({
+        email: req.body.response.email,
+        password: req.body.response.accessToken,
+        userName: req.body.response.name,
+        isVerified: true
+      });
+      return newUser.save()
+    }
+  }).then((user) => {
+    req.login(user, (err) => {
+      console.log("outPut: user", user)
+      res.status(200).json(user);
+    });
+  })
+});
+
+
 module.exports = authRoutes;
 
 

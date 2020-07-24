@@ -3,13 +3,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import BodyClassName from 'react-body-classname';
 import defaultAvatar from "assets/img/placeholder.jpg";
+import FacebookLogin from 'react-facebook-login';
 import defaultAvatarBg from "assets/img/dense-spider-web.jpg";
-
-
-
-
-
-
 
 // reactstrap components
 import {
@@ -74,6 +69,22 @@ class SignupPage extends React.Component {
       checked: checked
     });
   }
+
+  responseFacebook = (response) => {
+    axios.post("/api/facebook", { response })
+      .then((res) => {
+        this.props.updateUser(res.data)
+      }).then(() => {
+        this.props.history.push(`/profile-page/${this.props.currentUser._id}`)
+      }).catch((error) => {
+
+      })
+  }
+
+  componentClicked = () => {
+    console.log('is clicked facebook')
+  }
+
   handleFormSubmit = (event) => {
     event.preventDefault()
     const email = this.state.email
@@ -125,7 +136,7 @@ class SignupPage extends React.Component {
                         <h5 className="info-title">StoryMe</h5>
                         <p className="description">
                           Here is where your stories become alive
-                         </p>
+                          </p>
                       </div>
                     </div>
                     <div className="info info-horizontal">
@@ -165,10 +176,19 @@ class SignupPage extends React.Component {
                           Register
                     </CardTitle>
                         <div className="social text-center">
-                          <Button className="btn-icon btn-round"
+                          <FacebookLogin
+                            appId="565328274160052"
+                            autoLoad={true}
+                            fields="name,email,picture"
+                            callback={this.responseFacebook}
+                            cssClass="my-facebook-button-class"
+                            icon="fa-facebook"
+                            onClick={this.componentClicked}
+                          />
+                          {/* <Button className="btn-icon btn-round"
                             color="facebook">
                             <i className="fab fa-facebook"></i>
-                          </Button>
+                          </Button> */}
                           <h5 className="card-description">or go old school</h5>
                         </div>
                         <Form className="form" onSubmit={this.handleFormSubmit}>

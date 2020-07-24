@@ -100,12 +100,9 @@ app.use((req, res, next) => {
   res.sendFile(__dirname + "/client/build/index.html");
 });
 
-
-app.get('/profile-page/:id', (req, res, next) => {
-  console.log('profile route', req.params)
-  res.json("I'm the unknown error")
-});
-
-
+// app.get('/profile-page/:id', (req, res, next) => {
+//   console.log('profile route', req.params)
+//   res.json("I'm the unknown error")
+// });
 
 module.exports = app;

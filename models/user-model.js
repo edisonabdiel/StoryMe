@@ -21,7 +21,9 @@ const userSchema = new Schema({
   imageName: String,
   bgImage: String,
   bgImageName: String,
-  followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+  followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  token: String,
+  facebookId: String
 
 },
   {

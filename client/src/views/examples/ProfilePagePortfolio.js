@@ -10,11 +10,6 @@ import {
 } from "reactstrap";
 
 
-
-
-
-
-
 // Somewhere else, even another file
 
 export class ProfilePagePortfolio extends Component {
