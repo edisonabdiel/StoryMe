@@ -166,7 +166,8 @@ class ProfileEdit extends Component {
         const imageName = this.state.uploadedImageName
         const bgImageUrl = this.state.bgImageUrl
         const bgImageName = this.state.uploadedBgImageName
-        const userName = this.state.userName;
+        const userName = "@ " + this.state.userName;
+        console.log("outPut: handleFormSubmit -> userName", userName)
         const newPassword = this.state.newPassword
         axios.put(`/api/user/${this.props.currentUser._id}`, { email, password, about, imageUrl, imageName, userName, newPassword, bgImageUrl, bgImageName })
             .then((resp) => {
