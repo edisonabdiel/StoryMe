@@ -178,7 +178,6 @@ class SignupPage extends React.Component {
                         <div className="social text-center">
                           <FacebookLogin
                             appId="565328274160052"
-                            autoLoad={true}
                             fields="name,email,picture"
                             callback={this.responseFacebook}
                             cssClass="my-facebook-button-class"

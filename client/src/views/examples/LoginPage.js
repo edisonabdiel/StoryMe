@@ -113,7 +113,7 @@ export class LoginPage extends Component {
                           </div>
                           <FacebookLogin
                             appId="565328274160052"
-                            autoLoad={true}
+                            // autoLoad={true}
                             fields="name,email,picture"
                             callback={this.responseFacebook}
                             // cssClass="my-facebook-button-class"
