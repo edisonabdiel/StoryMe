@@ -154,6 +154,9 @@ class ProfileEdit extends Component {
                     alertBool: true,
                     errorMessage: resp.data.error
                 });
+            }).catch((error) => {
+                console.log("outPut: handlePasswordFormSubmit -> error", error)
+
             })
     }
 
@@ -166,11 +169,11 @@ class ProfileEdit extends Component {
         const imageName = this.state.uploadedImageName
         const bgImageUrl = this.state.bgImageUrl
         const bgImageName = this.state.uploadedBgImageName
-        const userName = "@ " + this.state.userName;
-        console.log("outPut: handleFormSubmit -> userName", userName)
+        const userName = this.state.userName;
         const newPassword = this.state.newPassword
         axios.put(`/api/user/${this.props.currentUser._id}`, { email, password, about, imageUrl, imageName, userName, newPassword, bgImageUrl, bgImageName })
             .then((resp) => {
+                // console.log("outPut: handleFormSubmit -> resp", resp)
                 this.props.updateUser(resp.data)
                 this.setState({
                     email: "",
@@ -183,6 +186,8 @@ class ProfileEdit extends Component {
                 })
             }).then(() => {
                 this.props.history.push(`/profile-page/${this.props.currentUser._id}`)
+            }).catch((err) => {
+                // console.log("outPut: handleFormSubmit -> err", err)
             })
     }
 
@@ -194,12 +199,6 @@ class ProfileEdit extends Component {
                 <div style={{ height: '100px' }}></div> {/* offsets height of navbar */}
                 <div className="text-center">
                     <Container fluid>
-                        {/* {this.state.successMessage
-                            ? <AlertMessage color="success" message={this.state.successMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
-                            : ''}
-                        {this.state.errorMessage
-                            ? <AlertMessage color="danger" message={this.state.errorMessage} setAlertBool={this.setAlertBool} alertBool={this.state.alertBool} />
-                            : ''} */}
                         <Row>
                             <Col md="3"></Col>
                             <Col className="px-0 my-auto" md="6">
@@ -252,9 +251,9 @@ class ProfileEdit extends Component {
                                                 </InputGroupText>
                                             </InputGroupAddon>
                                             <Input
-                                                placeholder="@userName"
+                                                placeholder="userName"
                                                 name="userName"
-                                                value={this.state.userName}
+                                                value={this.state.userName && this.state.userName.replace("@", "")}
                                                 type="text"
                                                 onFocus={() => this.setUserNameFocus(true)}
                                                 onBlur={() => this.setUserNameFocus(false)}
