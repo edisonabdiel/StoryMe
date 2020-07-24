@@ -107,12 +107,13 @@ const SingleStory = (props) => {
                                     </button>
                                 </div>
                                 <FacebookShareButton
-                                    url={`${process.env.EMAIL_HOST}stories/${oneStory._id}`}
+                                    url={`www.storyme.club/stories/${oneStory._id}`}
                                 >
                                     <FacebookIcon size={32} round={true} />
                                 </FacebookShareButton>
                                 <TwitterShareButton
-                                    url={`${process.env.EMAIL_HOST}stories/${oneStory._id}`}
+                                    url={`www.storyme.club/stories/${oneStory._id}`}
+                                    quote={oneStory.headline}
                                 >
                                     <TwitterIcon size={32} round={true} />
                                 </TwitterShareButton>

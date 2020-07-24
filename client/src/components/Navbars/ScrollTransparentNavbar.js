@@ -56,15 +56,6 @@ const ScrollTransparentNavbar = (props) => {
   });
   return (
     <>
-      {collapseOpen ? (
-        <div
-          id="bodyClick"
-          onClick={() => {
-            document.documentElement.classList.toggle("nav-open");
-            setCollapseOpen(false);
-          }}
-        />
-      ) : null}
       <Navbar className={"fixed-top" + navbarColor} color="dark" expand="lg">
         <Container>
           <div className="navbar-translate">
@@ -88,8 +79,10 @@ const ScrollTransparentNavbar = (props) => {
             <Nav className="ml-auto" id="ceva" navbar>
               <Link to="/" ><i className="now-ui-icons objects_globe p-md-3"></i></Link>
               {props.currentUser && props.profilePageNav &&
-                <Link to={`/profile-page/${props.currentUser._id}`}
-                  onClick={() => props.changeStateHandler(props.currentUser._id)}>
+                <Link
+                  to={`/profile-page/${props.currentUser._id}`}
+                  onClick={() => props.changeStateHandler(props.currentUser._id)}
+                >
                   <i
                     aria-hidden={true}
                     className="now-ui-icons users_single-02 p-md-3"

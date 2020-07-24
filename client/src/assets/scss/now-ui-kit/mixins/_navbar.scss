@@ -1,24 +1,24 @@
 @mixin navbar-responsive() {
     &.menu-on-left .navbar-translate {
-      flex-direction: row-reverse;
+        flex-direction: row-reverse;
     }
 
-    .navbar{
-        .navbar-nav{
+    .navbar {
+        .navbar-nav {
             margin-top: 53px;
             position: relative;
-        	  max-height: calc(100vh - 75px);
-        	  min-height: 100%;
-        	  overflow: auto;
+            max-height: calc(100vh - 75px);
+            min-height: 100%;
+            overflow: auto;
 
-            &.navbar-logo{
+            &.navbar-logo {
                 top: 0;
                 height: 53px;
             }
         }
 
         .dropdown.show .dropdown-menu,
-        .dropdown .dropdown-menu{
+        .dropdown .dropdown-menu {
             background-color: transparent;
             border: 0;
             transition: none;
@@ -31,44 +31,44 @@
             height: 125px;
             overflow-y: scroll;
 
-            &:before{
+            &:before {
                 display: none;
             }
         }
 
-        .dropdown{
-            .dropdown-item{
+        .dropdown {
+            .dropdown-item {
                 padding-left: 2.5rem;
             }
 
-            .dropdown-menu{
-               display: none;
-           }
+            .dropdown-menu {
+                display: none;
+            }
 
-           &.show .dropdown-menu{
-               display: block;
-           }
+            &.show .dropdown-menu {
+                display: block;
+            }
         }
 
         .dropdown-menu .dropdown-item:focus,
-        .dropdown-menu .dropdown-item:hover{
+        .dropdown-menu .dropdown-item:hover {
             color: $white-color;
             border-radius: $border-radius-small;
         }
 
-        .navbar-translate{
-          width: 100%;
-          position: relative;
-          display: flex;
-          -ms-flex-pack: justify!important;
-          justify-content: space-between!important;
-          -ms-flex-align: center;
-          align-items: center;
-          @include transform-translate-x(0px);
-          @include transition (0.50s, cubic-bezier(0.685, 0.0473, 0.346, 1));
+        .navbar-translate {
+            width: 100%;
+            position: relative;
+            display: flex;
+            -ms-flex-pack: justify !important;
+            justify-content: space-between !important;
+            -ms-flex-align: center;
+            align-items: center;
+            @include transform-translate-x(0px);
+            @include transition (0.50s, cubic-bezier(0.685, 0.0473, 0.346, 1));
         }
 
-        .navbar-toggler-bar{
+        .navbar-toggler-bar {
             display: block;
             position: relative;
             width: 22px;
@@ -76,17 +76,17 @@
             border-radius: 1px;
             background: $white-bg;
 
-            & + .navbar-toggler-bar{
+            &+.navbar-toggler-bar {
                 margin-top: 7px;
             }
 
-            &.bar2{
+            &.bar2 {
                 width: 17px;
                 transition: width .2s linear;
             }
         }
 
-        &.bg-white:not(.navbar-transparent) .navbar-toggler-bar{
+        &.bg-white:not(.navbar-transparent) .navbar-toggler-bar {
             background: $default-color;
         }
 
@@ -120,37 +120,41 @@
     //   @include bar-animation($bottombar-x);
     // }
 
-  .top-bar {
-    transform: rotate(0);
-  }
-  .middle-bar {
-    opacity: 1;
-  }
-  .bottom-bar {
-    transform: rotate(0);
-  }
-
-  .top-bar,
-  .middle-bar,
-  .bottom-bar{
-    transition: all 0.2s;
-  }
-
-
-
-  .toggled {
     .top-bar {
-    transform: rotate(45deg);
-    transform-origin: 0%;
-  }
-    .bottom-bar {
-      transform: rotate(-45deg);
-      transform-origin: 0%;
+        transform: rotate(0);
     }
+
     .middle-bar {
-      opacity: 0;
+        opacity: 1;
     }
-  }
+
+    .bottom-bar {
+        transform: rotate(0);
+    }
+
+    .top-bar,
+    .middle-bar,
+    .bottom-bar {
+        transition: all 0.2s;
+    }
+
+
+
+    .toggled {
+        .top-bar {
+            transform: rotate(45deg);
+            transform-origin: 0%;
+        }
+
+        .bottom-bar {
+            transform: rotate(-45deg);
+            transform-origin: 0%;
+        }
+
+        .middle-bar {
+            opacity: 0;
+        }
+    }
 
 
 
@@ -175,7 +179,7 @@
 }
 
 @mixin navbar-collapse() {
-    .navbar-collapse{
+    .navbar-collapse {
         position: fixed;
         display: block !important;
         top: 0;
@@ -194,12 +198,17 @@
         @include transform-translate-x(300px);
         @include transition (0.50s, cubic-bezier(0.685, 0.0473, 0.346, 1));
 
-        &:before{
-            background: $brand-primary; /* For browsers that do not support gradients */
-            background: -webkit-linear-gradient($brand-primary 0%, #000 80%); /* For Safari 5.1 to 6.0 */
-            background: -o-linear-gradient($brand-primary 0%, #000 80%); /* For Opera 11.1 to 12.0 */
-            background: -moz-linear-gradient($brand-primary 0%, #000 80%); /* For Firefox 3.6 to 15 */
-            background: linear-gradient($brand-primary 0%, #000 80%); /* Standard syntax (must be last) */
+        &:before {
+            background: $brand-primary;
+            /* For browsers that do not support gradients */
+            background: -webkit-linear-gradient($brand-primary 0%, #000 80%);
+            /* For Safari 5.1 to 6.0 */
+            background: -o-linear-gradient($brand-primary 0%, #000 80%);
+            /* For Opera 11.1 to 12.0 */
+            background: -moz-linear-gradient($brand-primary 0%, #000 80%);
+            /* For Firefox 3.6 to 15 */
+            background: linear-gradient($brand-primary 0%, #000 80%);
+            /* Standard syntax (must be last) */
             @include opacity(.76);
 
             display: block;
@@ -212,18 +221,18 @@
             z-index: -1;
         }
 
-        .navbar-nav:not(.navbar-logo){
+        .navbar-nav:not(.navbar-logo) {
             .nav-link {
                 margin: 0 1rem;
                 margin-top: 0.3125rem;
 
-                &:not(.btn){
+                &:not(.btn) {
                     color: $white-color !important;
                 }
             }
         }
 
-        .dropdown-menu .dropdown-item{
+        .dropdown-menu .dropdown-item {
             color: $white-color;
         }
     }
@@ -231,15 +240,15 @@
     @include navbar-responsive();
 
 
-    [class*="navbar-expand-"] .navbar-collapse{
+    [class*="navbar-expand-"] .navbar-collapse {
         width: 300px;
     }
 
-    .wrapper{
+    .wrapper {
         @include transition (0.50s, cubic-bezier(0.685, 0.0473, 0.346, 1));
     }
 
-    #bodyClick{
+    #bodyClick {
         height: 100%;
         width: 100%;
         position: fixed;

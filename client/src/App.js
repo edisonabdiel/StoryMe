@@ -5,6 +5,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 
 // styles
 import "assets/css/bootstrap.min.css";
+import "assets/css/now-ui-kit.css"
 import "assets/scss/now-ui-kit.scss?v=1.4.0";
 import "assets/demo/demo.css?v=1.4.0";
 import "assets/demo/react-demo.css?v=1.4.0";

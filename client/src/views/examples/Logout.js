@@ -13,7 +13,7 @@ export class Logout extends Component {
     }
     render() {
         return (
-            <div onClick={this.logoutHandler} style={{ color: '#e13e20', textAlign: 'center', fontSize: '16px' }} >
+            <div onClick={this.logoutHandler} style={{ color: '#e13e20', textAlign: 'center', fontSize: '16px' }} className='div-log' >
                 Logout
             </div>
         )

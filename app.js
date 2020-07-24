@@ -6,7 +6,7 @@ const favicon = require('serve-favicon');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 const path = require('path');
-const cors = require("cors");
+// const cors = require("cors");
 
 require('dotenv').config();
 
@@ -80,10 +80,10 @@ app.locals.title = 'Express - StoryMe Database';
 // ADD CORS SETTINGS HERE TO ALLOW CROSS-ORIGIN INTERACTION:
 
 // allow access to the API from different domains/origins
-app.use(cors({
-  // this could be multiple domains/origins, but we will allow just our React app
-  origin: ["http://localhost:3000"]
-}));
+// app.use(cors({
+// this could be multiple domains/origins, but we will allow just our React app
+//   origin: ["http://localhost:3000"]
+// }));
 
 // ROUTES MIDDLEWARE STARTS HERE:
 
@@ -98,6 +98,12 @@ app.use('/api', require('./routes/user-routes'));
 app.use((req, res, next) => {
   // If no routes match, send them the React HTML.
   res.sendFile(__dirname + "/client/build/index.html");
+});
+
+
+app.get('/profile-page/:id', (req, res, next) => {
+  console.log('profile route', req.params)
+  res.json("I'm the unknown error")
 });
 
 

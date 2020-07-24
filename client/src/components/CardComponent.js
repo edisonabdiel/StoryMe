@@ -59,5 +59,4 @@ const CardComponent = (props) => {
         </Row>
     )
 }
-
 export default CardComponent;
