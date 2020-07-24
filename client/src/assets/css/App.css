@@ -24,10 +24,10 @@
     margin: auto;
 }
 
-.card-component{
-  display: inline-flexbox;
-  justify-content: center;
-  align-items: center;
+.card-component {
+    display: inline-flexbox;
+    justify-content: center;
+    align-items: center;
 }
 
 .card-blog {
@@ -103,11 +103,60 @@
     min-width: 315px !important;
 }
 
-.footer{
-  padding: 0.5rem 0 !important;
+.footer {
+    padding: 0.5rem 0 !important;
 }
 
-.footer ul li a{
+.footer ul li a {
     padding: 0 !important;
     padding-right: 0.7rem !important;
+}
+
+
+@media screen and (max-width: 991px) {
+    [class*="navbar-expand-"] .navbar-collapse {
+        width: 42% !important;
+    }
+
+    .button-dropdown {
+        display: inline-flex !important;
+    }
+
+    .navbar .dropdown .dropdown-item {
+        padding: 5px 5px !important;
+    }
+
+    .navbar .dropdown.show .dropdown-menu,
+    .navbar .dropdown .dropdown-menu {
+        height: auto !important;
+        margin: 0 !important;
+    }
+
+    .div-log {
+        text-align: left !important;
+    }
+
+}
+
+.navbar-collapse:before {
+    background: #2c2c2c !important;
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#2c2c2c 0%, #000 80%) !important;
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#2c2c2c 0%, #000 80%) !important;
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#2c2c2c 0%, #000 80%) !important;
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#2c2c2c 0%, #000 80%) !important;
+    /* Standard syntax (must be last) */
+    opacity: 0.76 !important;
+    filter: alpha(opacity=76);
+    display: block !important;
+    content: "" !important;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: -1 !important;
 }

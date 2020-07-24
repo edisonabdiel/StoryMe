@@ -44,7 +44,13 @@ const FollowModal = (props) => {
                                 {props.data.map((follower) => {
                                     return (<div className="modal-body modal-flex" style={{ textAlign: 'center' }} key={follower._id}>
                                         <img src={follower.image} alt='...' className='follower-image' />
-                                        <h3>{follower.userName}</h3>
+
+                                        <h3 onClick={() => {
+                                            props.changeStateHandler(follower._id);
+                                            props.setIsClickedFollow(false)
+                                        }}
+                                            style={{ cursor: 'pointer' }}
+                                        >{follower.userName}</h3>
                                     </div>)
                                 })}
                                 <ModalFooter>
