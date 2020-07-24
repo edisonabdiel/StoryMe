@@ -53,8 +53,6 @@ let editProfilePasswordValidation = [
 ];
 
 
-
-
 module.exports = {
     signUpValidation: signUpValidation,
     loggedIn: loggedIn,

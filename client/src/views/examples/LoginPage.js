@@ -5,6 +5,10 @@ import ScrollTransparentNavbar from "components/Navbars/ScrollTransparentNavbar"
 import BodyClassName from "react-body-classname";
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import FacebookLogin from 'react-facebook-login';
+import { IoLogoFacebook } from "react-icons/io";
+
+
 
 // reactstrap components
 import {
@@ -69,6 +73,17 @@ export class LoginPage extends Component {
 
   }
 
+  responseFacebook = (response) => {
+    axios.post("/api/facebook", { response })
+      .then((res) => {
+        this.props.updateUser(res.data)
+      }).then(() => {
+        this.props.history.push(`/profile-page/${this.props.currentUser._id}`)
+      }).catch((error) => {
+
+      })
+  }
+
   render() {
     return (
       <BodyClassName className="login-page ">
@@ -87,7 +102,6 @@ export class LoginPage extends Component {
                 <Row>
                   <Col className="ml-auto mr-auto" md="5">
                     <Card className="card-login card-plain">
-                      {/* {this.state.errorMessage ? <p style={{ textAlign: 'center', color: "red" }}>{this.state.errorMessage}</p> : null} */}
 
                       <Form onSubmit={this.handleFormSubmit}>
                         <CardHeader className="text-center">
@@ -97,6 +111,15 @@ export class LoginPage extends Component {
                               src={require("assets/img/logo.png")}
                             ></img>
                           </div>
+                          <FacebookLogin
+                            appId="565328274160052"
+                            autoLoad={true}
+                            fields="name,email,picture"
+                            callback={this.responseFacebook}
+                            // cssClass="my-facebook-button-class"
+                            icon={<IoLogoFacebook />}
+                            onClick={this.componentClicked}
+                          />
                         </CardHeader>
                         {this.state.errorMessage && this.state.errorMessage.map((m) =>
                           <p key={m} style={{ textAlign: 'center', color: "red" }}>{m}</p>

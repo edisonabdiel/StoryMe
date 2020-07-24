@@ -170,48 +170,27 @@ authRoutes.get("/checkuser", (req, res, next) => {
 });
 
 
-// authRoutes.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
-
-
-// authRoutes.get('/auth/facebook/callback/', (req, res, next) => {
-//   passport.authenticate('facebook', (err, theUser, failureDetails) => {
-//     if (!theUser) {
-//       // "failureDetails" contains the error messages
-//       console.log("outPut: failureDetails", failureDetails.message)
-//       const errors = [failureDetails.message]
-//       console.log("outPut: errors", errors)
-
-//       res.status(401).json({ errors: errors });
-//       return;
-//     }
-//     // save user in session
-//     req.login(theUser, (err) => {
-//       // We are now logged in (that's why we can also send req.user)
-//       res.status(200).json(theUser);
-//     });
-//   })(req, res, next)
-// });
-
 authRoutes.post('/facebook', (req, res, next) => {
   console.log('req.body', req.body)
-  User.findOne({ token: req.body.token, email: req.body.email }).then((user) => {
+  User.findOne({ token: req.body.response.token, email: req.body.response.email }).then((user) => {
     if (user)
       req.login(user, (err) => {
+        console.log("outPut: user", user)
         // We are now logged in (that's why we can also send req.user)
         res.status(200).json(user);
       });
     else {
-      let newUser = new User();
-      newUser.image = req.body.picture
-      newUser.userName = req.body.givenName;
-      newUser.email = req.body.email;
-      newUser.token = req.body.accessToken
-      newUser.facebookId = req.body.id
+      const newUser = new User({
+        email: req.body.response.email,
+        password: req.body.response.accessToken,
+        userName: req.body.response.name,
+        isVerified: true
+      });
       return newUser.save()
     }
   }).then((user) => {
     req.login(user, (err) => {
-      // We are now logged in (that's why we can also send req.user)
+      console.log("outPut: user", user)
       res.status(200).json(user);
     });
   })

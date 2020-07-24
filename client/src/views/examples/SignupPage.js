@@ -71,22 +71,13 @@ class SignupPage extends React.Component {
   }
 
   responseFacebook = (response) => {
-    console.log("outPut: SignupPage -> responseFacebook -> resp", response)
-    const email = response.email
-    console.log("outPut: SignupPage -> responseFacebook -> email", email)
     axios.post("/api/facebook", { response })
       .then((res) => {
-        console.log("outPut: SignupPage -> responseFacebook -> res", res)
-        // console.log("outPut: SignupPage -> responseFacebook -> res", res)
-        //   this.props.updateUser(res.data)
-        //   console.log("outPut: SignupPage -> user", this.props.currentUser)
-        // }).then(() => {
-        //   this.props.history.push(`/email-sent`)
+        this.props.updateUser(res.data)
+      }).then(() => {
+        this.props.history.push(`/profile-page/${this.props.currentUser._id}`)
       }).catch((error) => {
-        console.log("outPut: facebook -> handleFormSubmit -> error", error)
-        // this.setState({
-        //   errorMessages: error.response.data.errors,
-        // })
+
       })
   }
 
