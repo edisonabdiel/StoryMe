@@ -6,7 +6,7 @@ const favicon = require('serve-favicon');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 const path = require('path');
-const cors = require("cors");
+// const cors = require("cors");
 
 require('dotenv').config();
 
