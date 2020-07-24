@@ -88,6 +88,7 @@ const SingleStory = (props) => {
                             onClick={() => props.changeStateHandler(oneStory.owner._id)}>
                             {oneStory.owner.userName ? oneStory.owner.userName : oneStory.owner.email}</Link>
                             : <Link to={`/profile-page/${oneStory.owner._id}`}>
+
                                 {oneStory.owner.userName ? oneStory.owner.userName : oneStory.owner.email}</Link>}
                     </div>
                     <hr />

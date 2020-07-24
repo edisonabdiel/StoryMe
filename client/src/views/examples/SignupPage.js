@@ -155,7 +155,7 @@ class SignupPage extends React.Component {
                       <div className="description">
                         <h5 className="info-title">Easy and Fast</h5>
                         <p className="description">
-                          It only takes a 2 clicks and a few seconds to share
+                          It only takes 2 clicks and a few seconds to share
                           your creations with the rest of the world
                     </p>
                       </div>

@@ -61,6 +61,12 @@ class App extends React.Component {
             if (this.state.loggedInUser && this.state.loggedInUser.isVerified) {
               return <ProfilePage currentUser={this.state.loggedInUser}
                 updateUser={this.updateUser} {...props} />
+            } else if (this.state.loggedInUser === null) {
+              return <Redirect
+                to={{
+                  pathname: '/',
+                  state: false
+                }} />
             }
             else {
               return <Redirect

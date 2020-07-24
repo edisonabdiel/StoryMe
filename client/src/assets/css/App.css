@@ -157,3 +157,8 @@
   }
 
 }
+
+.thumbnail .img-raised {
+  width: 50px !important;
+  height: 50px !important;
+}
