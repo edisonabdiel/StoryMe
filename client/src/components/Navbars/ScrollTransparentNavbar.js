@@ -56,15 +56,6 @@ const ScrollTransparentNavbar = (props) => {
   });
   return (
     <>
-      {collapseOpen ? (
-        <div
-          id="bodyClick"
-          onClick={() => {
-            document.documentElement.classList.toggle("nav-open");
-            setCollapseOpen(false);
-          }}
-        />
-      ) : null}
       <Navbar className={"fixed-top" + navbarColor} color="dark" expand="lg">
         <Container>
           <div className="navbar-translate">

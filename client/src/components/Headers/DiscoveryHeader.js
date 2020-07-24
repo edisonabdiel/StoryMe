@@ -35,7 +35,7 @@ const BlogPostsHeader = () => {
           <Row>
             <Col className="ml-auto mr-auto text-center" md="8">
               <h2 className="title">
-                Discover the Universe of your Stories
+                DISCOVER AN UNIVERSE OF STORIES
               </h2>
             </Col>
           </Row>

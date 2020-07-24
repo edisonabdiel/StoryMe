@@ -6264,7 +6264,7 @@ textarea.form-control:active {
 }
 
 .button-dropdown .dropdown-toggle:after {
-  display: none;
+  display: inline-flex;
 }
 
 .dropdown-menu i {
@@ -8771,8 +8771,8 @@ img {
   /* Standard syntax */
 }
 
-.clear-filter[filter-color="black"] {
-  background: rgba(0, 0, 0, 0.2);
+.clear-filter[filter-color="orange"] {
+  background: rgba(44, 44, 44, 0.2);
   /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(90deg, rgba(44, 44, 44, 0.2), rgba(224, 23, 3, 0.6));
   /* For Safari 5.1 to 6.0 */
@@ -10071,7 +10071,7 @@ img {
     display: block !important;
     top: 0;
     height: 100% !important;
-    width: 300px;
+    width: 20%;
     right: 0;
     z-index: 1032;
     visibility: visible;
@@ -10093,7 +10093,7 @@ img {
   }
 
   .navbar-collapse:before {
-    background: #f96332;
+    background: #2c2c2c;
     /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(#f96332 0%, #000 80%);
     /* For Safari 5.1 to 6.0 */
