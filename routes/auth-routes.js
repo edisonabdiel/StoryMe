@@ -193,7 +193,8 @@ authRoutes.get("/checkuser", (req, res, next) => {
 // });
 
 authRoutes.get('/auth/facebook', (req, res, next) => {
-  User.findOne({ token: req.body.response.token, email: req.body.response.email }).then((user) => {
+  console.log('req.body', req.body)
+  User.findOne({ token: req.body.token, email: req.body.email }).then((user) => {
     if (err)
       return res.json(err);
     if (user)
@@ -203,11 +204,11 @@ authRoutes.get('/auth/facebook', (req, res, next) => {
       });
     else {
       let newUser = new User();
-      newUser.image = req.body.response.picture
-      newUser.userName = req.body.response.givenName;
-      newUser.email = req.body.response.email;
-      newUser.token = req.body.response.accessToken
-      newUser.facebookId = req.body.response.id
+      newUser.image = req.body.picture
+      newUser.userName = req.body.givenName;
+      newUser.email = req.body.email;
+      newUser.token = req.body.accessToken
+      newUser.facebookId = req.body.id
       return newUser.save()
     }
   }).then((user) => {
