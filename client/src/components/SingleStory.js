@@ -108,12 +108,12 @@ const SingleStory = (props) => {
                                     </button>
                                 </div>
                                 <FacebookShareButton
-                                    url={`www.storyme-app.herokuapp.com/stories/${oneStory._id}`}
+                                    url={`https://storyme-app.herokuapp.com/stories/${oneStory._id}`}
                                 >
                                     <FacebookIcon size={32} round={true} />
                                 </FacebookShareButton>
                                 <TwitterShareButton
-                                    url={`www.storyme-app.herokuapp.com/stories/${oneStory._id}`}
+                                    url={`https://storyme-app.herokuapp.com/stories/${oneStory._id}`}
                                     quote={oneStory.headline}
                                 >
                                     <TwitterIcon size={32} round={true} />
