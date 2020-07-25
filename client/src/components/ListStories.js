@@ -112,7 +112,7 @@ class ListStories extends Component {
     }
   }
   changeStateHandler = (id) => {
-    // this.props.changeStateHandler(id)
+    this.props.changeStateHandler(id)
 
   }
 
