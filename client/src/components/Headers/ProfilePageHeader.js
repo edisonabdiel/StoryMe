@@ -27,7 +27,7 @@ export class ProfilePageHeader extends Component {
             ></div>
             <Container>
               <div className="photo-container">
-                <img src={this.props.user.image} alt="..."></img>
+                <img src={this.props.user.image} alt="..." style={{ height: '100px' }}></img>
               </div>
               <h3 className="title">{this.props.user.userName}</h3>
               <p className="category"></p>
