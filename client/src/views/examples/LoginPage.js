@@ -113,7 +113,7 @@ export class LoginPage extends Component {
                               src={require("assets/img/logo.png")}
                             ></img>
                           </div>
-                          <FacebookLogin
+                          {/* <FacebookLogin
                             appId="565328274160052"
                             // autoLoad={true}
                             fields="name,email,picture"
@@ -121,7 +121,7 @@ export class LoginPage extends Component {
                             icon={<IconContext.Provider value={{ size: "2em" }}><IoLogoFacebook /></IconContext.Provider>}
                             onClick={this.componentClicked}
                             textButton=' '
-                          />
+                          /> */}
                         </CardHeader>
                         {this.state.errorMessage && this.state.errorMessage.map((m) =>
                           <p key={m} style={{ textAlign: 'center', color: "red" }}>{m}</p>
