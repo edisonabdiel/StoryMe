@@ -87,15 +87,18 @@ function FixedTransparentNavbar(props) {
                     <span className="button-bar"></span>
                   </DropdownToggle>
                   <DropdownMenu aria-labelledby="navbarDropdown" data-background-color="black">
+                  {props.currentUser &&
                     <DropdownItem onClick={(e) => e.preventDefault()}>
                       <Link to="/login-page" style={{ textDecoration: 'none' }}><Logout updateUser={props.updateUser} currentUser={props.currentUser} /></Link>
-                    </DropdownItem>
-                    <DropdownItem onClick={(e) => e.preventDefault()}>
-                      <Link to="/login-page" style={{ textDecoration: 'none' }}><Login /></Link>
-                    </DropdownItem>
-                    <DropdownItem onClick={(e) => e.preventDefault()}>
-                      <Link to="/sign-up" style={{ textDecoration: 'none' }}><SignUp /></Link>
-                    </DropdownItem>
+                    </DropdownItem>}
+                    {!props.currentUser &&
+                      <DropdownItem onClick={(e) => e.preventDefault()}>
+                        <Link to="/login-page" style={{ textDecoration: 'none' }}><Login /></Link>
+                      </DropdownItem>}
+                    {!props.currentUser &&
+                      <DropdownItem onClick={(e) => e.preventDefault()}>
+                        <Link to="/sign-up" style={{ textDecoration: 'none' }}><SignUp /></Link>
+                      </DropdownItem>}
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </UncontrolledDropdown>

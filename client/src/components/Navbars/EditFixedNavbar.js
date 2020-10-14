@@ -56,13 +56,13 @@ const EditFixedNavbar = (props) => {
           <Collapse isOpen={collapseOpen} navbar>
             <Nav className="ml-auto" id="ceva" navbar>
               <Link to="/" ><i className="now-ui-icons objects_globe p-md-3"></i></Link>
-              {props.currentUser && props.currentUser.isVerified &&
+              {props.currentUser &&
                 <Link to={`/profile-page/${props.currentUser._id}`} >
                   <i
                     aria-hidden={true}
                     className="now-ui-icons users_single-02 p-md-3"
                   ></i></Link>}
-              {props.currentUser && props.currentUser.isVerified && <Link to='/profile-edit' style={{ textDecoration: 'none' }}><i
+              {props.currentUser && <Link to='/profile-edit' style={{ textDecoration: 'none' }}><i
                 aria-hidden={true}
                 className="now-ui-icons loader_gear p-md-3"
               ></i></Link>}
@@ -79,15 +79,18 @@ const EditFixedNavbar = (props) => {
                   <span className="button-bar"></span>
                 </DropdownToggle>
                 <DropdownMenu aria-labelledby="navbarDropdown" data-background-color="black">
+                {props.currentUser &&
                   <DropdownItem onClick={(e) => e.preventDefault()}>
                     <Link to="/login-page" style={{ textDecoration: 'none' }}><Logout updateUser={props.updateUser} currentUser={props.currentUser} /></Link>
-                  </DropdownItem>
-                  <DropdownItem onClick={(e) => e.preventDefault()}>
-                    <Link to="/login-page" style={{ textDecoration: 'none' }}><Login /></Link>
-                  </DropdownItem>
-                  <DropdownItem onClick={(e) => e.preventDefault()}>
-                    <Link to="/sign-up" style={{ textDecoration: 'none' }}><SignUp /></Link>
-                  </DropdownItem>
+                  </DropdownItem>}
+                  {!props.currentUser &&
+                    <DropdownItem onClick={(e) => e.preventDefault()}>
+                      <Link to="/login-page" style={{ textDecoration: 'none' }}><Login /></Link>
+                    </DropdownItem>}
+                  {!props.currentUser &&
+                    <DropdownItem onClick={(e) => e.preventDefault()}>
+                      <Link to="/sign-up" style={{ textDecoration: 'none' }}><SignUp /></Link>
+                    </DropdownItem>}
                 </DropdownMenu>
               </UncontrolledDropdown>
               <NavItem>
