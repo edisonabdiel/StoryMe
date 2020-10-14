@@ -55,10 +55,10 @@ class App extends React.Component {
           <Route exact path="/login-page" render={(props) => <LoginPage updateUser={this.updateUser} currentUser={this.state.loggedInUser} {...props} />} />
           <Route exact path="/sign-up" render={(props) => <SignupPage updateUser={this.updateUser} currentUser={this.state.loggedInUser} {...props} />} />
           <Route path="/terms-and-conditions" render={(props) => <TermsAndConditions {...props} />} />
-          <Route path="/email-sent" render={(props) => <EmailSent currentUser={this.state.loggedInUser} updateUser={this.updateUser} {...props} />} />
-          <Route path="/email-confirmed/:token" render={(props) => <EmailConfirmed currentUser={this.state.loggedInUser} updateUser={this.updateUser}{...props} />} />
+          {/* <Route path="/email-sent" render={(props) => <EmailSent currentUser={this.state.loggedInUser} updateUser={this.updateUser} {...props} />} /> */}
+          {/* <Route path="/email-confirmed/:token" render={(props) => <EmailConfirmed currentUser={this.state.loggedInUser} updateUser={this.updateUser}{...props} />} /> */}
           <Route exact path="/profile-page/:id" render={(props) => {
-            if (this.state.loggedInUser && this.state.loggedInUser.isVerified) {
+            if (this.state.loggedInUser) {
               return <ProfilePage currentUser={this.state.loggedInUser}
                 updateUser={this.updateUser} {...props} />
             } else if (this.state.loggedInUser === null) {

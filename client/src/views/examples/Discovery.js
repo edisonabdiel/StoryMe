@@ -4,7 +4,7 @@ import ScrollTransparentNavbar from "components/Navbars/ScrollTransparentNavbar.
 import DiscoveryHeader from "components/Headers/DiscoveryHeader.js";
 import FooterBlack from "components/Footers/FooterBlack.js";
 import ListStories from "components/ListStories";
-import EmailVerificationModal from 'components/EmailVerificationModal';
+// import EmailVerificationModal from 'components/EmailVerificationModal';
 
 
 
@@ -30,7 +30,7 @@ function BlogPosts(props) {
             updateUser={props.updateUser}
             history={props.history} />
         </div>
-        <EmailVerificationModal modalVerification={modalVerification} setModalVerification={setModalHandler} />
+        {/* <EmailVerificationModal modalVerification={modalVerification} setModalVerification={setModalHandler} /> */}
 
       </div>
       <FooterBlack />

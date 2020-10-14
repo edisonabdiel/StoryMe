@@ -154,7 +154,7 @@ class ListStories extends Component {
                 history={this.props.history}
                 currentUser={this.props.currentUser} />
             </Container>
-            <EmailVerificationModal modalVerification={this.state.emailVerification} setModalVerification={this.setModalVerification} />
+            {/* <EmailVerificationModal modalVerification={this.state.emailVerification} setModalVerification={this.setModalVerification} /> */}
           </div>
         </div>
       </div>

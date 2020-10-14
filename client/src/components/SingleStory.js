@@ -20,7 +20,7 @@ const SingleStory = (props) => {
             <div className="card-image" onClick={() => {
                 props.saveStoryIndex(props.position);
                 {
-                    props.currentUser && props.currentUser.isVerified
+                    props.currentUser
                         ? props.setModalClassic(true)
                         : !props.currentUser
                             ? props.setModalLogin(true)
@@ -47,7 +47,7 @@ const SingleStory = (props) => {
                 <CardTitle tag="h5" onClick={() => {
                     props.saveStoryIndex(props.position);
                     {
-                        props.currentUser && props.currentUser.isVerified
+                        props.currentUser 
                             ? props.setModalClassic(true)
                             : !props.currentUser
                                 ? props.setModalLogin(true)
@@ -59,7 +59,7 @@ const SingleStory = (props) => {
                 <p className="card-description" onClick={() => {
                     props.saveStoryIndex(props.position);
                     {
-                        props.currentUser && props.currentUser.isVerified
+                        props.currentUser 
                             ? props.setModalClassic(true)
                             : !props.currentUser
                                 ? props.setModalLogin(true)

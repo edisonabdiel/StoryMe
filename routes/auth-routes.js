@@ -25,13 +25,13 @@ const loggedIn = require("../helpers/middlewares").loggedIn;
 
 
 // email authorization
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.GMAIL_USERNAME,
-    pass: process.env.GMAIL_PASSWORD,
-  },
-});
+// const transporter = nodemailer.createTransport({
+//   service: "gmail",
+//   auth: {
+//     user: process.env.GMAIL_USERNAME,
+//     pass: process.env.GMAIL_PASSWORD,
+//   },
+// });
 
 //POST /api/singup
 authRoutes.post('/signup', signUpValidation, loggedIn, (req, res, next) => {
@@ -69,42 +69,42 @@ authRoutes.post('/signup', signUpValidation, loggedIn, (req, res, next) => {
     return newUser.save().then((user) => {
 
       // create new token for the user to verify its email 
-      const token = new Token({
-        _userId: user._id,
-        token: randomToken(16)
-      });
+      //   const token = new Token({
+      //     _userId: user._id,
+      //     token: randomToken(16)
+      //   });
 
-      return token.save()
-    }).then((token) => {
-      //Send email verification
-      const mailOptions = {
-        from: "storymewebapp@gmail.com",
-        to: email,
-        subject: "Account Verification Token",
-        html: `<p>Hi there,<br></br>
-          To verify your email, simply click below.</p><br>
-          <a href= "${process.env.EMAIL_HOST}email-confirmed/${token.token}">verify your email</a><br>
-          <h4>Enjoy<br>
-          The StoryMe Team</h4>`
-      };
-      // render the res after signup
-      transporter.sendMail(mailOptions, (err) => {
+      //   return token.save()
+      // }).then((token) => {
+      //   //Send email verification
+      //   const mailOptions = {
+      //     from: "storymewebapp@gmail.com",
+      //     to: email,
+      //     subject: "Account Verification Token",
+      //     html: `<p>Hi there,<br></br>
+      //       To verify your email, simply click below.</p><br>
+      //       <a href= "${process.env.EMAIL_HOST}email-confirmed/${token.token}">verify your email</a><br>
+      //       <h4>Enjoy<br>
+      //       The StoryMe Team</h4>`
+      //   };
+      //   // render the res after signup
+      //   transporter.sendMail(mailOptions, (err) => {
+      //     if (err) {
+      //       res.status(500).json({ message: 'Email could not be sent' })
+      //     };
+      // Automatically log in user after sign up
+      req.login(newUser, (err) => {
         if (err) {
-          res.status(500).json({ message: 'Email could not be sent' })
-        };
-        // Automatically log in user after sign up
-        req.login(newUser, (err) => {
-          if (err) {
-            res.status(500).json({ message: 'Login after signup went bad.' });
-            return;
-          }
-          // Send the user's information to the frontend
-          res.status(200).json(newUser);
-        });
+          res.status(500).json({ message: 'Login after signup went bad.' });
+          return;
+        }
+        // Send the user's information to the frontend
+        res.status(200).json(newUser);
       });
     });
   });
 });
+
 
 authRoutes.get("/confirmation/:token", (req, res) => {
   Token.findOne({
