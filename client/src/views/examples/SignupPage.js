@@ -106,7 +106,7 @@ class SignupPage extends React.Component {
           errorMessages: []
         })
       }).then(() => {
-        this.props.history.push(`/email-sent`)
+        this.props.history.push(`/profile-page/${this.props.currentUser._id}`)
       }).catch((error) => {
         this.setState({
           errorMessages: error.response.data.errors,
