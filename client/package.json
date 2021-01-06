@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "dompurify": "^2.0.12",
     "jodit-react": "^1.0.65",
     "moment": "2.26.0",
